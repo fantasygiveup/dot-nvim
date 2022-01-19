@@ -1,6 +1,6 @@
 Neovim dotfiles
 
-# Rationale
+## Rationale
 
 Keeping simple but at the same time powerful editing experience is what is
 desired. And as David Thomas and Andrew Hunt say: 'Don’t spend more effort than
@@ -24,13 +24,13 @@ Also, if a repetitive pattern is found during editing, then a command mapping to
 shortcut is added. And always try to remember: 'Don’t spend more effort than you
 save'!
 
-# License
-
-# References
+## References
 
 - [Lua guide](https://github.com/nanotee/nvim-lua-guide)
 - [Other way to structure dot nvim](https://github.com/glepnir/nvim)
 - [Package manager](https://github.com/wbthomason/packer.nvim)
 - [Packages installation path](file://${HOME}/.local/share/nvim/site/pack/packer/start)
+
+## License
 
 MIT

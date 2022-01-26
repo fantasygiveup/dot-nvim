@@ -43,7 +43,7 @@ end
 local function restore_buf_cursor()
   vim.fn.execute("normal! zM") -- close all folds.
   if vim.fn.line([[`"]]) <= vim.fn.line([[$]]) then
-    vim.fn.execute([[normal! g`"zz]])
+    pcall(vim.fn.execute([[normal! g`"zz]]))
   end
 
   -- It looks like vim/nvim doesn't sync cursor position right the way. To work it correctly, we

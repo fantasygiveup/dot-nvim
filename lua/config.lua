@@ -86,6 +86,7 @@ function config.next_hunk()
     return
   end
   require("gitsigns.actions").next_hunk()
+  vim.fn.execute("normal! zz")
 end
 
 function config.prev_hunk()

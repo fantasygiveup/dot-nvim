@@ -8,8 +8,11 @@ keybind("i", "<C-c>", "<Nop>", nopts)
 
 -- Core.
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 keybind("n", vim.g.mapleader, "", nopts)
 keybind("x", vim.g.mapleader, "", nopts)
+keybind("n", vim.g.maplocalleader, "", nopts)
+keybind("x", vim.g.maplocalleader, "", nopts)
 keybind("x", "p", "pgvy", nopts) -- don't override register on visual
 keybind("n", "[f", "<Cmd>cprev<CR>", nsopts)
 keybind("n", "]f", "<Cmd>cnext<CR>", nsopts)

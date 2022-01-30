@@ -235,6 +235,7 @@ function config.cmp()
       { name = "nvim_lsp" },
       { name = "luasnip" },
       { name = "tmux", option = { all_panes = true, label = "", } },
+      { name = "conjure" },
     },
   })
 end

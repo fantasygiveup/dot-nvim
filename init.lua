@@ -32,12 +32,14 @@ packer.startup(function(use)
       { "hrsh7th/cmp-nvim-lsp" },
       { "saadparwaiz1/cmp_luasnip" },
       { "andersevenrud/cmp-tmux" },
+      { "PaterJason/cmp-conjure" },
     }, config = config.cmp })
   use({ "norcalli/nvim-colorizer.lua", config = config.colorizer })
   use({ "plasticboy/vim-markdown", config = config.markdown })
   use({ "davidgranstrom/nvim-markdown-preview" })
   use({ "airblade/vim-rooter" })
   use({ "idanko/fzf-collection", run = "make bin" })
+  use({ "Olical/conjure", requires = { "Olical/aniseed" } })
   if packer_bootstrap then
     packer.sync()
   end

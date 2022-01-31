@@ -79,6 +79,11 @@ keybind("n", "<C-s>", "<Cmd>FzfNotes<CR>", nsopts)
 keybind("n", "<M-x>", "<Cmd>FzfBrowse<CR>", nsopts)
 keybind("n", "<M-v>", "<Cmd>FzfPasswords<CR>", nsopts)
 keybind("n", "<Leader>tc", "<Cmd>ColorizerToggle<CR>", nopts)
+keybind("n", "s(", [[<Cmd>lua require'config'.sandwich_surround('(')<CR>]], nsopts)
+keybind("n", "s[", [[<Cmd>lua require'config'.sandwich_surround('[')<CR>]], nsopts)
+keybind("n", "s{", [[<Cmd>lua require'config'.sandwich_surround('{')<CR>]], nsopts)
+keybind("n", "s'", [[<Cmd>lua require'config'.sandwich_surround("'")<CR>]], nsopts)
+keybind("n", 's"', [[<Cmd>lua require'config'.sandwich_surround('"')<CR>]], nsopts)
 
 -- Post.
 -- Bind C-c to ESC, also clean up the highlight.

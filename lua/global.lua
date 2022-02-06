@@ -13,8 +13,8 @@ function global:load_variables()
   self.modules_dir = self.vim_path .. path_sep .. "modules"
   self.path_sep    = path_sep
   self.home        = home
-  self.user_name   = "Illia A. Danko"
-  self.email       = "eli@danko.ws"
+  self.user_name   = "Elijah Danko"
+  self.email       = "me@eli.net"
 end
 
 global:load_variables()

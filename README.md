@@ -29,7 +29,6 @@ save'!
 - [Lua guide](https://github.com/nanotee/nvim-lua-guide)
 - [Other way to structure dot nvim](https://github.com/glepnir/nvim)
 - [Package manager](https://github.com/wbthomason/packer.nvim)
-- [Packages installation path](file://${HOME}/.local/share/nvim/site/pack/packer/start)
 
 ## License
 

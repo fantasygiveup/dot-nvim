@@ -176,10 +176,6 @@ function lsp_on_attach(_, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>", opts)
 end
 
-function config.tmux()
-  vim.g.tmux_navigator_no_mappings = 1
-end
-
 function config.lsp()
   local nvim_lsp = require("lspconfig")
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -242,7 +238,6 @@ function config.cmp()
       { name = "path" },
       { name = "nvim_lsp" },
       { name = "luasnip" },
-      { name = "tmux", option = { all_panes = true, label = "", } },
       { name = "conjure" },
     },
   })

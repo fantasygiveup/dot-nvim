@@ -134,12 +134,14 @@ function config.ale()
     sh = { "shellcheck" },
     lua = { "luacheck" },
     elm = { "make" },
+    python = { "flake8" },
   }
 
   vim.g.ale_fixers = {
     javascript = { "prettier" },
     css = { "prettier" },
     elm = { "elm-format" },
+    python = { "yapf" },
   }
 end
 

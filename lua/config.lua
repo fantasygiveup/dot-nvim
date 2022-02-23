@@ -147,7 +147,7 @@ end
 
 function config.gnupg()
   vim.g.GPGPreferArmor = 1  -- base64 armor message
-  vim.g.GPGDefaultRecipients = { "illia@idanko.net" }
+  vim.g.GPGDefaultRecipients = { "me@eli.net" }
 end
 
 

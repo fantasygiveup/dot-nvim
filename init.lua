@@ -22,6 +22,7 @@ packer.startup(function(use)
   use({ "dense-analysis/ale", config = config.ale })
   use({ "jamessan/vim-gnupg", config = config.gnupg })
   use({ "fatih/vim-go", config = config.go })
+  use({ "christoomey/vim-tmux-navigator", config = config.tmux })
   use({ "neovim/nvim-lspconfig", config = config.lsp })
   use({ "L3MON4D3/LuaSnip", config = config.luasnip })
   use({ "hrsh7th/nvim-cmp",
@@ -30,6 +31,7 @@ packer.startup(function(use)
       { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-nvim-lsp" },
       { "saadparwaiz1/cmp_luasnip" },
+      { "andersevenrud/cmp-tmux" },
       { "PaterJason/cmp-conjure" },
     }, config = config.cmp })
   use({ "norcalli/nvim-colorizer.lua", config = config.colorizer })

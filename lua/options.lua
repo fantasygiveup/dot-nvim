@@ -2,7 +2,7 @@ local global = require("global")
 
 local global_options = {
   termguicolors  = true,
-  background     = "dark",
+  background     = "light",
   hidden         = true,                    -- switch between buffers without having to save first
   encoding       = "utf-8",                 -- always use utf-8 whenever possible
   clipboard      = "unnamedplus",

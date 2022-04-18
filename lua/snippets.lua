@@ -5,8 +5,7 @@ local t = ls.text_node
 local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 
-ls.snippets = {
-  all = {
+ls.add_snippets("all", {
     s("loremSent", {
       t("Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."),
     }),
@@ -36,14 +35,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     ]], { global.user_name, os.date("%Y") }))
-  },
+  })
 
-  go = {
+ls.add_snippets("go", {
     s("pre", fmt([[fmt.Fprintf(os.Stderr, "{}\n")]], { i(0) })),
     s("pro", fmt([[fmt.Println("{}")]], { i(0) })),
-  },
+  })
 
-  html = {
+ls.add_snippets("html", {
     s("html5", fmt([[
 <!DOCTYPE html>
 <html lang="en">
@@ -58,5 +57,4 @@ SOFTWARE.
   </body>
 </html>
     ]], { i(1), i(0) }))
-  },
-}
+  })

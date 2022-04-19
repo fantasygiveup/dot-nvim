@@ -24,8 +24,8 @@ local function load_basic_autocmds()
     },
 
     terminal = {
-      { "TermOpen", "*", [[setlocal laststatus=0 signcolumn=no |
-      autocmd BufLeave <buffer> setlocal signcolumn=yes laststatus=2]] },
+      { "TermOpen", "*", [[setlocal laststatus=0 signcolumn=no norelativenumber nonumber |
+      autocmd BufLeave <buffer> setlocal number relativenumber signcolumn=yes laststatus=2]] },
     },
   }
 

@@ -32,6 +32,7 @@ local global_options = {
   virtualedit    = "onemore",
   ignorecase     = true,
   smartcase      = true,
+  laststatus     = 3,
 }
 
 local buffer_window_local = {

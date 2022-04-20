@@ -40,6 +40,8 @@ packer.startup(function(use)
   use({ "airblade/vim-rooter" })
   use({ "elijahdanko/fzf-notes", run = "make bin" })
   use({ "Olical/conjure", requires = { "Olical/aniseed" } })
+  use({ "nvim-treesitter/nvim-treesitter", config = config.treesitter })
+  use({ "nvim-orgmode/orgmode", config = config.orgmode })
   if packer_bootstrap then
     packer.sync()
   end

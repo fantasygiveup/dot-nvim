@@ -262,4 +262,19 @@ function config.markdown()
   vim.g.vim_markdown_folding_style_pythonic = 1
 end
 
+function config.treesitter()
+  require("nvim-treesitter.configs").setup({
+    highlight = {
+      enable = true,
+      -- org: required since TS highlighter doesn't support all syntax features (conceal).
+      additional_vim_regex_highlighting = { "org" },
+    },
+    ensure_installed = { "org" },
+  })
+end
+
+function config.orgmode()
+  require("orgmode").setup_ts_grammar()
+end
+
 return config

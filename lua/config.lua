@@ -13,7 +13,7 @@ function config.fzf()
 end
 
 function config.colortheme()
-  vim.cmd("colorscheme one")
+  vim.cmd("colorscheme github_light")
 end
 
 function config.gitlinker()
@@ -32,13 +32,6 @@ end
 
 function config.lualine()
 
-  local function theme()
-    if vim.o.background == "light" then
-      return "onelight"
-    end
-    return "onedark"
-  end
-
   local function spell()
     if not vim.o.spell then
       return ""
@@ -49,7 +42,7 @@ function config.lualine()
   local ll = require("lualine")
   ll.setup({
     options = {
-      theme = theme(),
+      theme = "auto",
       section_separators = {left = "", right = ""},
       component_separators = {left = "", right = ""},
     },
@@ -61,8 +54,8 @@ function config.lualine()
         sections = { "error", "warn" },
         symbols = { error = " ", warn = "  "},
         diagnostics_color = {
-          error = "jsonSemicolonError",
-          warn  = "Search",
+          error = "DiffDelete",
+          warn  = "DiffChange",
         } },
       },
     }

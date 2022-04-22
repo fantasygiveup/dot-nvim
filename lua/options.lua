@@ -33,6 +33,7 @@ local global_options = {
   ignorecase     = true,
   smartcase      = true,
   laststatus     = 3,
+  formatoptions  = vim.o.formatoptions:gsub('t', ''),  -- don't auto break lines
 }
 
 local buffer_window_local = {

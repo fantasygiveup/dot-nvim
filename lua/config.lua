@@ -262,7 +262,7 @@ function config.treesitter()
       -- org: required since TS highlighter doesn't support all syntax features (conceal).
       additional_vim_regex_highlighting = { "org" },
     },
-    ensure_installed = { "org" },
+    ensure_installed = { "org", "go", "javascript", "yaml", "json", "lua", "clojure", "python" },
   })
 end
 

@@ -170,29 +170,29 @@ function config.go()
   vim.g.go_echo_go_info = 0
 end
 
--- The function must be a global one to be found by lsp.setup().
-function lsp_on_attach(_, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-  -- Don't show diagnostics hints.
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
-  -- Don't show diagnostics signs.
-  vim.lsp.diagnostic.set_signs = function() end
-
-  local opts = { noremap = true, silent = true }
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gh", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "i", "<C-h>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>", opts)
-end
-
 function config.tmux()
   vim.g.tmux_navigator_no_mappings = 1
 end
 
 function config.lsp()
+  -- The function must be a global one to be found by lsp.setup().
+  local function on_attach(client, bufnr)
+    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+    -- Don't show diagnostics hints.
+    vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
+    -- Don't show diagnostics signs.
+    vim.lsp.diagnostic.set_signs = function() end
+
+    local opts = { noremap = true, silent = true }
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gh", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "i", "<C-h>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>", opts)
+  end
+
   local nvim_lsp = require("lspconfig")
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
@@ -200,7 +200,7 @@ function config.lsp()
   local servers = { "clangd", "gopls", "pyright", "tsserver", "elmls" }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup({
-      on_attach = lsp_on_attach,
+      on_attach = on_attach,
       capabilities = capabilities,
     })
   end

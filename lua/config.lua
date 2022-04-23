@@ -39,7 +39,7 @@ function config.lualine()
     return "SPELL[" .. vim.o.spelllang .. "]"
   end
 
-  local function lsp_client(msg)
+  local function lsp_active_client(msg)
     local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
     local clients = vim.lsp.get_active_clients()
     if next(clients) == nil then
@@ -64,7 +64,7 @@ function config.lualine()
     },
     sections = {
       lualine_a = { "mode", spell },
-      lualine_x = { lsp_client, "encoding", "fileformat", "filetype" },
+      lualine_x = { lsp_active_client, "encoding", "fileformat", "filetype" },
       lualine_y = {
         "progress",
         { "diagnostics", sources = { "ale" },

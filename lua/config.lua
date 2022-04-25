@@ -282,17 +282,6 @@ function config.treesitter()
   require("nvim-treesitter.configs").setup({
     highlight = {
       enable = true,
-      -- org: required since TS highlighter doesn't support all syntax features (conceal).
-      additional_vim_regex_highlighting = {
-        "org"
-      },
-    },
-    markdown = {
-      install_info = {
-        url = "https://github.com/MDeiml/tree-sitter-markdown",
-        files = { "src/parser.c", "src/scanner.cc" },
-      },
-      filetype = "markdown",
     },
     ensure_installed = {
       "org",
@@ -304,12 +293,9 @@ function config.treesitter()
       "clojure",
       "python",
       "markdown",
+      "elm",
     },
   })
-end
-
-function config.orgmode()
-  require("orgmode").setup_ts_grammar()
 end
 
 return config

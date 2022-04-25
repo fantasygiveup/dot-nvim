@@ -13,7 +13,10 @@ function config.fzf()
 end
 
 function config.colortheme()
-  vim.cmd("colorscheme github_light")
+  vim.cmd("colorscheme one")
+  -- Remove window border, and set proper color.
+  local color_ref = vim.api.nvim_get_hl_by_name("String", true)
+  vim.api.nvim_set_hl(0, "WinSeparator", { bg=nil, fg=color_ref.foreground })
 end
 
 function config.gitlinker()
@@ -31,6 +34,13 @@ function config.sandwich_surround(ch)
 end
 
 function config.lualine()
+
+  local function theme()
+    if vim.o.background == "light" then
+      return "onelight"
+    end
+    return "onedark"
+  end
 
   local function spell()
     if not vim.o.spell then
@@ -58,7 +68,7 @@ function config.lualine()
   local ll = require("lualine")
   ll.setup({
     options = {
-      theme = "auto",
+      theme = theme(),
       section_separators = {left = "", right = ""},
       component_separators = {left = "", right = ""},
     },
@@ -71,8 +81,8 @@ function config.lualine()
         sections = { "error", "warn" },
         symbols = { error = " ", warn = "  "},
         diagnostics_color = {
-          error = "DiffDelete",
-          warn  = "DiffChange",
+          error = "jsonSemicolonError",
+          warn  = "Search",
         } },
       },
     }

@@ -35,8 +35,6 @@ packer.startup(function(use)
       { "PaterJason/cmp-conjure" },
     }, config = config.cmp })
   use({ "norcalli/nvim-colorizer.lua", config = config.colorizer })
-  use({ "plasticboy/vim-markdown", config = config.markdown })
-  use({ "davidgranstrom/nvim-markdown-preview" })
   use({ "airblade/vim-rooter" })
   use({ "elijahdanko/fzf-notes", run = "make bin" })
   use({ "Olical/conjure", requires = { "Olical/aniseed" } })

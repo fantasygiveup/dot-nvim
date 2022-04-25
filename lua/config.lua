@@ -278,18 +278,33 @@ function config.colorizer()
   })
 end
 
-function config.markdown()
-  vim.g.vim_markdown_folding_style_pythonic = 1
-end
-
 function config.treesitter()
   require("nvim-treesitter.configs").setup({
     highlight = {
       enable = true,
       -- org: required since TS highlighter doesn't support all syntax features (conceal).
-      additional_vim_regex_highlighting = { "org" },
+      additional_vim_regex_highlighting = {
+        "org"
+      },
     },
-    ensure_installed = { "org", "go", "javascript", "yaml", "json", "lua", "clojure", "python" },
+    markdown = {
+      install_info = {
+        url = "https://github.com/MDeiml/tree-sitter-markdown",
+        files = { "src/parser.c", "src/scanner.cc" },
+      },
+      filetype = "markdown",
+    },
+    ensure_installed = {
+      "org",
+      "go",
+      "javascript",
+      "yaml",
+      "json",
+      "lua",
+      "clojure",
+      "python",
+      "markdown",
+    },
   })
 end
 

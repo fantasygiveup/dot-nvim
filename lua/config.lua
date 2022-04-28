@@ -298,4 +298,8 @@ function config.treesitter()
   })
 end
 
+function config.autopairs()
+  require("nvim-autopairs").setup({})
+end
+
 return config

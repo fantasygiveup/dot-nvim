@@ -19,23 +19,6 @@ keybind("n", "]f", "<Cmd>cnext<CR>", nsopts)
 keybind("n", "<Leader>ts", "<Cmd>setlocal spell! spelllang=en_us<CR>", nsopts)
 keybind("n", "<Leader>cw", [[<Cmd>keeppatterns %s/\s\+$//e<CR>]], nsopts)
 
--- Emacs/tcsh style compatible keybindings.
-keybind("i", "<A-b>", "<C-o>b", nopts)
-keybind("i", "<A-f>", "<C-o>w", nopts)
-keybind("i", "<A-d>", "<C-o>dw", nopts)
-keybind("i", "<C-y>", "<C-o>gP", nopts)
-keybind("i", "<C-w>", "<C-o>db", nopts)
-keybind("i", "<C-k>", "<C-o>D", nopts)
-keybind("i", "<C-a>", "<C-o>0", nopts)
-keybind("i", "<C-e>", "<C-o>$", nopts)
-keybind("i", "<C-_>", "<C-o>u", nopts) -- [C-/] to undo
-keybind("i", "<C-d>", "<Del>", nopts)
-keybind("i", "<C-u>", "<C-g>u<C-u>", nopts)
-keybind("i", "<C-b>", "<Left>", nopts)
-keybind("i", "<C-f>", "<Right>", nopts)
-keybind("i", "<C-p>", "<Up>", nopts)
-keybind("i", "<C-n>", "<Down>", nopts)
-
 -- Command line (tcsh style).
 keybind("c", "<C-a>", "<Home>", nopts)
 keybind("c", "<C-f>", "<Right>", nopts)

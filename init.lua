@@ -40,6 +40,7 @@ packer.startup(function(use)
   use({ "Olical/conjure", requires = { "Olical/aniseed" } })
   use({ "nvim-treesitter/nvim-treesitter", config = config.treesitter })
   use({ "nvim-orgmode/orgmode", config = config.orgmode })
+  use({ "windwp/nvim-autopairs", config = config.autopairs })
   if packer_bootstrap then
     packer.sync()
   end

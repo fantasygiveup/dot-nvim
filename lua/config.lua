@@ -267,6 +267,10 @@ function config.cmp()
       { name = "tmux", option = { all_panes = true, label = "", } },
       { name = "conjure" },
     },
+    preselect = cmp.PreselectMode.None,
+    completion = {
+      completeopt = 'menu,menuone,noinsert'
+    },
   })
 end
 

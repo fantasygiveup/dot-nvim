@@ -294,6 +294,7 @@ function config.treesitter()
       "python",
       "markdown",
       "elm",
+      "bash",
     },
   })
 end

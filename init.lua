@@ -34,6 +34,7 @@ packer.startup(function(use)
       { "andersevenrud/cmp-tmux" },
       { "PaterJason/cmp-conjure" },
       { "onsails/lspkind.nvim" },
+      { "hrsh7th/cmp-nvim-lua" },
     }, config = config.cmp })
   use({ "norcalli/nvim-colorizer.lua", config = config.colorizer })
   use({ "dbakker/vim-projectroot" })

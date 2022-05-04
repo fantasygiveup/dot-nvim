@@ -267,6 +267,7 @@ function config.cmp()
       { name = "luasnip" },
       { name = "tmux", option = { all_panes = true, label = "", } },
       { name = "conjure" },
+      { name = "nvim_lua" },
     },
     preselect = cmp.PreselectMode.None,
     completion = {

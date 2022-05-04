@@ -16,7 +16,12 @@ local function load_basic_autocmds()
       { { "BufRead", "BufNewFile" }, "COMMIT_EDITMSG", function() vim.opt_local.spell = true end },
       { { "BufRead, BufNewFile" } , "gitconfig", function() vim.bo.filetype = "gitconfig" end },
       { "FileType", "help", function() vim.cmd("only") end },
-      { "BufWinEnter", "*", function() require'internal'.restore_buf_cursor() end },
+      { "BufWinEnter", "*", function() require"internal".restore_buf_cursor() end },
+			{ "BufEnter", "*", function ()
+				if vim.bo.filetype ~= "help" then
+					pcall(vim.cmd, "ProjectRootCD")
+				end
+			end },
     },
 
     wins = {

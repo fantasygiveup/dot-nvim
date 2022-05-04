@@ -35,7 +35,7 @@ packer.startup(function(use)
       { "PaterJason/cmp-conjure" },
     }, config = config.cmp })
   use({ "norcalli/nvim-colorizer.lua", config = config.colorizer })
-  use({ "airblade/vim-rooter" })
+  use({ "dbakker/vim-projectroot" })
   use({ "elijahdanko/fzf-notes", run = "make bin" })
   use({ "Olical/conjure", requires = { "Olical/aniseed" } })
   use({ "nvim-treesitter/nvim-treesitter", config = config.treesitter })

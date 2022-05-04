@@ -1,31 +1,41 @@
 local function nvim_create_augroups(definitions)
-  for group_name, definition in pairs(definitions) do
-    vim.api.nvim_command("augroup "..group_name)
-    vim.api.nvim_command("autocmd!")
-    for _, def in ipairs(definition) do
-      local command = table.concat(vim.tbl_flatten({ "autocmd", def }), " ")
-      vim.api.nvim_command(command)
+  for desc, definition in pairs(definitions) do
+    for _, spec in pairs(definition) do
+      vim.api.nvim_create_autocmd(spec[1], {
+        pattern = spec[2],
+        callback = spec[3],
+				desc = desc,
+      })
     end
-    vim.api.nvim_command("augroup END")
   end
 end
 
 local function load_basic_autocmds()
   local definitions = {
     bufs = {
-      { "BufRead,BufNewFile", "COMMIT_EDITMSG", "setlocal spell" },
-      { "BufRead,BufNewFile", "gitconfig", "setfiletype gitconfig" },
-      { "FileType", "help", "only" },
-      { "BufWinEnter", "*", "lua require'internal'.restore_buf_cursor()" },
+      { { "BufRead", "BufNewFile" }, "COMMIT_EDITMSG", function() vim.opt_local.spell = true end },
+      { { "BufRead, BufNewFile" } , "gitconfig", function() vim.bo.filetype = "gitconfig" end },
+      { "FileType", "help", function() vim.cmd("only") end },
+      { "BufWinEnter", "*", function() require'internal'.restore_buf_cursor() end },
     },
 
     wins = {
-      { "VimResized", "*", "tabdo wincmd =" },
+      { "VimResized", "*", function() vim.cmd("tabdo wincmd =") end },
     },
 
     terminal = {
-      { "TermOpen", "*", [[setlocal laststatus=0 signcolumn=no norelativenumber nonumber |
-      autocmd BufLeave <buffer> setlocal number relativenumber signcolumn=yes laststatus=3]] },
+      { "TermOpen", "*", function()
+				vim.opt_local.laststatus = 0
+				vim.opt_local.signcolumn = "no"
+				vim.opt_local.relativenumber = false
+				vim.opt_local.number = false
+			end },
+			{ "TermLeave", "*", function()
+				vim.opt_local.laststatus = 3
+				vim.opt_local.signcolumn = "yes"
+				vim.opt_local.relativenumber = true
+				vim.opt_local.number = true
+			end },
     },
   }
 

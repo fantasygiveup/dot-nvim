@@ -4,7 +4,7 @@ local function nvim_create_augroups(definitions)
       vim.api.nvim_create_autocmd(spec[1], {
         pattern = spec[2],
         callback = spec[3],
-				desc = desc,
+        desc = desc,
       })
     end
   end
@@ -17,11 +17,11 @@ local function load_basic_autocmds()
       { { "BufRead, BufNewFile" } , "gitconfig", function() vim.bo.filetype = "gitconfig" end },
       { "FileType", "help", function() vim.cmd("only") end },
       { "BufWinEnter", "*", function() require"internal".restore_buf_cursor() end },
-			{ "BufEnter", "*", function ()
-				if vim.bo.filetype ~= "help" then
-					pcall(vim.cmd, "ProjectRootCD")
-				end
-			end },
+      { "BufEnter", "*", function ()
+        if vim.bo.filetype ~= "help" then
+          pcall(vim.cmd, "ProjectRootCD")
+        end
+      end },
     },
 
     wins = {
@@ -30,17 +30,17 @@ local function load_basic_autocmds()
 
     terminal = {
       { "TermOpen", "*", function()
-				vim.opt_local.laststatus = 0
-				vim.opt_local.signcolumn = "no"
-				vim.opt_local.relativenumber = false
-				vim.opt_local.number = false
-			end },
-			{ "TermLeave", "*", function()
-				vim.opt_local.laststatus = 3
-				vim.opt_local.signcolumn = "yes"
-				vim.opt_local.relativenumber = true
-				vim.opt_local.number = true
-			end },
+        vim.opt_local.laststatus = 0
+        vim.opt_local.signcolumn = "no"
+        vim.opt_local.relativenumber = false
+        vim.opt_local.number = false
+      end },
+      { "TermClose", "*", function()
+        vim.opt_local.laststatus = 3
+        vim.opt_local.signcolumn = "yes"
+        vim.opt_local.relativenumber = true
+        vim.opt_local.number = true
+      end },
     },
   }
 

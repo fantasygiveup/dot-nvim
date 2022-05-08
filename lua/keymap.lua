@@ -40,6 +40,7 @@ keybind("v", "<Leader>//", [[:<C-U>exec 'FzfRg ' . luaeval('require"internal".vi
 keybind("n", "<Leader>?", "<Cmd>FzfMaps<CR>", nsopts)
 keybind("n", "<Leader>:", "<Cmd>FzfCommands<CR>", nsopts)
 keybind("n", "<Leader>#", "<Cmd>FzfFiletypes<CR>", nsopts)
+keybind("n", "<Leader>gg", "<Cmd>Neogit<CR>", nsopts)
 keybind("n", "<Leader>g?", "<Cmd>lua require'gitsigns'.blame_line({full=true})<CR>", nsopts)
 keybind("n", "<leader>gu", "<Cmd>lua require'gitlinker'.get_buf_range_url('n', {action_callback = require'gitlinker.actions'.copy_to_clipboard})<CR>", nsopts)
 keybind("v", "<leader>gu", "<Cmd>lua require'gitlinker'.get_buf_range_url('v', {action_callback = require'gitlinker.actions'.copy_to_clipboard})<CR>", nsopts)

@@ -42,6 +42,7 @@ packer.startup(function(use)
   use({ "nvim-treesitter/nvim-treesitter", config = config.treesitter })
   use({ "nvim-orgmode/orgmode", config = config.orgmode })
   use({ "windwp/nvim-autopairs", config = config.autopairs })
+  use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
   if packer_bootstrap then
     packer.sync()
   end

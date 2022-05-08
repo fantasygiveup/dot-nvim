@@ -312,7 +312,16 @@ function config.treesitter()
 end
 
 function config.autopairs()
-  require("nvim-autopairs").setup({})
+  require("nvim-autopairs").setup()
+end
+
+function config.telescope()
+  local telescope = require("telescope")
+  telescope.setup({
+    extensions = { fzf = { fuzzy = false } }
+  })
+  telescope.load_extension("fzf")
+  telescope.load_extension("repo")
 end
 
 return config

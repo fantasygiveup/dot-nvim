@@ -14,7 +14,6 @@ packer.startup(function(use)
   use({ "ruifm/gitlinker.nvim", requires = 'nvim-lua/plenary.nvim', config = config.gitlinker })
   use({ "tpope/vim-commentary" })
   use({ "machakann/vim-sandwich" })
-  use({ "junegunn/fzf.vim", requires = "junegunn/fzf", config = config.fzf })
   use({ "rakr/vim-one", config = config.colortheme })
   use({ "nvim-lualine/lualine.nvim", requires = {"kyazdani42/nvim-web-devicons", opt = true}, config = config.lualine })
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitsigns })
@@ -37,12 +36,16 @@ packer.startup(function(use)
     }, config = config.cmp })
   use({ "norcalli/nvim-colorizer.lua", config = config.colorizer })
   use({ "dbakker/vim-projectroot" })
-  use({ "elijahdanko/fzf-notes", run = "make bin" })
   use({ "Olical/conjure", requires = { "guns/vim-sexp", "tpope/vim-sexp-mappings-for-regular-people" }})
   use({ "nvim-treesitter/nvim-treesitter", config = config.treesitter })
   use({ "nvim-orgmode/orgmode", config = config.orgmode })
   use({ "windwp/nvim-autopairs", config = config.autopairs })
-  use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
+  use({ "nvim-telescope/telescope.nvim",
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+      { "cljoly/telescope-repo.nvim" },
+    }, config = config.telescope })
   if packer_bootstrap then
     packer.sync()
   end

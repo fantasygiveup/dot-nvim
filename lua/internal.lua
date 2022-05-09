@@ -26,7 +26,7 @@ end
 local function search_visual_selected()
   local pattern = visual_selection()
   -- -w: exact word match.
-  require("telescope.builtin").grep_string({search = pattern, word_match = "-w"})
+  require("telescope.builtin").grep_string({search = pattern})
 end
 
 local function unfold()

@@ -318,7 +318,12 @@ end
 function config.telescope()
   local telescope = require("telescope")
   telescope.setup({
-    extensions = { fzf = { fuzzy = false } }
+    extensions = { fzf = { fuzzy = false } },
+    defaults = {
+      prompt_prefix = "🔭 ",
+      layout_config = { prompt_position = "top" },
+      sorting_strategy = "ascending",
+    },
   })
   telescope.load_extension("fzf")
   telescope.load_extension("repo")

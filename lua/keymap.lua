@@ -18,6 +18,7 @@ keybind("n", "[f", "<Cmd>cprev<CR>", nsopts)
 keybind("n", "]f", "<Cmd>cnext<CR>", nsopts)
 keybind("n", "<Leader>ts", "<Cmd>setlocal spell! spelllang=en_us<CR>", nsopts)
 keybind("n", "<Leader>cw", [[<Cmd>keeppatterns %s/\s\+$//e<CR>]], nsopts)
+keybind("n", "X", "<Cmd>lua require'internal'.qf_toggle()<CR>", nsopts)
 
 -- Command line (tcsh style).
 keybind("c", "<C-a>", "<Home>", nopts)

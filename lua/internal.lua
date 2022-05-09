@@ -58,7 +58,17 @@ local function restore_buf_cursor()
   timer:start(0, 0, vim.schedule_wrap(unfold))
 end
 
+local function qf_toggle()
+  local nr = vim.api.nvim_win_get_buf(0)
+  vim.cmd("cwindow")
+  local nr2 = vim.api.nvim_win_get_buf(0)
+  if nr == nr2 then
+    vim.cmd("cclose")
+  end
+end
+
 return {
   restore_buf_cursor = restore_buf_cursor,
   search_visual_selected = search_visual_selected,
+  qf_toggle = qf_toggle,
 }

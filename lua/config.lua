@@ -322,7 +322,8 @@ function config.telescope()
     extensions = { fzf = { fuzzy = false } },
     defaults = {
       prompt_prefix = "🔭 ",
-      layout_config = { prompt_position = "top" },
+      -- Full screen, equal panels, prompt and content top.
+      layout_config = { prompt_position = "top", width = 1000, height = 1000, preview_width = 0.5, anchor = "CENTER" },
       sorting_strategy = "ascending",
     },
   })

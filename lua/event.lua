@@ -10,6 +10,20 @@ local function nvim_create_augroups(definitions)
   end
 end
 
+local function zen_mode(status)
+  if status == 1 then
+    vim.opt_local.laststatus = 0
+    vim.opt_local.signcolumn = "no"
+    vim.opt_local.relativenumber = false
+    vim.opt_local.number = false
+  else
+    vim.opt_local.laststatus = 3
+    vim.opt_local.signcolumn = "yes"
+    vim.opt_local.relativenumber = true
+    vim.opt_local.number = true
+  end
+end
+
 local function load_basic_autocmds()
   local definitions = {
     bufs = {
@@ -28,18 +42,14 @@ local function load_basic_autocmds()
       { "VimResized", "*", function() vim.cmd("tabdo wincmd =") end },
     },
 
-    terminal = {
-      { "TermOpen", "*", function()
-        vim.opt_local.laststatus = 0
-        vim.opt_local.signcolumn = "no"
-        vim.opt_local.relativenumber = false
-        vim.opt_local.number = false
-      end },
-      { "TermClose", "*", function()
-        vim.opt_local.laststatus = 3
-        vim.opt_local.signcolumn = "yes"
-        vim.opt_local.relativenumber = true
-        vim.opt_local.number = true
+    zen = {
+      { "TermOpen", "*", function() zen_mode(1) end },
+      { "TermClose", "*", function() zen_mode(0) end },
+      { "FileType", "TelescopePrompt", function() zen_mode(1) end },
+      { "BufLeave", "*", function()
+        if vim.bo.filetype == "TelescopePrompt" then
+          zen_mode(0)
+        end
       end },
     },
   }

@@ -159,6 +159,7 @@ function config.ale()
 
   vim.g.ale_fixers = {
     javascript = { "prettier" },
+    javascriptreact = { "prettier" },
     css = { "prettier" },
     elm = { "elm-format" },
     python = { "yapf" },

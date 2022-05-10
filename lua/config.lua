@@ -74,7 +74,12 @@ function config.lualine()
     },
     sections = {
       lualine_a = { "mode", spell },
-      lualine_x = { lsp_active_client, "encoding", "fileformat", "filetype" },
+      lualine_x = {
+        { lsp_active_client, color = { fg = vim.api.nvim_get_hl_by_name("Function", false).foreground } },
+        "encoding",
+        "fileformat",
+        "filetype",
+      },
       lualine_y = {
         "progress",
         { "diagnostics", sources = { "ale" },

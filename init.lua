@@ -46,6 +46,7 @@ packer.startup(function(use)
       { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       { "cljoly/telescope-repo.nvim" },
     }, config = config.telescope })
+  use({ "ellisonleao/glow.nvim", config = config.glow })
   if packer_bootstrap then
     packer.sync()
   end

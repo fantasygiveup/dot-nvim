@@ -40,11 +40,20 @@ local function load_basic_autocmds()
 
     wins = {
       { "VimResized", "*", function() vim.cmd("tabdo wincmd =") end },
+      -- Special case for glow package.
+      { "WinClosed", "*", function()
+        local win = vim.api.nvim_get_current_win()
+        local buf = vim.api.nvim_win_get_buf(win)
+        local buf_name = vim.api.nvim_buf_get_name(buf)
+        if buf_name:find("term://", 1, true) == 1 then
+          zen_mode(0)
+        end
+      end },
     },
 
     zen = {
       { "TermOpen", "*", function() zen_mode(1) end },
-      { "TermClose", "*", function() zen_mode(0) end },
+      { "TermLeave", "*", function() zen_mode(0) end },
       { "FileType", "TelescopePrompt", function() zen_mode(1) end },
       { "BufLeave", "*", function()
         if vim.bo.filetype == "TelescopePrompt" then

@@ -341,4 +341,9 @@ function config.telescope()
   telescope.load_extension("repo")
 end
 
+function config.glow()
+  vim.g.glow_style = "light"
+  vim.g.glow_border = "rounded"
+end
+
 return config

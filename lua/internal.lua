@@ -67,8 +67,21 @@ local function qf_toggle()
   end
 end
 
+local function glow()
+  require('glow').glow('')
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if vim.api.nvim_buf_get_option(buf, "filetype") == "glowpreview" then
+      vim.api.nvim_win_set_width(win, 1000)
+      vim.api.nvim_win_set_height(win, 1000)
+      return
+    end
+  end
+end
+
 return {
   restore_buf_cursor = restore_buf_cursor,
   search_visual_selected = search_visual_selected,
   qf_toggle = qf_toggle,
+  glow = glow,
 }

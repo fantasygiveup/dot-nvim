@@ -1,5 +1,10 @@
 local config = {}
 
+local function disable_distribution_plugins()
+  vim.g.omni_sql_no_default_maps = 1
+end
+disable_distribution_plugins()
+
 function config.lf()
   vim.g.lf_map_keys = 0
   vim.g.bclose_no_plugin_maps = 1

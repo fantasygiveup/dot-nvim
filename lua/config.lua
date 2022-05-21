@@ -19,8 +19,8 @@ end
 
 function config.colortheme()
   vim.cmd("colorscheme one")
-  -- Remove window border, and set proper color.
-  local color_ref = vim.api.nvim_get_hl_by_name("String", true)
+  -- Remove window border.
+  local color_ref = vim.api.nvim_get_hl_by_name("Normal", true)
   vim.api.nvim_set_hl(0, "WinSeparator", { bg=nil, fg=color_ref.foreground })
 end
 

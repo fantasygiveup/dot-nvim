@@ -79,9 +79,14 @@ local function glow()
   end
 end
 
+local function scratchpad()
+  vim.cmd("edit " .. require("global").scratchpad)
+end
+
 return {
   restore_buf_cursor = restore_buf_cursor,
   search_visual_selected = search_visual_selected,
   qf_toggle = qf_toggle,
   glow = glow,
+  scratchpad = scratchpad,
 }

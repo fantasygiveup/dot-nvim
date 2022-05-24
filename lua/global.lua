@@ -16,6 +16,7 @@ function global:load_variables()
   self.home        = home
   self.user_name   = "Elijah Danko"
   self.email       = "me@eli.net"
+  self.scratchpad    = vim.fn.stdpath("config") .. path_sep .. "scratchpad.txt"
 end
 
 global:load_variables()

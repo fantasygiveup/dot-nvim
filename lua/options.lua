@@ -43,7 +43,7 @@ local buffer_window_local = {
   relativenumber = true,
   cursorline     = true,
   foldenable     = true,
-  signcolumn     = "yes",
+  signcolumn     = "number",
   undofile       = true,
 }
 

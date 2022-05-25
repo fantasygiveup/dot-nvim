@@ -18,7 +18,7 @@ local function zen_mode(status)
     vim.opt_local.number = false
   else
     vim.opt_local.laststatus = 3
-    vim.opt_local.signcolumn = "yes"
+    vim.opt_local.signcolumn = "number"
     vim.opt_local.relativenumber = true
     vim.opt_local.number = true
   end

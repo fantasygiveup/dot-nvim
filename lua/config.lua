@@ -326,21 +326,6 @@ function config.autopairs()
   require("nvim-autopairs").setup()
 end
 
-function config.telescope()
-  local telescope = require("telescope")
-  telescope.setup({
-    extensions = { fzf = { fuzzy = false } },
-    defaults = {
-      prompt_prefix = "🔭 ",
-      -- Full screen, equal panels, prompt and content top.
-      layout_config = { prompt_position = "top", width = 1000, height = 1000, preview_width = 0.5, anchor = "CENTER" },
-      sorting_strategy = "ascending",
-    },
-  })
-  telescope.load_extension("fzf")
-  telescope.load_extension("repo")
-end
-
 function config.glow()
   vim.g.glow_style = "light"
   vim.g.glow_border = "rounded"

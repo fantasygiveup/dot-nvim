@@ -23,12 +23,6 @@ local function visual_selection()
   return table.concat(lines, "\n")
 end
 
-local function search_visual_selected()
-  local pattern = visual_selection()
-  -- -w: exact word match.
-  require("telescope.builtin").grep_string({search = pattern})
-end
-
 local function unfold()
   local cl = vim.fn.line(".")
 
@@ -85,7 +79,7 @@ end
 
 return {
   restore_buf_cursor = restore_buf_cursor,
-  search_visual_selected = search_visual_selected,
+  visual_selection = visual_selection,
   qf_toggle = qf_toggle,
   glow = glow,
   scratchpad = scratchpad,

@@ -18,6 +18,8 @@ packer.startup(function(use)
   use({ "nvim-lualine/lualine.nvim", requires = {"kyazdani42/nvim-web-devicons", opt = true}, config = config.lualine })
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitsigns })
   use({ "dense-analysis/ale", config = config.ale })
+  use({ "junegunn/fzf.vim", requires = "junegunn/fzf", config = config.fzf })
+  use({ "elijahdanko/fzf-notes", run = "make bin" })
   use({ "jamessan/vim-gnupg", config = config.gnupg })
   use({ "fatih/vim-go", config = config.go })
   use({ "christoomey/vim-tmux-navigator", config = config.tmux })
@@ -40,12 +42,6 @@ packer.startup(function(use)
   use({ "nvim-treesitter/nvim-treesitter", config = config.treesitter })
   use({ "nvim-orgmode/orgmode", config = config.orgmode })
   use({ "windwp/nvim-autopairs", config = config.autopairs })
-  use({ "nvim-telescope/telescope.nvim",
-    requires = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-      { "cljoly/telescope-repo.nvim" },
-    }, config = config.telescope })
   use({ "ellisonleao/glow.nvim", config = config.glow })
   if packer_bootstrap then
     packer.sync()

@@ -319,6 +319,7 @@ function config.treesitter()
       "markdown",
       "elm",
       "bash",
+      "vim",
     },
   })
 end

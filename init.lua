@@ -22,7 +22,7 @@ packer.startup(function(use)
   use({ "elijahdanko/fzf-notes", run = "make bin" })
   use({ "jamessan/vim-gnupg", config = config.gnupg })
   use({ "fatih/vim-go", config = config.go })
-  use({ "christoomey/vim-tmux-navigator", config = config.tmux })
+  use({ "elijahdanko/tmuxnvim", config = config.tmux })
   use({ "neovim/nvim-lspconfig", config = config.lsp })
   use({ "L3MON4D3/LuaSnip", config = config.luasnip })
   use({ "hrsh7th/nvim-cmp",

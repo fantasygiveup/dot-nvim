@@ -193,7 +193,7 @@ function config.go()
 end
 
 function config.tmux()
-  vim.g.tmux_navigator_no_mappings = 1
+  require("tmuxnvim").setup({})
 end
 
 function config.lsp()

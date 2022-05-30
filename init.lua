@@ -42,7 +42,7 @@ packer.startup(function(use)
   use({ "nvim-treesitter/nvim-treesitter", config = config.treesitter })
   use({ "nvim-orgmode/orgmode", config = config.orgmode })
   use({ "windwp/nvim-autopairs", config = config.autopairs })
-  use({ "ellisonleao/glow.nvim", config = config.glow })
+  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
   if packer_bootstrap then
     packer.sync()
   end

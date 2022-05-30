@@ -72,7 +72,6 @@ keybind("n", "s{", [[<Cmd>lua require'config'.sandwich_surround('{')<CR>]], nsop
 keybind("n", "s'", [[<Cmd>lua require'config'.sandwich_surround("'")<CR>]], nsopts)
 keybind("n", 's"', [[<Cmd>lua require'config'.sandwich_surround('"')<CR>]], nsopts)
 keybind("n", "s`", [[<Cmd>lua require'config'.sandwich_surround('`')<CR>]], nsopts)
-keybind("n", ",ww", "<Cmd>lua require'internal'.glow()<CR>", nsopts)
 
 -- Post.
 -- Bind C-c to ESC, also clean up the highlight.

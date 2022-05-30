@@ -328,9 +328,4 @@ function config.autopairs()
   require("nvim-autopairs").setup()
 end
 
-function config.glow()
-  vim.g.glow_style = "light"
-  vim.g.glow_border = "rounded"
-end
-
 return config

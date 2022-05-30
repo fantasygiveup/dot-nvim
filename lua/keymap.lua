@@ -23,7 +23,8 @@ keybind("n", ",cw", [[<Cmd>keeppatterns %s/\s\+$//e<CR>]], nsopts)
 keybind("n", "X", "<Cmd>lua require'internal'.qf_toggle()<CR>", nsopts)
 keybind("n", "ZZ", "<Cmd>xa<CR>", nsopts)
 keybind("n", "ZQ", "<Cmd>qa!<CR>", nsopts)
-keybind("n", ",fs", [[<Cmd>lua require'internal'.scratchpad()<CR>]], nsopts)
+keybind("n", ",fs", [[<Cmd>lua require'internal'.open_scratchpad()<CR>]], nsopts)
+keybind("n", ",fa", [[<Cmd>lua require'internal'.open_ref()<CR>]], nsopts)
 
 -- Command line (tcsh style).
 keybind("c", "<C-a>", "<Home>", nopts)

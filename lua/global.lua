@@ -2,6 +2,7 @@ local global = {}
 local home = os.getenv("HOME")
 local path_sep = global.is_windows and '\\' or '/'
 local os_name = vim.loop.os_uname().sysname
+local restricted = home .. path_sep .. "github.com" .. path_sep .. "elijahdanko" .. path_sep .. "restricted"
 
 function global:load_variables()
   self.is_mac      = os_name == "Darwin"
@@ -15,7 +16,8 @@ function global:load_variables()
   self.home        = home
   self.user_name   = "Elijah Danko"
   self.email       = "me@eli.net"
-  self.scratchpad    = vim.fn.stdpath("config") .. path_sep .. "scratchpad.txt"
+  self.scratchpad  = vim.fn.stdpath("config") .. path_sep .. "scratchpad.txt"
+  self.ref         = restricted .. path_sep .. "ref.gpg"
 end
 
 global:load_variables()

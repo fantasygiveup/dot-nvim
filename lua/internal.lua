@@ -73,8 +73,12 @@ local function glow()
   end
 end
 
-local function scratchpad()
+local function open_scratchpad()
   vim.cmd("edit " .. require("global").scratchpad)
+end
+
+local function open_ref()
+  vim.cmd("edit " .. require("global").ref)
 end
 
 return {
@@ -82,5 +86,6 @@ return {
   visual_selection = visual_selection,
   qf_toggle = qf_toggle,
   glow = glow,
-  scratchpad = scratchpad,
+  open_scratchpad = open_scratchpad,
+  open_ref = open_ref,
 }

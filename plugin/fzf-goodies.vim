@@ -49,8 +49,7 @@ command! -nargs=* -bang FzfProjects call fzf#run(
 
 function s:fzf_projects_handler(path) abort
   exec s:fzf_projects_cd_cmd . " " a:path[0]
-  "Use sleep(0) for context change. Required for correctness of augroups.
-  call timer_start(0, {-> execute("FzfFiles")})
+  call timer_start(100, {-> execute("FzfFiles")})
 endfunction
 
 let &cpo = s:cpo_save

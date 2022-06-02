@@ -61,18 +61,6 @@ local function qf_toggle()
   end
 end
 
-local function glow()
-  require('glow').glow('')
-  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-    local buf = vim.api.nvim_win_get_buf(win)
-    if vim.api.nvim_buf_get_option(buf, "filetype") == "glowpreview" then
-      vim.api.nvim_win_set_width(win, 1000)
-      vim.api.nvim_win_set_height(win, 1000)
-      return
-    end
-  end
-end
-
 local function open_scratchpad()
   vim.cmd("edit " .. require("global").scratchpad)
 end
@@ -85,7 +73,6 @@ return {
   restore_buf_cursor = restore_buf_cursor,
   visual_selection = visual_selection,
   qf_toggle = qf_toggle,
-  glow = glow,
   open_scratchpad = open_scratchpad,
   open_ref = open_ref,
 }

@@ -40,7 +40,7 @@ local function load_basic_autocmds()
 
     wins = {
       { "VimResized", "*", function() vim.cmd("tabdo wincmd =") end },
-      -- Special case for glow package.
+      -- Special case for term apps like glow and fzf.
       { "WinClosed", "*", function()
         local win = vim.api.nvim_get_current_win()
         local buf = vim.api.nvim_win_get_buf(win)

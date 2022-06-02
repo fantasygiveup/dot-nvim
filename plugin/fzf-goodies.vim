@@ -1,7 +1,7 @@
-if exists('gloaded_fzf_custom')
+if exists('gloaded_fzf_goodies')
   finish
 endif
-let g:gloaded_fzf_custom = 1
+let g:gloaded_fzf_goodies = 1
 
 let s:cpo_save = &cpo
 set cpo&vim

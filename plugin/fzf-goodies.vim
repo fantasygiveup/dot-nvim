@@ -52,5 +52,11 @@ function s:fzf_projects_handler(path) abort
   call timer_start(100, {-> execute("FzfFiles")})
 endfunction
 
+" FzfNeoFiles.
+" Same as FzfFiles. In addition, computes preview settings based on window width.
+command! -bang -nargs=? -complete=dir FzfNeoFiles call fzf#vim#files(<q-args>, fzf#vim#with_preview(
+      \ {"options": ["--preview-window", <SID>preview_window()]}
+      \ ), <bang>0)
+
 let &cpo = s:cpo_save
 unlet s:cpo_save

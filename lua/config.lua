@@ -328,6 +328,10 @@ function config.autopairs()
   require("nvim-autopairs").setup()
 end
 
+function config.project_nvim()
+  require("project_nvim").setup()
+end
+
 function config.orgmode()
   local orgmode = require("orgmode")
   orgmode.setup_ts_grammar()

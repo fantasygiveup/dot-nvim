@@ -328,4 +328,14 @@ function config.autopairs()
   require("nvim-autopairs").setup()
 end
 
+function config.orgmode()
+  local orgmode = require("orgmode")
+  orgmode.setup_ts_grammar()
+  orgmode.setup({
+    mappings = {
+      disable_all = true,
+    },
+  })
+end
+
 return config

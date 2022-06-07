@@ -69,8 +69,16 @@ ls.add_snippets("org", {
 
 ls.add_snippets("lua", {
     s("fn", fmt([[
-function {}
+function {}({})
   {}
 end
-  ]], { i(1), i(0) })),
+  ]], { i(1), i(2), i(0) })),
+  })
+
+ls.add_snippets("lua", {
+    s("fnl", fmt([[
+local function {}({})
+  {}
+end
+  ]], { i(1), i(2), i(0) })),
   })

@@ -28,6 +28,12 @@ function s:preview_window() abort
   return states[0]
 endfunction
 
+" FzfNeoFiles.
+" Same as FzfFiles. In addition, computes preview settings based on window width.
+command! -bang -nargs=? -complete=dir FzfNeoFiles call fzf#vim#files(<q-args>, fzf#vim#with_preview(
+      \ { "options" : [ "--preview-window", <SID>preview_window() ] }
+      \ ), <bang>0)
+
 " FzfProjects.
 " Search for git project via fzf and change fs path.
 " Better to use along with something like `vim-projectroot` to set path back on buffer change.
@@ -49,14 +55,8 @@ command! -nargs=* -bang FzfProjects call fzf#run(
 
 function s:fzf_projects_handler(path) abort
   exec s:fzf_projects_cd_cmd . " " a:path[0]
-  call timer_start(100, {-> execute("FzfFiles")})
+  call timer_start(100, {-> execute("FzfNeoFiles")})
 endfunction
-
-" FzfNeoFiles.
-" Same as FzfFiles. In addition, computes preview settings based on window width.
-command! -bang -nargs=? -complete=dir FzfNeoFiles call fzf#vim#files(<q-args>, fzf#vim#with_preview(
-      \ { "options" : [ "--preview-window", <SID>preview_window() ] }
-      \ ), <bang>0)
 
 " FzfNeoBuffers.
 " Same as FzfBuffers. In addition, computes preview settings based on window width.

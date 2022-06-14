@@ -4,6 +4,7 @@ local keybind = vim.api.nvim_set_keymap
 
 -- Pre. Allows us to map C-c key sequence (see Post below).
 keybind("n", "<C-c>", "<Nop>", nopts)
+keybind("n", "<C-z>", "<Nop>", nopts)
 keybind("i", "<C-c>", "<Nop>", nopts)
 
 -- Core.

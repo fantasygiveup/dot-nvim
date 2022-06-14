@@ -37,10 +37,10 @@ command! -bang -nargs=? -complete=dir FzfNeoFiles call fzf#vim#files(<q-args>, f
 " FzfProjects.
 " Search for git project via fzf and change fs path.
 " Better to use along with something like `vim-projectroot` to set path back on buffer change.
-let s:term_yellow_fg='\033[0;33m'
+let s:fzf_projects_term_fg='\033[0;34m'
 let s:term_reset='\033[0m'
 let s:fzf_projects_fd_cmd = "fdfind --hidden --case-sensitive --absolute-path --exec echo -e '"
-      \ . s:term_yellow_fg . "{//}" . s:term_reset . "' ';' '^\.git$'"
+      \ . s:fzf_projects_term_fg . "{//}" . s:term_reset . "' ';' '^\.git$'"
 let s:fzf_projects_root = $HOME
 let s:fzf_projects_cd_cmd = "lcd"
 

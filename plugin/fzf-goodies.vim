@@ -49,7 +49,7 @@ command! -nargs=* -bang FzfProjects call fzf#run(
       \ "source": join([s:fzf_projects_fd_cmd, " ", s:fzf_projects_root]),
       \ "options": [
         \ "--prompt", "Projects> ",
-        \ "--preview", "tree -L 1 {}",
+        \ "--preview", "tree -C -L 1 {}",
         \ "--preview-window", <SID>preview_window(),
         \ "--ansi"
         \ ] }, <bang>0)

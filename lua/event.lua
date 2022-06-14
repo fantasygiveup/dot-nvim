@@ -24,6 +24,15 @@ local function zen_mode(status)
   end
 end
 
+local function zen_mode_buf_pat(status, pat)
+  local win = vim.api.nvim_get_current_win()
+  local buf = vim.api.nvim_win_get_buf(win)
+  local buf_name = vim.api.nvim_buf_get_name(buf)
+  if buf_name:find(pat, 1, true) == 1 then
+    zen_mode(status)
+  end
+end
+
 local function load_basic_autocmds()
   local definitions = {
     bufs = {
@@ -40,15 +49,9 @@ local function load_basic_autocmds()
 
     wins = {
       { "VimResized", "*", function() vim.cmd("tabdo wincmd =") end },
-      -- Special case for term apps like glow and fzf.
-      { "WinClosed", "*", function()
-        local win = vim.api.nvim_get_current_win()
-        local buf = vim.api.nvim_win_get_buf(win)
-        local buf_name = vim.api.nvim_buf_get_name(buf)
-        if buf_name:find("term://", 1, true) == 1 then
-          zen_mode(0)
-        end
-      end },
+      -- Special case for term apps like glow, fzf or lf.
+      { "WinClosed", "*",  function() zen_mode_buf_pat(0, "term://") end },
+      { "VimEnter", "*",  function() zen_mode_buf_pat(1, "term://") end },
     },
 
     zen = {

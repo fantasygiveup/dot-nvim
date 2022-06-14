@@ -8,6 +8,7 @@ disable_distribution_plugins()
 function config.lf()
   vim.g.lf_map_keys = 0
   vim.g.bclose_no_plugin_maps = 1
+  vim.g.lf_replace_netrw = 1
 end
 
 function config.fzf()

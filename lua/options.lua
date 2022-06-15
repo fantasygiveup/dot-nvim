@@ -35,6 +35,7 @@ local global_options = {
   laststatus     = 3,
   formatoptions  = vim.o.formatoptions:gsub('t', ''),  -- don't auto break lines
   grepprg        = 'rg --hidden --vimgrep --smart-case --',
+  wrap           = false,
 }
 
 local buffer_window_local = {

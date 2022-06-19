@@ -39,7 +39,8 @@ command! -bang -nargs=? -complete=dir FzfNeoFiles call fzf#vim#files(<q-args>, f
 " Better to use along with something like `vim-projectroot` to set path back on buffer change.
 let s:fzf_projects_term_fg='\033[0;34m'
 let s:term_reset='\033[0m'
-let s:fzf_projects_fd_cmd = "fdfind --hidden --case-sensitive --absolute-path --exec echo -e '"
+let s:fzf_projects_bin = executable("fd") ? "fd" : "fdfind"
+let s:fzf_projects_fd_cmd = s:fzf_projects_bin . " --hidden --case-sensitive --absolute-path --exec echo -e '"
       \ . s:fzf_projects_term_fg . "{//}" . s:term_reset . "' ';' '^\.git$'"
 let s:fzf_projects_root = $HOME
 let s:fzf_projects_cd_cmd = "lcd"

@@ -19,10 +19,9 @@ function config.fzf()
 end
 
 function config.colortheme()
-  vim.cmd("colorscheme one")
-  -- Remove window border.
-  local color_ref = vim.api.nvim_get_hl_by_name("Normal", true)
-  vim.api.nvim_set_hl(0, "WinSeparator", { bg=nil, fg=color_ref.foreground })
+  require('github-theme').setup({
+    theme_style = "dark",
+  })
 end
 
 function config.gitlinker()
@@ -40,13 +39,6 @@ function config.sandwich_surround(ch)
 end
 
 function config.lualine()
-
-  local function theme()
-    if vim.o.background == "light" then
-      return "onelight"
-    end
-    return "onedark"
-  end
 
   local function spell()
     if not vim.o.spell then
@@ -74,7 +66,7 @@ function config.lualine()
   local ll = require("lualine")
   ll.setup({
     options = {
-      theme = theme(),
+      theme = "auto",
       section_separators = {left = "", right = ""},
       component_separators = {left = "", right = ""},
     },

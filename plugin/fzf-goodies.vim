@@ -57,8 +57,7 @@ command! -nargs=* -bang FzfProjects call fzf#run(
       \ )
 
 function s:fzf_projects_handler(path) abort
-  exec s:fzf_projects_cd_cmd . " " a:path[0]
-  call timer_start(100, {-> execute("FzfNeoFiles")})
+  call timer_start(0, {-> execute([s:fzf_projects_cd_cmd . " " . a:path[0],  "FzfNeoFiles " . a:path[0]])})
 endfunction
 
 " FzfNeoBuffers.

@@ -84,8 +84,8 @@ function config.lualine()
         sections = { "error", "warn" },
         symbols = { error = " ", warn = "  "},
         diagnostics_color = {
-          error = "jsonSemicolonError",
-          warn  = "Search",
+          error = "DiffDelete",
+          warn  = "DiffChange",
         } },
       },
     }

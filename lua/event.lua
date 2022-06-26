@@ -16,11 +16,13 @@ local function zen_mode(status)
     vim.opt_local.signcolumn = "no"
     vim.opt_local.relativenumber = false
     vim.opt_local.number = false
+    vim.opt_local.cursorline = false
   else
-    vim.opt_local.laststatus = 3
-    vim.opt_local.signcolumn = "number"
-    vim.opt_local.relativenumber = true
+    vim.opt_local.cursorline = true
     vim.opt_local.number = true
+    vim.opt_local.relativenumber = true
+    vim.opt_local.signcolumn = "number"
+    vim.opt_local.laststatus = 3
   end
 end
 
@@ -51,7 +53,17 @@ local function load_basic_autocmds()
       { "VimResized", "*", function() vim.cmd("tabdo wincmd =") end },
       -- Special case for term apps like glow, fzf or lf.
       { "WinClosed", "*",  function() zen_mode_buf_pat(0, "term://") end },
-      { "VimEnter", "*",  function() zen_mode_buf_pat(1, "term://") end },
+      { "VimEnter", "*",  function()
+        if vim.o.diff then
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            vim.api.nvim_set_current_win(win)
+            zen_mode(1)
+          end
+          vim.cmd("normal! gg")
+          return
+        end
+        zen_mode_buf_pat(1, "term://")
+      end },
     },
 
     zen = {

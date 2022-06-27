@@ -61,18 +61,8 @@ local function qf_toggle()
   end
 end
 
-local function open_scratchpad()
-  vim.cmd("edit " .. require("global").scratchpad)
-end
-
-local function open_ref()
-  vim.cmd("edit " .. require("global").ref)
-end
-
 return {
   restore_buf_cursor = restore_buf_cursor,
   visual_selection = visual_selection,
   qf_toggle = qf_toggle,
-  open_scratchpad = open_scratchpad,
-  open_ref = open_ref,
 }

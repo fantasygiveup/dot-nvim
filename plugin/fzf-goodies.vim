@@ -66,5 +66,29 @@ command! -bar -bang -nargs=? -complete=buffer FzfNeoBuffers call
       \ fzf#vim#buffers(<q-args>, fzf#vim#with_preview(
       \ { "placeholder": "{1}", "options": [ "--preview-window", <SID>preview_window() ] }), <bang>0)
 
+" FzfBookmarks.
+command! -bang FzfBookmarks call fzf#run(
+      \ fzf#wrap({"sink*": function("<SID>bookmarks_handler"),
+      \ "source": join(["cat", " ", $FZF_BOOKMARKS_FILE]),
+      \ "options": [
+        \ "--prompt", "Bookmarks> ",
+        \ ] }, <bang>0)
+      \ )
+
+function s:bookmarks_handler(line) abort
+  if len(a:line) < 1
+    return
+  endif
+  let query = split(a:line[0])
+  if len(query) < 2
+    return
+  endif
+  let ftokens = split(query[-1], ":")
+  if len(ftokens) < 2
+    return
+  endif
+  exec "edit +" . ftokens[-1] . " " . ftokens[0]
+endfunction
+
 let &cpo = s:cpo_save
 unlet s:cpo_save

@@ -40,11 +40,9 @@ local global_options = {
 
 local buffer_window_local = {
   textwidth      = 80,
-  number         = true,
-  relativenumber = true,
   cursorline     = true,
   foldenable     = true,
-  signcolumn     = "number",
+  signcolumn     = "yes",
   undofile       = true,
 }
 

@@ -20,13 +20,19 @@ local function zen_mode(status)
   end
 end
 
-local function zen_mode_buf_pat(status, pat)
+local function turn_on_zen_mode() zen_mode(1) end
+local function turn_off_zen_mode() zen_mode(0) end
+
+local function on_win_close()
+  turn_off_zen_mode()
+  require("project_nvim.project").on_buf_enter()
+end
+
+local function on_buf_pat(pat, fn)
   local win = vim.api.nvim_get_current_win()
   local buf = vim.api.nvim_win_get_buf(win)
   local buf_name = vim.api.nvim_buf_get_name(buf)
-  if buf_name:find(pat, 1, true) == 1 then
-    zen_mode(status)
-  end
+  if buf_name:find(pat, 1, true) == 1 then fn() end
 end
 
 local function load_basic_autocmds()
@@ -36,17 +42,12 @@ local function load_basic_autocmds()
       { { "BufRead, BufNewFile" } , "gitconfig", function() vim.bo.filetype = "gitconfig" end },
       { "FileType", "help", function() pcall(vim.cmd, "only") end },
       { "BufWinEnter", "*", function() require"internal".restore_buf_cursor() end },
-      { "BufEnter", "*", function ()
-        if vim.bo.filetype ~= "help" then
-          pcall(vim.cmd, "ProjectRootCD")
-        end
-      end },
     },
 
     wins = {
       { "VimResized", "*", function() vim.cmd("tabdo wincmd =") end },
       -- Special case for term apps like glow, fzf or lf.
-      { "WinClosed", "*",  function() zen_mode_buf_pat(0, "term://") end },
+      { "WinClosed", "*",  function() on_buf_pat("term://", on_win_close) end },
       { "VimEnter", "*",  function()
         if vim.o.diff then
           for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -56,7 +57,7 @@ local function load_basic_autocmds()
           vim.cmd("normal! gg")
           return
         end
-        zen_mode_buf_pat(1, "term://")
+        on_buf_pat("term://", turn_on_zen_mode)
       end },
     },
 

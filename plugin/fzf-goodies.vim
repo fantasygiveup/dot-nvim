@@ -42,6 +42,11 @@ command! -bang -nargs=? -complete=dir FzfNeoFiles call fzf#vim#files(<q-args>, f
       \ { "options" : [ "--preview-window", <SID>preview_window() ] }
       \ ), <bang>0)
 
+command! -bar -bang -range=% FzfNeoBCommits
+      \ let b:fzf_winview = winsaveview() |
+      \ <line1>,<line2>call fzf#vim#buffer_commits(
+      \ fzf#vim#with_preview({ "placeholder": "", "options" : [ "--preview-window", <SID>preview_window() ] }), <bang>0)
+
 " FzfProjects.
 " Search for git project via fzf and change fs path.
 " Better to use along with something like `vim-projectroot` to set path back on buffer change.

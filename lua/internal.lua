@@ -35,21 +35,17 @@ local function unfold()
   local min = math.min(cf, uf)
 
   if min > 0 then
-    vim.fn.execute("normal! " .. tostring(min) .. "zo")
+    vim.cmd("normal! " .. tostring(min) .. "zo")
   end
 end
 
 -- restore_buf_cursor jumps to the last visited file's position.
 local function restore_buf_cursor()
-  vim.fn.execute("normal! zM") -- close all folds.
   if vim.fn.line([[`"]]) <= vim.fn.line([[$]]) then
     vim.cmd([[try | exec 'normal! g`"zz' | catch | endtry]])
   end
 
-  -- It looks like vim/nvim doesn't sync cursor position right the way. To work it correctly, we
-  -- might wait one more event loop round (similar to sleep(0) in UNIX to context switch.)
-  local timer = vim.loop.new_timer()
-  timer:start(0, 0, vim.schedule_wrap(unfold))
+  unfold()
 end
 
 local function qf_toggle()

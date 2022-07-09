@@ -71,6 +71,12 @@ keybind("n", "s{", [[<Cmd>lua require'config'.sandwich_surround('{')<CR>]], nsop
 keybind("n", "s'", [[<Cmd>lua require'config'.sandwich_surround("'")<CR>]], nsopts)
 keybind("n", 's"', [[<Cmd>lua require'config'.sandwich_surround('"')<CR>]], nsopts)
 keybind("n", "s`", [[<Cmd>lua require'config'.sandwich_surround('`')<CR>]], nsopts)
+vim.keymap.set("n", ",do", function() require('close_buffers').wipe({ type = 'other', force = true }) end)
+vim.keymap.set("n", ",da", function() require('close_buffers').wipe({ type = 'all', force = true }) end)
+vim.keymap.set("n", ",dp", function()
+  local project_root = require("project_nvim.project").get_project_root()
+  require('close_buffers').wipe({ regex = project_root, force = true })
+end)
 
 -- Post.
 -- Bind C-c to ESC, also clean up the highlight.

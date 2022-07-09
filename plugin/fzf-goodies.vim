@@ -10,12 +10,20 @@ set cpo&vim
 " Same as FzfRg. In addition, computes preview settings based on window width.
 command! -bang -nargs=* FzfNeoRg call
       \ fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --
-      \ ".shellescape(<q-args>), 1, fzf#vim#with_preview(
+      \ ".shellescape(<q-args>) . <SID>project_root_hack(), 1, fzf#vim#with_preview(
       \ {"options": ["--preview-window", <SID>preview_window()]}
       \ ), <bang>0)
 
 let s:preview_window = "nohidden,+{2}-/2|hidden,down,+{2}-/2"
 let s:preview_threshold = "160"
+
+" project_root_hack is a hack to change to a new project directory. An issue comes when two or more
+" consequtive calls to Fzf and old path is used.
+function s:project_root_hack() abort
+  let project_root = luaeval('require"project_nvim.project".get_project_root()')
+  exec "lcd " . project_root
+  return ""
+endfunction
 
 function s:preview_window() abort
   let states = split(s:preview_window, "|")

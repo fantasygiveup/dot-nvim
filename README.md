@@ -27,6 +27,8 @@ save'!
 ## References
 
 - [Lua guide](https://github.com/nanotee/nvim-lua-guide)
+- [Nvim API](https://neovim.io/doc/user/api.html)
+- [Whats new in nvim 0.7](https://gpanders.com/blog/whats-new-in-neovim-0-7)
 - [Other way to structure dot nvim](https://github.com/glepnir/nvim)
 - [Package manager](https://github.com/wbthomason/packer.nvim)
 

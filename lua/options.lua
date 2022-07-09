@@ -39,7 +39,7 @@ local global_options = {
 }
 
 local buffer_window_local = {
-  textwidth      = 80,
+  textwidth      = 100,
   cursorline     = true,
   foldenable     = true,
   signcolumn     = "yes",

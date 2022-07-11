@@ -76,6 +76,7 @@ local function ensure_dir()
   end
 end
 
+vim.cmd("language en_US.utf8")
 bind_global(global_options)
 bind_option(buffer_window_local)
 ensure_dir()

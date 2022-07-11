@@ -33,7 +33,9 @@ local global_options = {
   ignorecase     = true,
   smartcase      = true,
   laststatus     = 3,
-  formatoptions  = vim.o.formatoptions:gsub('t', ''),  -- don't auto break lines
+  -- 1. Do not auto break lines.
+  -- 2. Turn off autowrap links.
+  formatoptions  = vim.o.formatoptions:gsub('t', ''):gsub('c', ''),
   grepprg        = 'rg --hidden --vimgrep --smart-case --',
   wrap           = false,
 }

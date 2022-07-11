@@ -25,7 +25,6 @@ local function turn_off_zen_mode() zen_mode(0) end
 
 local function on_win_close()
   turn_off_zen_mode()
-  require("project_nvim.project").on_buf_enter()
 end
 
 local function on_buf_pat(pat, fn)
@@ -65,6 +64,10 @@ local function load_basic_autocmds()
       { "TermOpen", "*", function() zen_mode(1) end },
       { "TermLeave", "*", function() zen_mode(0) end },
     },
+
+    path = {
+      { { "BufWinEnter", "TermOpen", "TermLeave" }, "*", function() require("project_nvim.project").on_buf_enter() end },
+    }
   }
 
   nvim_create_augroups(definitions)

@@ -18,12 +18,6 @@ function config.fzf()
   vim.g.fzf_buffers_jump = 1
 end
 
-function config.colortheme()
-  require('github-theme').setup({
-    theme_style = "dark",
-  })
-end
-
 function config.gitlinker()
   require("gitlinker").setup({
     mappings = nil, -- don't use default mappings
@@ -39,6 +33,11 @@ function config.sandwich_surround(ch)
 end
 
 function config.lualine()
+
+  -- lualine uses a theme.
+  require('github-theme').setup({
+    theme_style = "dark",
+  })
 
   local function spell()
     if not vim.o.spell then

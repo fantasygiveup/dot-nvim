@@ -14,8 +14,10 @@ packer.startup(function(use)
   use({ "ruifm/gitlinker.nvim", requires = 'nvim-lua/plenary.nvim', config = config.gitlinker })
   use({ "tpope/vim-commentary" })
   use({ "machakann/vim-sandwich" })
-  use({ "projekt0n/github-nvim-theme", config = config.colortheme })
-  use({ "nvim-lualine/lualine.nvim", requires = {"kyazdani42/nvim-web-devicons", opt = true}, config = config.lualine })
+  use({ "nvim-lualine/lualine.nvim", requires = {
+    "projekt0n/github-nvim-theme",
+    {"kyazdani42/nvim-web-devicons", opt = true}},
+    config = config.lualine })
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitsigns })
   use({ "dense-analysis/ale", config = config.ale })
   use({ "junegunn/fzf.vim", requires = { "junegunn/fzf", "tpope/vim-fugitive" }, config = config.fzf })

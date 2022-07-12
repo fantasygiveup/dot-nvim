@@ -316,18 +316,23 @@ function config.treesitter()
       enable = true,
     },
     ensure_installed = {
-      "org",
       "go",
       "javascript",
       "yaml",
       "json",
       "lua",
       "clojure",
+      "commonlisp",
+      "scheme",
       "python",
       "markdown",
       "elm",
       "bash",
       "vim",
+      "html",
+      "css",
+      "query",
+      "ruby",
     },
   })
 end
@@ -338,16 +343,6 @@ end
 
 function config.project_nvim()
   require("project_nvim").setup()
-end
-
-function config.orgmode()
-  local orgmode = require("orgmode")
-  orgmode.setup_ts_grammar()
-  orgmode.setup({
-    mappings = {
-      disable_all = true,
-    },
-  })
 end
 
 function config.which_key()

@@ -16,7 +16,6 @@ keybind("n", ",", "", nopts)
 keybind("x", ",", "", nopts)
 keybind("n", vim.g.maplocalleader, "", nopts)
 keybind("x", vim.g.maplocalleader, "", nopts)
-keybind("x", "p", "pgvy", nopts) -- don't override register on visual
 keybind("n", "[f", "<Cmd>cprev<CR>", nsopts)
 keybind("n", "]f", "<Cmd>cnext<CR>", nsopts)
 keybind("n", ",ts", "<Cmd>setlocal spell! spelllang=en_us<CR>", nsopts)

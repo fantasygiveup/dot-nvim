@@ -57,8 +57,36 @@ local function qf_toggle()
   end
 end
 
+local function git_sync_file_change(file)
+  vim.fn.system("git rev-parse --is-inside-work-tree > /dev/null 2>&1")
+  if vim.v.shell_error ~= 0  then
+    print("Not in git")
+    return
+  end
+
+  file = file or vim.api.nvim_buf_get_name(0)
+  if file == nil or file == "" then
+    print("Not a file")
+    return
+  end
+
+  local remote = vim.fn.system("git config --get remote.origin.url"):gsub("\n", "")
+  local name = vim.fn.fnamemodify(file, ":t")
+  local cmds = {
+    { "git", "add", file },
+    { "git", "commit", "-m", "Update " .. name },
+    { "git", "push" }
+  }
+
+  for _, cmd in ipairs(cmds) do
+    vim.fn.system(cmd)
+  end
+  print(name .. " pushed to " .. remote)
+end
+
 return {
   restore_buf_cursor = restore_buf_cursor,
   visual_selection = visual_selection,
   qf_toggle = qf_toggle,
+  git_sync_file_change = git_sync_file_change,
 }

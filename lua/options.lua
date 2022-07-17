@@ -27,17 +27,16 @@ vim.o.virtualedit    = "onemore"
 vim.o.ignorecase     = true
 vim.o.smartcase      = true
 vim.o.laststatus     = 3
+vim.o.number         = true
 -- 1. Do not auto break lines.
 -- 2. Turn off autowrap links.
 vim.o.formatoptions  = vim.o.formatoptions:gsub('t', ''):gsub('c', '')
 vim.o.grepprg        = 'rg --hidden --vimgrep --smart-case --'
 vim.o.wrap           = false
-
--- Window local.
 vim.o.textwidth      = 80
 vim.o.cursorline     = true
 vim.o.foldenable     = true
-vim.o.signcolumn     = "yes"
+vim.o.signcolumn     = "number"
 vim.o.undofile       = true
 
 vim.cmd("language en_US.utf8")

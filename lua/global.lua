@@ -20,6 +20,22 @@ function global:load_variables()
   self.ref         = user_repo .. "restricted" .. path_sep .. "ref.gpg"
 end
 
+function global:ensure_dir()
+  local data_dir = {
+    self.undo_dir
+  }
+
+  if vim.fn.isdirectory(self.cache_dir) == 0 then
+    os.execute("mkdir -p " .. self.cache_dir)
+    for _, v in pairs(data_dir) do
+      if vim.fn.isdirectory(v) == 0 then
+        os.execute("mkdir -p " .. v)
+      end
+    end
+  end
+end
+
 global:load_variables()
+global:ensure_dir()
 
 return global

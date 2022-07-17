@@ -38,5 +38,6 @@ vim.o.cursorline     = true
 vim.o.foldenable     = true
 vim.o.signcolumn     = "number"
 vim.o.undofile       = true
+vim.o.spellfile      = global.cache_dir .. "spell/en.uft-8.add"
 
 vim.cmd("language en_US.utf8")

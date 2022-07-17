@@ -35,9 +35,8 @@ end
 function config.lualine()
 
   -- lualine uses a theme.
-  require('github-theme').setup({
-    theme_style = "dark",
-  })
+  require('gruvbox').setup({})
+  vim.cmd([[colorscheme gruvbox]])
 
   local function spell()
     if not vim.o.spell then
@@ -79,13 +78,11 @@ function config.lualine()
       },
       lualine_y = {
         "progress",
-        { "diagnostics", sources = { "ale" },
-        sections = { "error", "warn" },
-        symbols = { error = " ", warn = "  "},
-        diagnostics_color = {
-          error = "DiffDelete",
-          warn  = "DiffChange",
-        } },
+        { "diagnostics",
+          sources = { "ale" },
+          sections = { "error", "warn" },
+          symbols = { error = " ", warn = "  "},
+        },
       },
     }
   })

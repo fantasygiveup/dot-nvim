@@ -1,7 +1,7 @@
 local global = require("global")
 
 vim.o.termguicolors  = true
-vim.o.background     = "dark"
+vim.o.background     = "light"
 vim.o.hidden         = true                    -- switch between buffers without having to save first
 vim.o.encoding       = "utf-8"                 -- always use utf-8 whenever possible
 vim.o.clipboard      = "unnamedplus"

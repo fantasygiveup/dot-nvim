@@ -15,7 +15,7 @@ packer.startup(function(use)
   use({ "tpope/vim-commentary" })
   use({ "machakann/vim-sandwich" })
   use({ "nvim-lualine/lualine.nvim", requires = {
-    "projekt0n/github-nvim-theme",
+    "ellisonleao/gruvbox.nvim",
     {"kyazdani42/nvim-web-devicons", opt = true}},
     config = config.lualine })
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitsigns })

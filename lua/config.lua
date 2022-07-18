@@ -171,14 +171,8 @@ function config.gnupg()
   vim.g.GPGDefaultRecipients = { require("global").email }
 end
 
-
 function config.go()
-  vim.g.go_fmt_fail_silently = 1
-  vim.g.go_def_mapping_enabled = 0
-  vim.g.go_gopls_enabled = 0
-  vim.g.go_template_autocreate = 0
-  vim.g.go_echo_command_info = 0
-  vim.g.go_echo_go_info = 0
+  require("go").setup()
 end
 
 function config.tmux()

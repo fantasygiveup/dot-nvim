@@ -24,12 +24,8 @@ function config.gitlinker()
   })
 end
 
--- See <Plug>(sandwich-add).
-function config.sandwich_surround(ch)
-  if ch == [["]] then
-    ch = [[\"]]
-  end
-  vim.cmd([[exec "normal v%\<Plug>(sandwich-add)]] .. ch .. [[<CR>"]])
+function config.nvim_surround()
+  require("nvim-surround").setup({})
 end
 
 function config.lualine()

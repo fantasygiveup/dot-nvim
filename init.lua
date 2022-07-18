@@ -13,7 +13,7 @@ packer.startup(function(use)
   use({ "elijahdanko/lf.vim", requires = { "rbgrouleff/bclose.vim", opt = true }, config = config.lf })
   use({ "ruifm/gitlinker.nvim", requires = 'nvim-lua/plenary.nvim', config = config.gitlinker })
   use({ "tpope/vim-commentary" })
-  use({ "machakann/vim-sandwich" })
+  use({ "kylechui/nvim-surround", config = config.nvim_surround })
   use({ "nvim-lualine/lualine.nvim", requires = {
     "ellisonleao/gruvbox.nvim",
     {"kyazdani42/nvim-web-devicons", opt = true}},

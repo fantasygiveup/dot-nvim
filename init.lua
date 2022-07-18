@@ -46,7 +46,6 @@ packer.startup(function(use)
   use({ "windwp/nvim-autopairs", config = config.autopairs })
   use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
   use({ "kazhala/close-buffers.nvim", config = config.close_buffers })
-  use({ "folke/which-key.nvim", config = config.which_key })
   if packer_bootstrap then
     packer.sync()
   end

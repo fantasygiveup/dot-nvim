@@ -24,6 +24,10 @@ function config.gitlinker()
   })
 end
 
+function config.comment_nvim()
+  require("Comment").setup({})
+end
+
 function config.nvim_surround()
   require("nvim-surround").setup({})
 end

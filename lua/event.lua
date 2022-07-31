@@ -43,7 +43,7 @@ local function load_basic_autocmds()
       { { "BufRead, BufNewFile" } , "gitconfig", function() vim.bo.filetype = "gitconfig" end },
       { "FileType", "help", function() pcall(vim.cmd, "only") end },
       { "BufWinEnter", "*", function() require("internal").restore_buf_cursor() end },
-      { "BufWritePre", "*.go", function() require("go.format").goimport() end },
+      { "BufWritePre", "*.go", function() pcall(function() require("go.format").goimport() end) end },
     },
 
     wins = {

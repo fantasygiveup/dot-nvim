@@ -66,6 +66,12 @@ local function load_basic_autocmds()
     zen = {
       { "TermOpen", "*", function() zen_mode(1) end },
       { "TermLeave", "*", function() zen_mode(0) end },
+      { "FileType", "TelescopePrompt", function() zen_mode(1) end },
+      { "BufLeave", "*", function()
+        if vim.bo.filetype == "TelescopePrompt" then
+          zen_mode(0)
+        end
+      end },
     },
 
     path = {

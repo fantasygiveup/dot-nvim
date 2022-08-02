@@ -20,8 +20,12 @@ packer.startup(function(use)
     config = config.lualine })
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitsigns })
   use({ "dense-analysis/ale", config = config.ale })
-  use({ "junegunn/fzf.vim", requires = { "junegunn/fzf", "tpope/vim-fugitive" }, config = config.fzf })
-  use({ "elijahdanko/fzf-notes", run = "make bin" })
+  use({ "nvim-telescope/telescope.nvim",
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+      { "cljoly/telescope-repo.nvim" },
+    }, config = config.telescope })
   use({ "jamessan/vim-gnupg", config = config.gnupg })
   use({ "ray-x/go.nvim", config = config.go })
   use({ "aserowy/tmux.nvim", config = config.tmux })

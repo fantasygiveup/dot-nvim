@@ -11,11 +11,19 @@ function config.lf()
   vim.g.lf_replace_netrw = 1
 end
 
-function config.fzf()
-  vim.g.fzf_command_prefix = "Fzf"
-  vim.g.fzf_layout = { window = { width = 1.0, height = 1.0 } }
-  vim.g.fzf_colors = { gutter =  {"bg", "Normal"} }
-  vim.g.fzf_buffers_jump = 1
+function config.telescope()
+  local telescope = require("telescope")
+  telescope.setup({
+    extensions = { fzf = { fuzzy = false } },
+    defaults = {
+      prompt_prefix = "🔭 ",
+      -- Full screen, equal panels, prompt and content top.
+      layout_config = { prompt_position = "top", width = 1000, height = 1000, preview_width = 0.5, anchor = "CENTER" },
+      sorting_strategy = "ascending",
+    },
+  })
+  telescope.load_extension("fzf")
+  telescope.load_extension("repo")
 end
 
 function config.gitlinker()

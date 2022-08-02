@@ -75,7 +75,7 @@ local function load_basic_autocmds()
     },
 
     path = {
-      { { "BufWinEnter", "TermOpen", "TermLeave" }, "*", function() require("project_nvim.project").on_buf_enter() end },
+      { { "BufWinEnter", "TermOpen", "TermLeave" }, "*", function() pcall(function() require("project_nvim.project").on_buf_enter() end) end },
     }
   }
 

@@ -60,6 +60,7 @@ keybind("n", "<Leader>//", "<Cmd>lua require'telescope.builtin'.grep_string({sea
 keybind("v", "<Leader>//", ":<C-U>lua require'internal'.search_visual_selected()<CR>", nsopts)
 keybind("n", "<Leader>?", "<Cmd>Telescope keymaps<CR>", nsopts)
 keybind("n", "<Leader>:", "<Cmd>Telescope commands<CR>", nsopts)
+keybind("n", ",fr", "<Cmd>Telescope oldfiles<CR>", nsopts)
 keybind("n", ",#", "<Cmd>Telescope filetypes<CR>", nsopts)
 keybind("n", ",gg", "<Cmd>Telescope git_status<CR>", nsopts)
 keybind("n", ",gb", "<Cmd>Telescope git_bcommits<CR>", nsopts)

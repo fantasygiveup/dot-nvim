@@ -96,6 +96,10 @@ function config.lualine()
   })
 end
 
+function config.todo_comments()
+  require("todo-comments").setup({})
+end
+
 function config.gitsigns()
   require("gitsigns").setup({
     on_attach = function(bufnr)

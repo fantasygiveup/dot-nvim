@@ -26,6 +26,9 @@ packer.startup(function(use)
       { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       { "cljoly/telescope-repo.nvim" },
     }, config = config.telescope })
+  use({ "folke/todo-comments.nvim", requires = {
+    { "folke/trouble.nvim" }
+  }, config = config.todo_comments })
   use({ "jamessan/vim-gnupg", config = config.gnupg })
   use({ "ray-x/go.nvim", config = config.go })
   use({ "aserowy/tmux.nvim", config = config.tmux })

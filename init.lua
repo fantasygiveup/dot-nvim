@@ -14,9 +14,9 @@ packer.startup(function(use)
   use({ "ruifm/gitlinker.nvim", requires = 'nvim-lua/plenary.nvim', config = config.gitlinker })
   use({ "numToStr/Comment.nvim", config = config.comment_nvim })
   use({ "kylechui/nvim-surround", config = config.nvim_surround })
+  use({ "kyazdani42/nvim-web-devicons" })
   use({ "nvim-lualine/lualine.nvim", requires = {
-    "ellisonleao/gruvbox.nvim",
-    {"kyazdani42/nvim-web-devicons", opt = true}},
+    "ellisonleao/gruvbox.nvim" },
     config = config.lualine })
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitsigns })
   use({ "dense-analysis/ale", config = config.ale })

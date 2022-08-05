@@ -97,7 +97,9 @@ function config.lualine()
 end
 
 function config.todo_comments()
-  require("todo-comments").setup({})
+  require("todo-comments").setup({
+    signs = false,
+  })
 end
 
 function config.gitsigns()

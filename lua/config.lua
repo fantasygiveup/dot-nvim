@@ -43,8 +43,7 @@ end
 function config.lualine()
 
   -- lualine uses a theme.
-  require('gruvbox').setup({})
-  vim.cmd([[colorscheme gruvbox]])
+  vim.cmd([[colorscheme kanagawa]])
 
   local function spell()
     if not vim.o.spell then

@@ -16,7 +16,7 @@ packer.startup(function(use)
   use({ "kylechui/nvim-surround", config = config.nvim_surround })
   use({ "kyazdani42/nvim-web-devicons" })
   use({ "nvim-lualine/lualine.nvim", requires = {
-    "ellisonleao/gruvbox.nvim" },
+    "rebelot/kanagawa.nvim" },
     config = config.lualine })
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitsigns })
   use({ "dense-analysis/ale", config = config.ale })

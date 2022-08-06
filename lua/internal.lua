@@ -64,15 +64,19 @@ local function qf_toggle()
 end
 
 local function git_sync_file_change(file)
-  vim.fn.system("git rev-parse --is-inside-work-tree > /dev/null 2>&1")
-  if vim.v.shell_error ~= 0  then
-    print("Not in git")
-    return
-  end
-
   file = file or vim.api.nvim_buf_get_name(0)
   if file == nil or file == "" then
     print("Not a file")
+    return
+  end
+
+  local diff = vim.fn.system("git diff " .. file):gsub("\n", "")
+  if vim.v.shell_error ~= 0 then
+    print("Not in git")
+    return
+  end
+  if diff == "" then
+    print("Not modified")
     return
   end
 

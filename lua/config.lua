@@ -358,4 +358,13 @@ function config.project_nvim()
   require("project_nvim").setup()
 end
 
+function config.yanky()
+  require("yanky").setup({
+      highlight = {
+        on_put = false,
+        on_yank = false,
+      }
+  })
+end
+
 return config

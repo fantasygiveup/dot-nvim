@@ -1,34 +1,3 @@
-local function visual_selection_range()
-  local _, csrow, cscol, _ = unpack(vim.fn.getpos("'<"))
-  local _, cerow, cecol, _ = unpack(vim.fn.getpos("'>"))
-  if csrow < cerow or (csrow == cerow and cscol <= cecol) then
-    return csrow - 1, cscol - 1, cerow - 1, cecol
-  else
-    return cerow - 1, cecol - 1, csrow - 1, cscol
-  end
-end
-
-local function visual_selection()
-  local csrow, cscol, cerow, cecol = visual_selection_range()
-  local buf = vim.api.nvim_get_current_buf()
-  local lines = vim.api.nvim_buf_get_lines(buf, csrow, cerow+1, false)
-  if #lines == 0 then
-    return ''
-  elseif #lines == 1 then
-    lines[1] = string.sub(lines[1], cscol+1, cecol)
-  else
-    lines[1] = string.sub(lines[1], cscol+1, string.len(lines[1]))
-    lines[#lines] = string.sub(lines[#lines], 1, cecol)
-  end
-  return table.concat(lines, "\n")
-end
-
-local function search_visual_selected()
-  local pattern = visual_selection()
-  -- -w: exact word match.
-  require("telescope.builtin").grep_string({search = pattern})
-end
-
 local function unfold()
   local cl = vim.fn.line(".")
 
@@ -96,7 +65,6 @@ end
 
 return {
   restore_buf_cursor = restore_buf_cursor,
-  search_visual_selected = search_visual_selected,
   qf_toggle = qf_toggle,
   git_sync_file_change = git_sync_file_change,
 }

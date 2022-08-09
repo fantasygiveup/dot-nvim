@@ -20,12 +20,7 @@ packer.startup(function(use)
     config = config.lualine })
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitsigns })
   use({ "dense-analysis/ale", config = config.ale })
-  use({ "nvim-telescope/telescope.nvim",
-    requires = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-      { "cljoly/telescope-repo.nvim" },
-    }, config = config.telescope })
+  use({ "ibhagwan/fzf-lua", config = config.fzf }) -- nvim-web-devicons requires
   use({ "folke/todo-comments.nvim", requires = {
     { "folke/trouble.nvim" }
   }, config = config.todo_comments })

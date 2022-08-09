@@ -11,19 +11,27 @@ function config.lf()
   vim.g.lf_replace_netrw = 1
 end
 
-function config.telescope()
-  local telescope = require("telescope")
-  telescope.setup({
-    extensions = { fzf = { fuzzy = false } },
-    defaults = {
-      prompt_prefix = "🔭 ",
-      -- Full screen, equal panels, prompt and content top.
-      layout_config = { prompt_position = "top", width = 1000, height = 1000, preview_width = 0.5, anchor = "CENTER" },
-      sorting_strategy = "ascending",
+function config.fzf()
+  require('fzf-lua').setup({
+    winopts = {
+      fullscreen = true,
+      preview = {
+        vertical       = 'down:50%',
+        horizontal     = 'right:50%',
+        flip_columns   = 160,
+        scrollbar      = false,
+        winopts = {
+          number = false,
+        },
+      },
+    },
+    keymap = {
+      builtin = {
+        ["<A-p>"] = "toggle-preview",
+      },
+      fzf = {},
     },
   })
-  telescope.load_extension("fzf")
-  telescope.load_extension("repo")
 end
 
 function config.gitlinker()

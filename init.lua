@@ -49,6 +49,7 @@ packer.startup(function(use)
   use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
   use({ "kazhala/close-buffers.nvim", config = config.close_buffers })
   use({ "gbprod/yanky.nvim", config = config.yanky})
+  use({ "stevearc/dressing.nvim", config = config.dressing }) -- better ui for vim.input and vim.select
   if packer_bootstrap then
     packer.sync()
   end

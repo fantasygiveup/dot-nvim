@@ -367,4 +367,12 @@ function config.yanky()
   })
 end
 
+function config.dressing()
+  require("dressing").setup({
+    select = {
+      backend = { "builtin" },
+    },
+  })
+end
+
 return config

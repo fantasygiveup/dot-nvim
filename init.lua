@@ -35,12 +35,10 @@ packer.startup(function(use)
       { "hrsh7th/cmp-nvim-lsp" },
       { "saadparwaiz1/cmp_luasnip" },
       { "andersevenrud/cmp-tmux" },
-      { "PaterJason/cmp-conjure" },
       { "onsails/lspkind.nvim" },
       { "hrsh7th/cmp-nvim-lua" },
     }, config = config.cmp })
   use({ "norcalli/nvim-colorizer.lua", config = config.colorizer })
-  use({ "Olical/conjure", requires = { "guns/vim-sexp", "tpope/vim-sexp-mappings-for-regular-people" }})
   use({ "ahmedkhalf/project.nvim", config = config.project_nvim })
   use({ "nvim-treesitter/nvim-treesitter", config = config.treesitter })
   use({ "nvim-treesitter/playground", config.treesitter_playground })

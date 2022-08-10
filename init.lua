@@ -24,7 +24,6 @@ packer.startup(function(use)
   use({ "folke/todo-comments.nvim", requires = {
     { "folke/trouble.nvim" }
   }, config = config.todo_comments })
-  use({ "jamessan/vim-gnupg", config = config.gnupg })
   use({ "ray-x/go.nvim", config = config.go })
   use({ "aserowy/tmux.nvim", config = config.tmux })
   use({ "neovim/nvim-lspconfig", config = config.lsp })

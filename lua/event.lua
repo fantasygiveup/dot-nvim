@@ -12,6 +12,7 @@ end
 
 local function zen_mode(status)
   if status == 1 then
+    vim.opt_local.relativenumber = false
     vim.opt_local.number = false
     vim.opt_local.laststatus = 0
     vim.opt_local.cursorline = false
@@ -19,6 +20,7 @@ local function zen_mode(status)
     vim.opt_local.cursorline = true
     vim.opt_local.laststatus = 3
     vim.opt_local.number = true
+    vim.opt_local.relativenumber = true
   end
 end
 

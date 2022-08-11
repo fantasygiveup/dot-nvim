@@ -22,6 +22,7 @@ function config.fzf()
         scrollbar      = false,
         winopts = {
           number = false,
+          relativenumber = false,
         },
       },
     },

@@ -28,6 +28,7 @@ vim.o.ignorecase     = true
 vim.o.smartcase      = true
 vim.o.laststatus     = 3
 vim.o.number         = true
+vim.o.relativenumber = true
 -- 1. Do not auto break lines.
 -- 2. Turn off autowrap links.
 vim.o.formatoptions  = vim.o.formatoptions:gsub('t', ''):gsub('c', '')

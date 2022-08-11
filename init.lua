@@ -20,9 +20,6 @@ packer.startup(function(use)
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitsigns })
   use({ "dense-analysis/ale", config = config.ale })
   use({ "ibhagwan/fzf-lua", config = config.fzf }) -- nvim-web-devicons requires
-  use({ "folke/todo-comments.nvim", requires = {
-    { "folke/trouble.nvim" }
-  }, config = config.todo_comments })
   use({ "ray-x/go.nvim", config = config.go })
   use({ "aserowy/tmux.nvim", config = config.tmux })
   use({ "neovim/nvim-lspconfig", config = config.lsp })

@@ -251,6 +251,10 @@ function config.cmp()
   local luasnip = require("luasnip")
   local lspkind = require("lspkind")
   cmp.setup({
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body)
@@ -264,11 +268,8 @@ function config.cmp()
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-u>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-g>"] = cmp.mapping.close(),
-      ["<CR>"] = cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
-      },
+      ["<C-e>"] = cmp.mapping.abort(),
+      ["<CR>"] = cmp.mapping.confirm { select = true },
       ["<Tab>"] = function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -289,16 +290,17 @@ function config.cmp()
       end,
     },
     sources = {
-      { name = "buffer" },
-      { name = "path" },
-      { name = "nvim_lsp" },
-      { name = "luasnip" },
-      { name = "tmux", option = { all_panes = true, label = "", } },
-      { name = "nvim_lua" },
+      { name = "luasnip", priority = 9 },
+      { name = "nvim_lsp", priority = 8 },
+      { name = "nvim_lua", priority = 7 },
+      { name = "buffer", priority = 6 },
+      { name = "tmux", option = { all_panes = true, label = "", }, priority = 6 },
+      { name = "path", priority = 5 },
     },
     preselect = cmp.PreselectMode.None,
     completion = {
-      completeopt = 'menu,menuone,noinsert'
+      completeopt = "menu,menuone,noinsert",
+      autocomplete = false,
     },
     formatting = {
       format = lspkind.cmp_format({

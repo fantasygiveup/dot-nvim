@@ -35,7 +35,7 @@ packer.startup(function(use)
       { "hrsh7th/cmp-nvim-lsp" },
       { "saadparwaiz1/cmp_luasnip" },
       { "andersevenrud/cmp-tmux" },
-      { "onsails/lspkind.nvim" },
+      { "onsails/lspkind.nvim" },  -- lsp pictograms
       { "hrsh7th/cmp-nvim-lua" },
     }, config = config.cmp })
   use({ "norcalli/nvim-colorizer.lua", config = config.colorizer })

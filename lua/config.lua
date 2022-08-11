@@ -52,7 +52,9 @@ end
 function config.lualine()
 
   -- lualine uses a theme.
-  require('gruvbox').setup({})
+  require('gruvbox').setup({
+    distinct_sign = false,
+  })
   vim.cmd([[colorscheme gruvbox]])
 
   local function spell()

@@ -1,7 +1,7 @@
 local global = require("global")
 
 vim.o.termguicolors  = true
-vim.o.background     = "light"
+vim.o.background     = "dark"
 vim.o.hidden         = true                    -- switch between buffers without having to save first
 vim.o.encoding       = "utf-8"                 -- always use utf-8 whenever possible
 vim.o.clipboard      = "unnamedplus"
@@ -39,5 +39,9 @@ vim.o.foldenable     = true
 vim.o.signcolumn     = "number"
 vim.o.undofile       = true
 vim.o.spellfile      = global.cache_dir .. "spell/en.uft-8.add"
+
+if os.getenv("SYSTEM_COLOR_THEME") == "ebdbb2" then
+  vim.o.background = "light"
+end
 
 vim.cmd("language en_US.utf8")

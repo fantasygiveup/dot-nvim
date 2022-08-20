@@ -43,5 +43,3 @@ vim.o.spellfile      = global.cache_dir .. "spell/en.uft-8.add"
 if os.getenv("SYSTEM_COLOR_THEME") == "ebdbb2" then
   vim.o.background = "light"
 end
-
-vim.cmd("language en_US.utf8")

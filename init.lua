@@ -8,6 +8,7 @@ local packer = require("packer")
 
 packer.startup(function(use)
   local config = require("config")
+  config.global()
 
   use({ "wbthomason/packer.nvim" })
   use({ "elijahdanko/lf.vim", requires = { "rbgrouleff/bclose.vim", opt = true }, config = config.lf })

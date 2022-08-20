@@ -27,9 +27,6 @@ function config.fzf()
         horizontal     = 'right:50%',
         flip_columns   = 160,
         scrollbar      = false,
-        winopts = {
-          number = false,
-        },
       },
     },
     keymap = {

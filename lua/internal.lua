@@ -32,7 +32,7 @@ local function qf_toggle()
   end
 end
 
-local function git_sync_file_change(file)
+local function git_save_file_remote(file)
   file = file or vim.api.nvim_buf_get_name(0)
   if file == nil or file == "" then
     print("Not a file")
@@ -66,5 +66,5 @@ end
 return {
   restore_buf_cursor = restore_buf_cursor,
   qf_toggle = qf_toggle,
-  git_sync_file_change = git_sync_file_change,
+  git_save_file_remote = git_save_file_remote,
 }

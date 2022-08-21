@@ -42,7 +42,7 @@ keybind("n", ",g?", "<Cmd>lua require'gitsigns'.blame_line({full=true})<CR>", ns
 keybind("n", ",gu", "<Cmd>lua require'gitlinker'.get_buf_range_url('n', {action_callback = require'gitlinker.actions'.copy_to_clipboard})<CR>", nsopts)
 keybind("v", ",gu", "<Cmd>lua require'gitlinker'.get_buf_range_url('v', {action_callback = require'gitlinker.actions'.copy_to_clipboard})<CR>", nsopts)
 keybind("n", ",gU", "<Cmd>lua require'gitlinker'.get_repo_url({action_callback = require'gitlinker.actions'.open_in_browser})<CR>", nsopts)
-keybind("n", ",gf", "<Cmd>lua require'internal'.git_sync_file_change()<CR>", nsopts)
+keybind("n", ",gs", "<Cmd>lua require'internal'.git_save_file_remote()<CR>", nsopts)
 keybind("n", "<Leader>hp", "<Cmd>lua require'gitsigns'.preview_hunk()<CR>", nsopts)
 keybind("n", "<Leader>hu", "<Cmd>lua require'gitsigns'.reset_hunk()<CR>", nsopts)
 keybind("n", "<Leader>hs", "<Cmd>lua require'gitsigns'.stage_hunk()<CR>", nsopts)

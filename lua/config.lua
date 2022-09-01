@@ -303,7 +303,6 @@ function config.cmp()
     preselect = cmp.PreselectMode.None,
     completion = {
       completeopt = "menu,menuone,noinsert",
-      autocomplete = false,
     },
     formatting = {
       format = lspkind.cmp_format({

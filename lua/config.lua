@@ -119,7 +119,7 @@ end
 function config.gitsigns()
   require("gitsigns").setup({
     on_attach = function(bufnr)
-      if vim.o.diff then
+      if vim.o.diff or vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":e") == "gpg" then
         return false
       end
       return true

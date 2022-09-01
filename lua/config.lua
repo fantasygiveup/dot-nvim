@@ -52,62 +52,9 @@ function config.nvim_surround()
   require("nvim-surround").setup({})
 end
 
-function config.lualine()
-  -- lualine uses a theme.
+function config.status_line()
   require("github-theme").setup()
-
-  local function spell()
-    if not vim.o.spell then
-      return ""
-    end
-    return "SPELL[" .. vim.o.spelllang .. "]"
-  end
-
-  local function lsp_active_client(msg)
-    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-    local clients = vim.lsp.get_active_clients()
-    if next(clients) == nil then
-      return ""
-    end
-
-    for _, client in ipairs(clients) do
-      local filetypes = client.config.filetypes
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        return "lsp:" .. client.name
-      end
-    end
-    return ""
-  end
-
-  local ll = require("lualine")
-  ll.setup({
-    options = {
-      theme = "auto",
-      section_separators = { left = "", right = "" },
-      component_separators = { left = "", right = "" },
-    },
-    sections = {
-      lualine_a = { "mode", spell },
-      lualine_x = {
-        {
-          lsp_active_client,
-          color = { fg = vim.api.nvim_get_hl_by_name("Function", false).foreground },
-        },
-        "encoding",
-        "fileformat",
-        "filetype",
-      },
-      lualine_y = {
-        "progress",
-        {
-          "diagnostics",
-          sources = { "ale" },
-          sections = { "error", "warn" },
-          symbols = { error = " ", warn = "  " },
-        },
-      },
-    },
-  })
+  require("feline").setup()
 end
 
 function config.todo_comments()

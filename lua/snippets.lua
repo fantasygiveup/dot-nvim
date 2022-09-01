@@ -6,13 +6,20 @@ local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 
 ls.add_snippets("all", {
-    s("loremSent", {
-      t("Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."),
-    }),
-    s("loremPara", {
-      t("Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."),
-    }),
-    s("mitl", fmt([[
+  s("loremSent", {
+    t(
+      "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."
+    ),
+  }),
+  s("loremPara", {
+    t(
+      "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    ),
+  }),
+  s(
+    "mitl",
+    fmt(
+      [[
 The MIT License (MIT)
 
 Copyright (c) {} {}
@@ -34,16 +41,22 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-    ]], { global.user_name, os.date("%Y") }))
-  })
+    ]],
+      { global.user_name, os.date("%Y") }
+    )
+  ),
+})
 
 ls.add_snippets("go", {
-    s("pre", fmt([[fmt.Fprintf(os.Stderr, "{}\n")]], { i(0) })),
-    s("pro", fmt([[fmt.Println("{}")]], { i(0) })),
-  })
+  s("pre", fmt([[fmt.Fprintf(os.Stderr, "{}\n")]], { i(0) })),
+  s("pro", fmt([[fmt.Println("{}")]], { i(0) })),
+})
 
 ls.add_snippets("html", {
-    s("html5", fmt([[
+  s(
+    "html5",
+    fmt(
+      [[
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -56,29 +69,50 @@ ls.add_snippets("html", {
     {}
   </body>
 </html>
-    ]], { i(1), i(0) }))
-  })
+    ]],
+      { i(1), i(0) }
+    )
+  ),
+})
 
 ls.add_snippets("org", {
-    s("<s", fmt([[
+  s(
+    "<s",
+    fmt(
+      [[
 #+begin_src {}
   {}
 #+end_src
-    ]], { i(1), i(0) })),
-  })
+    ]],
+      { i(1), i(0) }
+    )
+  ),
+})
 
 ls.add_snippets("lua", {
-    s("fn", fmt([[
+  s(
+    "fn",
+    fmt(
+      [[
 function {}({})
   {}
 end
-  ]], { i(1), i(2), i(0) })),
-  })
+  ]],
+      { i(1), i(2), i(0) }
+    )
+  ),
+})
 
 ls.add_snippets("lua", {
-    s("fnl", fmt([[
+  s(
+    "fnl",
+    fmt(
+      [[
 local function {}({})
   {}
 end
-  ]], { i(1), i(2), i(0) })),
-  })
+  ]],
+      { i(1), i(2), i(0) }
+    )
+  ),
+})

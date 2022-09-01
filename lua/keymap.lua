@@ -39,9 +39,24 @@ keybind("n", "<Leader>pc", "<Cmd>PackerCompile<CR>", nsopts)
 keybind("n", "<Leader>ps", "<Cmd>PackerSync<CR>", nsopts)
 keybind("n", "-", "<Cmd>nohlsearch | Lf<CR>", nsopts)
 keybind("n", ",g?", "<Cmd>lua require'gitsigns'.blame_line({full=true})<CR>", nsopts)
-keybind("n", ",gu", "<Cmd>lua require'gitlinker'.get_buf_range_url('n', {action_callback = require'gitlinker.actions'.copy_to_clipboard})<CR>", nsopts)
-keybind("v", ",gu", "<Cmd>lua require'gitlinker'.get_buf_range_url('v', {action_callback = require'gitlinker.actions'.copy_to_clipboard})<CR>", nsopts)
-keybind("n", ",gU", "<Cmd>lua require'gitlinker'.get_repo_url({action_callback = require'gitlinker.actions'.open_in_browser})<CR>", nsopts)
+keybind(
+  "n",
+  ",gu",
+  "<Cmd>lua require'gitlinker'.get_buf_range_url('n', {action_callback = require'gitlinker.actions'.copy_to_clipboard})<CR>",
+  nsopts
+)
+keybind(
+  "v",
+  ",gu",
+  "<Cmd>lua require'gitlinker'.get_buf_range_url('v', {action_callback = require'gitlinker.actions'.copy_to_clipboard})<CR>",
+  nsopts
+)
+keybind(
+  "n",
+  ",gU",
+  "<Cmd>lua require'gitlinker'.get_repo_url({action_callback = require'gitlinker.actions'.open_in_browser})<CR>",
+  nsopts
+)
 keybind("n", ",gs", "<Cmd>lua require'internal'.git_save_file_remote()<CR>", nsopts)
 keybind("n", "<Leader>hp", "<Cmd>lua require'gitsigns'.preview_hunk()<CR>", nsopts)
 keybind("n", "<Leader>hu", "<Cmd>lua require'gitsigns'.reset_hunk()<CR>", nsopts)
@@ -65,17 +80,26 @@ keybind("n", ",#", "<Cmd>lua require'fzf-lua'.filetypes()<CR>", nopts)
 keybind("n", ",gg", "<Cmd>lua require'fzf-lua'.git_status()<CR>", nopts)
 keybind("n", ",gb", "<Cmd>lua require'fzf-lua'.git_bcommits()<CR>", nopts)
 keybind("n", ",r", "<Cmd>lua require'fzf-lua'.resume()<CR>", nopts)
-keybind("n", "<C-s>", [[<Cmd>lua require'fzf-lua'.grep_project({cwd = require'global'.notes_dir})<CR>]], nsopts)
-vim.keymap.set("n", ",do", function() require('close_buffers').wipe({ type = 'other', force = true }) end)
-vim.keymap.set("n", ",da", function() require('close_buffers').wipe({ type = 'all', force = true }) end)
+keybind(
+  "n",
+  "<C-s>",
+  [[<Cmd>lua require'fzf-lua'.grep_project({cwd = require'global'.notes_dir})<CR>]],
+  nsopts
+)
+vim.keymap.set("n", ",do", function()
+  require("close_buffers").wipe({ type = "other", force = true })
+end)
+vim.keymap.set("n", ",da", function()
+  require("close_buffers").wipe({ type = "all", force = true })
+end)
 vim.keymap.set("n", ",dp", function()
   local project_root = require("project_nvim.project").get_project_root()
-  require('close_buffers').wipe({ regex = project_root, force = true })
+  require("close_buffers").wipe({ regex = project_root, force = true })
 end)
-vim.keymap.set({"n","x"}, "p", "<Plug>(YankyPutAfter)")
-vim.keymap.set({"n","x"}, "P", "<Plug>(YankyPutBefore)")
-vim.keymap.set({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
-vim.keymap.set({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
+vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
+vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
+vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
 vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleForward)")
 vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleBackward)")
 

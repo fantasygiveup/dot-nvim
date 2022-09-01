@@ -54,7 +54,7 @@ local function git_save_file_remote(file)
   local cmds = {
     { "git", "add", file },
     { "git", "commit", "-m", "Update " .. name },
-    { "git", "push" }
+    { "git", "push" },
   }
 
   for _, cmd in ipairs(cmds) do

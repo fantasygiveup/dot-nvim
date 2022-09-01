@@ -1,10 +1,10 @@
 local config = {}
 
 function config.global()
-   vim.g.loaded_python3_provider = 0
-   vim.g.loaded_ruby_provider = 0
-   vim.g.loaded_node_provider = 0
-   vim.g.loaded_perl_provider = 0
+  vim.g.loaded_python3_provider = 0
+  vim.g.loaded_ruby_provider = 0
+  vim.g.loaded_node_provider = 0
+  vim.g.loaded_perl_provider = 0
 end
 
 local function disable_distribution_plugins()
@@ -19,14 +19,14 @@ function config.lf()
 end
 
 function config.fzf()
-  require('fzf-lua').setup({
+  require("fzf-lua").setup({
     winopts = {
       fullscreen = true,
       preview = {
-        vertical       = 'down:50%',
-        horizontal     = 'right:50%',
-        flip_columns   = 160,
-        scrollbar      = false,
+        vertical = "down:50%",
+        horizontal = "right:50%",
+        flip_columns = 160,
+        scrollbar = false,
       },
     },
     keymap = {
@@ -53,9 +53,8 @@ function config.nvim_surround()
 end
 
 function config.lualine()
-
   -- lualine uses a theme.
-  require('github-theme').setup()
+  require("github-theme").setup()
 
   local function spell()
     if not vim.o.spell then
@@ -65,7 +64,7 @@ function config.lualine()
   end
 
   local function lsp_active_client(msg)
-    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
     local clients = vim.lsp.get_active_clients()
     if next(clients) == nil then
       return ""
@@ -84,26 +83,30 @@ function config.lualine()
   ll.setup({
     options = {
       theme = "auto",
-      section_separators = {left = "", right = ""},
-      component_separators = {left = "", right = ""},
+      section_separators = { left = "", right = "" },
+      component_separators = { left = "", right = "" },
     },
     sections = {
       lualine_a = { "mode", spell },
       lualine_x = {
-        { lsp_active_client, color = { fg = vim.api.nvim_get_hl_by_name("Function", false).foreground } },
+        {
+          lsp_active_client,
+          color = { fg = vim.api.nvim_get_hl_by_name("Function", false).foreground },
+        },
         "encoding",
         "fileformat",
         "filetype",
       },
       lualine_y = {
         "progress",
-        { "diagnostics",
+        {
+          "diagnostics",
           sources = { "ale" },
           sections = { "error", "warn" },
-          symbols = { error = " ", warn = "  "},
+          symbols = { error = " ", warn = "  " },
         },
       },
-    }
+    },
   })
 end
 
@@ -123,13 +126,33 @@ function config.gitsigns()
     end,
     keymaps = {},
     signs = {
-      add          = { hl = "GitSignsAdd"   , text = "▌", numhl="GitSignsAddNr"   , linehl="GitSignsAddLn" },
-      change       = { hl = "GitSignsChange", text = "▌", numhl="GitSignsChangeNr", linehl="GitSignsChangeLn" },
-      delete       = { hl = "GitSignsDelete", text = "▌", numhl="GitSignsDeleteNr", linehl="GitSignsDeleteLn" },
-      topdelete    = { hl = "GitSignsDelete", text = "▌", numhl="GitSignsDeleteNr", linehl="GitSignsDeleteLn" },
-      changedelete = { hl = "GitSignsChange", text = "▌", numhl="GitSignsChangeNr", linehl="GitSignsChangeLn" },
+      add = { hl = "GitSignsAdd", text = "▌", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+      change = {
+        hl = "GitSignsChange",
+        text = "▌",
+        numhl = "GitSignsChangeNr",
+        linehl = "GitSignsChangeLn",
+      },
+      delete = {
+        hl = "GitSignsDelete",
+        text = "▌",
+        numhl = "GitSignsDeleteNr",
+        linehl = "GitSignsDeleteLn",
+      },
+      topdelete = {
+        hl = "GitSignsDelete",
+        text = "▌",
+        numhl = "GitSignsDeleteNr",
+        linehl = "GitSignsDeleteLn",
+      },
+      changedelete = {
+        hl = "GitSignsChange",
+        text = "▌",
+        numhl = "GitSignsChangeNr",
+        linehl = "GitSignsChangeLn",
+      },
     },
-    attach_to_untracked = false,  -- don't highlight new files
+    attach_to_untracked = false, -- don't highlight new files
   })
 end
 
@@ -191,10 +214,6 @@ function config.ale()
   }
 end
 
-function config.go()
-  require("go").setup()
-end
-
 function config.tmux()
   require("tmux").setup({
     copy_sync = {
@@ -208,7 +227,7 @@ function config.tmux()
     resize = {
       -- enables default keybindings (A-hjkl) for normal mode
       enable_default_keybindings = true,
-    }
+    },
   })
 end
 
@@ -227,7 +246,13 @@ function config.lsp()
     vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gh", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "i", "<C-h>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(
+      bufnr,
+      "i",
+      "<C-h>",
+      "<Cmd>lua vim.lsp.buf.signature_help()<CR>",
+      opts
+    )
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gR", "<Cmd>lua vim.lsp.buf.rename()<CR>", opts)
   end
@@ -271,8 +296,8 @@ function config.cmp()
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-u>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-e>"] = cmp.mapping.abort(),
-      ["<CR>"] = cmp.mapping.confirm { select = true },
+      ["<C-g>"] = cmp.mapping.abort(),
+      ["<CR>"] = cmp.mapping.confirm({}),
       ["<Tab>"] = function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -297,7 +322,7 @@ function config.cmp()
       { name = "nvim_lsp", priority = 8 },
       { name = "nvim_lua", priority = 7 },
       { name = "buffer", priority = 6 },
-      { name = "tmux", option = { all_panes = true, label = "", }, priority = 6 },
+      { name = "tmux", option = { all_panes = true, label = "" }, priority = 6 },
       { name = "path", priority = 5 },
     },
     preselect = cmp.PreselectMode.None,
@@ -316,7 +341,7 @@ end
 function config.colorizer()
   require("colorizer").setup({
     DEFAULT_OPTIONS = {
-      names = false;
+      names = false,
     },
   })
 end
@@ -358,10 +383,10 @@ end
 
 function config.yanky()
   require("yanky").setup({
-      highlight = {
-        on_put = false,
-        on_yank = false,
-      }
+    highlight = {
+      on_put = false,
+      on_yank = false,
+    },
   })
 end
 

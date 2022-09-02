@@ -120,47 +120,6 @@ function config.prev_hunk()
   require("gitsigns.actions").prev_hunk()
 end
 
-function config.toggle_diagnostics_sign()
-  if not vim.g.ale_enabled then
-    return
-  end
-
-  -- toggle 0 and -1
-  vim.g.ale_max_signs = -1 - vim.g.ale_max_signs
-  vim.cmd("ALEDisable | ALEEnable")
-end
-
-function config.ale()
-  vim.g.ale_set_highlights = 0
-  vim.g.ale_linters_explicit = 1
-  vim.g.ale_lint_on_save = 1
-  vim.g.ale_sign_error = ""
-  vim.g.ale_sign_warning = ""
-  vim.g.ale_sign_info = ""
-  vim.g.ale_sign_style_error = ""
-  vim.g.ale_sign_style_warning = ""
-  vim.g.ale_fix_on_save = 1
-  vim.g.ale_max_signs = 0
-
-  vim.g.ale_linters = {
-    go = { "gopls" },
-    javascript = { "eslint" },
-    yaml = { "yamllint" },
-    sh = { "shellcheck" },
-    lua = { "luacheck" },
-    elm = { "make" },
-    python = { "flake8" },
-  }
-
-  vim.g.ale_fixers = {
-    javascript = { "prettier" },
-    javascriptreact = { "prettier" },
-    css = { "prettier" },
-    elm = { "elm-format" },
-    python = { "yapf" },
-  }
-end
-
 function config.tmux()
   require("tmux").setup({
     copy_sync = {

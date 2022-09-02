@@ -7,6 +7,20 @@ local gl = require("global")
 
 local function get_format_opts()
   local file_name = api.nvim_buf_get_name(0)
+  local prettier_path = os.getenv("HOME")
+    .. gl.path_sep
+    .. ".config"
+    .. gl.path_sep
+    .. "prettier"
+    .. gl.path_sep
+    .. "prettier.config.js"
+  local prettier = {
+    cmd = "prettier",
+    args = {
+      "--config=" .. prettier_path,
+      file_name,
+    },
+  }
   local fmt_tools = {
     go = {
       cmd = "golines",
@@ -25,6 +39,13 @@ local function get_format_opts()
           .. "stylua.toml",
         "-",
       },
+    },
+    yaml = prettier,
+    javascript = prettier,
+    json = prettier,
+    python = {
+      cmd = "yapf",
+      args = { file_name },
     },
   }
 

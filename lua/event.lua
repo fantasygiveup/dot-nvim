@@ -92,14 +92,7 @@ local function load_basic_autocmds()
       },
       {
         "BufWritePost",
-        "*.go",
-        function()
-          require("formatter"):formatter()
-        end,
-      },
-      {
-        "BufWritePost",
-        "*.lua",
+        "*.go,*.lua,*.yaml,*.yml,*.js,*.json,*.py",
         function()
           require("formatter"):formatter()
         end,

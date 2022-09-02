@@ -24,7 +24,7 @@ local function get_format_opts()
   local fmt_tools = {
     go = {
       cmd = "golines",
-      args = { "--max-len=100", file_name },
+      args = { "--max-len=120", file_name },
     },
     lua = {
       cmd = "stylua",

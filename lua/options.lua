@@ -35,7 +35,8 @@ vim.o.wrap = false
 vim.o.textwidth = 80
 vim.o.cursorline = true
 vim.o.foldenable = true
-vim.o.signcolumn = "yes"
+vim.o.signcolumn = "number"
+vim.o.number = true
 vim.o.undofile = true
 vim.o.spellfile = global.cache_dir .. "spell/en.uft-8.add"
 

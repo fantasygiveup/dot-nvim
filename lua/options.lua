@@ -40,7 +40,7 @@ vim.o.undofile = true
 vim.o.spellfile = global.cache_dir .. "spell/en.uft-8.add"
 
 if os.getenv("SYSTEM_COLOR_THEME") == "d5e5f6" then
-  vim.cmd([[colorscheme github_light_default]])
+  vim.cmd([[colorscheme github_light]])
 else
   vim.cmd([[colorscheme github_dark]])
 end

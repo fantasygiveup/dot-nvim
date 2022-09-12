@@ -1,2 +1,2 @@
-vim.wo.conceallevel = 1 -- turn on conceal feature
+vim.wo.conceallevel = 0 -- turn off conceal feature
 vim.keymap.set("n", ",ww", "<Cmd>MarkdownPreviewToggle<CR>")

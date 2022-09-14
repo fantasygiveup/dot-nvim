@@ -54,7 +54,21 @@ end
 
 function config.status_line()
   require("github-theme").setup()
-  require("feline").setup()
+
+  local feline = require("feline")
+  feline.setup()
+
+  local int2rgb = require("utils").int2rgb
+  local red = vim.api.nvim_get_hl_by_name("DiagnosticSignError", true)
+  local yellow = vim.api.nvim_get_hl_by_name("DiagnosticSignWarn", true)
+  local cyan = vim.api.nvim_get_hl_by_name("DiagnosticSignHint", true)
+  local skyblue = vim.api.nvim_get_hl_by_name("DiagnosticSignInfo", true)
+  feline.use_theme({
+    red = int2rgb(red.foreground),
+    yellow = int2rgb(yellow.foreground),
+    cyan = int2rgb(cyan.foreground),
+    skyblue = int2rgb(skyblue.foreground),
+  })
 end
 
 function config.todo_comments()
@@ -138,36 +152,55 @@ function config.tmux()
 end
 
 function config.lsp()
-  -- The function must be a global one to be found by lsp.setup().
   local function on_attach(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-    -- Don't show diagnostics hints.
-    vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
-    -- Don't show diagnostics signs.
-    vim.lsp.diagnostic.set_signs = function() end
-
-    local opts = { noremap = true, silent = true }
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gh", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(
-      bufnr,
-      "i",
-      "<C-h>",
-      "<Cmd>lua vim.lsp.buf.signature_help()<CR>",
-      opts
-    )
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gR", "<Cmd>lua vim.lsp.buf.rename()<CR>", opts)
+    require("keymap").lsp(client, bufnr)
   end
+
+  local signs = {
+    { name = "DiagnosticSignError", text = "" },
+    { name = "DiagnosticSignWarn", text = "" },
+    { name = "DiagnosticSignHint", text = "" },
+    { name = "DiagnosticSignInfo", text = "" },
+  }
+
+  for _, sign in ipairs(signs) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+  end
+
+  local config = {
+    virtual_text = false,
+    signs = {
+      active = signs,
+    },
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+      focusable = false,
+      style = "minimal",
+      border = "rounded",
+      source = "always",
+      header = "",
+      prefix = "",
+    },
+  }
+
+  vim.diagnostic.config(config)
+
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = "rounded",
+  })
+
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = "rounded",
+  })
 
   local nvim_lsp = require("lspconfig")
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-  local servers = { "clangd", "gopls", "pyright", "tsserver", "elmls" }
+  local servers = { "clangd", "gopls", "pyright", "tsserver" }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup({
       on_attach = on_attach,
@@ -300,6 +333,25 @@ function config.dressing()
   require("dressing").setup({
     select = {
       backend = { "builtin" },
+    },
+  })
+end
+
+function config.null_ls()
+  local null_ls = require("null-ls")
+
+  -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
+  local diagnostics = null_ls.builtins.diagnostics
+
+  null_ls.setup({
+    on_attach = function(client, bufnr)
+      require("keymap").lsp(client, bufnr)
+    end,
+    debug = false,
+    sources = {
+      diagnostics.golangci_lint,
+      diagnostics.yamllint,
+      diagnostics.shellcheck,
     },
   })
 end

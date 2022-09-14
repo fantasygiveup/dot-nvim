@@ -33,6 +33,7 @@ packer.startup(function(use)
   use({ "ibhagwan/fzf-lua", config = config.fzf }) -- nvim-web-devicons requires
   use({ "aserowy/tmux.nvim", config = config.tmux })
   use({ "neovim/nvim-lspconfig", config = config.lsp })
+  use({ "jose-elias-alvarez/null-ls.nvim", config = config.null_ls })
   use({ "L3MON4D3/LuaSnip", config = config.luasnip })
   use({
     "hrsh7th/nvim-cmp",

@@ -152,7 +152,30 @@ function config.tmux()
 end
 
 function config.lsp()
+  local function lsp_highlight_document(client, bufnr)
+    if client.resolved_capabilities.document_highlight then
+      local group = vim.api.nvim_create_augroup("document_highlight_group", { clear = true })
+
+      vim.api.nvim_create_autocmd({ "CursorHold" }, {
+        group = group,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.document_highlight()
+        end,
+      })
+
+      vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+        group = group,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.clear_references()
+        end,
+      })
+    end
+  end
+
   local function on_attach(client, bufnr)
+    lsp_highlight_document(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     require("keymap").lsp(client, bufnr)
   end

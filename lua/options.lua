@@ -39,6 +39,7 @@ vim.o.signcolumn = "number"
 vim.o.number = true
 vim.o.undofile = true
 vim.o.spellfile = global.cache_dir .. "spell/en.uft-8.add"
+vim.o.updatetime = 500 -- used by vim.lsp.buf.document_highlight()
 
 if os.getenv("SYSTEM_COLOR_THEME") == "d5e5f6" then
   vim.cmd([[colorscheme github_light]])

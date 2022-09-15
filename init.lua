@@ -68,6 +68,10 @@ packer.startup(function(use)
   end
 end)
 
+local gl = require("global")
+gl:load_variables()
+gl:ensure_dir()
+
 require("options")
 require("keymap")
 require("event")

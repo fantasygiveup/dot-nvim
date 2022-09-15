@@ -40,7 +40,4 @@ function global:ensure_dir()
   end
 end
 
-global:load_variables()
-global:ensure_dir()
-
 return global

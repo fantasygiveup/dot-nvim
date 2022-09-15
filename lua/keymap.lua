@@ -1,97 +1,98 @@
 local M = {}
 
-local nsopts = { noremap = true, silent = true }
-local nopts = { noremap = true }
-local keybind = vim.api.nvim_set_keymap
+local api = vim.api
+local opts = { noremap = true, silent = true }
+local optsn = { noremap = true }
+local bind = api.nvim_set_keymap
 
 M.core = function()
   -- Pre. Allows us to map C-c key sequence (see Post below).
-  keybind("n", "<C-c>", "<Nop>", nopts)
-  keybind("n", "<C-z>", "<Nop>", nopts)
-  keybind("i", "<C-c>", "<Nop>", nopts)
+  bind("n", "<C-c>", "<Nop>", optsn)
+  bind("n", "<C-z>", "<Nop>", optsn)
+  bind("i", "<C-c>", "<Nop>", optsn)
 
   -- Core.
   vim.g.mapleader = " "
   vim.g.maplocalleader = ","
-  keybind("n", vim.g.mapleader, "", nopts)
-  keybind("x", vim.g.mapleader, "", nopts)
-  keybind("n", ",", "", nopts)
-  keybind("x", ",", "", nopts)
-  keybind("n", vim.g.maplocalleader, "", nopts)
-  keybind("x", vim.g.maplocalleader, "", nopts)
-  keybind("n", "[f", "<Cmd>cprev<CR>", nsopts)
-  keybind("n", "]f", "<Cmd>cnext<CR>", nsopts)
-  keybind("n", ",ts", "<Cmd>setlocal spell! spelllang=en_us<CR>", nsopts)
-  keybind("n", ",cw", [[<Cmd>keeppatterns %s/\s\+$//e<CR>]], nsopts)
-  keybind("n", "X", "<Cmd>lua require'internal'.qf_toggle()<CR>", nsopts)
-  keybind("n", "ZZ", "<Cmd>xa<CR>", nsopts)
-  keybind("n", "ZQ", "<Cmd>qa!<CR>", nsopts)
+  bind("n", vim.g.mapleader, "", optsn)
+  bind("x", vim.g.mapleader, "", optsn)
+  bind("n", ",", "", optsn)
+  bind("x", ",", "", optsn)
+  bind("n", vim.g.maplocalleader, "", optsn)
+  bind("x", vim.g.maplocalleader, "", optsn)
+  bind("n", "[f", "<Cmd>cprev<CR>", opts)
+  bind("n", "]f", "<Cmd>cnext<CR>", opts)
+  bind("n", ",ts", "<Cmd>setlocal spell! spelllang=en_us<CR>", opts)
+  bind("n", ",cw", [[<Cmd>keeppatterns %s/\s\+$//e<CR>]], opts)
+  bind("n", "X", "<Cmd>lua require'internal'.qf_toggle()<CR>", opts)
+  bind("n", "ZZ", "<Cmd>xa<CR>", opts)
+  bind("n", "ZQ", "<Cmd>qa!<CR>", opts)
 
   -- Command line (tcsh style).
-  keybind("c", "<C-a>", "<Home>", nopts)
-  keybind("c", "<C-f>", "<Right>", nopts)
-  keybind("c", "<C-b>", "<Left>", nopts)
-  keybind("c", "<C-e>", "<End>", nopts)
-  keybind("c", "<C-d>", "<Del>", nopts)
-  keybind("c", "<Esc>b", "<S-Left>", nopts)
-  keybind("c", "<Esc>f", "<S-Right>", nopts)
-  keybind("c", "<C-t>", [[<C-R>=expand("%:p:h") . "/" <CR>]], nopts)
+  bind("c", "<C-a>", "<Home>", optsn)
+  bind("c", "<C-f>", "<Right>", optsn)
+  bind("c", "<C-b>", "<Left>", optsn)
+  bind("c", "<C-e>", "<End>", optsn)
+  bind("c", "<C-d>", "<Del>", optsn)
+  bind("c", "<Esc>b", "<S-Left>", optsn)
+  bind("c", "<Esc>f", "<S-Right>", optsn)
+  bind("c", "<C-t>", [[<C-R>=expand("%:p:h") . "/" <CR>]], optsn)
 
   -- Post.
   -- Bind C-c to ESC, also clean up the highlight.
-  keybind("n", "<C-c>", "<Esc>:noh<CR>", nsopts)
-  keybind("i", "<C-c>", "<Esc>:noh<CR>", nsopts)
+  bind("n", "<C-c>", "<Esc>:noh<CR>", opts)
+  bind("i", "<C-c>", "<Esc>:noh<CR>", opts)
 end
 
 M.plugins = function()
   -- Plugins.
-  keybind("n", "<Leader>pc", "<Cmd>PackerCompile<CR>", nsopts)
-  keybind("n", "<Leader>ps", "<Cmd>PackerSync<CR>", nsopts)
-  keybind("n", "-", "<Cmd>nohlsearch | Lf<CR>", nsopts)
-  keybind("n", ",g?", "<Cmd>lua require'gitsigns'.blame_line({full=true})<CR>", nsopts)
-  keybind(
+  bind("n", "<Leader>pc", "<Cmd>PackerCompile<CR>", opts)
+  bind("n", "<Leader>ps", "<Cmd>PackerSync<CR>", opts)
+  bind("n", "-", "<Cmd>nohlsearch | Lf<CR>", opts)
+  bind("n", ",g?", "<Cmd>lua require'gitsigns'.blame_line({full=true})<CR>", opts)
+  bind(
     "n",
     ",gu",
     "<Cmd>lua require'gitlinker'.get_buf_range_url('n', {action_callback = require'gitlinker.actions'.copy_to_clipboard})<CR>",
-    nsopts
+    opts
   )
-  keybind(
+  bind(
     "v",
     ",gu",
     "<Cmd>lua require'gitlinker'.get_buf_range_url('v', {action_callback = require'gitlinker.actions'.copy_to_clipboard})<CR>",
-    nsopts
+    opts
   )
-  keybind(
+  bind(
     "n",
     ",gU",
     "<Cmd>lua require'gitlinker'.get_repo_url({action_callback = require'gitlinker.actions'.open_in_browser})<CR>",
-    nsopts
+    opts
   )
-  keybind("n", ",gc", "<Cmd>lua require'internal'.git_save_file_remote()<CR>", nsopts)
-  keybind("n", "<Leader>hp", "<Cmd>lua require'gitsigns'.preview_hunk()<CR>", nsopts)
-  keybind("n", "<Leader>hu", "<Cmd>lua require'gitsigns'.reset_hunk()<CR>", nsopts)
-  keybind("n", "<Leader>hs", "<Cmd>lua require'gitsigns'.stage_hunk()<CR>", nsopts)
-  keybind("n", "<Leader>hr", "<Cmd>lua require'gitsigns'.reset_buffer()<CR>", nsopts)
-  keybind("n", "]c", "<Cmd>lua require'config'.next_hunk()<CR>", nsopts)
-  keybind("n", "[c", "<Cmd>lua require'config'.prev_hunk()<CR>", nsopts)
-  keybind("n", ",tc", "<Cmd>ColorizerToggle<CR>", nopts)
-  keybind("n", "<C-t>", "<Cmd>lua require'fzf-lua'.files()<CR>", nopts)
-  keybind("n", "<Leader><", "<Cmd>lua require'fzf-lua'.buffers()<CR>", nopts)
-  keybind("n", "<Leader>//", ":<C-U>lua require'fzf-lua'.grep_project()<CR>", nsopts)
-  keybind("v", "<Leader>//", ":<C-U>lua require'fzf-lua'.grep_visual()<CR>", nsopts)
-  keybind("n", "<Leader>:", "<Cmd>lua require'fzf-lua'.commands()<CR>", nopts)
-  keybind("n", "<Leader>?", "<Cmd>lua require'fzf-lua'.keymaps()<CR>", nopts)
-  keybind("n", ",fr", "<Cmd>lua require'fzf-lua'.oldfiles()<CR>", nopts)
-  keybind("n", ",#", "<Cmd>lua require'fzf-lua'.filetypes()<CR>", nopts)
-  keybind("n", ",gg", "<Cmd>LazyGit<CR>", nopts)
-  keybind("n", ",gl", "<Cmd>LazyGitFilter<CR>", nopts)
-  keybind("n", ",gh", "<Cmd>LazyGitFilterCurrentFile<CR>", nopts)
-  keybind("n", ",r", "<Cmd>lua require'fzf-lua'.resume()<CR>", nopts)
-  keybind(
+  bind("n", ",gc", "<Cmd>lua require'internal'.git_save_file_remote()<CR>", opts)
+  bind("n", "<Leader>hp", "<Cmd>lua require'gitsigns'.preview_hunk()<CR>", opts)
+  bind("n", "<Leader>hu", "<Cmd>lua require'gitsigns'.reset_hunk()<CR>", opts)
+  bind("n", "<Leader>hs", "<Cmd>lua require'gitsigns'.stage_hunk()<CR>", opts)
+  bind("n", "<Leader>hr", "<Cmd>lua require'gitsigns'.reset_buffer()<CR>", opts)
+  bind("n", "]c", "<Cmd>lua require'config'.next_hunk()<CR>", opts)
+  bind("n", "[c", "<Cmd>lua require'config'.prev_hunk()<CR>", opts)
+  bind("n", ",tc", "<Cmd>ColorizerToggle<CR>", optsn)
+  bind("n", "<C-t>", "<Cmd>lua require'fzf-lua'.files()<CR>", optsn)
+  bind("n", "<Leader><", "<Cmd>lua require'fzf-lua'.buffers()<CR>", optsn)
+  bind("n", "<Leader>//", ":<C-U>lua require'fzf-lua'.grep_project()<CR>", opts)
+  bind("v", "<Leader>//", ":<C-U>lua require'fzf-lua'.grep_visual()<CR>", opts)
+  bind("n", "<Leader>:", "<Cmd>lua require'fzf-lua'.commands()<CR>", optsn)
+  bind("n", "<Leader>?", "<Cmd>lua require'fzf-lua'.keymaps()<CR>", optsn)
+  bind("n", ",fr", "<Cmd>lua require'fzf-lua'.oldfiles()<CR>", optsn)
+  bind("n", ",#", "<Cmd>lua require'fzf-lua'.filetypes()<CR>", optsn)
+  bind("n", ",gg", "<Cmd>LazyGit<CR>", optsn)
+  bind("n", ",gl", "<Cmd>LazyGitFilter<CR>", optsn)
+  bind("n", ",gh", "<Cmd>LazyGitFilterCurrentFile<CR>", optsn)
+  bind("n", ",r", "<Cmd>lua require'fzf-lua'.resume()<CR>", optsn)
+  bind(
     "n",
     "<C-s>",
     [[<Cmd>lua require'fzf-lua'.grep_project({cwd = require'global'.notes_dir})<CR>]],
-    nsopts
+    opts
   )
   vim.keymap.set("n", ",do", function()
     require("close_buffers").wipe({ type = "other", force = true })
@@ -112,23 +113,16 @@ M.plugins = function()
 end
 
 M.lsp = function(client, bufnr)
-  local opts = { noremap = true, silent = true }
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", "<Cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", "<Cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gh", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(
-    bufnr,
-    "i",
-    "<C-h>",
-    "<Cmd>lua vim.lsp.buf.signature_help()<CR>",
-    opts
-  )
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gR", "<Cmd>lua vim.lsp.buf.rename()<CR>", opts)
+  api.nvim_buf_set_keymap(bufnr, "n", "]d", "<Cmd>lua vim.diagnostic.goto_next()<CR>", opts)
+  api.nvim_buf_set_keymap(bufnr, "n", "[d", "<Cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
+  api.nvim_buf_set_keymap(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  api.nvim_buf_set_keymap(bufnr, "n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+  api.nvim_buf_set_keymap(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  api.nvim_buf_set_keymap(bufnr, "n", "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+  api.nvim_buf_set_keymap(bufnr, "n", "gh", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+  api.nvim_buf_set_keymap(bufnr, "i", "<C-h>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+  api.nvim_buf_set_keymap(bufnr, "n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>", opts)
+  api.nvim_buf_set_keymap(bufnr, "n", "gR", "<Cmd>lua vim.lsp.buf.rename()<CR>", opts)
 end
 
 M.core()

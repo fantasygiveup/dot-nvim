@@ -83,8 +83,9 @@ M.plugins = function()
   keybind("n", "<Leader>?", "<Cmd>lua require'fzf-lua'.keymaps()<CR>", nopts)
   keybind("n", ",fr", "<Cmd>lua require'fzf-lua'.oldfiles()<CR>", nopts)
   keybind("n", ",#", "<Cmd>lua require'fzf-lua'.filetypes()<CR>", nopts)
-  keybind("n", ",gg", "<Cmd>lua require'fzf-lua'.git_status()<CR>", nopts)
-  keybind("n", ",gb", "<Cmd>lua require'fzf-lua'.git_bcommits()<CR>", nopts)
+  keybind("n", ",gg", "<Cmd>LazyGit<CR>", nopts)
+  keybind("n", ",gl", "<Cmd>LazyGitFilter<CR>", nopts)
+  keybind("n", ",gh", "<Cmd>LazyGitFilterCurrentFile<CR>", nopts)
   keybind("n", ",r", "<Cmd>lua require'fzf-lua'.resume()<CR>", nopts)
   keybind(
     "n",

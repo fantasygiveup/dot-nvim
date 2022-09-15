@@ -366,6 +366,10 @@ function config.null_ls()
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
   local diagnostics = null_ls.builtins.diagnostics
 
+  local gl = require("global")
+  local config_dir = os.getenv("HOME") .. gl.path_sep .. ".config" .. gl.path_sep
+  local yamllint_path = config_dir .. "yamllint" .. gl.path_sep .. "config.yaml"
+
   null_ls.setup({
     on_attach = function(client, bufnr)
       require("keymap").lsp(client, bufnr)
@@ -373,7 +377,7 @@ function config.null_ls()
     debug = false,
     sources = {
       diagnostics.golangci_lint,
-      diagnostics.yamllint,
+      diagnostics.yamllint.with({ extra_args = { "-c", yamllint_path } }),
       diagnostics.shellcheck,
     },
   })

@@ -19,8 +19,8 @@ packer.startup(function(use)
 
   use({ "wbthomason/packer.nvim" })
   use({
-    "elijahdanko/lf.vim",
-    requires = { "rbgrouleff/bclose.vim", opt = true },
+    "lmburns/lf.nvim",
+    requires = { "nvim-lua/plenary.nvim", "akinsho/toggleterm.nvim" },
     config = config.lf,
   })
   use({ "ruifm/gitlinker.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitlinker })

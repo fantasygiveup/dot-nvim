@@ -1,5 +1,4 @@
 -- Almost all code is taken from https://github.com/glepnir/nvim.
--- Thank you glepnir.
 
 local uv, api = vim.loop, vim.api
 local fmt = {}

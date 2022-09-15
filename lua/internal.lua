@@ -1,3 +1,5 @@
+local M = {}
+
 local function unfold()
   local cl = vim.fn.line(".")
 
@@ -15,7 +17,7 @@ local function unfold()
 end
 
 -- restore_buf_cursor jumps to the last visited file's position.
-local function restore_buf_cursor()
+M.restore_buf_cursor = function()
   if vim.fn.line([[`"]]) <= vim.fn.line([[$]]) then
     vim.cmd([[try | exec 'normal! g`"zz' | catch | endtry]])
   end
@@ -23,7 +25,7 @@ local function restore_buf_cursor()
   unfold()
 end
 
-local function qf_toggle()
+M.qf_toggle = function()
   local nr = vim.api.nvim_win_get_buf(0)
   vim.cmd("cwindow")
   local nr2 = vim.api.nvim_win_get_buf(0)
@@ -32,7 +34,7 @@ local function qf_toggle()
   end
 end
 
-local function git_save_file_remote(file)
+M.git_save_file_remote = function(file)
   file = file or vim.api.nvim_buf_get_name(0)
   if file == nil or file == "" then
     print("Not a file")
@@ -63,8 +65,12 @@ local function git_save_file_remote(file)
   print(name .. " pushed to " .. remote)
 end
 
-return {
-  restore_buf_cursor = restore_buf_cursor,
-  qf_toggle = qf_toggle,
-  git_save_file_remote = git_save_file_remote,
-}
+M.int2rgb = function(color)
+  bit = require("bit")
+  local r = bit.rshift(bit.band(color, 0xFF0000), 16)
+  local g = bit.rshift(bit.band(color, 0x00FF00), 8)
+  local b = bit.band(color, 0x0000FF)
+  return string.format("#%02x%02x%02x", r, g, b)
+end
+
+return M

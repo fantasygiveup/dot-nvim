@@ -1,6 +1,6 @@
-local config = {}
+local M = {}
 
-function config.global()
+M.global = function()
   vim.g.loaded_python3_provider = 0
   vim.g.loaded_ruby_provider = 0
   vim.g.loaded_node_provider = 0
@@ -12,7 +12,7 @@ local function disable_distribution_plugins()
 end
 disable_distribution_plugins()
 
-function config.lf()
+M.lf = function()
   vim.g.lf_netrw = 1
   require("lf").setup({
     winblend = 0, -- disable transparency
@@ -22,7 +22,7 @@ function config.lf()
   })
 end
 
-function config.fzf()
+M.fzf = function()
   require("fzf-lua").setup({
     winopts = {
       fullscreen = true,
@@ -42,27 +42,27 @@ function config.fzf()
   })
 end
 
-function config.gitlinker()
+M.gitlinker = function()
   require("gitlinker").setup({
     mappings = nil, -- don't use default mappings
   })
 end
 
-function config.comment_nvim()
+M.comment_nvim = function()
   require("Comment").setup({})
 end
 
-function config.nvim_surround()
+M.nvim_surround = function()
   require("nvim-surround").setup({})
 end
 
-function config.status_line()
+M.status_line = function()
   require("github-theme").setup()
 
   local feline = require("feline")
   feline.setup()
 
-  local int2rgb = require("utils").int2rgb
+  local int2rgb = require("internal").int2rgb
   local red = vim.api.nvim_get_hl_by_name("DiagnosticSignError", true)
   local yellow = vim.api.nvim_get_hl_by_name("DiagnosticSignWarn", true)
   local cyan = vim.api.nvim_get_hl_by_name("DiagnosticSignHint", true)
@@ -75,13 +75,13 @@ function config.status_line()
   })
 end
 
-function config.todo_comments()
+M.todo_comments = function()
   require("todo-comments").setup({
     signs = false,
   })
 end
 
-function config.gitsigns()
+M.gitsigns = function()
   require("gitsigns").setup({
     on_attach = function(bufnr)
       if vim.o.diff or vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":e") == "gpg" then
@@ -121,7 +121,7 @@ function config.gitsigns()
   })
 end
 
-function config.next_hunk()
+M.next_hunk = function()
   if vim.o.diff then
     vim.fn.execute("normal! ]c")
     return
@@ -130,7 +130,7 @@ function config.next_hunk()
   vim.fn.execute("normal! zz")
 end
 
-function config.prev_hunk()
+M.prev_hunk = function()
   if vim.o.diff then
     vim.fn.execute("normal! [c")
     return
@@ -138,7 +138,7 @@ function config.prev_hunk()
   require("gitsigns.actions").prev_hunk()
 end
 
-function config.tmux()
+M.tmux = function()
   require("tmux").setup({
     copy_sync = {
       -- sync registers *, +, unnamed, and 0 till 9 from tmux in advance
@@ -155,7 +155,7 @@ function config.tmux()
   })
 end
 
-function config.lsp()
+M.lsp = function()
   local function lsp_highlight_document(client, bufnr)
     if client.resolved_capabilities.document_highlight then
       local group = vim.api.nvim_create_augroup("document_highlight_group", { clear = true })
@@ -236,11 +236,11 @@ function config.lsp()
   end
 end
 
-function config.luasnip()
+M.luasnip = function()
   require("snippets")
 end
 
-function config.cmp()
+M.cmp = function()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
   local lspkind = require("lspkind")
@@ -304,7 +304,7 @@ function config.cmp()
   })
 end
 
-function config.colorizer()
+M.colorizer = function()
   require("colorizer").setup({
     DEFAULT_OPTIONS = {
       names = false,
@@ -312,7 +312,7 @@ function config.colorizer()
   })
 end
 
-function config.treesitter()
+M.treesitter = function()
   require("nvim-treesitter.configs").setup({
     highlight = {
       enable = true,
@@ -339,15 +339,15 @@ function config.treesitter()
   })
 end
 
-function config.autopairs()
+M.autopairs = function()
   require("nvim-autopairs").setup()
 end
 
-function config.project_nvim()
+M.project_nvim = function()
   require("project_nvim").setup()
 end
 
-function config.yanky()
+M.yanky = function()
   require("yanky").setup({
     highlight = {
       on_put = false,
@@ -356,7 +356,7 @@ function config.yanky()
   })
 end
 
-function config.dressing()
+M.dressing = function()
   require("dressing").setup({
     select = {
       backend = { "builtin" },
@@ -364,7 +364,7 @@ function config.dressing()
   })
 end
 
-function config.null_ls()
+M.null_ls = function()
   local null_ls = require("null-ls")
 
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
@@ -387,8 +387,8 @@ function config.null_ls()
   })
 end
 
-function config.lazygit()
+M.lazygit = function()
   vim.g.lazygit_floating_window_scaling_factor = 1.0
 end
 
-return config
+return M

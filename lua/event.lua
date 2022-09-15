@@ -149,9 +149,3 @@ api.nvim_create_autocmd({ "BufWinEnter", "TermOpen", "TermLeave" }, {
     end)
   end,
 })
-
-api.nvim_create_autocmd({ "FileChangedShellPost" }, {
-  group = group,
-  pattern = { "*" },
-  callback = function() end,
-})

@@ -13,7 +13,9 @@ end
 disable_distribution_plugins()
 
 M.lf = function()
-  vim.g.lf_netrw = 1
+  -- NOTE! Temporary disabled to avoid fzf-todo open file issue.
+  -- vim.g.lf_netrw = 1
+
   require("lf").setup({
     winblend = 0, -- disable transparency
     border = "single",

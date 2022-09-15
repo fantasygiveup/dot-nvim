@@ -3,13 +3,15 @@
 set backupskip+=*.gpg
 " To avoid that parts of the file is saved to .viminfo when yanking or
 " deleting, empty the 'viminfo' option.
-set viminfo=
+
+" NOTE: moved to buffer due to shada problem.
+" set viminfo=
 
 augroup encrypted
   au!
   " Disable swap files, and set binary file format before reading the file
   autocmd BufReadPre,FileReadPre *.gpg
-    \ setlocal noswapfile bin
+    \ setlocal noswapfile bin viminfo=
   " Decrypt the contents after reading the file, reset binary file format
   " and run any BufReadPost autocmds matching the file name without the .gpg
   " extension

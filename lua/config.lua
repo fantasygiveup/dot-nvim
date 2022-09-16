@@ -181,6 +181,14 @@ M.lsp = function()
   end
 
   local function on_attach(client, bufnr)
+    vim.pretty_print(client)
+
+    -- Disable diagnostic handlers.
+    if client.name == "tsserver" then -- prefer eslint
+      vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
+      vim.lsp.diagnostic.set_signs = function() end
+    end
+
     lsp_highlight_document(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     require("keymap").lsp(client, bufnr)
@@ -385,6 +393,7 @@ M.null_ls = function()
       diagnostics.golangci_lint,
       diagnostics.yamllint.with({ extra_args = { "-c", yamllint_path } }),
       diagnostics.shellcheck,
+      diagnostics.eslint,
     },
   })
 end

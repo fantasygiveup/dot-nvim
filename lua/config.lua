@@ -402,4 +402,8 @@ M.lazygit = function()
   vim.g.lazygit_floating_window_scaling_factor = 1.0
 end
 
+M.icon_picker = function()
+  require("icon-picker").setup({})
+end
+
 return M

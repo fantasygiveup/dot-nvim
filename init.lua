@@ -64,6 +64,11 @@ packer.startup(function(use)
   use({ "kazhala/close-buffers.nvim", config = config.close_buffers })
   use({ "gbprod/yanky.nvim", config = config.yanky })
   use({ "kdheepak/lazygit.nvim", config = config.lazygit })
+  use({
+    "ziontee113/icon-picker.nvim",
+    requires = { "stevearc/dressing.nvim" },
+    config = config.icon_picker,
+  })
   if packer_bootstrap then
     packer.sync()
   end

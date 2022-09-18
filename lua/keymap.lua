@@ -110,6 +110,7 @@ M.plugins = function()
   vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
   vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleForward)")
   vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleBackward)")
+  vim.keymap.set("n", ",e", "<Cmd>IconPickerNormal<CR>")
 end
 
 M.lsp = function(client, bufnr)

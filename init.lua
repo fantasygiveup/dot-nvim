@@ -69,6 +69,7 @@ packer.startup(function(use)
     requires = { "stevearc/dressing.nvim" },
     config = config.icon_picker,
   })
+  use({ "folke/zen-mode.nvim", config = config.zen_mode })
   if packer_bootstrap then
     packer.sync()
   end

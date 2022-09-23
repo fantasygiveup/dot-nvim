@@ -58,9 +58,17 @@ M.nvim_surround = function()
   require("nvim-surround").setup({})
 end
 
-M.status_line = function()
-  require("github-theme").setup()
+M.theme = function()
+  require("tokyonight").setup()
 
+  if os.getenv("SYSTEM_COLOR_THEME") == "light" then
+    vim.cmd([[colorscheme tokyonight-day]])
+  else
+    vim.cmd([[colorscheme tokyonight-night]])
+  end
+end
+
+M.status_line = function()
   local feline = require("feline")
   feline.setup()
 

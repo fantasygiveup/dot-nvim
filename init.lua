@@ -27,7 +27,7 @@ packer.startup(function(use)
   use({ "numToStr/Comment.nvim", config = config.comment_nvim })
   use({ "kylechui/nvim-surround", config = config.nvim_surround })
   use({ "kyazdani42/nvim-web-devicons" })
-  use({ "projekt0n/github-nvim-theme" })
+  use({ "folke/tokyonight.nvim", config = config.theme })
   use({ "feline-nvim/feline.nvim", config = config.status_line })
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitsigns })
   use({ "ibhagwan/fzf-lua", config = config.fzf }) -- nvim-web-devicons requires

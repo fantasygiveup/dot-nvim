@@ -31,7 +31,6 @@ packer.startup(function(use)
   use({ "feline-nvim/feline.nvim", config = config.status_line })
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitsigns })
   use({ "ibhagwan/fzf-lua", config = config.fzf }) -- nvim-web-devicons requires
-  use({ "aserowy/tmux.nvim", config = config.tmux })
   use({ "neovim/nvim-lspconfig", config = config.lsp })
   use({ "jose-elias-alvarez/null-ls.nvim", config = config.null_ls })
   use({ "L3MON4D3/LuaSnip", config = config.luasnip })
@@ -70,6 +69,7 @@ packer.startup(function(use)
     config = config.icon_picker,
   })
   use({ "folke/zen-mode.nvim", config = config.zen_mode })
+  use({ "elijahdanko/ttymux.nvim", config = config.ttymux })
   if packer_bootstrap then
     packer.sync()
   end

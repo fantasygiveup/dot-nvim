@@ -148,23 +148,6 @@ M.prev_hunk = function()
   require("gitsigns.actions").prev_hunk()
 end
 
-M.tmux = function()
-  require("tmux").setup({
-    copy_sync = {
-      -- sync registers *, +, unnamed, and 0 till 9 from tmux in advance
-      enable = false,
-    },
-    navigation = {
-      -- enables default keybindings (C-hjkl) for normal mode
-      enable_default_keybindings = true,
-    },
-    resize = {
-      -- enables default keybindings (A-hjkl) for normal mode
-      enable_default_keybindings = true,
-    },
-  })
-end
-
 M.lsp = function()
   local function lsp_highlight_document(client, bufnr)
     if client.resolved_capabilities.document_highlight then
@@ -430,6 +413,10 @@ M.zen_mode = function()
       },
     },
   })
+end
+
+M.ttymux = function()
+  require("ttymux").setup({})
 end
 
 return M

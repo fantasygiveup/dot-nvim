@@ -422,30 +422,8 @@ M.null_ls = function()
   })
 end
 
-M.lazygit = function()
-  vim.g.lazygit_floating_window_scaling_factor = 1.0
-end
-
 M.icon_picker = function()
   require("icon-picker").setup({})
-end
-
-M.zen_mode = function()
-  require("zen-mode").setup({
-    window = {
-      backdrop = 1.0,
-      width = 80,
-      options = {
-        signcolumn = "no",
-        number = false,
-        relativenumber = false,
-        cursorline = false,
-        cursorcolumn = false,
-        foldcolumn = "0",
-        list = false,
-      },
-    },
-  })
 end
 
 M.tmux = function()

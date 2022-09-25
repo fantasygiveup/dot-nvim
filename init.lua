@@ -61,13 +61,11 @@ packer.startup(function(use)
     ft = { "markdown" },
   })
   use({ "kazhala/close-buffers.nvim", config = config.close_buffers })
-  use({ "kdheepak/lazygit.nvim", config = config.lazygit })
   use({
     "ziontee113/icon-picker.nvim",
     requires = { "stevearc/dressing.nvim" },
     config = config.icon_picker,
   })
-  use({ "folke/zen-mode.nvim", config = config.zen_mode })
   use({ "aserowy/tmux.nvim", config = config.tmux })
   if packer_bootstrap then
     packer.sync()

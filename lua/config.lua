@@ -38,6 +38,8 @@ M.fzf = function()
     keymap = {
       builtin = {
         ["<A-p>"] = "toggle-preview",
+        ["<C-f>"] = "preview-page-down",
+        ["<C-b>"] = "preview-page-up",
       },
       fzf = {},
     },

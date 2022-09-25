@@ -59,29 +59,65 @@ M.nvim_surround = function()
 end
 
 M.theme = function()
-  require("tokyonight").setup()
-
-  if os.getenv("SYSTEM_COLOR_THEME") == "light" then
-    vim.cmd([[colorscheme tokyonight-day]])
-  else
-    vim.cmd([[colorscheme tokyonight-night]])
-  end
+  vim.o.background = require("internal").system_background()
+  require("onedark").setup({
+    style = vim.o.background,
+  })
+  require("onedark").load()
 end
 
 M.status_line = function()
-  local feline = require("feline")
-  feline.setup()
+  local function spell()
+    if not vim.o.spell then
+      return ""
+    end
+    return "SPELL[" .. vim.o.spelllang .. "]"
+  end
 
-  local int2rgb = require("internal").int2rgb
-  local red = vim.api.nvim_get_hl_by_name("DiagnosticSignError", true)
-  local yellow = vim.api.nvim_get_hl_by_name("DiagnosticSignWarn", true)
-  local cyan = vim.api.nvim_get_hl_by_name("DiagnosticSignHint", true)
-  local skyblue = vim.api.nvim_get_hl_by_name("DiagnosticSignInfo", true)
-  feline.use_theme({
-    red = int2rgb(red.foreground),
-    yellow = int2rgb(yellow.foreground),
-    cyan = int2rgb(cyan.foreground),
-    skyblue = int2rgb(skyblue.foreground),
+  local function lsp_active_client(msg)
+    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+    local clients = vim.lsp.get_active_clients()
+    if next(clients) == nil then
+      return ""
+    end
+
+    for _, client in ipairs(clients) do
+      local filetypes = client.config.filetypes
+      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+        return "" .. client.name
+      end
+    end
+    return ""
+  end
+
+  local ll = require("lualine")
+  ll.setup({
+    options = {
+      theme = "onedark",
+      section_separators = { left = "", right = "" },
+      component_separators = { left = "", right = "" },
+    },
+    sections = {
+      lualine_a = { "mode", spell },
+      lualine_x = {
+        {
+          lsp_active_client,
+          color = { fg = vim.api.nvim_get_hl_by_name("Function", false).foreground },
+        },
+        "encoding",
+        "fileformat",
+        "filetype",
+      },
+      lualine_y = {
+        "progress",
+        {
+          "diagnostics",
+          sources = { "ale" },
+          sections = { "error", "warn" },
+          symbols = { error = " ", warn = "  " },
+        },
+      },
+    },
   })
 end
 

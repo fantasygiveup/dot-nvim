@@ -75,4 +75,8 @@ M.int2rgb = function(color)
   return string.format("#%02x%02x%02x", r, g, b)
 end
 
+M.system_background = function()
+  return os.getenv("SYSTEM_COLOR_THEME")
+end
+
 return M

@@ -8,7 +8,6 @@ local bind = api.nvim_set_keymap
 M.core = function()
   -- Pre. Allows us to map C-c key sequence (see Post below).
   bind("n", "<C-c>", "<Nop>", optsn)
-  bind("n", "<C-z>", "<Nop>", optsn)
   bind("i", "<C-c>", "<Nop>", optsn)
 
   -- Core.

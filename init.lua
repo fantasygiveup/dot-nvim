@@ -68,7 +68,7 @@ packer.startup(function(use)
     config = config.icon_picker,
   })
   use({ "folke/zen-mode.nvim", config = config.zen_mode })
-  use({ "elijahdanko/ttymux.nvim", config = config.ttymux })
+  use({ "aserowy/tmux.nvim", config = config.tmux })
   if packer_bootstrap then
     packer.sync()
   end

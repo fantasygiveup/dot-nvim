@@ -84,7 +84,7 @@ M.status_line = function()
     for _, client in ipairs(clients) do
       local filetypes = client.config.filetypes
       if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        return "" .. client.name
+        return "⚙️ " .. client.name
       end
     end
     return ""
@@ -100,10 +100,7 @@ M.status_line = function()
     sections = {
       lualine_a = { "mode", spell },
       lualine_x = {
-        {
-          lsp_active_client,
-          color = { fg = vim.api.nvim_get_hl_by_name("Function", false).foreground },
-        },
+        { lsp_active_client },
         "encoding",
         "fileformat",
         "filetype",

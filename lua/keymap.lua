@@ -86,8 +86,6 @@ M.plugins = function()
   bind("n", ",#", "<Cmd>lua require'fzf-lua'.filetypes()<CR>", optsn)
   bind("n", ",gg", "<Cmd>lua require'fzf-lua'.git_status()<CR>", opts)
   bind("n", ",gh", "<Cmd>lua require'fzf-lua'.git_bcommits()<CR>", opts)
-  bind("n", ",gg", "<Cmd>LazyGit<CR>", optsn)
-  bind("n", ",gl", "<Cmd>LazyGitFilter<CR>", optsn)
   bind("n", ",r", "<Cmd>lua require'fzf-lua'.resume()<CR>", optsn)
   bind(
     "n",

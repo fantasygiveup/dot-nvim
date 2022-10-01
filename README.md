@@ -15,7 +15,7 @@ gives me the following:
 - column, line number navigation
 - sorting
 - buffer and project-wide replacement by string or regexp pattern
-- multiple cursor editing
+- multiple cursor editing ([you-don-t-need-more-than-one-cursor-in-vim](https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db))
 - build, test and run a single unit or a whole project from the editor
 - switching between projects
 - interact with version control (blame, commit, logs, search)

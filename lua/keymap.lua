@@ -27,6 +27,7 @@ M.core = function()
   bind("n", "X", "<Cmd>lua require'internal'.qf_toggle()<CR>", opts)
   bind("n", "ZZ", "<Cmd>xa<CR>", opts)
   bind("n", "ZQ", "<Cmd>qa!<CR>", opts)
+  bind("v", "//", [[y/\V<C-R>=escape(@",'/\')<CR><CR>]], opts) -- convert visual to search
 
   -- Command line (tcsh style).
   bind("c", "<C-a>", "<Home>", optsn)

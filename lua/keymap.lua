@@ -79,8 +79,6 @@ M.plugins = function()
   bind("n", ",tc", "<Cmd>ColorizerToggle<CR>", optsn)
   bind("n", "<C-t>", "<Cmd>lua require'fzf-lua'.files()<CR>", optsn)
   bind("n", "<Leader><", "<Cmd>lua require'fzf-lua'.buffers()<CR>", optsn)
-  bind("n", "<Leader>//", ":<C-U>lua require'fzf-lua'.grep_project()<CR>", opts)
-  bind("v", "<Leader>//", ":<C-U>lua require'fzf-lua'.grep_visual()<CR>", opts)
   bind("n", "<Leader>:", "<Cmd>lua require'fzf-lua'.commands()<CR>", optsn)
   bind("n", "<Leader>?", "<Cmd>lua require'fzf-lua'.keymaps()<CR>", optsn)
   bind("n", ",fr", "<Cmd>lua require'fzf-lua'.oldfiles()<CR>", optsn)
@@ -88,23 +86,39 @@ M.plugins = function()
   bind("n", ",gg", "<Cmd>lua require'fzf-lua'.git_status()<CR>", opts)
   bind("n", ",gh", "<Cmd>lua require'fzf-lua'.git_bcommits()<CR>", opts)
   bind("n", ",r", "<Cmd>lua require'fzf-lua'.resume()<CR>", optsn)
-  bind(
-    "n",
-    "<C-s>",
-    [[<Cmd>lua require'fzf-lua'.grep_project({cwd = require'global'.notes_dir})<CR>]],
-    opts
-  )
+
+  vim.keymap.set("n", ",e", "<Cmd>IconPickerNormal<CR>")
+
   vim.keymap.set("n", ",do", function()
     require("close_buffers").wipe({ type = "other", force = true })
   end)
+
   vim.keymap.set("n", ",da", function()
     require("close_buffers").wipe({ type = "all", force = true })
   end)
+
   vim.keymap.set("n", ",dp", function()
     local project_root = require("project_nvim.project").get_project_root()
     require("close_buffers").wipe({ regex = project_root, force = true })
   end)
-  vim.keymap.set("n", ",e", "<Cmd>IconPickerNormal<CR>")
+
+  vim.keymap.set("n", "<Leader>//", function()
+    require("fzf-lua").grep_project()
+  end)
+
+  vim.keymap.set("v", "<Leader>//", function()
+    require("fzf-lua").grep_visual()
+  end)
+
+  vim.keymap.set("n", "<C-s>", function()
+    local cmd_opts = {
+      cwd = require("global").notes_dir,
+      search = "\\S",
+      no_esc = true,
+      fzf_opts = { ["--nth"] = false },
+    }
+    require("fzf-lua").grep_project(cmd_opts)
+  end)
 end
 
 M.lsp = function(client, bufnr)

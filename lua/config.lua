@@ -64,6 +64,7 @@ M.theme = function()
   vim.o.background = require("internal").system_background()
   require("onedark").setup({
     style = vim.o.background,
+    highlights = { QuickFixLine = { fmt = "none" } }, -- overrides
   })
   require("onedark").load()
 end

@@ -5,6 +5,7 @@ local opts = { noremap = true, silent = true }
 local optsn = { noremap = true }
 local bind = api.nvim_set_keymap
 
+-- stylua: ignore start
 M.core = function()
   -- Pre. Allows us to map C-c key sequence (see Post below).
   bind("n", "<C-c>", "<Nop>", optsn)
@@ -51,24 +52,6 @@ M.plugins = function()
   bind("n", "<Leader>ps", "<Cmd>PackerSync<CR>", opts)
   bind("n", "-", "<Cmd>nohlsearch | Lf<CR>", opts)
   bind("n", ",g?", "<Cmd>lua require'gitsigns'.blame_line({full=true})<CR>", opts)
-  bind(
-    "n",
-    ",gu",
-    "<Cmd>lua require'gitlinker'.get_buf_range_url('n', {action_callback = require'gitlinker.actions'.copy_to_clipboard})<CR>",
-    opts
-  )
-  bind(
-    "v",
-    ",gu",
-    "<Cmd>lua require'gitlinker'.get_buf_range_url('v', {action_callback = require'gitlinker.actions'.copy_to_clipboard})<CR>",
-    opts
-  )
-  bind(
-    "n",
-    ",gU",
-    "<Cmd>lua require'gitlinker'.get_repo_url({action_callback = require'gitlinker.actions'.open_in_browser})<CR>",
-    opts
-  )
   bind("n", ",gc", "<Cmd>lua require'internal'.git_save_file_remote()<CR>", opts)
   bind("n", "<Leader>hp", "<Cmd>lua require'gitsigns'.preview_hunk()<CR>", opts)
   bind("n", "<Leader>hu", "<Cmd>lua require'gitsigns'.reset_hunk()<CR>", opts)
@@ -89,26 +72,24 @@ M.plugins = function()
 
   vim.keymap.set("n", ",e", "<Cmd>IconPickerNormal<CR>")
 
-  vim.keymap.set("n", ",do", function()
-    require("close_buffers").wipe({ type = "other", force = true })
-  end)
+  -- gitlinker begin.
+  local gl = require("gitlinker")
+  local gla = require("gitlinker.actions")
+  vim.keymap.set( "n", ",gu", function() gl.get_buf_range_url('n', { action_callback = gla.copy_to_clipboard } ) end)
+  vim.keymap.set( "v", ",gu", function() gl.get_buf_range_url('v', { action_callback = gla.copy_to_clipboard } ) end)
+  vim.keymap.set( "n", ",gU", function() gl.get_buf_range_url('v', { action_callback = gla.open_in_browser } ) end)
+  -- gitlinker end.
 
-  vim.keymap.set("n", ",da", function()
-    require("close_buffers").wipe({ type = "all", force = true })
-  end)
+  vim.keymap.set("n", ",do", function() require("close_buffers").wipe({ type = "other", force = true }) end)
+  vim.keymap.set("n", ",da", function() require("close_buffers").wipe({ type = "all", force = true }) end)
 
   vim.keymap.set("n", ",dp", function()
     local project_root = require("project_nvim.project").get_project_root()
     require("close_buffers").wipe({ regex = project_root, force = true })
   end)
 
-  vim.keymap.set("n", "<Leader>//", function()
-    require("fzf-lua").grep_project()
-  end)
-
-  vim.keymap.set("v", "<Leader>//", function()
-    require("fzf-lua").grep_visual()
-  end)
+  vim.keymap.set("n", "<Leader>//", function() require("fzf-lua").grep_project() end)
+  vim.keymap.set("v", "<Leader>//", function() require("fzf-lua").grep_visual() end)
 
   vim.keymap.set("n", "<C-s>", function()
     local cmd_opts = {
@@ -119,7 +100,14 @@ M.plugins = function()
     }
     require("fzf-lua").grep_project(cmd_opts)
   end)
+
+  vim.keymap.set("n", ",cc", function() vim.cmd("!make") end)
+  vim.keymap.set("n", ",cb", function() vim.cmd("!make build") end)
+  vim.keymap.set("n", ",ct", function() vim.cmd("!make test") end)
+  vim.keymap.set("n", ",cr", function() vim.cmd("!make run") end)
+  vim.keymap.set("n", ",cl", function() vim.cmd("!make lint") end)
 end
+-- stylua: ignore end
 
 M.lsp = function(client, bufnr)
   api.nvim_buf_set_keymap(bufnr, "n", "]d", "<Cmd>lua vim.diagnostic.goto_next()<CR>", opts)

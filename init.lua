@@ -66,7 +66,7 @@ packer.startup(function(use)
     requires = { "stevearc/dressing.nvim" },
     config = config.icon_picker,
   })
-  use({ "elijahdanko/ttymux.nvim", config = config.ttymux })
+  use({ "aserowy/tmux.nvim", config = config.tmux })
   if packer_bootstrap then
     packer.sync()
   end

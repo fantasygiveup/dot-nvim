@@ -427,8 +427,21 @@ M.icon_picker = function()
   require("icon-picker").setup({})
 end
 
-M.ttymux = function()
-  require("ttymux").setup({})
+M.tmux = function()
+  require("tmux").setup({
+    copy_sync = {
+      -- sync registers *, +, unnamed, and 0 till 9 from tmux in advance
+      enable = false,
+    },
+    navigation = {
+      -- enables default keybindings (C-hjkl) for normal mode
+      enable_default_keybindings = true,
+    },
+    resize = {
+      -- enables default keybindings (A-hjkl) for normal mode
+      enable_default_keybindings = true,
+    },
+  })
 end
 
 return M

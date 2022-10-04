@@ -83,6 +83,27 @@ api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
+api.nvim_create_autocmd({ "BufWritePre" }, {
+  group = group,
+  pattern = {
+    "*.c",
+    "*.cpp",
+    "*.cc",
+    "*.C",
+    "*.cxx",
+    "*.c++",
+    "*.h",
+    "*.hh",
+    "*.H",
+    "*.hxx",
+    "*.hpp",
+    "*.h++",
+  },
+  callback = function()
+    vim.lsp.buf.formatting()
+  end,
+})
+
 api.nvim_create_autocmd({ "BufWritePost" }, {
   group = group,
   pattern = { "*.go,*.lua,*.yaml,*.yml,*.js,*.json,*.py" },

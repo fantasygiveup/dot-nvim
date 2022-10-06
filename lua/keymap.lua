@@ -77,7 +77,7 @@ M.plugins = function()
   local gla = require("gitlinker.actions")
   vim.keymap.set( "n", ",gu", function() gl.get_buf_range_url('n', { action_callback = gla.copy_to_clipboard } ) end)
   vim.keymap.set( "v", ",gu", function() gl.get_buf_range_url('v', { action_callback = gla.copy_to_clipboard } ) end)
-  vim.keymap.set( "n", ",gU", function() gl.get_buf_range_url('v', { action_callback = gla.open_in_browser } ) end)
+  vim.keymap.set( "n", ",gU", function() gl.get_repo_url( { action_callback = gla.open_in_browser } ) end)
   -- gitlinker end.
 
   vim.keymap.set("n", ",do", function() require("close_buffers").wipe({ type = "other", force = true }) end)

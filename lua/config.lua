@@ -209,7 +209,7 @@ M.lsp = function()
 
   local function on_attach(client, bufnr)
     -- Disable diagnostic handlers.
-    if client.name == "tsserver" then -- prefer eslint
+    if client.name == "tsserver" or client.name == "clangd" then
       vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
       vim.lsp.diagnostic.set_signs = function() end
     end

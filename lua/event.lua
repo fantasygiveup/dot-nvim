@@ -5,7 +5,9 @@ local function zen_mode(status)
   if status == 1 then
     vim.opt_local.laststatus = 0
     vim.opt_local.cursorline = false
+    vim.opt_local.number = false
   else
+    vim.opt_local.number = true
     vim.opt_local.cursorline = true
     vim.opt_local.laststatus = 3
   end

@@ -7,19 +7,32 @@ local gl = require("global")
 local function get_format_opts()
   local file_name = api.nvim_buf_get_name(0)
   local config_dir = os.getenv("HOME") .. gl.path_sep .. ".config" .. gl.path_sep
-  local prettier_path = config_dir .. "prettier" .. gl.path_sep .. "prettier.config.js"
-  local stylua_path = config_dir .. "stylua" .. gl.path_sep .. "stylua.toml"
-  local prettier = {
+
+  local prettier_cfg = {
     cmd = "prettier",
-    args = { "--config=" .. prettier_path, file_name },
+    args = {
+      "--config=" .. config_dir .. "prettier" .. gl.path_sep .. "prettier.config.js",
+      file_name,
+    },
   }
+
   local fmt_tools = {
     go = { cmd = "golines", args = { "--max-len=100", file_name } },
-    lua = { cmd = "stylua", args = { "--config-path=" .. stylua_path, "-" } },
-    yaml = prettier,
-    javascript = prettier,
+    lua = {
+      cmd = "stylua",
+      args = { "--config-path=" .. config_dir .. "stylua" .. gl.path_sep .. "stylua.toml", "-" },
+    },
+    yaml = prettier_cfg,
+    javascript = prettier_cfg,
     json = prettier,
     python = { cmd = "yapf", args = { file_name } },
+    cpp = {
+      cmd = "clang-format",
+      args = {
+        "-style=file:" .. config_dir .. "clang-format" .. gl.path_sep .. "clang-format",
+        file_name,
+      },
+    },
   }
 
   if fmt_tools[vim.bo.filetype] then

@@ -85,7 +85,7 @@ api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
-api.nvim_create_autocmd({ "BufWritePre" }, {
+api.nvim_create_autocmd({ "BufWritePost" }, {
   group = group,
   pattern = {
     "*.c",
@@ -102,7 +102,7 @@ api.nvim_create_autocmd({ "BufWritePre" }, {
     "*.h++",
   },
   callback = function()
-    vim.lsp.buf.formatting()
+    require("formatter"):formatter()
   end,
 })
 

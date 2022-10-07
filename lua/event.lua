@@ -1,5 +1,5 @@
 local api = vim.api
-local group = api.nvim_create_augroup("MyGroup", {})
+local gen_group = api.nvim_create_augroup("GenericGroup", {})
 
 local function zen_mode(status)
   if status == 1 then
@@ -34,7 +34,7 @@ local function on_buf_pat(pat, fn)
 end
 
 api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  group = group,
+  group = gen_group,
   pattern = { "COMMIT_EDITMSG" },
   callback = function()
     vim.opt_local.spell = true
@@ -42,7 +42,7 @@ api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 api.nvim_create_autocmd({ "BufRead, BufNewFile" }, {
-  group = group,
+  group = gen_group,
   pattern = { "gitconfig" },
   callback = function()
     vim.bo.filetype = "gitconfig"
@@ -50,7 +50,7 @@ api.nvim_create_autocmd({ "BufRead, BufNewFile" }, {
 })
 
 api.nvim_create_autocmd({ "FileType" }, {
-  group = group,
+  group = gen_group,
   pattern = { "help" },
   callback = function()
     pcall(vim.cmd, "only")
@@ -58,15 +58,78 @@ api.nvim_create_autocmd({ "FileType" }, {
 })
 
 api.nvim_create_autocmd({ "BufWinEnter" }, {
-  group = group,
+  group = gen_group,
   pattern = { "*" },
   callback = function()
     require("internal").restore_buf_cursor()
   end,
 })
 
+api.nvim_create_autocmd({ "VimResized" }, {
+  group = gen_group,
+  pattern = { "*" },
+  callback = function()
+    vim.cmd("tabdo wincmd =")
+  end,
+})
+
+-- Special case for term apps like glow, fzf or lf.
+api.nvim_create_autocmd({ "WinClosed" }, {
+  group = gen_group,
+  pattern = { "*" },
+  callback = function()
+    on_buf_pat("term://", on_win_close)
+  end,
+})
+
+api.nvim_create_autocmd({ "VimEnter" }, {
+  group = gen_group,
+  pattern = { "*" },
+  callback = function()
+    if vim.o.diff then
+      for _, win in ipairs(api.nvim_list_wins()) do
+        api.nvim_set_current_win(win)
+        zen_mode(1)
+      end
+      vim.cmd("normal! gg")
+      return
+    end
+    on_buf_pat("term://", turn_on_zen_mode)
+  end,
+})
+
+api.nvim_create_autocmd({ "TermOpen" }, {
+  group = gen_group,
+  pattern = { "*" },
+  callback = function()
+    zen_mode(1)
+  end,
+})
+
+api.nvim_create_autocmd({ "TermLeave" }, {
+  group = gen_group,
+  pattern = { "*" },
+  callback = function()
+    zen_mode(0)
+  end,
+})
+
+api.nvim_create_autocmd({ "BufWinEnter", "TermOpen", "TermLeave" }, {
+  group = gen_group,
+  pattern = { "*" },
+  callback = function()
+    pcall(function()
+      require("project_nvim.project").on_buf_enter()
+    end)
+  end,
+})
+
+--- Code format.
+
+local fmt_group = api.nvim_create_augroup("FormatGroup", {})
+
 api.nvim_create_autocmd({ "BufWritePre" }, {
-  group = group,
+  group = fmt_group,
   pattern = { "*.go" },
   callback = function()
     local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding())
@@ -86,8 +149,15 @@ api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 api.nvim_create_autocmd({ "BufWritePost" }, {
-  group = group,
+  group = fmt_group,
   pattern = {
+    "*.go",
+    "*.lua",
+    "*.yaml",
+    "*.yml",
+    "*.js",
+    "*.json",
+    "*.py",
     "*.c",
     "*.cpp",
     "*.cc",
@@ -103,72 +173,5 @@ api.nvim_create_autocmd({ "BufWritePost" }, {
   },
   callback = function()
     require("formatter"):formatter()
-  end,
-})
-
-api.nvim_create_autocmd({ "BufWritePost" }, {
-  group = group,
-  pattern = { "*.go,*.lua,*.yaml,*.yml,*.js,*.json,*.py" },
-  callback = function()
-    require("formatter"):formatter()
-  end,
-})
-
-api.nvim_create_autocmd({ "VimResized" }, {
-  group = group,
-  pattern = { "*" },
-  callback = function()
-    vim.cmd("tabdo wincmd =")
-  end,
-})
-
--- Special case for term apps like glow, fzf or lf.
-api.nvim_create_autocmd({ "WinClosed" }, {
-  group = group,
-  pattern = { "*" },
-  callback = function()
-    on_buf_pat("term://", on_win_close)
-  end,
-})
-
-api.nvim_create_autocmd({ "VimEnter" }, {
-  group = group,
-  pattern = { "*" },
-  callback = function()
-    if vim.o.diff then
-      for _, win in ipairs(api.nvim_list_wins()) do
-        api.nvim_set_current_win(win)
-        zen_mode(1)
-      end
-      vim.cmd("normal! gg")
-      return
-    end
-    on_buf_pat("term://", turn_on_zen_mode)
-  end,
-})
-
-api.nvim_create_autocmd({ "TermOpen" }, {
-  group = group,
-  pattern = { "*" },
-  callback = function()
-    zen_mode(1)
-  end,
-})
-
-api.nvim_create_autocmd({ "TermLeave" }, {
-  group = group,
-  pattern = { "*" },
-  callback = function()
-    zen_mode(0)
-  end,
-})
-
-api.nvim_create_autocmd({ "BufWinEnter", "TermOpen", "TermLeave" }, {
-  group = group,
-  pattern = { "*" },
-  callback = function()
-    pcall(function()
-      require("project_nvim.project").on_buf_enter()
-    end)
   end,
 })

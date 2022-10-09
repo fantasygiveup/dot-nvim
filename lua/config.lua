@@ -370,6 +370,7 @@ M.treesitter = function()
       "css",
       "query",
       "ruby",
+      "cpp",
     },
   })
 end

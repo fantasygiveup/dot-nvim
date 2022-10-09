@@ -143,4 +143,25 @@ int main() {{
       { i(0) }
     )
   ),
+  s(
+    "cssol",
+    fmt(
+      [[
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class Solution {{
+public:
+    {}
+}};
+
+int main() {{
+    auto sol = Solution{{}};
+    // cout << sol.your_method() << endl;
+}}
+  ]],
+      { i(0) }
+    )
+  ),
 })

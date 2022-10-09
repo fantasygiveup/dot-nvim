@@ -100,8 +100,16 @@ M.plugins = function()
     require("fzf-lua").grep_project(cmd_opts)
   end)
 
+  -- Makefile shortcuts.
+  vim.keymap.set("n", ",cb", function()
+    local build_cmd = "!make build"
+    local ok, fname = pcall(vim.api.nvim_buf_get_name, 0)
+    if ok then
+      build_cmd = build_cmd .. " MAKEFILE_FILENAME=" .. fname
+    end
+    vim.cmd(build_cmd)
+  end)
   vim.keymap.set("n", ",cc", function() vim.cmd("!make") end)
-  vim.keymap.set("n", ",cb", function() vim.cmd("!make build") end)
   vim.keymap.set("n", ",ct", function() vim.cmd("!make test") end)
   vim.keymap.set("n", ",cr", function() vim.cmd("!make run") end)
   vim.keymap.set("n", ",cl", function() vim.cmd("!make lint") end)

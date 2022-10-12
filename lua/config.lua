@@ -209,7 +209,7 @@ M.lsp = function()
 
   local function on_attach(client, bufnr)
     -- Disable diagnostic handlers.
-    if client.name == "tsserver" or client.name == "clangd" then
+    if client.name == "tsserver" then
       vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
       vim.lsp.diagnostic.set_signs = function() end
     end
@@ -262,7 +262,7 @@ M.lsp = function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-  local servers = { "clangd", "gopls", "pyright", "tsserver" }
+  local servers = { "ccls", "gopls", "pyright", "tsserver" }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup({
       on_attach = on_attach,

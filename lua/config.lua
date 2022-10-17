@@ -363,6 +363,7 @@ M.treesitter = function()
       "scheme",
       "python",
       "markdown",
+      "markdown_inline",
       "elm",
       "bash",
       "vim",

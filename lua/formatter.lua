@@ -117,14 +117,14 @@ end
 function fmt:formatter()
   fmt:get_current_lines()
   local opts = get_format_opts()
-  opts.filetype = vim.bo.filetype
-  if vim.bo.filetype == "lua" then
-    opts.contents = {}
-    for _, v in pairs(self.old_lines) do
-      table.insert(opts.contents, v .. "\n")
-    end
-  end
   if opts ~= nil then
+    opts.filetype = vim.bo.filetype
+    if vim.bo.filetype == "lua" then
+      opts.contents = {}
+      for _, v in pairs(self.old_lines) do
+        table.insert(opts.contents, v .. "\n")
+      end
+    end
     fmt:new_spawn(opts)
   end
 end

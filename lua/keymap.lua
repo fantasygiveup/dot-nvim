@@ -69,7 +69,8 @@ M.plugins = function()
   bind("n", ",gh", "<Cmd>lua require'fzf-lua'.git_bcommits()<CR>", opts)
   bind("n", ",r", "<Cmd>lua require'fzf-lua'.resume()<CR>", optsn)
 
-  vim.keymap.set("n", ",e", "<Cmd>IconPickerNormal<CR>")
+  vim.keymap.set("n", "<A-e>", "<Cmd>IconPickerNormal<CR>")
+  vim.keymap.set("i", "<A-e>", "<Cmd>IconPickerInsert<CR>")
 
   -- gitlinker begin.
   local gl = require("gitlinker")

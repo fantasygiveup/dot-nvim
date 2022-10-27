@@ -407,6 +407,8 @@ M.null_ls = function()
 
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
   local diagnostics = null_ls.builtins.diagnostics
+  -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
+  local formatting = null_ls.builtins.formatting
 
   local gl = require("global")
   local config_dir = os.getenv("HOME") .. gl.path_sep .. ".config" .. gl.path_sep
@@ -422,6 +424,8 @@ M.null_ls = function()
       diagnostics.yamllint.with({ extra_args = { "-c", yamllint_path } }),
       diagnostics.shellcheck,
       diagnostics.eslint,
+      formatting.gofumpt,
+      formatting.golines,
     },
   })
 end

@@ -17,7 +17,6 @@ local function get_format_opts()
   }
 
   local fmt_tools = {
-    go = { cmd = "golines", args = { "--max-len=100", file_name } },
     lua = {
       cmd = "stylua",
       args = { "--config-path=" .. config_dir .. "stylua" .. gl.path_sep .. "stylua.toml", "-" },

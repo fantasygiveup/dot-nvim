@@ -169,7 +169,7 @@ end
 
 M.next_hunk = function()
   if vim.o.diff then
-    vim.fn.execute("normal! ]c")
+    vim.fn.execute("normal! ]czz")
     return
   end
   require("gitsigns.actions").next_hunk()
@@ -178,10 +178,11 @@ end
 
 M.prev_hunk = function()
   if vim.o.diff then
-    vim.fn.execute("normal! [c")
+    vim.fn.execute("normal! [czz")
     return
   end
   require("gitsigns.actions").prev_hunk()
+  vim.fn.execute("normal! zz")
 end
 
 M.lsp = function()

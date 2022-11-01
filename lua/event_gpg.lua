@@ -22,7 +22,7 @@ api.nvim_create_autocmd({ "BufReadPost", "FileReadPost" }, {
   group = group,
   pattern = { "*.gpg" },
   callback = function()
-    vim.fn.execute([[%!gpg --decrypt --default-recipient-self]])
+    vim.fn.execute([[%!gpg --quiet --decrypt --default-recipient-self]])
     vim.opt_local.bin = false
   end,
 })

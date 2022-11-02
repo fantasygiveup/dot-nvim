@@ -382,7 +382,10 @@ M.autopairs = function()
 end
 
 M.project_nvim = function()
-  require("project_nvim").setup()
+  local project_nvim = require("project_nvim").setup({
+    patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "go.mod" },
+    detection_methods = { "pattern", "lsp" },
+  })
 end
 
 M.yanky = function()

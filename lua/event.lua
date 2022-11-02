@@ -114,16 +114,6 @@ api.nvim_create_autocmd({ "TermLeave" }, {
   end,
 })
 
-api.nvim_create_autocmd({ "BufWinEnter", "TermOpen", "TermLeave" }, {
-  group = gen_group,
-  pattern = { "*" },
-  callback = function()
-    pcall(function()
-      require("project_nvim.project").on_buf_enter()
-    end)
-  end,
-})
-
 --- Code format.
 
 local fmt_group = api.nvim_create_augroup("FormatGroup", {})

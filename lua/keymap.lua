@@ -114,6 +114,8 @@ M.plugins = function()
   vim.keymap.set("n", ",ct", function() vim.cmd("!make test") end)
   vim.keymap.set("n", ",cr", function() vim.cmd("!make run") end)
   vim.keymap.set("n", ",cl", function() vim.cmd("!make lint") end)
+
+  vim.keymap.set("n", ",z", "<Cmd>ZenMode<CR>")
 end
 -- stylua: ignore end
 

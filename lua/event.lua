@@ -1,23 +1,21 @@
 local api = vim.api
 local gen_group = api.nvim_create_augroup("GenericGroup", {})
 
-local function zen_mode(status)
-  if status == 1 then
+local function toggle_guideline(enable)
+  if enable == 1 then
     vim.opt_local.laststatus = 0
     vim.opt_local.cursorline = false
-    vim.opt_local.number = false
   else
-    vim.opt_local.number = true
     vim.opt_local.cursorline = true
     vim.opt_local.laststatus = 3
   end
 end
 
 local function turn_on_zen_mode()
-  zen_mode(1)
+  toggle_guideline(1)
 end
 local function turn_off_zen_mode()
-  zen_mode(0)
+  toggle_guideline(0)
 end
 
 local function on_win_close()
@@ -89,7 +87,7 @@ api.nvim_create_autocmd({ "VimEnter" }, {
     if vim.o.diff then
       for _, win in ipairs(api.nvim_list_wins()) do
         api.nvim_set_current_win(win)
-        zen_mode(1)
+        toggle_guideline(1)
       end
       vim.cmd("normal! gg")
       return
@@ -102,7 +100,7 @@ api.nvim_create_autocmd({ "TermOpen" }, {
   group = gen_group,
   pattern = { "*" },
   callback = function()
-    zen_mode(1)
+    toggle_guideline(1)
   end,
 })
 
@@ -110,7 +108,7 @@ api.nvim_create_autocmd({ "TermLeave" }, {
   group = gen_group,
   pattern = { "*" },
   callback = function()
-    zen_mode(0)
+    toggle_guideline(0)
   end,
 })
 

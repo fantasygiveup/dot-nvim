@@ -84,6 +84,8 @@ api.nvim_create_autocmd({ "VimEnter" }, {
   group = gen_group,
   pattern = { "*" },
   callback = function()
+    api.nvim_set_hl(0, "@visual", { link = "Visual" }) -- custom markdown tree-sitter highlight
+
     if vim.o.diff then
       for _, win in ipairs(api.nvim_list_wins()) do
         api.nvim_set_current_win(win)

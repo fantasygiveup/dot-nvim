@@ -375,6 +375,9 @@ M.treesitter = function()
       "cpp",
     },
   })
+
+  -- Custom markdown tree-sitter highlight.
+  require("vim.treesitter.query").set_query("markdown", "highlights", "(fenced_code_block) @visual")
 end
 
 M.autopairs = function()

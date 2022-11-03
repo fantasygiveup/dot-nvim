@@ -460,6 +460,7 @@ M.zen_mode = function()
       backdrop = 1.0,
       width = 80,
       options = {
+        wrap = true,
         signcolumn = "no",
         number = false,
         relativenumber = false,

@@ -8,18 +8,7 @@ local function get_format_opts()
   local file_name = api.nvim_buf_get_name(0)
   local config_dir = os.getenv("HOME") .. gl.path_sep .. ".config" .. gl.path_sep
 
-  local prettier_cfg = {
-    cmd = "prettier",
-    args = {
-      "--config=" .. config_dir .. "prettier" .. gl.path_sep .. "prettier.config.js",
-      file_name,
-    },
-  }
-
   local fmt_tools = {
-    yaml = prettier_cfg,
-    javascript = prettier_cfg,
-    json = prettier,
     cpp = {
       cmd = "clang-format",
       args = {

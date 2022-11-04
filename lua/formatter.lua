@@ -17,10 +17,6 @@ local function get_format_opts()
   }
 
   local fmt_tools = {
-    lua = {
-      cmd = "stylua",
-      args = { "--config-path=" .. config_dir .. "stylua" .. gl.path_sep .. "stylua.toml", "-" },
-    },
     yaml = prettier_cfg,
     javascript = prettier_cfg,
     json = prettier,

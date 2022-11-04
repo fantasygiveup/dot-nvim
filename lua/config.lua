@@ -418,7 +418,6 @@ M.null_ls = function()
 
   local gl = require("global")
   local config_dir = os.getenv("HOME") .. gl.path_sep .. ".config" .. gl.path_sep
-  local yamllint_path = config_dir .. "yamllint" .. gl.path_sep .. "config.yaml"
   local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
   null_ls.setup({
@@ -439,11 +438,18 @@ M.null_ls = function()
     debug = false,
     sources = {
       diagnostics.golangci_lint,
-      diagnostics.yamllint.with({ extra_args = { "-c", yamllint_path } }),
+      diagnostics.yamllint.with({
+        extra_args = { "-c", config_dir .. "yamllint" .. gl.path_sep .. "config.yaml" },
+      }),
       diagnostics.shellcheck,
       diagnostics.eslint,
       formatting.gofumpt,
       formatting.golines,
+      formatting.stylua.with({
+        extra_args = {
+          "--config-path=" .. config_dir .. "stylua" .. gl.path_sep .. "stylua.toml",
+        },
+      }),
     },
   })
 end

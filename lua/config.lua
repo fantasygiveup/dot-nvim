@@ -450,6 +450,7 @@ M.null_ls = function()
           "--config-path=" .. config_dir .. "stylua" .. gl.path_sep .. "stylua.toml",
         },
       }),
+      formatting.yapf,
     },
   })
 end

@@ -125,7 +125,6 @@ api.nvim_create_autocmd({ "BufWritePost" }, {
     "*.yml",
     "*.js",
     "*.json",
-    "*.py",
     "*.c",
     "*.cpp",
     "*.cc",

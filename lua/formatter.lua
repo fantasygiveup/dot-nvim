@@ -20,7 +20,6 @@ local function get_format_opts()
     yaml = prettier_cfg,
     javascript = prettier_cfg,
     json = prettier,
-    python = { cmd = "yapf", args = { file_name } },
     cpp = {
       cmd = "clang-format",
       args = {

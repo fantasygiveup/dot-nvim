@@ -419,10 +419,22 @@ M.null_ls = function()
   local gl = require("global")
   local config_dir = os.getenv("HOME") .. gl.path_sep .. ".config" .. gl.path_sep
   local yamllint_path = config_dir .. "yamllint" .. gl.path_sep .. "config.yaml"
+  local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
   null_ls.setup({
     on_attach = function(client, bufnr)
       require("keymap").lsp(client, bufnr)
+
+      if client.supports_method("textDocument/formatting") then
+        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          group = augroup,
+          buffer = bufnr,
+          callback = function()
+            vim.lsp.buf.format({ bufnr = bufnr })
+          end,
+        })
+      end
     end,
     debug = false,
     sources = {

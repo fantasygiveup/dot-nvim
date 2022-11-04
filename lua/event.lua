@@ -118,14 +118,6 @@ api.nvim_create_autocmd({ "TermLeave" }, {
 
 local fmt_group = api.nvim_create_augroup("FormatGroup", {})
 
-api.nvim_create_autocmd({ "BufWritePre" }, {
-  group = fmt_group,
-  pattern = { "*.go" },
-  callback = function()
-    vim.lsp.buf.format()
-  end,
-})
-
 api.nvim_create_autocmd({ "BufWritePost" }, {
   group = fmt_group,
   pattern = {

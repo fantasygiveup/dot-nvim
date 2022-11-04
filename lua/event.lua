@@ -121,10 +121,6 @@ local fmt_group = api.nvim_create_augroup("FormatGroup", {})
 api.nvim_create_autocmd({ "BufWritePost" }, {
   group = fmt_group,
   pattern = {
-    "*.yaml",
-    "*.yml",
-    "*.js",
-    "*.json",
     "*.c",
     "*.cpp",
     "*.cc",

@@ -451,6 +451,11 @@ M.null_ls = function()
         },
       }),
       formatting.yapf,
+      formatting.prettier.with({
+        extra_args = {
+          "--config=" .. config_dir .. "prettier" .. gl.path_sep .. "prettier.config.js",
+        },
+      }),
     },
   })
 end

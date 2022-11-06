@@ -61,7 +61,7 @@ M.nvim_surround = function()
 end
 
 M.theme = function()
-  vim.o.background = require("internal").system_background()
+  vim.o.background = os.getenv("SYSTEM_COLOR_THEME")
   require("onedark").setup({
     style = vim.o.background,
     highlights = { QuickFixLine = { fmt = "none" } }, -- overrides

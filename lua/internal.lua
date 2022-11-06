@@ -67,18 +67,6 @@ M.git_save_file_remote = function(file)
   print(name .. " pushed to " .. remote)
 end
 
-M.int2rgb = function(color)
-  local bit = require("bit")
-  local r = bit.rshift(bit.band(color, 0xFF0000), 16)
-  local g = bit.rshift(bit.band(color, 0x00FF00), 8)
-  local b = bit.band(color, 0x0000FF)
-  return string.format("#%02x%02x%02x", r, g, b)
-end
-
-M.system_background = function()
-  return os.getenv("SYSTEM_COLOR_THEME")
-end
-
 M.make_build = function()
   local build_cmd = "!make build"
   local ok, fname = pcall(vim.api.nvim_buf_get_name, 0)

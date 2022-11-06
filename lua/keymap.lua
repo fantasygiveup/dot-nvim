@@ -93,6 +93,7 @@ M.plugins = function()
   vim.keymap.set("n", ",z", "<Cmd>ZenMode<CR>")
 
   vim.keymap.set("n", "<C-g>", "<Cmd>lua require'fzf_projects'.navigate()<CR>")
+  vim.keymap.set("n", "<localleader>b", "<Cmd>Dashboard<CR>")
 end
 -- stylua: ignore end
 

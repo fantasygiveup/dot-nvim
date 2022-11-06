@@ -5,29 +5,11 @@ local function toggle_guideline(enable)
   if enable == 1 then
     vim.opt_local.laststatus = 0
     vim.opt_local.cursorline = false
+    vim.opt_local.number = false
   else
+    vim.opt_local.number = true
     vim.opt_local.cursorline = true
     vim.opt_local.laststatus = 3
-  end
-end
-
-local function turn_on_zen_mode()
-  toggle_guideline(1)
-end
-local function turn_off_zen_mode()
-  toggle_guideline(0)
-end
-
-local function on_win_close()
-  turn_off_zen_mode()
-end
-
-local function on_buf_pat(pat, fn)
-  local win = api.nvim_get_current_win()
-  local buf = api.nvim_win_get_buf(win)
-  local buf_name = api.nvim_buf_get_name(buf)
-  if buf_name:find(pat, 1, true) == 1 then
-    fn()
   end
 end
 
@@ -71,15 +53,6 @@ api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
--- Special case for term apps like glow, fzf or lf.
-api.nvim_create_autocmd({ "WinClosed" }, {
-  group = gen_group,
-  pattern = { "*" },
-  callback = function()
-    on_buf_pat("term://", on_win_close)
-  end,
-})
-
 api.nvim_create_autocmd({ "VimEnter" }, {
   group = gen_group,
   pattern = { "*" },
@@ -94,23 +67,6 @@ api.nvim_create_autocmd({ "VimEnter" }, {
       vim.cmd("normal! gg")
       return
     end
-    on_buf_pat("term://", turn_on_zen_mode)
-  end,
-})
-
-api.nvim_create_autocmd({ "TermOpen" }, {
-  group = gen_group,
-  pattern = { "*" },
-  callback = function()
-    toggle_guideline(1)
-  end,
-})
-
-api.nvim_create_autocmd({ "TermLeave" }, {
-  group = gen_group,
-  pattern = { "*" },
-  callback = function()
-    toggle_guideline(0)
   end,
 })
 

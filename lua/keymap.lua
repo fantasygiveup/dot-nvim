@@ -108,9 +108,9 @@ M.plugins = function()
   vim.keymap.set("n", "<localleader>cl", "<cmd>!make lint<cr>")
 
   vim.keymap.set("n", "<localleader>z", "<cmd>ZenMode<cr>")
-
   vim.keymap.set("n", "<c-g>", "<cmd>lua require'fzf_projects'.navigate()<cr>")
   vim.keymap.set("n", "<localleader>b", "<cmd>Dashboard<cr>")
+  vim.keymap.set("n", "<localleader>fn", "<cmd>DashboardNewFile<cr>")
 end
 -- stylua: ignore end
 

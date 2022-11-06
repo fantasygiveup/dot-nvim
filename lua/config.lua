@@ -517,6 +517,12 @@ M.dashboard = function()
   }
   db.custom_center = {
     {
+      icon = "  ",
+      desc = "New File                        ",
+      action = "DashboardNewFile",
+      shortcut = "<localleader>fn",
+    },
+    {
       icon = "  ",
       desc = "Switch project                            ",
       shortcut = "<C-g>",

@@ -91,6 +91,8 @@ M.plugins = function()
   vim.keymap.set("n", ",cl", "<Cmd>!make lint<CR>")
 
   vim.keymap.set("n", ",z", "<Cmd>ZenMode<CR>")
+
+  vim.keymap.set("n", "<C-g>", "<Cmd>lua require'fzf_projects'.navigate()<CR>")
 end
 -- stylua: ignore end
 

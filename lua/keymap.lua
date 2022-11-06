@@ -2,118 +2,93 @@ local M = {}
 
 local api = vim.api
 local opts = { noremap = true, silent = true }
-local optsn = { noremap = true }
-local bind = api.nvim_set_keymap
 
 -- stylua: ignore start
 M.core = function()
   -- Pre. Allows us to map C-c key sequence (see Post below).
-  bind("n", "<C-c>", "<Nop>", optsn)
-  bind("i", "<C-c>", "<Nop>", optsn)
+  vim.keymap.set("n", "<C-c>", "<Nop>")
+  vim.keymap.set("i", "<C-c>", "<Nop>")
 
   -- Core.
   vim.g.mapleader = " "
   vim.g.maplocalleader = ","
-  bind("n", vim.g.mapleader, "", optsn)
-  bind("x", vim.g.mapleader, "", optsn)
-  bind("n", ",", "", optsn)
-  bind("x", ",", "", optsn)
-  bind("n", vim.g.maplocalleader, "", optsn)
-  bind("x", vim.g.maplocalleader, "", optsn)
-  bind("x", "p", "pgvy", opts)
-  bind("n", "[f", "<Cmd>cprev<CR>", opts)
-  bind("n", "]f", "<Cmd>cnext<CR>", opts)
-  bind("n", ",ts", "<Cmd>setlocal spell! spelllang=en_us<CR>", opts)
-  bind("n", ",cw", [[<Cmd>keeppatterns %s/\s\+$//e<CR>]], opts)
-  bind("n", "X", "<Cmd>lua require'internal'.qf_toggle()<CR>", opts)
-  bind("n", "ZZ", "<Cmd>xa<CR>", opts)
-  bind("n", "ZQ", "<Cmd>qa!<CR>", opts)
+  vim.keymap.set("n", vim.g.mapleader, "")
+  vim.keymap.set("x", vim.g.mapleader, "")
+  vim.keymap.set("n", ",", "")
+  vim.keymap.set("x", ",", "")
+  vim.keymap.set("n", vim.g.maplocalleader, "")
+  vim.keymap.set("x", vim.g.maplocalleader, "")
+  vim.keymap.set("x", "p", "pgvy")
+  vim.keymap.set("n", "[f", "<Cmd>cprev<CR>")
+  vim.keymap.set("n", "]f", "<Cmd>cnext<CR>")
+  vim.keymap.set("n", ",ts", "<Cmd>setlocal spell! spelllang=en_us<CR>")
+  vim.keymap.set("n", ",cw", [[<Cmd>keeppatterns %s/\s\+$//e<CR>]])
+  vim.keymap.set("n", "X", "<Cmd>lua require'internal'.qf_toggle()<CR>")
+  vim.keymap.set("n", "ZZ", "<Cmd>xa<CR>")
+  vim.keymap.set("n", "ZQ", "<Cmd>qa!<CR>")
 
   -- Command line (tcsh style).
-  bind("c", "<C-a>", "<Home>", optsn)
-  bind("c", "<C-f>", "<Right>", optsn)
-  bind("c", "<C-b>", "<Left>", optsn)
-  bind("c", "<C-e>", "<End>", optsn)
-  bind("c", "<C-d>", "<Del>", optsn)
-  bind("c", "<Esc>b", "<S-Left>", optsn)
-  bind("c", "<Esc>f", "<S-Right>", optsn)
-  bind("c", "<C-t>", [[<C-R>=expand("%:p:h") . "/" <CR>]], optsn)
+  vim.keymap.set("c", "<C-a>", "<Home>")
+  vim.keymap.set("c", "<C-f>", "<Right>")
+  vim.keymap.set("c", "<C-b>", "<Left>")
+  vim.keymap.set("c", "<C-e>", "<End>")
+  vim.keymap.set("c", "<C-d>", "<Del>")
+  vim.keymap.set("c", "<Esc>b", "<S-Left>")
+  vim.keymap.set("c", "<Esc>f", "<S-Right>")
+  vim.keymap.set("c", "<C-t>", [[<C-R>=expand("%:p:h") . "/" <CR>]])
 
   -- Post.
   -- Bind C-c to ESC, also clean up the highlight.
-  bind("n", "<C-c>", "<Esc>:noh<CR>", opts)
-  bind("i", "<C-c>", "<Esc>:noh<CR>", opts)
+  vim.keymap.set("n", "<C-c>", "<Esc>:noh<CR>", opts)
+  vim.keymap.set("i", "<C-c>", "<Esc>:noh<CR>", opts)
 end
 
 M.plugins = function()
   -- Plugins.
-  bind("n", "<Leader>pc", "<Cmd>PackerCompile<CR>", opts)
-  bind("n", "<Leader>ps", "<Cmd>PackerSync<CR>", opts)
-  bind("n", "-", "<Cmd>nohlsearch | Lf<CR>", opts)
-  bind("n", ",g?", "<Cmd>lua require'gitsigns'.blame_line({full=true})<CR>", opts)
-  bind("n", ",gc", "<Cmd>lua require'internal'.git_save_file_remote()<CR>", opts)
-  bind("n", "<Leader>hp", "<Cmd>lua require'gitsigns'.preview_hunk()<CR>", opts)
-  bind("n", "<Leader>hu", "<Cmd>lua require'gitsigns'.reset_hunk()<CR>", opts)
-  bind("n", "<Leader>hs", "<Cmd>lua require'gitsigns'.stage_hunk()<CR>", opts)
-  bind("n", "<Leader>hr", "<Cmd>lua require'gitsigns'.reset_buffer()<CR>", opts)
-  bind("n", "]c", "<Cmd>lua require'config'.next_hunk()<CR>", opts)
-  bind("n", "[c", "<Cmd>lua require'config'.prev_hunk()<CR>", opts)
-  bind("n", ",tc", "<Cmd>ColorizerToggle<CR>", optsn)
-  bind("n", "<C-t>", "<Cmd>lua require'fzf-lua'.files()<CR>", optsn)
-  bind("n", "<Leader><", "<Cmd>lua require'fzf-lua'.buffers()<CR>", optsn)
-  bind("n", "<Leader>:", "<Cmd>lua require'fzf-lua'.commands()<CR>", optsn)
-  bind("n", "<Leader>?", "<Cmd>lua require'fzf-lua'.keymaps()<CR>", optsn)
-  bind("n", ",fr", "<Cmd>lua require'fzf-lua'.oldfiles()<CR>", optsn)
-  bind("n", ",#", "<Cmd>lua require'fzf-lua'.filetypes()<CR>", optsn)
-  bind("n", ",gg", "<Cmd>lua require'fzf-lua'.git_status()<CR>", opts)
-  bind("n", ",gh", "<Cmd>lua require'fzf-lua'.git_bcommits()<CR>", opts)
-  bind("n", ",r", "<Cmd>lua require'fzf-lua'.resume()<CR>", optsn)
+  vim.keymap.set("n", "<Leader>pc", "<Cmd>PackerCompile<CR>")
+  vim.keymap.set("n", "<Leader>ps", "<Cmd>PackerSync<CR>")
+  vim.keymap.set("n", "-", "<Cmd>nohlsearch | Lf<CR>")
+  vim.keymap.set("n", ",g?", "<Cmd>lua require'gitsigns'.blame_line({full=true})<CR>")
+  vim.keymap.set("n", ",gc", "<Cmd>lua require'internal'.git_save_file_remote()<CR>")
+  vim.keymap.set("n", "<Leader>hp", "<Cmd>lua require'gitsigns'.preview_hunk()<CR>")
+  vim.keymap.set("n", "<Leader>hu", "<Cmd>lua require'gitsigns'.reset_hunk()<CR>")
+  vim.keymap.set("n", "<Leader>hs", "<Cmd>lua require'gitsigns'.stage_hunk()<CR>")
+  vim.keymap.set("n", "<Leader>hr", "<Cmd>lua require'gitsigns'.reset_buffer()<CR>")
+  vim.keymap.set("n", "]c", "<Cmd>lua require'config'.next_hunk()<CR>")
+  vim.keymap.set("n", "[c", "<Cmd>lua require'config'.prev_hunk()<CR>")
+  vim.keymap.set("n", ",tc", "<Cmd>ColorizerToggle<CR>")
+  vim.keymap.set("n", "<C-t>", "<Cmd>lua require'fzf-lua'.files()<CR>")
+  vim.keymap.set("n", "<Leader><", "<Cmd>lua require'fzf-lua'.buffers()<CR>")
+  vim.keymap.set("n", "<Leader>:", "<Cmd>lua require'fzf-lua'.commands()<CR>")
+  vim.keymap.set("n", "<Leader>?", "<Cmd>lua require'fzf-lua'.keymaps()<CR>")
+  vim.keymap.set("n", ",fr", "<Cmd>lua require'fzf-lua'.oldfiles()<CR>")
+  vim.keymap.set("n", ",#", "<Cmd>lua require'fzf-lua'.filetypes()<CR>")
+  vim.keymap.set("n", ",gg", "<Cmd>lua require'fzf-lua'.git_status()<CR>")
+  vim.keymap.set("n", ",gh", "<Cmd>lua require'fzf-lua'.git_bcommits()<CR>")
+  vim.keymap.set("n", ",r", "<Cmd>lua require'fzf-lua'.resume()<CR>")
 
   vim.keymap.set("n", "<A-e>", "<Cmd>IconPickerNormal<CR>")
   vim.keymap.set("i", "<A-e>", "<Cmd>IconPickerInsert<CR>")
 
-  -- gitlinker begin.
-  local gl = require("gitlinker")
-  local gla = require("gitlinker.actions")
-  vim.keymap.set( "n", ",gu", function() gl.get_buf_range_url('n', { action_callback = gla.copy_to_clipboard } ) end)
-  vim.keymap.set( "v", ",gu", function() gl.get_buf_range_url('v', { action_callback = gla.copy_to_clipboard } ) end)
-  vim.keymap.set( "n", ",gU", function() gl.get_repo_url( { action_callback = gla.open_in_browser } ) end)
-  -- gitlinker end.
+  vim.keymap.set( "n", ",gu", "<Cmd>lua require'internal'.git_url_at_point()<CR>")
+  vim.keymap.set( "v", ",gu", "<Cmd>lua require'internal'.git_url_range()<CR>")
+  vim.keymap.set( "n", ",gU", "<Cmd>lua require'internal'.git_url_in_browser()<CR>")
 
-  vim.keymap.set("n", ",do", function() require("close_buffers").wipe({ type = "other", force = true }) end)
-  vim.keymap.set("n", ",da", function() require("close_buffers").wipe({ type = "all", force = true }) end)
+  vim.keymap.set("n", ",do", "<Cmd> lua require'internal'.del_buf_others()<CR>")
+  vim.keymap.set("n", ",da", "<Cmd> lua require'internal'.del_buf_all()<CR>")
+  vim.keymap.set("n", ",dp", "<Cmd> lua require'internal'.del_buf_current_project()<CR>")
 
-  vim.keymap.set("n", ",dp", function()
-    local project_root = require("project_nvim.project").get_project_root()
-    require("close_buffers").wipe({ regex = project_root, force = true })
-  end)
+  vim.keymap.set("n", "<Leader>//", "<Cmd>lua require'fzf-lua'.grep_project()<CR>")
+  vim.keymap.set("v", "<Leader>//", "<Cmd>lua require'fzf-lua'.grep_visual()<CR>")
 
-  vim.keymap.set("n", "<Leader>//", function() require("fzf-lua").grep_project() end)
-  vim.keymap.set("v", "<Leader>//", function() require("fzf-lua").grep_visual() end)
-
-  vim.keymap.set("n", "<C-s>", function()
-    local cmd_opts = {
-      cwd = require("global").notes_dir,
-      search = "\\S",
-      no_esc = true,
-      fzf_opts = { ["--nth"] = false },
-    }
-    require("fzf-lua").grep_project(cmd_opts)
-  end)
+  vim.keymap.set("n", "<C-s>", "<Cmd>lua require'internal'.search_notes()<CR>")
 
   -- Makefile shortcuts.
-  vim.keymap.set("n", ",cb", function()
-    local build_cmd = "!make build"
-    local ok, fname = pcall(vim.api.nvim_buf_get_name, 0)
-    if ok then
-      build_cmd = build_cmd .. " MAKEFILE_FILENAME=" .. fname
-    end
-    vim.cmd(build_cmd)
-  end)
-  vim.keymap.set("n", ",cc", function() vim.cmd("!make") end)
-  vim.keymap.set("n", ",ct", function() vim.cmd("!make test") end)
-  vim.keymap.set("n", ",cr", function() vim.cmd("!make run") end)
-  vim.keymap.set("n", ",cl", function() vim.cmd("!make lint") end)
+  vim.keymap.set("n", ",cb", "<Cmd>lua require'internal'.make_build()<CR>")
+  vim.keymap.set("n", ",cc", "<Cmd>!make<CR>")
+  vim.keymap.set("n", ",ct", "<Cmd>!make test<CR>")
+  vim.keymap.set("n", ",cr", "<Cmd>!make run<CR>")
+  vim.keymap.set("n", ",cl", "<Cmd>!make lint<CR>")
 
   vim.keymap.set("n", ",z", "<Cmd>ZenMode<CR>")
 end

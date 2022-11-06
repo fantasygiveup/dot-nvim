@@ -79,4 +79,55 @@ M.system_background = function()
   return os.getenv("SYSTEM_COLOR_THEME")
 end
 
+M.make_build = function()
+  local build_cmd = "!make build"
+  local ok, fname = pcall(vim.api.nvim_buf_get_name, 0)
+  if ok then
+    build_cmd = build_cmd .. " MAKEFILE_FILENAME=" .. fname
+  end
+  vim.cmd(build_cmd)
+end
+
+M.search_notes = function()
+  local cmd_opts = {
+    cwd = require("global").notes_dir,
+    search = "\\S",
+    no_esc = true,
+    fzf_opts = { ["--nth"] = false },
+  }
+  require("fzf-lua").grep_project(cmd_opts)
+end
+
+-- gitlinker begin
+local gitlinker = require("gitlinker")
+local gitlinker_actions = require("gitlinker.actions")
+
+M.git_url_at_point = function()
+  gitlinker.get_buf_range_url("n", { action_callback = gitlinker_actions.copy_to_clipboard })
+end
+
+M.git_url_range = function()
+  gitlinker.get_buf_range_url("v", { action_callback = gitlinker_actions.copy_to_clipboard })
+end
+
+M.git_url_in_browser = function()
+  gitlinker.get_repo_url({ action_callback = gitlinker_actions.open_in_browser })
+end
+-- gitlinker end
+
+-- delete buffers begin
+M.del_buf_others = function()
+  require("close_buffers").wipe({ type = "other", force = true })
+end
+
+M.del_buf_all = function()
+  require("close_buffers").wipe({ type = "all", force = true })
+end
+
+M.del_buf_current_project = function()
+  local project_root = require("project_nvim.project").get_project_root()
+  require("close_buffers").wipe({ regex = project_root, force = true })
+end
+-- delete buffers end
+
 return M

@@ -325,6 +325,7 @@ M.cmp = function()
       { name = "buffer", priority = 6 },
       { name = "tmux", option = { all_panes = true, label = "" }, priority = 6 },
       { name = "path", priority = 5 },
+      { name = "calc", priority = 5 },
     },
     preselect = cmp.PreselectMode.None,
     completion = {

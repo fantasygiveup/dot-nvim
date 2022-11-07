@@ -44,6 +44,7 @@ packer.startup(function(use)
       { "andersevenrud/cmp-tmux" },
       { "onsails/lspkind.nvim" }, -- lsp pictograms
       { "hrsh7th/cmp-nvim-lua" },
+      { "hrsh7th/cmp-calc" },
     },
     config = config.cmp,
   })

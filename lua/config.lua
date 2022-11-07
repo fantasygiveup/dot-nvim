@@ -378,6 +378,7 @@ M.treesitter = function()
 
   -- Custom markdown tree-sitter highlight.
   require("vim.treesitter.query").set_query("markdown", "highlights", "(fenced_code_block) @visual")
+  vim.g.markdown_folding = 1 -- enable markdown folding
 end
 
 M.autopairs = function()

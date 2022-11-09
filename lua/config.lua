@@ -373,6 +373,7 @@ M.treesitter = function()
       "query",
       "ruby",
       "cpp",
+      "sql",
     },
   })
 

@@ -82,6 +82,7 @@ M.search_notes = function()
     search = "\\S",
     no_esc = true,
     fzf_opts = { ["--nth"] = false },
+    rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512",
   }
   require("fzf-lua").grep_project(cmd_opts)
 end

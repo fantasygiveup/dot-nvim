@@ -107,7 +107,7 @@ M.plugins = function()
   vim.keymap.set("n", "<localleader>cr", "<cmd>!make run<cr>")
   vim.keymap.set("n", "<localleader>cl", "<cmd>!make lint<cr>")
 
-  vim.keymap.set("n", "<localleader>z", "<cmd>ZenMode<cr>")
+  vim.keymap.set("n", "<localleader>z", "<cmd>lua require'internal'.zen_mode_textwidth()<cr>")
   vim.keymap.set("n", "<c-g>", "<cmd>lua require'fzf_projects'.navigate()<cr>")
   vim.keymap.set("n", "<localleader>b", "<cmd>Dashboard<cr>")
   vim.keymap.set("n", "<localleader>fn", "<cmd>DashboardNewFile<cr>")

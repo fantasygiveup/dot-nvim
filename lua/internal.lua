@@ -124,4 +124,12 @@ M.del_buf_current_project = function()
 end
 -- delete buffers end
 
+M.zen_mode_textwidth = function()
+  require("zen-mode").toggle({
+    window = {
+      width = vim.bo.textwidth,
+    },
+  })
+end
+
 return M

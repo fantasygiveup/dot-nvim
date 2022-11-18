@@ -88,19 +88,24 @@ M.search_notes = function()
 end
 
 -- gitlinker begin
-local gitlinker = require("gitlinker")
-local gitlinker_actions = require("gitlinker.actions")
-
 M.git_url_at_point = function()
-  gitlinker.get_buf_range_url("n", { action_callback = gitlinker_actions.copy_to_clipboard })
+  require("gitlinker").get_buf_range_url(
+    "n",
+    { action_callback = require("gitlinker.actions").copy_to_clipboard }
+  )
 end
 
 M.git_url_range = function()
-  gitlinker.get_buf_range_url("v", { action_callback = gitlinker_actions.copy_to_clipboard })
+  require("gitlinker").get_buf_range_url(
+    "v",
+    { action_callback = require("gitlinker.actions").copy_to_clipboard }
+  )
 end
 
 M.git_url_in_browser = function()
-  gitlinker.get_repo_url({ action_callback = gitlinker_actions.open_in_browser })
+  require("gitlinker").get_repo_url({
+    action_callback = require("gitlinker.actions").open_in_browser,
+  })
 end
 -- gitlinker end
 

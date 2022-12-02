@@ -112,6 +112,9 @@ M.plugins = function()
   vim.keymap.set("n", "<leader>m", "<cmd>Dashboard<cr>")
   vim.keymap.set("n", "<localleader>fn", "<cmd>DashboardNewFile<cr>")
   vim.keymap.set("n", "<leader><Space>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
+  vim.keymap.set("n", "<localleader>fd", "<cmd>lua require'diary'.new_entry()<cr>")
+
+  -- Debugger.
   vim.keymap.set("n", "<localleader>dt", "<cmd>lua require'dap'.terminate(); require'dap'.clear_breakpoints()<cr>")
   vim.keymap.set("n", "<localleader>dc", "<cmd>lua require'dap'.continue()<cr>")
   vim.keymap.set("n", "<localleader>dn", "<cmd>lua require'dap'.step_over()<cr>")

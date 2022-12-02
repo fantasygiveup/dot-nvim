@@ -2,29 +2,11 @@ local M = {}
 
 local api = vim.api
 
-local function unfold()
-  local cl = vim.fn.line(".")
-
-  if not vim.o.foldenable or cl <= 1 then
-    return
-  end
-
-  local cf = vim.fn.foldlevel(cl)
-  local uf = vim.fn.foldlevel(cl - 1)
-  local min = math.min(cf, uf)
-
-  if min > 0 then
-    vim.cmd("normal! " .. tostring(min) .. "zo")
-  end
-end
-
 -- restore_buf_cursor jumps to the last visited file's position.
 M.restore_buf_cursor = function()
   if vim.fn.line([[`"]]) <= vim.fn.line([[$]]) then
     vim.cmd([[try | exec 'normal! g`"zz' | catch | endtry]])
   end
-
-  unfold()
 end
 
 M.qf_toggle = function()
@@ -124,10 +106,12 @@ M.del_buf_current_project = function()
 end
 -- delete buffers end
 
-M.zen_mode_textwidth = function()
+M.zen_mode_textwidth = function(extra_width)
+  local extra_width = extra_width or 0
+
   require("zen-mode").toggle({
     window = {
-      width = vim.bo.textwidth,
+      width = vim.bo.textwidth + extra_width,
     },
   })
 end

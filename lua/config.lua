@@ -374,6 +374,8 @@ M.treesitter = function()
       "ruby",
       "cpp",
       "sql",
+      "elixir",
+      "erlang",
     },
   })
 

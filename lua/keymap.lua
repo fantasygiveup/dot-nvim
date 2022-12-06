@@ -109,8 +109,6 @@ M.plugins = function()
 
   vim.keymap.set("n", "<localleader>z", "<cmd>lua require'internal'.zen_mode_textwidth()<cr>")
   vim.keymap.set("n", "<c-g>", "<cmd>lua require'fzf_projects'.navigate()<cr>")
-  vim.keymap.set("n", "<leader>m", "<cmd>Dashboard<cr>")
-  vim.keymap.set("n", "<localleader>fn", "<cmd>DashboardNewFile<cr>")
   vim.keymap.set("n", "<leader><Space>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
   vim.keymap.set("n", "<localleader>fd", "<cmd>lua require'diary'.new_entry()<cr>")
 

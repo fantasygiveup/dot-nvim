@@ -69,8 +69,6 @@ packer.startup(function(use)
   })
   use({ "aserowy/tmux.nvim", config = config.tmux })
   use({ "folke/zen-mode.nvim", config = config.zen_mode })
-  use({ "folke/which-key.nvim", config = config.which_key })
-  use({ "glepnir/dashboard-nvim", config = config.dashboard })
   use({ "kevinhwang91/nvim-bqf", ft = "qf" })
   use({
     "mfussenegger/nvim-dap",

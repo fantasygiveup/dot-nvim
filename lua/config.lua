@@ -374,8 +374,6 @@ M.treesitter = function()
       "ruby",
       "cpp",
       "sql",
-      "elixir",
-      "erlang",
     },
   })
 
@@ -519,74 +517,6 @@ M.zen_mode = function()
       },
     },
   })
-end
-
-M.which_key = function()
-  require("which-key").setup({
-    layout = { height = { min = 4, max = 15 } },
-  })
-end
-
-M.dashboard = function()
-  local db = require("dashboard")
-  db.custom_header = {
-    " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
-    " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
-    " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
-    " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
-    " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-    " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
-  }
-  db.custom_center = {
-    {
-      icon = "  ",
-      desc = "New File                        ",
-      action = "DashboardNewFile",
-      shortcut = "<localleader>fn",
-    },
-    {
-      icon = "  ",
-      desc = "Switch project                            ",
-      shortcut = "<C-g>",
-      action = "lua require'fzf_projects'.navigate()",
-    },
-    {
-      icon = "  ",
-      desc = "Find File                                 ",
-      action = "lua require'fzf-lua'.files()",
-      shortcut = "<C-t>",
-    },
-    {
-      icon = "  ",
-      desc = "File Browser                                  ",
-      action = "nohlsearch | Lf",
-      shortcut = "-",
-    },
-    {
-      icon = "  ",
-      desc = "Recently opened files           ",
-      action = "lua require'fzf-lua'.oldfiles()",
-      shortcut = "<localleader>fr",
-    },
-    {
-      icon = "  ",
-      desc = "Rebuild plugins                      ",
-      action = "PackerCompile",
-      shortcut = "<leader>pc",
-    },
-    {
-      icon = "痢 ",
-      desc = "Sync plugins remote                  ",
-      action = "PackerSync",
-      shortcut = "<leader>ps",
-    },
-    {
-      icon = "  ",
-      desc = "Dashboard                             ",
-      action = "Dashboard",
-      shortcut = "<leader>m",
-    },
-  }
 end
 
 M.dap = function()

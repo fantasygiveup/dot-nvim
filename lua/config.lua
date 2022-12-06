@@ -262,18 +262,12 @@ M.lsp = function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-  local servers = { "ccls", "gopls", "pyright", "tsserver", { "elixirls", { "elixir-ls" } } }
-  for _, server in ipairs(servers) do
-    local lsp = server
-    local cfg = {
+  local servers = { "ccls", "gopls", "pyright", "tsserver" }
+  for _, lsp in ipairs(servers) do
+    nvim_lsp[lsp].setup({
       on_attach = on_attach,
       capabilities = capabilities,
-    }
-    if type(server) == "table" then
-      lsp = server[1]
-      cfg.cmd = server[2]
-    end
-    nvim_lsp[lsp].setup(cfg)
+    })
   end
 end
 
@@ -380,6 +374,7 @@ M.treesitter = function()
       "ruby",
       "cpp",
       "sql",
+      "elixir",
       "erlang",
     },
   })
@@ -482,7 +477,6 @@ M.null_ls = function()
           return default_args
         end,
       }),
-      formatting.mix,
     },
   })
 end

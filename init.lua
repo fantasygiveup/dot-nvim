@@ -77,9 +77,6 @@ packer.startup(function(use)
     requires = { "rcarriga/nvim-dap-ui" },
     config = config.dap,
   })
-  -- Consider to change to treesitter/elixir once a bug is resolved
-  -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2965
-  use({ "elixir-editors/vim-elixir" })
   if packer_bootstrap then
     packer.sync()
   end

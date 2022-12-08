@@ -444,6 +444,7 @@ M.null_ls = function()
       diagnostics.shellcheck,
       diagnostics.eslint,
       formatting.goimports,
+      formatting.golines.with({ extra_args = { "--max-len=150" } }),
       formatting.stylua.with({
         extra_args = {
           "--config-path=" .. config_dir .. "stylua" .. gl.path_sep .. "stylua.toml",

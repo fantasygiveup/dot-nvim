@@ -75,6 +75,7 @@ packer.startup(function(use)
     requires = { "rcarriga/nvim-dap-ui" },
     config = config.dap,
   })
+  use({ "folke/todo-comments.nvim", config = config.todo_comments })
   if packer_bootstrap then
     packer.sync()
   end

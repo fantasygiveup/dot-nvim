@@ -549,4 +549,16 @@ M.dap = function()
   dapui.setup()
 end
 
+M.todo_comments = function()
+  require("todo-comments").setup({
+    signs = false,
+    merge_keywords = false,
+    highlight = {
+      keyword = "bg",
+      after = "",
+      pattern = [[.*<(KEYWORDS)\s*(\(.*\))?\s*:]],
+    },
+  })
+end
+
 return M

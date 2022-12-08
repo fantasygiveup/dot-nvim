@@ -34,7 +34,7 @@ local function new_entry(title)
 end
 
 M.new_entry = function()
-  vim.ui.input("New Diary", new_entry)
+  vim.ui.input({ prompt = "New Diary", relative = "win" }, new_entry)
 end
 
 return M

@@ -384,8 +384,10 @@ end
 
 M.dressing = function()
   require("dressing").setup({
-    select = {
-      backend = { "builtin" },
+    input = {
+      get_config = function(opts)
+        return opts
+      end,
     },
   })
 end

@@ -62,9 +62,9 @@ packer.startup(function(use)
     ft = { "markdown" },
   })
   use({ "kazhala/close-buffers.nvim", config = config.close_buffers })
+  use({ "stevearc/dressing.nvim", config = config.dressing }) -- better ui of vim.ui.input, vim.ui.select
   use({
     "ziontee113/icon-picker.nvim",
-    requires = { "stevearc/dressing.nvim" },
     config = config.icon_picker,
   })
   use({ "aserowy/tmux.nvim", config = config.tmux })

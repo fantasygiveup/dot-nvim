@@ -95,12 +95,20 @@ M.status_line = function()
   local ll = require("lualine")
   ll.setup({
     options = {
-      theme = "onedark",
+      theme = "auto",
       section_separators = { left = "", right = "" },
       component_separators = { left = "", right = "" },
     },
     sections = {
       lualine_a = { "mode", spell },
+      lualine_b = {
+        {
+          "diagnostics",
+          sources = { "nvim_diagnostic" },
+          sections = { "error" },
+          symbols = { error = " " },
+        },
+      },
       lualine_x = {
         { lsp_active_client },
         "encoding",
@@ -109,12 +117,6 @@ M.status_line = function()
       },
       lualine_y = {
         "progress",
-        {
-          "diagnostics",
-          sources = { "ale" },
-          sections = { "error", "warn" },
-          symbols = { error = " ", warn = "  " },
-        },
       },
     },
   })
@@ -200,7 +202,7 @@ M.lsp = function()
   end
 
   local signs = {
-    { name = "DiagnosticSignError", text = "" },
+    { name = "DiagnosticSignError", text = "" },
     { name = "DiagnosticSignWarn", text = "" },
     { name = "DiagnosticSignHint", text = "" },
     { name = "DiagnosticSignInfo", text = "" },

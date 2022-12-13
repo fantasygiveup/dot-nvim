@@ -58,7 +58,7 @@ M.make_build = function()
   vim.cmd(build_cmd)
 end
 
-M.search_notes = function()
+M.fzf_search_notes = function()
   local cmd_opts = {
     cwd = require("global").notes_dir,
     search = "\\S",

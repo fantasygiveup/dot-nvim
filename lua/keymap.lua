@@ -62,8 +62,8 @@ end
 
 M.plugins = function()
   -- Plugins.
-  vim.keymap.set("n", "<leader>pc", "<cmd>PackerCompile<cr>")
-  vim.keymap.set("n", "<leader>ps", "<cmd>PackerSync<cr>")
+  vim.keymap.set("n", "<localleader>xc", "<cmd>PackerCompile<cr>")
+  vim.keymap.set("n", "<localleader>xs", "<cmd>PackerSync<cr>")
   vim.keymap.set("n", "-", "<cmd>nohlsearch | Lf<cr>")
   vim.keymap.set("n", "<localleader>g?", "<cmd>lua require'gitsigns'.blame_line({full=true})<cr>")
   vim.keymap.set("n", "<localleader>gc", "<cmd>lua require'internal'.git_save_file_remote()<cr>")
@@ -98,8 +98,8 @@ M.plugins = function()
   vim.keymap.set( "v", "<localleader>gu", "<cmd>lua require'internal'.git_url_range()<cr>")
   vim.keymap.set( "n", "<localleader>gU", "<cmd>lua require'internal'.git_url_in_browser()<cr>")
 
-  vim.keymap.set("n", "<leader>bo", "<cmd>lua require'internal'.del_buf_others()<cr>")
-  vim.keymap.set("n", "<leader>b#", "<cmd>lua require'internal'.del_buf_all()<cr>")
+  vim.keymap.set("n", "<localleader>bo", "<cmd>lua require'internal'.del_buf_others()<cr>")
+  vim.keymap.set("n", "<localleader>b#", "<cmd>lua require'internal'.del_buf_all()<cr>")
   vim.keymap.set("n", "<leader>p#", "<cmd>lua require'internal'.del_buf_current_project()<cr>")
 
   -- Makefile shortcuts.
@@ -109,18 +109,20 @@ M.plugins = function()
   vim.keymap.set("n", "<leader>mr", "<cmd>!make run<cr>")
   vim.keymap.set("n", "<leader>ml", "<cmd>!make lint<cr>")
 
-  vim.keymap.set("n", "<localleader>z", "<cmd>lua require'internal'.zen_mode_textwidth()<cr>")
-  vim.keymap.set("n", "<leader><Space>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
-
-  vim.keymap.set("n", "<leader>ne", "<cmd>lua require'diary'.new_entry()<cr>")
+  vim.keymap.set("n", "<localleader>tz", "<cmd>lua require'internal'.zen_mode()<cr>")
 
   -- Debugger.
+  vim.keymap.set("n", "<localleader>d<Space>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
   vim.keymap.set("n", "<localleader>dt", "<cmd>lua require'dap'.terminate(); require'dap'.clear_breakpoints()<cr>")
   vim.keymap.set("n", "<localleader>dc", "<cmd>lua require'dap'.continue()<cr>")
   vim.keymap.set("n", "<localleader>dn", "<cmd>lua require'dap'.step_over()<cr>")
   vim.keymap.set("n", "<localleader>di", "<cmd>lua require'dap'.step_into()<cr>")
   vim.keymap.set("n", "<localleader>du", "<cmd>lua require'dapui'.toggle()<cr>")
   vim.keymap.set("v", "<localleader>de", "<cmd>lua require'dapui'.eval(); vim.fn.feedkeys('v')<cr>")
+
+  -- Dashboard.
+  vim.keymap.set("n", "<localleader>bn", "<cmd>DashboardNewFile<cr>")
+  vim.keymap.set("n", "<localleader>gh", "<cmd>Dashboard<cr>")
 end
 -- stylua: ignore end
 

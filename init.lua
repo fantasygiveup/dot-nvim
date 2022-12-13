@@ -75,6 +75,8 @@ packer.startup(function(use)
     requires = { "rcarriga/nvim-dap-ui" },
     config = config.dap,
   })
+  use({ "folke/which-key.nvim", config = config.which_key })
+  use({ "glepnir/dashboard-nvim", config = config.dashboard })
   use({ "folke/todo-comments.nvim", config = config.todo_comments })
   use({ "nvim-orgmode/orgmode", config = config.orgmode })
   if packer_bootstrap then

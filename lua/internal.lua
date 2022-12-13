@@ -106,7 +106,7 @@ M.del_buf_current_project = function()
 end
 -- delete buffers end
 
-M.zen_mode_textwidth = function(extra_width)
+M.zen_mode = function(extra_width)
   local extra_width = extra_width or 0
 
   require("zen-mode").toggle({

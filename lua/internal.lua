@@ -106,14 +106,25 @@ M.del_buf_current_project = function()
 end
 -- delete buffers end
 
-M.zen_mode = function(extra_width)
+M.zen_mode = function(extra_width, direction)
   local extra_width = extra_width or 0
+  local direction = direction or 0
+  local zen_mode = require("zen-mode.view")
 
-  require("zen-mode").toggle({
+  local fn = zen_mode.toggle
+  if direction > 0 then
+    fn = zen_mode.open
+  elseif direction < 0 then
+    fn = zen_mode.close
+  end
+
+  local opts = {
     window = {
       width = vim.bo.textwidth + extra_width,
     },
-  })
+  }
+
+  fn(opts)
 end
 
 return M

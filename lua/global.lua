@@ -13,6 +13,7 @@ function global:load_variables()
   self.vim_path = vim.fn.stdpath("config")
   self.notes_dir = notes_dir
   self.diary = notes_dir .. path_sep .. "diary.md"
+  self.todos = notes_dir .. path_sep .. "todos.md"
   self.cache_dir = home .. path_sep .. ".cache" .. path_sep .. "nvim" .. path_sep
   self.undo_dir = home .. path_sep .. ".cache" .. path_sep .. "undo" .. path_sep
   self.modules_dir = self.vim_path .. path_sep .. "modules"

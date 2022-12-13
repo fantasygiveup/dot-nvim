@@ -105,8 +105,8 @@ M.status_line = function()
         {
           "diagnostics",
           sources = { "nvim_diagnostic" },
-          sections = { "error" },
-          symbols = { error = " " },
+          sections = { "error", "warn", "info", "hint" },
+          symbols = { error = " ", warn = " ", info = " ", hint = " " },
         },
       },
       lualine_x = {

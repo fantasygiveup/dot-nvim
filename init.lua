@@ -76,6 +76,7 @@ packer.startup(function(use)
     config = config.dap,
   })
   use({ "folke/todo-comments.nvim", config = config.todo_comments })
+  use({ "nvim-orgmode/orgmode", config = config.orgmode })
   if packer_bootstrap then
     packer.sync()
   end

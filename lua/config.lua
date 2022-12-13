@@ -334,7 +334,6 @@ M.treesitter = function()
   require("nvim-treesitter.configs").setup({
     highlight = {
       enable = true,
-      additional_vim_regex_highlighting = { "org" },
     },
     ensure_installed = {
       "go",
@@ -357,7 +356,6 @@ M.treesitter = function()
       "ruby",
       "cpp",
       "sql",
-      "org",
     },
   })
 
@@ -628,21 +626,6 @@ M.todo_comments = function()
       after = "",
       pattern = [[.*<(KEYWORDS)\s*(\(.*\))?\s*:]],
     },
-  })
-end
-
-M.orgmode = function()
-  ok, orgmode = pcall(require, "orgmode")
-  if not ok then
-    return
-  end
-
-  orgmode.setup_ts_grammar()
-  local global = require("global")
-
-  orgmode.setup({
-    org_agenda_files = { global.notes_dir .. global.path_sep .. "*" },
-    org_default_notes_file = global.diary,
   })
 end
 

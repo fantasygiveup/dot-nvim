@@ -9,7 +9,7 @@ vim.o.writebackup = false
 vim.o.swapfile = false
 -- Show non-printable characters.
 vim.o.list = true
-vim.o.listchars = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←"
+vim.o.listchars = "tab:»·,nbsp:+,trail:,extends:→,precedes:←"
 vim.o.showmode = false -- don't show current mode in command-line
 vim.o.autoindent = true -- indent according to previous line
 vim.o.expandtab = true -- use spaces instead of tabs

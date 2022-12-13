@@ -402,8 +402,8 @@ M.null_ls = function()
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
   local formatting = null_ls.builtins.formatting
 
-  local gl = require("global")
-  local config_dir = os.getenv("HOME") .. gl.path_sep .. ".config" .. gl.path_sep
+  local global = require("global")
+  local config_dir = os.getenv("HOME") .. global.path_sep .. ".config" .. global.path_sep
   local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
   null_ls.setup({
@@ -425,7 +425,7 @@ M.null_ls = function()
     sources = {
       diagnostics.golangci_lint,
       diagnostics.yamllint.with({
-        extra_args = { "-c", config_dir .. "yamllint" .. gl.path_sep .. "config.yaml" },
+        extra_args = { "-c", config_dir .. "yamllint" .. global.path_sep .. "config.yaml" },
       }),
       diagnostics.shellcheck,
       diagnostics.eslint,
@@ -433,14 +433,14 @@ M.null_ls = function()
       formatting.golines.with({ extra_args = { "--max-len=150" } }),
       formatting.stylua.with({
         extra_args = {
-          "--config-path=" .. config_dir .. "stylua" .. gl.path_sep .. "stylua.toml",
+          "--config-path=" .. config_dir .. "stylua" .. global.path_sep .. "stylua.toml",
         },
       }),
       formatting.yapf,
       formatting.prettier.with({
         extra_args = function()
           local default_args =
-            { "--config=" .. config_dir .. "prettier" .. gl.path_sep .. "prettier.config.js" }
+            { "--config=" .. config_dir .. "prettier" .. global.path_sep .. "prettier.config.js" }
 
           local ok, project_root = pcall(require, "project_nvim.project")
           if not ok then
@@ -450,7 +450,7 @@ M.null_ls = function()
           local file_names = { ".prettierrc.js", "prettier.config.js" }
 
           for _, file_name in ipairs(file_names) do
-            local conf_path = project_root.get_project_root() .. gl.path_sep .. file_name
+            local conf_path = project_root.get_project_root() .. global.path_sep .. file_name
             local prettierrc_fd = io.open(conf_path, "r")
 
             if prettierrc_fd ~= nil then
@@ -638,10 +638,11 @@ M.orgmode = function()
   end
 
   orgmode.setup_ts_grammar()
+  local global = require("global")
 
   orgmode.setup({
-    org_agenda_files = { "~/github.com/illia-danko/org/*" },
-    org_default_notes_file = "~/github.com/illia-danko/org/journal.org",
+    org_agenda_files = { global.notes_dir .. global.path_sep .. "*" },
+    org_default_notes_file = global.diary,
   })
 end
 

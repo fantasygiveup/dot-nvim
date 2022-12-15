@@ -10,6 +10,7 @@ end
 local function disable_distribution_plugins()
   vim.g.omni_sql_no_default_maps = 1
 end
+
 disable_distribution_plugins()
 
 M.lf = function()
@@ -119,12 +120,6 @@ M.status_line = function()
         "progress",
       },
     },
-  })
-end
-
-M.todo_comments = function()
-  require("todo-comments").setup({
-    signs = false,
   })
 end
 

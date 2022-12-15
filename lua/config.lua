@@ -239,7 +239,8 @@ M.lsp = function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-  local servers = { "ccls", "gopls", "pyright", "tsserver" }
+  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+  local servers = { "ccls", "gopls", "pyright", "tsserver", "clojure_lsp" }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup({
       on_attach = on_attach,
@@ -445,7 +446,7 @@ M.null_ls = function()
       formatting.prettier.with({
         extra_args = function()
           local default_args =
-            { "--config=" .. config_dir .. "prettier" .. global.path_sep .. "prettier.config.js" }
+          { "--config=" .. config_dir .. "prettier" .. global.path_sep .. "prettier.config.js" }
 
           local ok, project_root = pcall(require, "project_nvim.project")
           if not ok then
@@ -467,6 +468,7 @@ M.null_ls = function()
           return default_args
         end,
       }),
+      formatting.zprint,
     },
   })
 end

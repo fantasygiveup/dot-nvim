@@ -78,6 +78,7 @@ packer.startup(function(use)
   use({ "folke/which-key.nvim", config = config.which_key })
   use({ "glepnir/dashboard-nvim", config = config.dashboard })
   use({ "folke/todo-comments.nvim", config = config.todo_comments })
+  use({ "Olical/conjure" })
   if packer_bootstrap then
     packer.sync()
   end

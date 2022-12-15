@@ -11,6 +11,7 @@ vim.o.swapfile = false
 vim.o.list = true
 vim.o.listchars = "tab:»·,nbsp:+,trail:,extends:→,precedes:←"
 vim.o.showmode = false -- don't show current mode in command-line
+vim.o.showcmd = false -- don't show typed keys
 vim.o.autoindent = true -- indent according to previous line
 vim.o.expandtab = true -- use spaces instead of tabs
 vim.o.tabstop = 4 -- spaces per tab

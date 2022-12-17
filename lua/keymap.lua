@@ -60,6 +60,7 @@ M.core = function()
   vim.keymap.set("i", "<c-c>", "<esc>:noh<cr>", opts)
 end
 
+-- stylua: ignore start
 M.plugins = function()
   -- Plugins.
   vim.keymap.set("n", "<localleader>xc", "<cmd>PackerCompile<cr>")
@@ -132,9 +133,11 @@ M.plugins = function()
 end
 -- stylua: ignore end
 
-M.lsp = function(client, bufnr)
-  api.nvim_buf_set_keymap(bufnr, "n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
-  api.nvim_buf_set_keymap(bufnr, "n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
+-- stylua: ignore start
+M.lsp = function(client, bufnr) api.nvim_buf_set_keymap(bufnr, "n", "]d",
+    "<cmd>lua vim.diagnostic.goto_next({ severity = require'global'.diagnostic_severity })<cr>", opts)
+  api.nvim_buf_set_keymap(bufnr, "n", "[d",
+    "<cmd>lua vim.diagnostic.goto_prev({ severity = require'global'.diagnostic_severity })<cr>", opts)
   api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
   api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
   api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
@@ -144,6 +147,7 @@ M.lsp = function(client, bufnr)
   api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
   api.nvim_buf_set_keymap(bufnr, "n", "gR", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 end
+-- stylua: ignore end
 
 M.core()
 M.plugins()

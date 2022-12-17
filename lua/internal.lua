@@ -127,4 +127,20 @@ M.zen_mode = function(extra_width, direction)
   fn(opts)
 end
 
+M.diagnostic_severity = function()
+  local severity = require("global").diagnostic_severity
+  if severity == vim.diagnostic.severity.ERROR then
+    return { "error" }
+  end
+  if severity == vim.diagnostic.severity.WARN then
+    return { "error", "warn" }
+  end
+  if severity == vim.diagnostic.severity.INFO then
+    return { "error", "warn", "info" }
+  end
+  if severity == vim.diagnostic.severity.HINT then
+    return { "error", "warn", "info", "hint" }
+  end
+end
+
 return M

@@ -20,6 +20,7 @@ function global:load_variables()
   self.path_sep = path_sep
   self.home = home
   self.user_name = "Illia Danko"
+  self.diagnostic_severity = vim.diagnostic.severity.ERROR
 end
 
 function global:ensure_dir()

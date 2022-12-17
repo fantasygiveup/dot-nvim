@@ -69,60 +69,6 @@ M.theme = function()
   require("onedark").load()
 end
 
-M.status_line = function()
-  local function spell()
-    if not vim.o.spell then
-      return ""
-    end
-    return "SPELL[" .. vim.o.spelllang .. "]"
-  end
-
-  local function lsp_active_client(msg)
-    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-    local clients = vim.lsp.get_active_clients()
-    if next(clients) == nil then
-      return ""
-    end
-
-    for _, client in ipairs(clients) do
-      local filetypes = client.config.filetypes
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        return " " .. client.name
-      end
-    end
-    return ""
-  end
-
-  local ll = require("lualine")
-  ll.setup({
-    options = {
-      theme = "auto",
-      section_separators = { left = "", right = "" },
-      component_separators = { left = "", right = "" },
-    },
-    sections = {
-      lualine_a = { "mode", spell },
-      lualine_b = {
-        {
-          "diagnostics",
-          sources = { "nvim_diagnostic" },
-          sections = { "error", "warn", "info", "hint" },
-          symbols = { error = " ", warn = " ", info = " ", hint = " " },
-        },
-      },
-      lualine_x = {
-        { lsp_active_client },
-        "encoding",
-        "fileformat",
-        "filetype",
-      },
-      lualine_y = {
-        "progress",
-      },
-    },
-  })
-end
-
 M.gitsigns = function()
   require("gitsigns").setup({
     on_attach = function(bufnr)
@@ -184,36 +130,19 @@ M.lsp = function()
     end
   end
 
-  local function on_attach(client, bufnr)
-    -- Disable diagnostic handlers.
-    if client.name == "tsserver" then
-      vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
-      vim.lsp.diagnostic.set_signs = function() end
-    end
-
-    lsp_highlight_document(client, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-    require("keymap").lsp(client, bufnr)
-  end
-
-  local signs = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
-  }
-
-  for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-  end
-
-  local config = {
+  local diagnostic_config = {
     virtual_text = false,
     signs = {
-      active = signs,
+      active = {
+        { name = "DiagnosticSignError", text = "" },
+        { name = "DiagnosticSignWarn", text = "" },
+        { name = "DiagnosticSignHint", text = "" },
+        { name = "DiagnosticSignInfo", text = "" },
+      },
+      severity = vim.diagnostic.severity.ERROR,
     },
     update_in_insert = true,
-    underline = true,
+    underline = { severity = vim.diagnostic.severity.ERROR },
     severity_sort = true,
     float = {
       focusable = false,
@@ -225,7 +154,18 @@ M.lsp = function()
     },
   }
 
-  vim.diagnostic.config(config)
+  for _, sign in ipairs(diagnostic_config.signs.active) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+  end
+
+  local function on_attach(client, bufnr)
+    lsp_highlight_document(client, bufnr)
+    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+    require("keymap").lsp(client, bufnr)
+  end
+
+  vim.lsp.handlers["textDocument/publishDiagnostics"] =
+    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
@@ -256,6 +196,60 @@ M.lsp = function()
         diagnostics = { globals = { "vim" } },
         workspace = { library = vim.api.nvim_get_runtime_file("", true) },
         telemetry = { enable = false },
+      },
+    },
+  })
+end
+
+M.status_line = function()
+  local function spell()
+    if not vim.o.spell then
+      return ""
+    end
+    return "SPELL[" .. vim.o.spelllang .. "]"
+  end
+
+  local function lsp_active_client(msg)
+    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+    local clients = vim.lsp.get_active_clients()
+    if next(clients) == nil then
+      return ""
+    end
+
+    for _, client in ipairs(clients) do
+      local filetypes = client.config.filetypes
+      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+        return " " .. client.name
+      end
+    end
+    return ""
+  end
+
+  local ll = require("lualine")
+  ll.setup({
+    options = {
+      theme = "auto",
+      section_separators = { left = "", right = "" },
+      component_separators = { left = "", right = "" },
+    },
+    sections = {
+      lualine_a = { "mode", spell },
+      lualine_b = {
+        {
+          "diagnostics",
+          sources = { "nvim_diagnostic" },
+          sections = require("internal").diagnostic_severity(),
+          symbols = { error = " ", warn = " ", info = " ", hint = " " },
+        },
+      },
+      lualine_x = {
+        { lsp_active_client },
+        "encoding",
+        "fileformat",
+        "filetype",
+      },
+      lualine_y = {
+        "progress",
       },
     },
   })
@@ -446,7 +440,7 @@ M.null_ls = function()
       formatting.prettier.with({
         extra_args = function()
           local default_args =
-          { "--config=" .. config_dir .. "prettier" .. global.path_sep .. "prettier.config.js" }
+            { "--config=" .. config_dir .. "prettier" .. global.path_sep .. "prettier.config.js" }
 
           local ok, project_root = pcall(require, "project_nvim.project")
           if not ok then

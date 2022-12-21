@@ -633,7 +633,7 @@ M.todo_comments = function()
 end
 
 M.conjure = function()
-  vim.g["conjure#mapping#def_word"] = "" -- don't override ,gd
+  vim.g["conjure#mapping#prefix"] = ""
 end
 
 return M

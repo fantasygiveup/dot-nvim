@@ -346,6 +346,7 @@ M.treesitter = function()
       "clojure",
       "commonlisp",
       "scheme",
+      "fennel",
       "python",
       "markdown",
       "markdown_inline",

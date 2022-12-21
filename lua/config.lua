@@ -165,7 +165,7 @@ M.lsp = function()
   end
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
+  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
@@ -174,6 +174,7 @@ M.lsp = function()
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
   })
+  vim.diagnostic.config(diagnostic_config)
 
   local nvim_lsp = require("lspconfig")
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -441,7 +442,7 @@ M.null_ls = function()
       formatting.prettier.with({
         extra_args = function()
           local default_args =
-            { "--config=" .. config_dir .. "prettier" .. global.path_sep .. "prettier.config.js" }
+          { "--config=" .. config_dir .. "prettier" .. global.path_sep .. "prettier.config.js" }
 
           local ok, project_root = pcall(require, "project_nvim.project")
           if not ok then

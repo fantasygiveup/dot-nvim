@@ -63,25 +63,25 @@ end
 -- stylua: ignore start
 M.plugins = function()
   -- Plugins.
-  vim.keymap.set("n", "<localleader>xc", "<cmd>PackerCompile<cr>")
-  vim.keymap.set("n", "<localleader>xs", "<cmd>PackerSync<cr>")
+  vim.keymap.set("n", "<leader>pc", "<cmd>PackerCompile<cr>")
+  vim.keymap.set("n", "<leader>ps", "<cmd>PackerSync<cr>")
   vim.keymap.set("n", "-", "<cmd>nohlsearch | Lf<cr>")
   vim.keymap.set("n", "<localleader>g?", "<cmd>lua require'gitsigns'.blame_line({full=true})<cr>")
   vim.keymap.set("n", "<localleader>gc", "<cmd>lua require'internal'.git_save_file_remote()<cr>")
   vim.keymap.set("n", "<localleader>gp", "<cmd>lua require'gitsigns'.preview_hunk()<cr>")
-  vim.keymap.set("n", "<localleader>gd", "<cmd>lua require'gitsigns'.reset_hunk()<cr>")
-  vim.keymap.set("n", "<localleader>gs", "<cmd>lua require'gitsigns'.stage_hunk()<cr>")
-  vim.keymap.set("n", "<localleader>gr", "<cmd>lua require'gitsigns'.reset_buffer()<cr>")
-  vim.keymap.set("n", "]c", "<cmd>lua require'config'.next_hunk()<cr>")
-  vim.keymap.set("n", "[c", "<cmd>lua require'config'.prev_hunk()<cr>")
+  vim.keymap.set("n", "<localleader>hu", "<cmd>lua require'gitsigns'.reset_hunk()<cr>")
+  vim.keymap.set("n", "<localleader>hs", "<cmd>lua require'gitsigns'.stage_hunk()<cr>")
+  vim.keymap.set("n", "<localleader>h#", "<cmd>lua require'gitsigns'.reset_buffer()<cr>")
+  vim.keymap.set("n", "]c", "<cmd>lua require'internal'.next_hunk()<cr>")
+  vim.keymap.set("n", "[c", "<cmd>lua require'internal'.prev_hunk()<cr>")
   vim.keymap.set("n", "<localleader>tc", "<cmd>ColorizerToggle<cr>")
 
   -- Fzf-lua.
   vim.keymap.set("n", "<leader><", "<cmd>lua require'fzf-lua'.buffers()<cr>")
   vim.keymap.set("n", "<leader>pf", "<cmd>lua require'fzf-lua'.files({ cmd = vim.env.FZF_DEFAULT_COMMAND })<cr>")
-  vim.keymap.set("n", "<leader>hw", "<cmd>lua require'fzf-lua'.commands()<cr>")
-  vim.keymap.set("n", "<leader>hm", "<cmd>lua require'fzf-lua'.keymaps()<cr>")
-  vim.keymap.set("n", "<leader>ht", "<cmd>lua require'fzf-lua'.filetypes()<cr>")
+  vim.keymap.set("n", "g?", "<cmd>lua require'fzf-lua'.commands()<cr>")
+  vim.keymap.set("n", "gm", "<cmd>lua require'fzf-lua'.keymaps()<cr>")
+  vim.keymap.set("n", "<localleader>~", "<cmd>lua require'fzf-lua'.filetypes()<cr>")
   vim.keymap.set("n", "<localleader>fr", "<cmd>lua require'fzf-lua'.oldfiles()<cr>")
   vim.keymap.set("n", "<localleader>gg", "<cmd>lua require'fzf-lua'.git_status()<cr>")
   vim.keymap.set("n", "<localleader>gb", "<cmd>lua require'fzf-lua'.git_bcommits()<cr>")
@@ -99,9 +99,9 @@ M.plugins = function()
   vim.keymap.set("v", "<localleader>gu", "<cmd>lua require'internal'.git_url_range()<cr>")
   vim.keymap.set("n", "<localleader>gU", "<cmd>lua require'internal'.git_url_in_browser()<cr>")
 
-  vim.keymap.set("n", "<localleader>bo", "<cmd>lua require'internal'.del_buf_others()<cr>")
-  vim.keymap.set("n", "<localleader>b#", "<cmd>lua require'internal'.del_buf_all()<cr>")
-  vim.keymap.set("n", "<leader>p#", "<cmd>lua require'internal'.del_buf_current_project()<cr>")
+  vim.keymap.set("n", "<localleader>do", "<cmd>lua require'internal'.del_buf_others()<cr>")
+  vim.keymap.set("n", "<localleader>d#", "<cmd>lua require'internal'.del_buf_all()<cr>")
+  vim.keymap.set("n", "<localleader>dp", "<cmd>lua require'internal'.del_buf_current_project()<cr>")
 
   -- Makefile shortcuts.
   vim.keymap.set("n", "<leader>mc", "<cmd>lua require'internal'.make_build()<cr>")
@@ -110,14 +110,14 @@ M.plugins = function()
   vim.keymap.set("n", "<leader>mr", "<cmd>!make run<cr>")
   vim.keymap.set("n", "<leader>ml", "<cmd>!make lint<cr>")
 
-  vim.keymap.set("n", "<localleader>tz", "<cmd>lua require'internal'.zen_mode()<cr>")
-
-  vim.keymap.set("n", "<localleader>b?", "<cmd>lua require'imenu'.goto_function()<cr>")
+  vim.keymap.set("n", "<localleader>z", "<cmd>lua require'internal'.zen_mode()<cr>")
+  vim.keymap.set("n", "<leader>?", "<cmd>lua require'imenu'.goto_function()<cr>")
 
   vim.keymap.set("n", "<leader>oe", "<cmd>lua require'notes'.diary_new_entry()<cr>")
   vim.keymap.set("n", "<leader>oo", "<cmd>lua require'notes'.diary_open_file()<cr>")
   vim.keymap.set("n", "<leader>ot", "<cmd>lua require'notes'.todo_new_entry()<cr>")
   vim.keymap.set("n", "<leader>ol", "<cmd>lua require'notes'.todo_open_file()<cr>")
+
   -- Debugger.
   vim.keymap.set("n", "<localleader>d<Space>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
   vim.keymap.set("n", "<localleader>dt", "<cmd>lua require'dap'.terminate(); require'dap'.clear_breakpoints()<cr>")
@@ -144,8 +144,8 @@ M.lsp = function(client, bufnr) api.nvim_buf_set_keymap(bufnr, "n", "]d",
   api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
   api.nvim_buf_set_keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
   api.nvim_buf_set_keymap(bufnr, "i", "<C-h>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-  api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-  api.nvim_buf_set_keymap(bufnr, "n", "gR", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+  api.nvim_buf_set_keymap(bufnr, "n", "gu", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+  api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 end
 -- stylua: ignore end
 

@@ -89,24 +89,6 @@ M.gitsigns = function()
   })
 end
 
-M.next_hunk = function()
-  if vim.o.diff then
-    vim.fn.execute("normal! ]czz")
-    return
-  end
-  require("gitsigns.actions").next_hunk()
-  vim.fn.execute("normal! zz")
-end
-
-M.prev_hunk = function()
-  if vim.o.diff then
-    vim.fn.execute("normal! [czz")
-    return
-  end
-  require("gitsigns.actions").prev_hunk()
-  vim.fn.execute("normal! zz")
-end
-
 M.lsp = function()
   local function lsp_highlight_document(client, bufnr)
     if client.server_capabilities.documentHighlightProvider then
@@ -181,7 +163,7 @@ M.lsp = function()
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  local servers = { "ccls", "gopls", "pyright", "tsserver", "clojure_lsp" }
+  local servers = { "ccls", "gopls", "pyright", "tsserver" }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup({
       on_attach = on_attach,
@@ -603,15 +585,15 @@ M.dashboard = function()
     },
     {
       icon = "  ",
-      desc = "Rebuild plugins                   ",
+      desc = "Rebuild plugins                        ",
       action = "PackerCompile",
-      shortcut = "<localleader>xc",
+      shortcut = "<leader>pc",
     },
     {
       icon = "痢 ",
-      desc = "Sync plugins remote               ",
+      desc = "Sync plugins remote                    ",
       action = "PackerSync",
-      shortcut = "<localleader>xs",
+      shortcut = "<leader>ps",
     },
     {
       icon = "  ",
@@ -627,15 +609,11 @@ M.todo_comments = function()
     signs = false,
     merge_keywords = false,
     highlight = {
-      keyword = "bg",
+      keyword = "fg",
       after = "",
       pattern = [[.*<(KEYWORDS)\s*(\(.*\))?\s*:]],
     },
   })
-end
-
-M.conjure = function()
-  vim.g["conjure#mapping#prefix"] = ""
 end
 
 return M

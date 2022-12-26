@@ -106,6 +106,22 @@ M.del_buf_current_project = function()
 end
 -- delete buffers end
 
+M.next_hunk = function()
+  if vim.o.diff then
+    pcall(vim.cmd, "normal! ]czz")
+    return
+  end
+  require("gitsigns.actions").next_hunk()
+end
+
+M.prev_hunk = function()
+  if vim.o.diff then
+    pcall(vim.cmd, "normal! [czz")
+    return
+  end
+  require("gitsigns.actions").prev_hunk()
+end
+
 M.zen_mode = function(extra_width, direction)
   local extra_width = extra_width or 0
   local direction = direction or 0

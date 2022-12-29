@@ -41,3 +41,4 @@ vim.o.undofile = true
 vim.o.spellfile = global.cache_dir .. "spell/en.uft-8.add"
 vim.o.updatetime = 500 -- used by vim.lsp.buf.document_highlight()
 vim.o.autoread = true -- informed when changed outside
+vim.o.completeopt = "menu,menuone,noselect"

@@ -50,11 +50,7 @@ packer.startup(function(use)
   })
   use({ "norcalli/nvim-colorizer.lua", config = config.colorizer })
   use({ "ahmedkhalf/project.nvim", config = config.project_nvim })
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    requires = { "p00f/nvim-ts-rainbow" },
-    config = config.treesitter,
-  })
+  use({ "nvim-treesitter/nvim-treesitter", config = config.treesitter })
   use({ "nvim-treesitter/playground", config.treesitter_playground })
   use({ "windwp/nvim-autopairs", config = config.autopairs })
   use({
@@ -82,12 +78,6 @@ packer.startup(function(use)
   use({ "folke/which-key.nvim", config = config.which_key })
   use({ "glepnir/dashboard-nvim", config = config.dashboard })
   use({ "folke/todo-comments.nvim", config = config.todo_comments })
-  use({ "gpanders/nvim-parinfer", config = config.parinfer })
-  use({
-    "Olical/conjure",
-    requires = { "guns/vim-sexp", "tpope/vim-sexp-mappings-for-regular-people" },
-    config = config.conjure,
-  })
   if packer_bootstrap then
     packer.sync()
   end

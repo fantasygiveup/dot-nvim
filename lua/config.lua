@@ -163,7 +163,7 @@ M.lsp = function()
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  local servers = { "ccls", "gopls", "pyright", "tsserver", "clojure_lsp" }
+  local servers = { "ccls", "gopls", "pyright", "tsserver" }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup({
       on_attach = on_attach,
@@ -247,7 +247,7 @@ M.cmp = function()
     unpack = unpack or table.unpack
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0
-        and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
   end
 
   local cmp = require("cmp")
@@ -327,12 +327,6 @@ M.treesitter = function()
   require("nvim-treesitter.configs").setup({
     highlight = {
       enable = true,
-    },
-    rainbow = {
-      enable = true,
-      disable = { "lua", "jsx", "javascript", "json", "c", "cpp", "go" },
-      extended_mode = true,
-      max_file_lines = nil,
     },
     ensure_installed = {
       "go",
@@ -458,7 +452,7 @@ M.null_ls = function()
           return default_args
         end,
       }),
-      formatting.zprint, -- clojure formatter
+      formatting.zprint,
     },
   })
 end
@@ -626,12 +620,6 @@ M.todo_comments = function()
       pattern = [[.*<(KEYWORDS)\s*(\(.*\))?\s*:]],
     },
   })
-end
-
-M.parinfer = function() end
-
-M.conjure = function()
-  vim.g["conjure#mapping#def_word"] = { "gd" }
 end
 
 return M

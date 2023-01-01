@@ -16,9 +16,16 @@ local lua_function_query_string = [[
   )
 ]]
 
+local golang_function_query_string = [[
+  (function_declaration
+    name: (identifier) @func_name (#offset! @func_name)
+  )
+]]
+
 local func_lookup = {
   python = python_function_query_string,
   lua = lua_function_query_string,
+  go = golang_function_query_string,
 }
 
 local function get_functions(bufnr, lang, query_string)

@@ -253,26 +253,28 @@ M.cmp = function()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
   local lspkind = require("lspkind")
+
   cmp.setup({
+    completion = {
+      autocomplete = false,
+    },
+    snippet = {
+      expand = function(args)
+        require("luasnip").lsp_expand(args.body)
+      end,
+    },
     window = {
       completion = cmp.config.window.bordered(),
       documentation = cmp.config.window.bordered(),
     },
-    snippet = {
-      expand = function(args)
-        luasnip.lsp_expand(args.body)
-      end,
-    },
-    mapping = {
-      ["<C-p>"] = cmp.mapping.select_prev_item(),
-      ["<Up>"] = cmp.mapping.select_prev_item(),
-      ["<C-n>"] = cmp.mapping.select_next_item(),
-      ["<Down>"] = cmp.mapping.select_next_item(),
-      ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-      ["<C-d>"] = cmp.mapping.scroll_docs(4),
+    mapping = cmp.mapping.preset.insert({
+      ["<C-n>"] = cmp.mapping.select_next_item({ behavior = "select", count = 1 }),
+      ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = "select", count = 1 }),
+      ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.abort(),
-      ["<CR>"] = cmp.mapping.confirm({ select = true }),
+      ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -292,27 +294,78 @@ M.cmp = function()
           luasnip.expand_or_jump()
         end
       end, { "i", "s" }),
-    },
-    sources = {
-      { name = "luasnip", priority = 9 },
-      { name = "nvim_lsp", priority = 8 },
-      { name = "nvim_lua", priority = 7 },
-      { name = "buffer", priority = 6 },
-      { name = "tmux", option = { all_panes = true, label = "" }, priority = 6 },
-      { name = "path", priority = 5 },
-      { name = "calc", priority = 5 },
-    },
-    preselect = cmp.PreselectMode.None,
-    completion = {
-      completeopt = "menu,menuone,noinsert",
-    },
-    formatting = {
-      format = lspkind.cmp_format({
-        mode = "symbol",
-        maxwidth = 50,
-      }),
-    },
+    }),
+    sources = cmp.config.sources({
+      { name = "nvim_lsp" },
+      { name = "luasnip" },
+    }, {
+      { name = "buffer" },
+      { name = "tmux", option = { all_panes = true } },
+      { name = "path" },
+      { name = "calc" },
+    }),
   })
+
+  -- cmp.setup({
+  --   window = {
+  --     completion = cmp.config.window.bordered(),
+  --     documentation = cmp.config.window.bordered(),
+  --   },
+  --   snippet = {
+  --     expand = function(args)
+  --       luasnip.lsp_expand(args.body)
+  --     end,
+  --   },
+  --   mapping = {
+  --     ["<C-p>"] = cmp.mapping.select_prev_item(),
+  --     ["<Up>"] = cmp.mapping.select_prev_item(),
+  --     ["<C-n>"] = cmp.mapping.select_next_item(),
+  --     ["<Down>"] = cmp.mapping.select_next_item(),
+  --     ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+  --     ["<C-d>"] = cmp.mapping.scroll_docs(4),
+  --     ["<C-Space>"] = cmp.mapping.complete(),
+  --     ["<C-e>"] = cmp.mapping.abort(),
+  --     ["<CR>"] = cmp.mapping.confirm({ select = true }),
+  --     ["<Tab>"] = cmp.mapping(function(fallback)
+  --       if cmp.visible() then
+  --         cmp.select_next_item()
+  --       elseif luasnip.expand_or_jumpable() then
+  --         luasnip.expand_or_jump()
+  --       elseif has_words_before() then
+  --         cmp.complete()
+  --       else
+  --         fallback()
+  --       end
+  --     end, { "i", "s" }),
+  --
+  --     ["<S-Tab>"] = cmp.mapping(function()
+  --       if cmp.visible() then
+  --         cmp.select_prev_item()
+  --       elseif luasnip.expand_or_jumpable() then
+  --         luasnip.expand_or_jump()
+  --       end
+  --     end, { "i", "s" }),
+  --   },
+  --   sources = {
+  --     { name = "luasnip", priority = 9 },
+  --     { name = "nvim_lsp", priority = 8 },
+  --     { name = "nvim_lua", priority = 7 },
+  --     { name = "buffer", priority = 6 },
+  --     { name = "tmux", option = { all_panes = true, label = "" }, priority = 6 },
+  --     { name = "path", priority = 5 },
+  --     { name = "calc", priority = 5 },
+  --   },
+  --   preselect = cmp.PreselectMode.None,
+  --   completion = {
+  --     completeopt = "menu,menuone,noinsert",
+  --   },
+  --   formatting = {
+  --     format = lspkind.cmp_format({
+  --       mode = "symbol",
+  --       maxwidth = 50,
+  --     }),
+  --   },
+  -- })
 end
 
 M.colorizer = function()

@@ -111,7 +111,7 @@ M.plugins = function()
   vim.keymap.set("n", "<leader>ml", "<cmd>!make lint<cr>")
 
   vim.keymap.set("n", "<localleader>z", "<cmd>lua require'internal'.zen_mode()<cr>")
-  vim.keymap.set("n", "<leader>?", "<cmd>lua require'imenu'.goto_function()<cr>")
+  vim.keymap.set("n", "<leader>?", "<cmd>lua require'treesitter_buffer_overview'.goto_function()<cr>")
 
   vim.keymap.set("n", "<leader>oe", "<cmd>lua require'notes'.diary_new_entry()<cr>")
   vim.keymap.set("n", "<leader>oo", "<cmd>lua require'notes'.diary_open_file()<cr>")

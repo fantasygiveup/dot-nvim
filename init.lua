@@ -50,10 +50,9 @@ packer.startup(function(use)
   use({ "ahmedkhalf/project.nvim", config = config.project_nvim })
   use({
     "nvim-treesitter/nvim-treesitter",
-    requires = { "p00f/nvim-ts-rainbow" },
+    requires = { "nvim-treesitter/playground", "p00f/nvim-ts-rainbow" },
     config = config.treesitter,
   })
-  use({ "nvim-treesitter/playground", config.treesitter_playground })
   use({ "windwp/nvim-autopairs", config = config.autopairs })
   use({
     "iamcco/markdown-preview.nvim",

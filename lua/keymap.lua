@@ -79,7 +79,7 @@ M.plugins = function()
   -- Fzf-lua.
   vim.keymap.set("n", "<leader><", "<cmd>lua require'fzf-lua'.buffers()<cr>")
   vim.keymap.set("n", "<leader>pf", "<cmd>lua require'fzf-lua'.files({ cmd = vim.env.FZF_DEFAULT_COMMAND })<cr>")
-  vim.keymap.set("n", "g?", "<cmd>lua require'fzf-lua'.commands()<cr>")
+  vim.keymap.set("n", "<leader>:", "<cmd>lua require'fzf-lua'.commands()<cr>")
   vim.keymap.set("n", "gm", "<cmd>lua require'fzf-lua'.keymaps()<cr>")
   vim.keymap.set("n", "<localleader>~", "<cmd>lua require'fzf-lua'.filetypes()<cr>")
   vim.keymap.set("n", "<localleader>fr", "<cmd>lua require'fzf-lua'.oldfiles()<cr>")

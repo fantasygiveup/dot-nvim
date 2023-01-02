@@ -3,10 +3,19 @@
 
 local M = {}
 
-local ts_query_lookup = {
+local ts_var_query_lookup = {
+  lua = [[
+  (variable_declaration
+    (assignment_statement
+      (variable_list
+         name: (identifier) @name (#offset! @name))))
+  ]],
+}
+
+local ts_func_query_lookup = {
   python = [[
   (function_definition
-    name: (identifier) @func_name (#offset! @func_name)
+    name: (identifier) @name (#offset! @name)
   )]],
   lua = [[
   (function_declaration
@@ -14,13 +23,42 @@ local ts_query_lookup = {
     [
       (dot_index_expression)
       (identifier)
-    ] @func_name (#offset! @func_name)
-  )]],
+    ] @name (#offset! @name)
+  )
+  (assignment_statement
+    (variable_list
+        name: (dot_index_expression) @name (#offset! @name))
+    (expression_list (function_definition)))
+  ]],
   go = [[
   (function_declaration
-    name: (identifier) @func_name (#offset! @func_name)
+    name: (identifier) @name (#offset! @name)
   )]],
 }
+
+local function get_ts_entries(opts)
+  local lookup_table = opts.lookup_table
+  local lang = opts.lang
+  local kind = opts.kind
+  local query_string = lookup_table[lang]
+  local bufnr = opts.bufnr
+  if not query_string then
+    return {}
+  end
+
+  local ts_parser = vim.treesitter.get_parser(bufnr, lang)
+  local ts_syntax_tree = ts_parser:parse()[1]
+  local ts_root = ts_syntax_tree:root()
+  local ts_query = vim.treesitter.parse_query(lang, query_string)
+  local entries = {}
+
+  for _, captures, _ in ts_query:iter_matches(ts_root, bufnr) do
+    local row, col, meta = captures[1]:start()
+    local name = vim.treesitter.query.get_node_text(captures[1], bufnr)
+    table.insert(entries, { name = name, row = row, col = col, kind = kind })
+  end
+  return entries
+end
 
 M.show = function()
   local ok, fzf_lua = pcall(require, "fzf-lua")
@@ -36,26 +74,15 @@ M.show = function()
   local lang = vim.api.nvim_buf_get_option(bufnr, "filetype")
   local path = vim.api.nvim_buf_get_name(bufnr)
 
-  local query_string = ts_query_lookup[lang]
-  if not query_string then
-    vim.notify(string.format("Overview: %s is not supported", lang), vim.log.levels.INFO)
-    return
+  local opts = { lookup_table = ts_var_query_lookup, lang = lang, kind = "var", bufnr = bufnr }
+  local entries = get_ts_entries(opts)
+
+  local opts = { lookup_table = ts_func_query_lookup, lang = lang, kind = "func", bufnr = bufnr }
+  for _, entry in ipairs(get_ts_entries(opts)) do
+    table.insert(entries, entry)
   end
-
-  local ts_parser = vim.treesitter.get_parser(bufnr, lang)
-  local ts_syntax_tree = ts_parser:parse()[1]
-  local ts_root = ts_syntax_tree:root()
-  local ts_query = vim.treesitter.parse_query(lang, query_string)
-  local entries = {}
-
-  for _, captures, _ in ts_query:iter_matches(ts_root, bufnr) do
-    local row, col, _ = captures[1]:start()
-    local name = vim.treesitter.query.get_node_text(captures[1], bufnr)
-    table.insert(entries, { name = name, row = row, col = col, kind = "func" })
-  end
-
-  if vim.tbl_isempty(entries) then
-    vim.notify(string.format("Overview: no entries"), vim.log.levels.INFO)
+  if not entries then
+    vim.notify("Overview: not found", vim.log.levels.INFO)
     return
   end
 

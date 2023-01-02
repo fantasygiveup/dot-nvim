@@ -22,21 +22,6 @@ local ts_query_lookup = {
   )]],
 }
 
-local function get_functions(bufnr, lang, query_string)
-  local parser = vim.treesitter.get_parser(bufnr, lang)
-  local syntax_tree = parser:parse()[1]
-  local root = syntax_tree:root()
-  local query = vim.treesitter.parse_query(lang, query_string)
-  local func_list = {}
-
-  for _, captures, metadata in query:iter_matches(root, bufnr) do
-    local row, col, _ = captures[1]:start()
-    local name = vim.treesitter.query.get_node_text(captures[1], bufnr)
-    table.insert(func_list, { name, row, col, metadata[1].range })
-  end
-  return func_list
-end
-
 M.show = function()
   local ok, fzf_lua = pcall(require, "fzf-lua")
   if not ok then
@@ -53,7 +38,7 @@ M.show = function()
 
   local query_string = ts_query_lookup[lang]
   if not query_string then
-    vim.notify(strings.format("Overview: %s is not supported", lang), vim.log.levels.INFO)
+    vim.notify(string.format("Overview: %s is not supported", lang), vim.log.levels.INFO)
     return
   end
 
@@ -70,7 +55,7 @@ M.show = function()
   end
 
   if vim.tbl_isempty(entries) then
-    vim.notify(strings.format("Overview: no entries"), vim.log.levels.INFO)
+    vim.notify(string.format("Overview: no entries"), vim.log.levels.INFO)
     return
   end
 

@@ -147,7 +147,7 @@ M.lsp = function()
   end
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
+  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
@@ -173,6 +173,8 @@ M.lsp = function()
 
   -- See https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua.
   nvim_lsp.sumneko_lua.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
     settings = {
       Lua = {
         runtime = { version = "LuaJIT" },
@@ -247,7 +249,7 @@ M.cmp = function()
     unpack = unpack or table.unpack
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0
-      and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+        and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
   end
 
   local cmp = require("cmp")
@@ -427,7 +429,7 @@ M.null_ls = function()
       formatting.prettier.with({
         extra_args = function()
           local default_args =
-            { "--config=" .. config_dir .. "prettier" .. global.path_sep .. "prettier.config.js" }
+          { "--config=" .. config_dir .. "prettier" .. global.path_sep .. "prettier.config.js" }
 
           local ok, project_root = pcall(require, "project_nvim.project")
           if not ok then
@@ -619,7 +621,9 @@ M.todo_comments = function()
   })
 end
 
-M.parinfer = function() end
+M.parinfer = function()
+  vim.g["conjure#mapping"] = false
+end
 
 M.conjure = function() end
 

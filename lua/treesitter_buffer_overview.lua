@@ -1,31 +1,25 @@
+-- NOT READY YET!!!
+-- Shows file overview using treesitter query. Inspired by Emacs imenu.
+
 local M = {}
 
-local python_function_query_string = [[
+local ts_query_lookup = {
+  python = [[
   (function_definition
     name: (identifier) @func_name (#offset! @func_name)
-  )
-]]
-
-local lua_function_query_string = [[
+  )]],
+  lua = [[
   (function_declaration
   name:
     [
       (dot_index_expression)
       (identifier)
     ] @func_name (#offset! @func_name)
-  )
-]]
-
-local golang_function_query_string = [[
+  )]],
+  go = [[
   (function_declaration
     name: (identifier) @func_name (#offset! @func_name)
-  )
-]]
-
-local func_lookup = {
-  python = python_function_query_string,
-  lua = lua_function_query_string,
-  go = golang_function_query_string,
+  )]],
 }
 
 local function get_functions(bufnr, lang, query_string)
@@ -43,37 +37,75 @@ local function get_functions(bufnr, lang, query_string)
   return func_list
 end
 
-function M.goto_function(bufnr, lang)
-  bufnr = bufnr or vim.api.nvim_get_current_buf()
-  lang = lang or vim.api.nvim_buf_get_option(bufnr, "filetype")
+M.show = function()
+  local ok, fzf_lua = pcall(require, "fzf-lua")
+  if not ok then
+    vim.notify("Overview: error load fzf-lua", vim.log.levels.ERROR)
+    return
+  end
 
-  local query_string = func_lookup[lang]
+  local fzf_lua_builtin = require("fzf-lua.previewer.builtin")
+  local fzf_lua_actions = require("fzf-lua.actions")
+
+  local bufnr = vim.api.nvim_get_current_buf()
+  local lang = vim.api.nvim_buf_get_option(bufnr, "filetype")
+  local path = vim.api.nvim_buf_get_name(bufnr)
+
+  local query_string = ts_query_lookup[lang]
   if not query_string then
-    vim.notify(lang .. " is not supported", vim.log.levels.INFO)
+    vim.notify(strings.format("Overview: %s is not supported", lang), vim.log.levels.INFO)
     return
   end
-  local func_list = get_functions(bufnr, lang, query_string)
-  if vim.tbl_isempty(func_list) then
+
+  local ts_parser = vim.treesitter.get_parser(bufnr, lang)
+  local ts_syntax_tree = ts_parser:parse()[1]
+  local ts_root = ts_syntax_tree:root()
+  local ts_query = vim.treesitter.parse_query(lang, query_string)
+  local entries = {}
+
+  for _, captures, _ in ts_query:iter_matches(ts_root, bufnr) do
+    local row, col, _ = captures[1]:start()
+    local name = vim.treesitter.query.get_node_text(captures[1], bufnr)
+    table.insert(entries, { name = name, row = row, col = col, kind = "func" })
+  end
+
+  if vim.tbl_isempty(entries) then
+    vim.notify(strings.format("Overview: no entries"), vim.log.levels.INFO)
     return
   end
-  local funcs = {}
-  for _, func in ipairs(func_list) do
-    table.insert(funcs, func[1])
+
+  local FzfLuaPreviewer = fzf_lua_builtin.buffer_or_file:extend()
+
+  function FzfLuaPreviewer:new(o, opts, fzf_win)
+    FzfLuaPreviewer.super.new(self, o, opts, fzf_win)
+    setmetatable(self, FzfLuaPreviewer)
+    return self
   end
-  vim.ui.select(funcs, {
-    prompt = "Select a function:",
-    format_item = function(item)
-      return "Function - " .. item
-    end,
-  }, function(_, idx)
-    if not idx then
-      return
+
+  local re_entry = "^%[(%d+)%].*$"
+
+  function FzfLuaPreviewer:parse_entry(entry_str)
+    local line = entry_str:match(re_entry)
+    return {
+      path = path,
+      line = tonumber(line) or 1,
+      col = 1,
+    }
+  end
+
+  fzf_lua.fzf_exec(function(fzf_cb)
+    for _, e in ipairs(entries) do
+      fzf_cb(string.format("[%d] %s %s", e.row + 1, e.name, e.kind))
     end
-    local goto_function = func_list[idx]
-    local row, col = goto_function[2] + 1, goto_function[3] + 2
-    vim.fn.setcharpos(".", { bufnr, row, col, 0 })
-    vim.cmd([[normal! zz]])
-  end)
+  end, {
+    previewer = FzfLuaPreviewer,
+    actions = {
+      ["default"] = function(selected, opts)
+        local line = selected[1]:match(re_entry)
+        vim.api.nvim_win_set_cursor(0, { tonumber(line), 0 })
+      end,
+    },
+  })
 end
 
 return M

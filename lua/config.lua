@@ -349,6 +349,7 @@ M.treesitter = function()
       "ruby",
       "cpp",
       "sql",
+      "make",
     },
   })
 

@@ -3,12 +3,44 @@
 
 local M = {}
 
+local ts_const_query_lookup = {
+  go = [[
+  ((package_clause)
+   (const_declaration
+     (const_spec
+        name: (identifier) @name (#match? @name "^[A-Z_0-9]+") (#offset! @name))))
+  ]],
+}
+
 local ts_var_query_lookup = {
   lua = [[
   (variable_declaration
     (assignment_statement
       (variable_list
          name: (identifier) @name (#offset! @name))))
+  ]],
+  go = [[
+  ((package_clause)
+   (var_declaration
+     (var_spec
+        name: (identifier) @name (#match? @name "^[A-Z_0-9]+") (#offset! @name))))
+  ]],
+}
+
+local ts_type_query_lookup = {
+  go = [[
+  ((package_clause)
+   (type_declaration
+     (type_spec
+        name: (type_identifier) @name (#match? @name "^[A-Z_0-9]+") (#offset! @name))))
+  ]],
+}
+
+local ts_method_query_lookup = {
+  go = [[
+  ((package_clause)
+   (method_declaration
+      name: (field_identifier) @name (#match? @name "^[A-Z_0-9]+") (#offset! @name)))
   ]],
 }
 
@@ -31,9 +63,10 @@ local ts_func_query_lookup = {
     (expression_list (function_definition)))
   ]],
   go = [[
-  (function_declaration
-    name: (identifier) @name (#offset! @name)
-  )]],
+  ((package_clause)
+   (function_declaration
+      name: (identifier) @name (#match? @name "^[A-Z_0-9]+") (#offset! @name)))
+  ]],
 }
 
 local function get_ts_entries(opts)
@@ -52,7 +85,8 @@ local function get_ts_entries(opts)
   local ts_query = vim.treesitter.parse_query(lang, query_string)
   local entries = {}
 
-  for _, captures, _ in ts_query:iter_matches(ts_root, bufnr) do
+  -- NOTE: In order to confirm that it's a top level node consider run vim.treesitter.query.get_previous_node()
+  for v, captures, e in ts_query:iter_matches(ts_root, bufnr) do
     local row, col, meta = captures[1]:start()
     local name = vim.treesitter.query.get_node_text(captures[1], bufnr)
     table.insert(entries, { name = name, row = row, col = col, kind = kind })
@@ -74,8 +108,24 @@ M.show = function()
   local lang = vim.api.nvim_buf_get_option(bufnr, "filetype")
   local path = vim.api.nvim_buf_get_name(bufnr)
 
-  local opts = { lookup_table = ts_var_query_lookup, lang = lang, kind = "var", bufnr = bufnr }
+  local opts = { lookup_table = ts_const_query_lookup, lang = lang, kind = "const", bufnr = bufnr }
   local entries = get_ts_entries(opts)
+
+  local opts = { lookup_table = ts_var_query_lookup, lang = lang, kind = "var", bufnr = bufnr }
+  for _, entry in ipairs(get_ts_entries(opts)) do
+    table.insert(entries, entry)
+  end
+
+  local opts = { lookup_table = ts_type_query_lookup, lang = lang, kind = "type", bufnr = bufnr }
+  for _, entry in ipairs(get_ts_entries(opts)) do
+    table.insert(entries, entry)
+  end
+
+  local opts =
+  { lookup_table = ts_method_query_lookup, lang = lang, kind = "method", bufnr = bufnr }
+  for _, entry in ipairs(get_ts_entries(opts)) do
+    table.insert(entries, entry)
+  end
 
   local opts = { lookup_table = ts_func_query_lookup, lang = lang, kind = "func", bufnr = bufnr }
   for _, entry in ipairs(get_ts_entries(opts)) do

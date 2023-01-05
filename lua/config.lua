@@ -61,7 +61,7 @@ M.nvim_surround = function()
 end
 
 M.theme = function()
-  vim.o.background = os.getenv("SYSTEM_COLOR_THEME")
+  vim.o.background = "dark"
   require("onedark").setup({
     style = vim.o.background,
     highlights = { QuickFixLine = { fmt = "none" } }, -- overrides
@@ -172,18 +172,26 @@ M.lsp = function()
   end
 
   -- See https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua.
-  nvim_lsp.sumneko_lua.setup({
+  require('lspconfig').sumneko_lua.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
       Lua = {
-        runtime = { version = "LuaJIT" },
-        diagnostics = { globals = { "vim" } },
-        workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-        telemetry = { enable = false },
+        runtime = {
+          version = 'LuaJIT',
+          path = runtime_path,
+        },
+        diagnostics = { globals = { 'vim' } },
+        workspace = {
+          library = vim.api.nvim_get_runtime_file('', true),
+          checkThirdParty = false,
+        },
+        telemetry = {
+          enable = false,
+        },
       },
     },
-  })
+  }
 end
 
 M.status_line = function()
@@ -540,74 +548,6 @@ M.dap = function()
   end
 
   dapui.setup()
-end
-
-M.which_key = function()
-  require("which-key").setup({
-    layout = { height = { min = 4, max = 15 } },
-  })
-end
-
-M.dashboard = function()
-  local db = require("dashboard")
-  db.custom_header = {
-    " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
-    " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
-    " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
-    " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
-    " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-    " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
-  }
-  db.custom_center = {
-    {
-      icon = "  ",
-      desc = "Switch project                         ",
-      shortcut = "<leader>pp",
-      action = "lua require'fzf_projects'.navigate()",
-    },
-    {
-      icon = "  ",
-      desc = "Find File                              ",
-      action = "lua require'fzf-lua'.files()",
-      shortcut = "<leader>pf",
-    },
-    {
-      icon = "  ",
-      desc = "New Buffer                        ",
-      action = "DashboardNewFile",
-      shortcut = "<localleader>bn",
-    },
-    {
-      icon = "  ",
-      desc = "File Browser                                    ",
-      action = "nohlsearch | Lf",
-      shortcut = "-",
-    },
-    {
-      icon = "  ",
-      desc = "Recently opened files             ",
-      action = "lua require'fzf-lua'.oldfiles()",
-      shortcut = "<localleader>fr",
-    },
-    {
-      icon = "  ",
-      desc = "Rebuild plugins                        ",
-      action = "PackerCompile",
-      shortcut = "<leader>pc",
-    },
-    {
-      icon = "痢 ",
-      desc = "Sync plugins remote                    ",
-      action = "PackerSync",
-      shortcut = "<leader>ps",
-    },
-    {
-      icon = "  ",
-      desc = "Dashboard                         ",
-      action = "Dashboard",
-      shortcut = "<localleader>gh",
-    },
-  }
 end
 
 M.todo_comments = function()

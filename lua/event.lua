@@ -41,7 +41,7 @@ api.nvim_create_autocmd({ "BufWinEnter" }, {
   group = gen_group,
   pattern = { "*" },
   callback = function()
-    require("internal").restore_buf_cursor()
+    require("utils").restore_buf_cursor()
   end,
 })
 

@@ -1,25 +1,16 @@
 local M = {}
 
-local api = vim.api
-
--- restore_buf_cursor jumps to the last visited file's position.
-M.restore_buf_cursor = function()
-  if vim.fn.line([[`"]]) <= vim.fn.line([[$]]) then
-    vim.cmd([[try | exec 'normal! g`"zz' | catch | endtry]])
-  end
-end
-
 M.qf_toggle = function()
-  local nr = api.nvim_win_get_buf(0)
+  local nr = vim.api.nvim_win_get_buf(0)
   vim.cmd("cwindow")
-  local nr2 = api.nvim_win_get_buf(0)
+  local nr2 = vim.api.nvim_win_get_buf(0)
   if nr == nr2 then
     vim.cmd("cclose")
   end
 end
 
 M.git_save_file_remote = function(file)
-  file = file or api.nvim_buf_get_name(0)
+  file = file or vim.api.nvim_buf_get_name(0)
   if file == nil or file == "" then
     print("Not a file")
     return

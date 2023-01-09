@@ -40,26 +40,6 @@ M.git_save_file_remote = function(file)
   print(name .. " pushed to " .. remote)
 end
 
-M.make_build = function()
-  local build_cmd = "!make build"
-  local ok, fname = pcall(vim.api.nvim_buf_get_name, 0)
-  if ok then
-    build_cmd = build_cmd .. " MAKEFILE_FILENAME=" .. fname
-  end
-  vim.cmd(build_cmd)
-end
-
-M.fzf_search_notes = function()
-  local cmd_opts = {
-    cwd = require("global").notes_dir,
-    search = "\\S",
-    no_esc = true,
-    fzf_opts = { ["--nth"] = false },
-    rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512",
-  }
-  require("fzf-lua").grep_project(cmd_opts)
-end
-
 -- gitlinker begin
 M.git_url_at_point = function()
   require("gitlinker").get_buf_range_url(
@@ -97,6 +77,7 @@ M.del_buf_current_project = function()
 end
 -- delete buffers end
 
+-- gitsigns begin
 M.next_hunk = function()
   if vim.o.diff then
     pcall(vim.cmd, "normal! ]czz")
@@ -112,6 +93,14 @@ M.prev_hunk = function()
   end
   require("gitsigns.actions").prev_hunk()
 end
+-- gitsigns end
+
+-- telescope begin
+M.search_visual_selection = function()
+  local pattern = require("utils").get_visual_selection()
+  require("telescope.builtin").grep_string({ search = pattern })
+end
+-- telescope end
 
 M.zen_mode = function(extra_width, direction)
   local extra_width = extra_width or 0

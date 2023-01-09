@@ -24,26 +24,25 @@ M.lf = function()
   })
 end
 
-M.fzf = function()
-  require("fzf-lua").setup({
-    winopts = {
-      fullscreen = true,
-      preview = {
-        vertical = "down:50%",
-        horizontal = "right:50%",
-        flip_columns = 160,
-        scrollbar = false,
+M.telescope = function()
+  local telescope = require("telescope")
+  telescope.setup({
+    extensions = { fzf = { fuzzy = false } },
+    defaults = {
+      prompt_prefix = "🔭 ",
+      -- Full screen, equal panels, prompt and content top.
+      layout_config = {
+        prompt_position = "top",
+        width = 1000,
+        height = 1000,
+        preview_width = 0.5,
+        anchor = "CENTER",
       },
-    },
-    keymap = {
-      builtin = {
-        ["<A-p>"] = "toggle-preview",
-        ["<C-f>"] = "preview-page-down",
-        ["<C-b>"] = "preview-page-up",
-      },
-      fzf = {},
+      sorting_strategy = "ascending",
     },
   })
+
+  telescope.load_extension("fzf")
 end
 
 M.gitlinker = function()

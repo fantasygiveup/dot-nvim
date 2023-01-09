@@ -70,7 +70,6 @@ packer.startup(function(use)
   })
   use({ "aserowy/tmux.nvim", config = config.tmux })
   use({ "folke/zen-mode.nvim", config = config.zen_mode })
-  use({ "kevinhwang91/nvim-bqf", ft = "qf" })
   use({
     "mfussenegger/nvim-dap",
     requires = { "rcarriga/nvim-dap-ui" },

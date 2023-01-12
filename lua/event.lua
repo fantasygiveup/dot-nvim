@@ -70,6 +70,33 @@ api.nvim_create_autocmd({ "VimEnter" }, {
   end,
 })
 
+local function on_buf_pat(pat, fn)
+  local win = api.nvim_get_current_win()
+  local buf = api.nvim_win_get_buf(win)
+  local buf_name = api.nvim_buf_get_name(buf)
+  if buf_name:find(pat, 1, true) == 1 then
+    fn()
+  end
+end
+
+api.nvim_create_autocmd({ "TermOpen", "VimEnter" }, {
+  group = gen_group,
+  pattern = { "*" },
+  callback = function()
+    on_buf_pat("term://", function()
+      toggle_guideline(1)
+    end)
+  end,
+})
+
+api.nvim_create_autocmd({ "TermLeave" }, {
+  group = gen_group,
+  pattern = { "*" },
+  callback = function()
+    toggle_guideline(0)
+  end,
+})
+
 --- Code format.
 
 local fmt_group = api.nvim_create_augroup("FormatGroup", {})

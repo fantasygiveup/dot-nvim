@@ -14,14 +14,8 @@ end
 disable_distribution_plugins()
 
 M.lf = function()
-  vim.g.lf_netrw = 1 -- use lf over netrw
-
-  require("lf").setup({
-    winblend = 0, -- disable transparency
-    border = "single",
-    height = 1.0,
-    width = 1.0,
-  })
+  vim.g.lf_replace_netrw = 1 -- use lf over netrw
+  vim.g.lf_map_keys = 0
 end
 
 M.telescope = function()
@@ -146,7 +140,7 @@ M.lsp = function()
   end
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
+  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
@@ -251,7 +245,7 @@ M.cmp = function()
     unpack = unpack or table.unpack
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0
-      and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+        and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
   end
 
   local cmp = require("cmp")
@@ -432,7 +426,7 @@ M.null_ls = function()
       formatting.prettier.with({
         extra_args = function()
           local default_args =
-            { "--config=" .. config_dir .. "prettier" .. global.path_sep .. "prettier.config.js" }
+          { "--config=" .. config_dir .. "prettier" .. global.path_sep .. "prettier.config.js" }
 
           local ok, project_root = pcall(require, "project_nvim.project")
           if not ok then

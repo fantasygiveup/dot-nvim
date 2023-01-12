@@ -18,25 +18,26 @@ M.lf = function()
   vim.g.lf_map_keys = 0
 end
 
-M.telescope = function()
-  local telescope = require("telescope")
-  telescope.setup({
-    extensions = { fzf = { fuzzy = false } },
-    defaults = {
-      prompt_prefix = "🔭 ",
-      -- Full screen, equal panels, prompt and content top.
-      layout_config = {
-        prompt_position = "top",
-        width = 1000,
-        height = 1000,
-        preview_width = 0.5,
-        anchor = "CENTER",
+M.fzf = function()
+  require("fzf-lua").setup({
+    winopts = {
+      fullscreen = true,
+      preview = {
+        vertical = "down:50%",
+        horizontal = "right:50%",
+        flip_columns = 160,
+        scrollbar = false,
       },
-      sorting_strategy = "ascending",
+      keymap = {
+        builtin = {
+          ["<A-p>"] = "toggle-preview",
+          ["<C-f>"] = "preview-page-down",
+          ["<C-b>"] = "preview-page-up",
+        },
+        fzf = {},
+      },
     },
   })
-
-  telescope.load_extension("fzf")
 end
 
 M.gitlinker = function()
@@ -140,7 +141,7 @@ M.lsp = function()
   end
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] =
-  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
+    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
@@ -245,7 +246,7 @@ M.cmp = function()
     unpack = unpack or table.unpack
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0
-        and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
   end
 
   local cmp = require("cmp")
@@ -426,7 +427,7 @@ M.null_ls = function()
       formatting.prettier.with({
         extra_args = function()
           local default_args =
-          { "--config=" .. config_dir .. "prettier" .. global.path_sep .. "prettier.config.js" }
+            { "--config=" .. config_dir .. "prettier" .. global.path_sep .. "prettier.config.js" }
 
           local ok, project_root = pcall(require, "project_nvim.project")
           if not ok then

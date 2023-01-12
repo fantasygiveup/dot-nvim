@@ -29,14 +29,7 @@ packer.startup(function(use)
   use({ "kyazdani42/nvim-web-devicons" })
   use({ "navarasu/onedark.nvim", config = config.theme })
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitsigns })
-  use({
-    "nvim-telescope/telescope.nvim", -- nvim-web-devicons is required
-    requires = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-    },
-    config = config.telescope,
-  })
+  use({ "ibhagwan/fzf-lua", config = config.fzf }) -- nvim-web-devicons requires
   use({ "neovim/nvim-lspconfig", config = config.lsp })
   use({ "jose-elias-alvarez/null-ls.nvim", config = config.null_ls })
   use({ "nvim-lualine/lualine.nvim", config = config.status_line })

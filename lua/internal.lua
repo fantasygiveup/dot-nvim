@@ -9,6 +9,18 @@ M.qf_toggle = function()
   end
 end
 
+M.fzf_search_notes = function()
+  local cmd_opts = {
+    cwd = require("global").notes_dir,
+    search = "\\S",
+    no_esc = true,
+    prompt = "Notes> ",
+    fzf_opts = { ["--nth"] = false },
+    rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512",
+  }
+  require("fzf-lua").grep_project(cmd_opts)
+end
+
 M.git_save_file_remote = function(file)
   file = file or vim.api.nvim_buf_get_name(0)
   if file == nil or file == "" then

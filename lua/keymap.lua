@@ -68,7 +68,7 @@ M.plugins = function()
   vim.keymap.set("n", "-", "<cmd>nohlsearch | Lf<cr>")
   vim.keymap.set("n", "<localleader>g?", "<cmd>lua require'gitsigns'.blame_line({full=true})<cr>")
   vim.keymap.set("n", "<localleader>gc", "<cmd>lua require'internal'.git_save_file_remote()<cr>")
-  vim.keymap.set("n", "<localleader>gp", "<cmd>lua require'gitsigns'.preview_hunk()<cr>")
+  vim.keymap.set("n", "<leader>hp", "<cmd>lua require'gitsigns'.preview_hunk()<cr>")
   vim.keymap.set("n", "<leader>hu", "<cmd>lua require'gitsigns'.reset_hunk()<cr>")
   vim.keymap.set("n", "<leader>hs", "<cmd>lua require'gitsigns'.stage_hunk()<cr>")
   vim.keymap.set("n", "<leader>h#", "<cmd>lua require'gitsigns'.reset_buffer()<cr>")
@@ -89,7 +89,7 @@ M.plugins = function()
   vim.keymap.set("n", "<localleader>r", "<cmd>lua require('telescope.builtin').resume()<cr>")
   vim.keymap.set("n", "<leader>/", "<cmd>lua require('telescope.builtin').grep_string({search = ''})<cr>")
   vim.keymap.set("v", "<leader>/", "<cmd>lua require('internal').search_visual_selection()<cr>")
-  vim.keymap.set("n", "<leader>os",
+  vim.keymap.set("n", "<c-s>",
     "<cmd>lua require'telescope.builtin'.grep_string({cwd = require'global'.notes_dir, search = ''})<cr>")
 
   vim.keymap.set("n", "<a-e>", "<cmd>IconPickerNormal<cr>")

@@ -15,7 +15,7 @@ end
 
 M.diary_open_file = function()
   open_file(require("global").diary)
-  require("internal").zen_mode(5)
+  require("internal").zen_mode(5, 1)
 end
 
 local function diary_new_entry(title)
@@ -44,7 +44,7 @@ local function diary_new_entry(title)
 
   pcall(vim.cmd, "normal! zo") -- open the fold
 
-  require("internal").zen_mode(5)
+  require("internal").zen_mode(5, 1)
 end
 
 M.diary_new_entry = function()
@@ -52,7 +52,8 @@ M.diary_new_entry = function()
 end
 
 M.todo_open_file = function()
-  return open_file(require("global").todos)
+  open_file(require("global").todos)
+  require("internal").zen_mode(5, 1)
 end
 
 local function todo_new_entry(title)

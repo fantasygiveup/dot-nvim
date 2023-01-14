@@ -14,7 +14,8 @@ local function open_file(path)
 end
 
 M.diary_open_file = function()
-  return open_file(require("global").diary)
+  open_file(require("global").diary)
+  require("internal").zen_mode(5)
 end
 
 local function diary_new_entry(title)

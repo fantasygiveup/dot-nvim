@@ -106,8 +106,8 @@ M.plugins = function()
 
   vim.keymap.set("n", "<leader>oe", "<cmd>lua require'notes'.diary_new_entry()<cr>")
   vim.keymap.set("n", "<leader>oo", "<cmd>lua require'notes'.diary_open_file()<cr>")
-  vim.keymap.set("n", "<leader>ot", "<cmd>lua require'notes'.todo_new_entry()<cr>")
-  vim.keymap.set("n", "<leader>ol", "<cmd>lua require'notes'.todo_open_file()<cr>")
+  vim.keymap.set("n", "<leader>ot", "<cmd>lua require'notes'.todos_new_entry()<cr>")
+  vim.keymap.set("n", "<leader>ol", "<cmd>lua require'notes'.todos_open_file()<cr>")
 
   -- Debugger.
   vim.keymap.set("n", "<localleader>d<Space>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")

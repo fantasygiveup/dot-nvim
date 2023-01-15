@@ -7,4 +7,17 @@ M.restore_buf_cursor = function()
   end
 end
 
+M.open_buffer_file = function(path)
+  if vim.api.nvim_buf_get_name(0) == path then
+    return
+  end
+
+  local ok, _ = pcall(vim.cmd, "e " .. path)
+  if not ok then
+    error("Could not open file: " .. path)
+  end
+
+  return ok
+end
+
 return M

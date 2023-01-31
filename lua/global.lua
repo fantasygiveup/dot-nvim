@@ -4,7 +4,7 @@ local home = os.getenv("HOME")
 local path_sep = global.is_windows and "\\" or "/"
 local os_name = vim.loop.os_uname().sysname
 local user_repo = home .. path_sep .. "github.com" .. path_sep .. "illia-danko" .. path_sep
-local notes_dir = user_repo .. "org"
+local notes_dir = user_repo .. "docs"
 
 function global:load_variables()
   self.is_mac = os_name == "Darwin"

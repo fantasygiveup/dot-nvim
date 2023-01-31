@@ -77,12 +77,6 @@ packer.startup(function(use)
     config = config.dap,
   })
   use({ "folke/todo-comments.nvim", config = config.todo_comments })
-  use({ "gpanders/nvim-parinfer", config = config.parinfer })
-  use({
-    "Olical/conjure",
-    requires = { "guns/vim-sexp", "tpope/vim-sexp-mappings-for-regular-people" },
-    config = config.conjure,
-  })
   if packer_bootstrap then
     packer.sync()
   end

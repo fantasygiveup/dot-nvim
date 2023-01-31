@@ -157,7 +157,7 @@ M.lsp = function()
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  local servers = { "ccls", "gopls", "pyright", "tsserver", "clojure_lsp", "rust_analyzer" }
+  local servers = { "ccls", "gopls", "pyright", "tsserver", "rust_analyzer" }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup({
       on_attach = on_attach,
@@ -450,7 +450,6 @@ M.null_ls = function()
           return default_args
         end,
       }),
-      formatting.zprint, -- clojure formatter
     },
   })
 end
@@ -552,16 +551,10 @@ M.todo_comments = function()
   })
 end
 
-M.parinfer = function()
-  vim.g["conjure#mapping"] = false
-end
-
 M.which_key = function()
   require("which-key").setup({
     layout = { height = { min = 4, max = 15 } },
   })
 end
-
-M.conjure = function() end
 
 return M

@@ -77,16 +77,15 @@ M.plugins = function()
   vim.keymap.set("n", "<localleader>tc", "<cmd>ColorizerToggle<cr>")
 
   -- Fzf-lua.
-  vim.keymap.set("n", "<leader><", "<cmd>lua require'fzf-lua'.buffers()<cr>")
-  vim.keymap.set("n", "<leader>pf", "<cmd>lua require'fzf-lua'.files({ cmd = vim.env.FZF_DEFAULT_COMMAND })<cr>")
+  vim.keymap.set("n", "<localleader>b", "<cmd>lua require'fzf-lua'.buffers()<cr>")
+  vim.keymap.set("n", "<c-t>", "<cmd>lua require'fzf-lua'.files({ cmd = vim.env.FZF_DEFAULT_COMMAND })<cr>")
   vim.keymap.set("n", "<leader>:", "<cmd>lua require'fzf-lua'.commands()<cr>")
   vim.keymap.set("n", "<leader>?", "<cmd>lua require'fzf-lua'.keymaps()<cr>")
   vim.keymap.set("n", "<localleader>~", "<cmd>lua require'fzf-lua'.filetypes()<cr>")
-  vim.keymap.set("n", "<localleader>fr", "<cmd>lua require'fzf-lua'.oldfiles()<cr>")
+  vim.keymap.set("n", "<localleader>r", "<cmd>lua require'fzf-lua'.oldfiles()<cr>")
   vim.keymap.set("n", "<localleader>gg", "<cmd>lua require'fzf-lua'.git_status()<cr>")
   vim.keymap.set("n", "<localleader>gb", "<cmd>lua require'fzf-lua'.git_bcommits()<cr>")
   vim.keymap.set("n", "<localleader>gl", "<cmd>lua require'fzf-lua'.git_commits()<cr>")
-  vim.keymap.set("n", "<localleader>r", "<cmd>lua require'fzf-lua'.resume()<cr>")
   vim.keymap.set("n", "<leader>/", "<cmd>lua require'internal'.fzf_grep_project()<cr>")
   vim.keymap.set("v", "<leader>/", "<cmd>lua require'fzf-lua'.grep_visual()<cr>")
   vim.keymap.set("n", "<c-s>", "<cmd>lua require'internal'.fzf_grep_notes()<cr>")
@@ -117,10 +116,6 @@ M.plugins = function()
   vim.keymap.set("n", "<localleader>di", "<cmd>lua require'dap'.step_into()<cr>")
   vim.keymap.set("n", "<localleader>du", "<cmd>lua require'dapui'.toggle()<cr>")
   vim.keymap.set("v", "<localleader>de", "<cmd>lua require'dapui'.eval(); vim.fn.feedkeys('v')<cr>")
-
-  -- Dashboard.
-  vim.keymap.set("n", "<localleader>bn", "<cmd>DashboardNewFile<cr>")
-  vim.keymap.set("n", "<localleader>gh", "<cmd>Dashboard<cr>")
 end
 -- stylua: ignore end
 

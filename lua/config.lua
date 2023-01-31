@@ -556,6 +556,12 @@ M.parinfer = function()
   vim.g["conjure#mapping"] = false
 end
 
+M.which_key = function()
+  require("which-key").setup({
+    layout = { height = { min = 4, max = 15 } },
+  })
+end
+
 M.conjure = function() end
 
 return M

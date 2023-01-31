@@ -9,16 +9,19 @@ M.qf_toggle = function()
   end
 end
 
-M.fzf_search_notes = function()
-  local cmd_opts = {
-    cwd = require("global").notes_dir,
-    search = "\\S",
-    no_esc = true,
-    prompt = "Notes> ",
-    fzf_opts = { ["--nth"] = false },
-    rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512",
-  }
-  require("fzf-lua").grep_project(cmd_opts)
+M.fzf_grep_project = function(opts)
+  local opts = opts or {}
+  opts.rg_opts =
+    "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512"
+  opts.fzf_opts = { ["--nth"] = false }
+  opts.no_esc = true
+  opts.search = opts.search or "\\S"
+
+  require("fzf-lua").grep_project(opts)
+end
+
+M.fzf_grep_notes = function()
+  M.fzf_grep_project({ prompt = "Notes> ", cwd = require("global").notes_dir })
 end
 
 M.git_save_file_remote = function(file)

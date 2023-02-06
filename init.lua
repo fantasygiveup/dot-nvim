@@ -77,6 +77,7 @@ packer.startup(function(use)
     config = config.dap,
   })
   use({ "folke/todo-comments.nvim", config = config.todo_comments })
+  use({ "rest-nvim/rest.nvim", config = config.rest_nvim })
   if packer_bootstrap then
     packer.sync()
   end

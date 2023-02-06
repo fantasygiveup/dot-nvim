@@ -348,6 +348,7 @@ M.treesitter = function()
       "sql",
       "make",
       "rust",
+      "http",
     },
   })
 
@@ -555,6 +556,10 @@ M.which_key = function()
   require("which-key").setup({
     layout = { height = { min = 4, max = 15 } },
   })
+end
+
+M.rest_nvim = function()
+  require("rest-nvim").setup({})
 end
 
 return M

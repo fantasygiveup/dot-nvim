@@ -28,14 +28,14 @@ M.fzf = function()
         flip_columns = 160,
         scrollbar = false,
       },
-      keymap = {
-        builtin = {
-          ["<A-p>"] = "toggle-preview",
-          ["<C-f>"] = "preview-page-down",
-          ["<C-b>"] = "preview-page-up",
-        },
-        fzf = {},
+    },
+    keymap = {
+      builtin = {
+        ["<A-p>"] = "toggle-preview",
+        ["<C-f>"] = "preview-page-down",
+        ["<C-b>"] = "preview-page-up",
       },
+      fzf = {},
     },
   })
 end

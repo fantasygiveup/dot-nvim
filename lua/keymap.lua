@@ -109,22 +109,23 @@ M.plugins = function()
   vim.keymap.set("n", "<leader>os", "<cmd>lua require'notes'.todos_open_file()<cr>")
 
   -- Debugger.
-  vim.keymap.set("n", "<localleader><Space><Space>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
-  vim.keymap.set("n", "<localleader><Space>t", "<cmd>lua require'dap'.terminate(); require'dap'.clear_breakpoints()<cr>")
-  vim.keymap.set("n", "<localleader><Space>r", "<cmd>lua require'dap'.run_last()<cr>")
-  vim.keymap.set("n", "<localleader><Space>c", "<cmd>lua require'dap'.continue()<cr>")
-  vim.keymap.set("n", "<localleader><Space>n", "<cmd>lua require'dap'.step_over()<cr>")
-  vim.keymap.set("n", "<localleader><Space>i", "<cmd>lua require'dap'.step_into()<cr>")
-  vim.keymap.set("n", "<localleader><Space>u", "<cmd>lua require'dapui'.toggle()<cr>")
-  vim.keymap.set("v", "<localleader><Space>e", "<cmd>lua require'dapui'.eval(); vim.fn.feedkeys('v')<cr>")
+  vim.keymap.set("n", "<leader><Space>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
+  vim.keymap.set("n", "<leader>t", "<cmd>lua require'dap'.terminate(); require'dap'.clear_breakpoints()<cr>")
+  vim.keymap.set("n", "<leader>r", "<cmd>lua require'dap'.run_last()<cr>")
+  vim.keymap.set("n", "<leader>c", "<cmd>lua require'dap'.continue()<cr>")
+  vim.keymap.set("n", "<leader>n", "<cmd>lua require'dap'.step_over()<cr>")
+  vim.keymap.set("n", "<leader>i", "<cmd>lua require'dap'.step_into()<cr>")
+  vim.keymap.set("n", "<leader>u", "<cmd>lua require'dapui'.toggle()<cr>")
+  vim.keymap.set("v", "<leader>e", "<cmd>lua require'dapui'.eval(); vim.fn.feedkeys('v')<cr>")
 end
 -- stylua: ignore end
 
 -- stylua: ignore start
-M.lsp = function(client, bufnr) api.nvim_buf_set_keymap(bufnr, "n", "]d",
-    "<cmd>lua vim.diagnostic.goto_next({ severity = require'global'.diagnostic_severity })<cr>", opts)
+M.lsp = function(client, bufnr)
+  api.nvim_buf_set_keymap(bufnr, "n", "]d",
+      "<cmd>lua vim.diagnostic.goto_next({ severity = require'global'.diagnostic_severity })<cr>", opts)
   api.nvim_buf_set_keymap(bufnr, "n", "[d",
-    "<cmd>lua vim.diagnostic.goto_prev({ severity = require'global'.diagnostic_severity })<cr>", opts)
+      "<cmd>lua vim.diagnostic.goto_prev({ severity = require'global'.diagnostic_severity })<cr>", opts)
   api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
   api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
   api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)

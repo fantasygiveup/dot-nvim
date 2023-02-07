@@ -109,13 +109,14 @@ M.plugins = function()
   vim.keymap.set("n", "<leader>os", "<cmd>lua require'notes'.todos_open_file()<cr>")
 
   -- Debugger.
-  vim.keymap.set("n", "<localleader>d<Space>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
-  vim.keymap.set("n", "<localleader>dt", "<cmd>lua require'dap'.terminate(); require'dap'.clear_breakpoints()<cr>")
-  vim.keymap.set("n", "<localleader>dc", "<cmd>lua require'dap'.continue()<cr>")
-  vim.keymap.set("n", "<localleader>dn", "<cmd>lua require'dap'.step_over()<cr>")
-  vim.keymap.set("n", "<localleader>di", "<cmd>lua require'dap'.step_into()<cr>")
-  vim.keymap.set("n", "<localleader>du", "<cmd>lua require'dapui'.toggle()<cr>")
-  vim.keymap.set("v", "<localleader>de", "<cmd>lua require'dapui'.eval(); vim.fn.feedkeys('v')<cr>")
+  vim.keymap.set("n", "<localleader><Space><Space>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
+  vim.keymap.set("n", "<localleader><Space>t", "<cmd>lua require'dap'.terminate(); require'dap'.clear_breakpoints()<cr>")
+  vim.keymap.set("n", "<localleader><Space>r", "<cmd>lua require'dap'.run_last()<cr>")
+  vim.keymap.set("n", "<localleader><Space>c", "<cmd>lua require'dap'.continue()<cr>")
+  vim.keymap.set("n", "<localleader><Space>n", "<cmd>lua require'dap'.step_over()<cr>")
+  vim.keymap.set("n", "<localleader><Space>i", "<cmd>lua require'dap'.step_into()<cr>")
+  vim.keymap.set("n", "<localleader><Space>u", "<cmd>lua require'dapui'.toggle()<cr>")
+  vim.keymap.set("v", "<localleader><Space>e", "<cmd>lua require'dapui'.eval(); vim.fn.feedkeys('v')<cr>")
 end
 -- stylua: ignore end
 

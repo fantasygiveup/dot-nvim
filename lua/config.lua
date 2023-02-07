@@ -346,6 +346,7 @@ M.treesitter = function()
       "make",
       "rust",
       "http",
+      "comment",
     },
   })
 
@@ -535,18 +536,6 @@ M.dap = function()
   end
 
   dapui.setup()
-end
-
-M.todo_comments = function()
-  require("todo-comments").setup({
-    signs = false,
-    merge_keywords = false,
-    highlight = {
-      keyword = "fg",
-      after = "",
-      pattern = [[.*<(KEYWORDS)\s*(\(.*\))?\s*:]],
-    },
-  })
 end
 
 M.which_key = function()

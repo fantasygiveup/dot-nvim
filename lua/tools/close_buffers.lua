@@ -1,42 +1,7 @@
 local M = {}
 
 M.setup = function(use)
-  use({ "ziontee113/icon-picker.nvim", config = M.icon_picker_setup })
-  use({ "illia-danko/lf.vim", requires = { "rbgrouleff/bclose.vim" }, config = M.lf_setup })
-  use({ "norcalli/nvim-colorizer.lua", config = M.colorizer_setup })
   use({ "kazhala/close-buffers.nvim", config = M.close_buffers_setup })
-end
-
-M.icon_picker_setup = function()
-  local ok, icon_picker = pcall(require, "icon-picker")
-  if not ok then
-    return
-  end
-
-  icon_picker.setup({})
-
-  vim.keymap.set("n", "<a-e>", "<cmd>IconPickerNormal<cr>")
-  vim.keymap.set("i", "<a-e>", "<cmd>IconPickerInsert<cr>")
-end
-
-M.lf_setup = function()
-  vim.g.lf_replace_netrw = 1 -- use lf over netrw
-  vim.g.lf_map_keys = 0
-
-  vim.keymap.set("n", "-", "<cmd>nohlsearch | Lf<cr>")
-end
-
-M.colorizer_setup = function()
-  local ok, colorizer = pcall(require, "colorizer")
-  if not ok then
-    return
-  end
-
-  colorizer.setup({
-    DEFAULT_OPTIONS = { names = false },
-  })
-
-  vim.keymap.set("n", "<localleader>tc", "<cmd>ColorizerToggle<cr>")
 end
 
 M.close_buffers_setup = function()

@@ -40,7 +40,11 @@ packer.startup(function(use)
   require("treesitter").setup(use)
   require("debugger").setup(use)
   require("vc").setup(use)
-  require("tools").setup(use)
+
+  require("tools.icon_picker").setup(use)
+  require("tools.lf").setup(use)
+  require("tools.colorizer").setup(use)
+  require("tools.close_buffers").setup(use)
 
   if packer_bootstrap then
     packer.sync()

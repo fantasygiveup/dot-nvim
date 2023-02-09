@@ -30,7 +30,6 @@ packer.startup(function(use)
   use({ "navarasu/onedark.nvim", config = config.theme })
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitsigns })
   use({ "ibhagwan/fzf-lua", config = config.fzf }) -- nvim-web-devicons requires
-  use({ "neovim/nvim-lspconfig", config = config.lsp })
   use({ "jose-elias-alvarez/null-ls.nvim", config = config.null_ls })
   use({ "folke/which-key.nvim", config = config.which_key })
   use({ "nvim-lualine/lualine.nvim", config = config.status_line })
@@ -73,7 +72,9 @@ packer.startup(function(use)
   use({ "folke/zen-mode.nvim", config = config.zen_mode })
   use({ "rest-nvim/rest.nvim", config = config.rest_nvim })
 
+  require("completion").setup(use)
   require("debugger").setup(use)
+
   if packer_bootstrap then
     packer.sync()
   end

@@ -63,11 +63,6 @@ end
 -- stylua: ignore start
 M.plugins = function()
   -- Plugins.
-
-  vim.keymap.set("n", "<localleader>do", "<cmd>lua require'internal'.del_buf_others()<cr>")
-  vim.keymap.set("n", "<localleader>d#", "<cmd>lua require'internal'.del_buf_all()<cr>")
-  vim.keymap.set("n", "<localleader>dp", "<cmd>lua require'internal'.del_buf_current_project()<cr>")
-
   vim.keymap.set("n", "<localleader>z", "<cmd>lua require'internal'.zen_mode()<cr>")
 
   vim.keymap.set("n", "<leader>od", "<cmd>lua require'notes'.diary_new_entry()<cr>")

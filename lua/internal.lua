@@ -9,24 +9,6 @@ M.qf_toggle = function()
   end
 end
 
--- delete buffers begin
-M.del_buf_others = function()
-  require("close_buffers").wipe({ type = "other", force = true })
-  print("Close other buffers")
-end
-
-M.del_buf_all = function()
-  require("close_buffers").wipe({ type = "all", force = true })
-  print("Close all buffers")
-end
-
-M.del_buf_current_project = function()
-  local project_root = require("project_nvim.project").get_project_root()
-  require("close_buffers").wipe({ regex = project_root, force = true })
-  print(string.format("Close buffers of %s", vim.fn.fnamemodify(project_root, ":t")))
-end
--- delete buffers end
-
 M.zen_mode = function(extra_width, direction)
   local extra_width = extra_width or 0
   local direction = direction or 0

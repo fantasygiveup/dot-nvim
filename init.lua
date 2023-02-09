@@ -34,7 +34,6 @@ packer.startup(function(use)
     end,
     ft = { "markdown" },
   })
-  use({ "kazhala/close-buffers.nvim", config = config.close_buffers })
   use({ "aserowy/tmux.nvim", config = config.tmux })
   use({ "folke/zen-mode.nvim", config = config.zen_mode })
   use({ "rest-nvim/rest.nvim", config = config.rest_nvim })

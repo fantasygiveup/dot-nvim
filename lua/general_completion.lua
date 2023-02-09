@@ -45,9 +45,23 @@ M.finder = function()
   vim.keymap.set("n", "<localleader>gg", "<cmd>lua require'fzf-lua'.git_status()<cr>")
   vim.keymap.set("n", "<localleader>gb", "<cmd>lua require'fzf-lua'.git_bcommits()<cr>")
   vim.keymap.set("n", "<localleader>gl", "<cmd>lua require'fzf-lua'.git_commits()<cr>")
-  vim.keymap.set("n", "<leader>/", "<cmd>lua require'internal'.fzf_grep_project()<cr>")
   vim.keymap.set("v", "<leader>/", "<cmd>lua require'fzf-lua'.grep_visual()<cr>")
-  vim.keymap.set("n", "<c-s>", "<cmd>lua require'internal'.fzf_grep_notes()<cr>")
+
+  local function grep_project(opts)
+    local opts = opts or {}
+    opts.rg_opts =
+      "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512"
+    opts.fzf_opts = { ["--nth"] = false }
+    opts.no_esc = true
+    opts.search = opts.search or "\\S"
+    fzf_lua.grep_project(opts)
+  end
+
+  vim.keymap.set("n", "<leader>/", grep_project, { desc = "grep_project" })
+
+  vim.keymap.set("n", "<c-s>", function()
+    grep_project({ prompt = "Notes> ", cwd = require("global").notes_dir })
+  end, { desc = "grep_notes" })
 end
 
 M.dressing = function()

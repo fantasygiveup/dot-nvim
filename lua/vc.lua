@@ -86,7 +86,7 @@ M.gitsigns_setup = function()
   end, { desc = "prev_hunk" })
 end
 
-M.hook = function()
+M.load = function()
   -- vc_save_file_remote.
   vim.keymap.set("n", "<localleader>gc", function()
     local file = vim.api.nvim_buf_get_name(0)

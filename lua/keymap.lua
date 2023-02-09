@@ -1,6 +1,6 @@
 local M = {}
 
-M.hook = function()
+M.load = function()
   -- Pre. Allows us to map C-c key sequence (see Post below).
   vim.keymap.set("n", "<c-c>", "<nop>")
   vim.keymap.set("i", "<c-c>", "<nop>")

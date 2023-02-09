@@ -56,9 +56,9 @@ require("options")
 require("event")
 require("event_gpg")
 
-require("vc").hook()
-require("notes").hook()
-require("keymap").hook()
+require("vc").load()
+require("notes").load()
+require("keymap").load()
 
 vim.keymap.set("n", "<leader>pc", "<cmd>PackerCompile<cr>")
 vim.keymap.set("n", "<leader>ps", "<cmd>PackerSync<cr>")

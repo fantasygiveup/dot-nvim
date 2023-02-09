@@ -53,12 +53,12 @@ gl:load_variables()
 gl:ensure_dir()
 
 require("options")
+require("keymap").load()
 require("event")
 require("event_gpg")
 
 require("vc").load()
 require("notes").load()
-require("keymap").load()
 
 vim.keymap.set("n", "<leader>pc", "<cmd>PackerCompile<cr>")
 vim.keymap.set("n", "<leader>ps", "<cmd>PackerSync<cr>")

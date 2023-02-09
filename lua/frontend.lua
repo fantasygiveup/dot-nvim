@@ -49,17 +49,24 @@ M.status_line_setup = function()
   local function lsp_active_client(msg)
     local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
     local clients = vim.lsp.get_active_clients()
+    local str = ""
     if next(clients) == nil then
-      return ""
+      return str
     end
 
     for _, client in ipairs(clients) do
       local filetypes = client.config.filetypes
       if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        return " " .. client.name
+        if string.len(str) > 0 then
+          str = str .. " "
+        end
+        str = str .. client.name
       end
     end
-    return ""
+    if string.len(str) > 0 then
+      str = " [" .. str .. "]"
+    end
+    return str
   end
 
   lualine.setup({

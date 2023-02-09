@@ -18,11 +18,6 @@ packer.startup(function(use)
   config.global()
 
   use({ "wbthomason/packer.nvim" })
-  use({
-    "illia-danko/lf.vim",
-    requires = { "rbgrouleff/bclose.vim" },
-    config = config.lf,
-  })
   use({ "numToStr/Comment.nvim", config = config.comment_nvim })
   use({ "kylechui/nvim-surround", config = config.nvim_surround })
   use({ "navarasu/onedark.nvim", config = config.theme })

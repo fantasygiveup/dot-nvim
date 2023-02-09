@@ -13,11 +13,6 @@ end
 
 disable_distribution_plugins()
 
-M.lf = function()
-  vim.g.lf_replace_netrw = 1 -- use lf over netrw
-  vim.g.lf_map_keys = 0
-end
-
 M.comment_nvim = function()
   require("Comment").setup({})
 end

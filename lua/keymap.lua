@@ -63,7 +63,6 @@ end
 -- stylua: ignore start
 M.plugins = function()
   -- Plugins.
-  vim.keymap.set("n", "-", "<cmd>nohlsearch | Lf<cr>")
   vim.keymap.set("n", "<localleader>tc", "<cmd>ColorizerToggle<cr>")
 
   vim.keymap.set("n", "<localleader>do", "<cmd>lua require'internal'.del_buf_others()<cr>")

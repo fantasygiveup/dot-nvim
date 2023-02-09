@@ -15,14 +15,14 @@ gives me the following:
 -   column, line number navigation
 -   sorting
 -   buffer and project-wide replacement by string or regexp pattern
--   multiple cursor editing ([you-don-t-need-more-than-one-cursor-in-vim](https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db))
+-   multiple cursor (places) editing ([you-don-t-need-more-than-one-cursor-in-vim](https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db))
 -   build, test and run a single unit or a whole project from the editor
 -   switching between projects
 -   interact with version control (blame, commit, logs, search)
 
-Also, if a repetitive pattern is found during editing, then a command mapping to
-shortcut is added. And always try to remember: 'Don’t spend more effort than you
-save'!
+Also, if a repetitive pattern is found during editing, then a command shortcut
+is added. Mantra: 'Don’t spend more effort than you save' even if you fell in
+love with your editor!
 
 # References
 

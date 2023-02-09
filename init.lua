@@ -2,13 +2,13 @@ local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({
-          "git",
-          "clone",
-          "--depth",
-          "1",
-          "https://github.com/wbthomason/packer.nvim",
-          install_path,
-      })
+    "git",
+    "clone",
+    "--depth",
+    "1",
+    "https://github.com/wbthomason/packer.nvim",
+    install_path,
+  })
 end
 
 local packer = require("packer")
@@ -18,17 +18,14 @@ packer.startup(function(use)
   config.global()
 
   use({ "wbthomason/packer.nvim" })
-  use({ "numToStr/Comment.nvim", config = config.comment_nvim })
-  use({ "kylechui/nvim-surround", config = config.nvim_surround })
   use({ "ahmedkhalf/project.nvim", config = config.project_nvim })
-  use({ "windwp/nvim-autopairs", config = config.autopairs })
   use({
-      "iamcco/markdown-preview.nvim",
-      run = "cd app && npm install",
-      setup = function()
-        vim.g.mkdp_filetypes = { "markdown" }
-      end,
-      ft = { "markdown" },
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    setup = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
   })
   use({ "aserowy/tmux.nvim", config = config.tmux })
   use({ "rest-nvim/rest.nvim", config = config.rest_nvim })
@@ -39,6 +36,7 @@ packer.startup(function(use)
   require("frontend").setup(use)
   require("treesitter").setup(use)
   require("debugger").setup(use)
+  require("edit").setup(use)
   require("vc").setup(use)
 
   require("tools.icon_picker").setup(use)

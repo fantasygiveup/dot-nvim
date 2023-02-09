@@ -13,18 +13,6 @@ end
 
 disable_distribution_plugins()
 
-M.comment_nvim = function()
-  require("Comment").setup({})
-end
-
-M.nvim_surround = function()
-  require("nvim-surround").setup({})
-end
-
-M.autopairs = function()
-  require("nvim-autopairs").setup()
-end
-
 M.project_nvim = function()
   local project_nvim = require("project_nvim").setup({
     patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "go.mod" },

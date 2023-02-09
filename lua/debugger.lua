@@ -2,41 +2,41 @@ local M = {}
 
 M.setup = function(use)
   use({
-    "mfussenegger/nvim-dap",
-    requires = { "rcarriga/nvim-dap-ui" },
-    config = M.config,
+      "mfussenegger/nvim-dap",
+      requires = { "rcarriga/nvim-dap-ui" },
+      config = M.dap,
   })
 end
 
-M.config = function()
+M.dap = function()
   ok, dap = pcall(require, "dap")
   if not ok then
     return
   end
   dap.adapters.delve = {
-    type = "server",
-    port = "${port}",
-    executable = {
-      command = "dlv",
-      args = { "dap", "-l", "127.0.0.1:${port}" },
-    },
+      type = "server",
+      port = "${port}",
+      executable = {
+          command = "dlv",
+          args = { "dap", "-l", "127.0.0.1:${port}" },
+      },
   }
 
   -- 'dlv' binary is required.
   dap.configurations.go = {
-    {
-      type = "delve",
-      name = "Debug",
-      request = "launch",
-      program = "${file}",
-    },
-    {
-      type = "delve",
-      name = "Debug test",
-      request = "launch",
-      mode = "test",
-      program = "./${relativeFileDirname}",
-    },
+      {
+          type = "delve",
+          name = "Debug",
+          request = "launch",
+          program = "${file}",
+      },
+      {
+          type = "delve",
+          name = "Debug test",
+          request = "launch",
+          mode = "test",
+          program = "./${relativeFileDirname}",
+      },
   }
 
   vim.fn.sign_define("DapBreakpoint", { text = "" })
@@ -55,9 +55,9 @@ M.config = function()
   -- Keymap.
   vim.keymap.set("n", "<leader><Space>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
   vim.keymap.set(
-    "n",
-    "<leader>t",
-    "<cmd>lua require'dap'.terminate(); require'dap'.clear_breakpoints()<cr>"
+      "n",
+      "<leader>t",
+      "<cmd>lua require'dap'.terminate(); require'dap'.clear_breakpoints()<cr>"
   )
   vim.keymap.set("n", "<leader>r", "<cmd>lua require'dap'.run_last()<cr>")
   vim.keymap.set("n", "<leader>c", "<cmd>lua require'dap'.continue()<cr>")

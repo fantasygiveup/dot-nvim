@@ -1,10 +1,6 @@
 local M = {}
 
-local api = vim.api
-local opts = { noremap = true, silent = true }
-
--- stylua: ignore start
-M.core = function()
+M.hook = function()
   -- Pre. Allows us to map C-c key sequence (see Post below).
   vim.keymap.set("n", "<c-c>", "<nop>")
   vim.keymap.set("i", "<c-c>", "<nop>")
@@ -56,10 +52,8 @@ M.core = function()
 
   -- Post.
   -- Bind C-c to ESC, also clean up the highlight.
-  vim.keymap.set("n", "<c-c>", "<esc>:noh<cr>", opts)
-  vim.keymap.set("i", "<c-c>", "<esc>:noh<cr>", opts)
+  vim.keymap.set("n", "<c-c>", "<esc>:noh<cr>", { noremap = true, silent = true })
+  vim.keymap.set("i", "<c-c>", "<esc>:noh<cr>", { noremap = true, silent = true })
 end
-
-M.core()
 
 return M

@@ -16,8 +16,8 @@ M.theme_setup = function()
   vim.o.background = os.getenv("SYSTEM_COLOR_THEME")
 
   onedark.setup({
-    style = vim.o.background,
-    highlights = { QuickFixLine = { fmt = "none" } }, -- overrides
+      style = vim.o.background,
+      highlights = { QuickFixLine = { fmt = "none" } }, -- overrides
   })
   onedark.load()
 end
@@ -29,7 +29,7 @@ M.which_key_setup = function()
   end
 
   which_key.setup({
-    layout = { height = { min = 4, max = 15 } },
+      layout = { height = { min = 4, max = 15 } },
   })
 end
 
@@ -69,32 +69,48 @@ M.status_line_setup = function()
     return str
   end
 
+  local function diagnostics_severity()
+    local severity = require("global").diagnostic_severity
+    if severity == vim.diagnostic.severity.ERROR then
+      return { "error" }
+    end
+    if severity == vim.diagnostic.severity.WARN then
+      return { "error", "warn" }
+    end
+    if severity == vim.diagnostic.severity.INFO then
+      return { "error", "warn", "info" }
+    end
+    if severity == vim.diagnostic.severity.HINT then
+      return { "error", "warn", "info", "hint" }
+    end
+  end
+
   lualine.setup({
-    options = {
-      theme = "auto",
-      section_separators = { left = "", right = "" },
-      component_separators = { left = "", right = "" },
-    },
-    sections = {
-      lualine_a = { "mode", spell },
-      lualine_b = {
-        {
-          "diagnostics",
-          sources = { "nvim_diagnostic" },
-          sections = require("internal").diagnostic_severity(),
-          symbols = { error = " ", warn = " ", info = " ", hint = " " },
-        },
+      options = {
+          theme = "auto",
+          section_separators = { left = "", right = "" },
+          component_separators = { left = "", right = "" },
       },
-      lualine_x = {
-        { lsp_active_client },
-        "encoding",
-        "fileformat",
-        "filetype",
+      sections = {
+          lualine_a = { "mode", spell },
+          lualine_b = {
+              {
+                  "diagnostics",
+                  sources = { "nvim_diagnostic" },
+                  sections = diagnostics_severity(),
+                  symbols = { error = " ", warn = " ", info = " ", hint = " " },
+              },
+          },
+          lualine_x = {
+              { lsp_active_client },
+              "encoding",
+              "fileformat",
+              "filetype",
+          },
+          lualine_y = {
+              "progress",
+          },
       },
-      lualine_y = {
-        "progress",
-      },
-    },
   })
 end
 
@@ -105,27 +121,27 @@ M.zen_mode_setup = function()
   end
 
   zen_mode.setup({
-    window = {
-      backdrop = 1.0,
-      width = 80,
-      options = {
-        wrap = true,
-        signcolumn = "no",
-        number = false,
-        relativenumber = false,
-        cursorline = false,
-        cursorcolumn = false,
-        foldcolumn = "0",
-        list = false,
+      window = {
+          backdrop = 1.0,
+          width = 80,
+          options = {
+              wrap = true,
+              signcolumn = "no",
+              number = false,
+              relativenumber = false,
+              cursorline = false,
+              cursorcolumn = false,
+              foldcolumn = "0",
+              list = false,
+          },
       },
-    },
   })
 
   vim.keymap.set(
-    "n",
-    "<localleader>z",
-    "<cmd>lua require'frontend'.zen_mode()<cr>",
-    { desc = "zen_mode_toggle" }
+      "n",
+      "<localleader>z",
+      "<cmd>lua require'frontend'.zen_mode()<cr>",
+      { desc = "zen_mode_toggle" }
   )
 end
 
@@ -145,9 +161,9 @@ M.zen_mode = function(extra_width, direction)
   end
 
   local opts = {
-    window = {
-      width = vim.bo.textwidth + extra_width,
-    },
+      window = {
+          width = vim.bo.textwidth + extra_width,
+      },
   }
 
   fn(opts)

@@ -19,9 +19,18 @@ M.load = function()
   vim.keymap.set("n", "]f", "<cmd>cnext<cr>")
   vim.keymap.set("n", "<localleader>ts", "<cmd>setlocal spell! spelllang=en_us<cr>")
   vim.keymap.set("n", "<localleader>cw", [[<cmd>keeppatterns %s/\s\+$//e<cr>]])
-  vim.keymap.set("n", "X", "<cmd>lua require'internal'.qf_toggle()<cr>")
   vim.keymap.set("n", "ZZ", "<cmd>xa<cr>")
   vim.keymap.set("n", "ZQ", "<cmd>qa!<cr>")
+
+  -- Quickfix.
+  vim.keymap.set("n", "X", function()
+    local nr = vim.api.nvim_win_get_buf(0)
+    vim.cmd("cwindow")
+    local nr2 = vim.api.nvim_win_get_buf(0)
+    if nr == nr2 then
+      vim.cmd("cclose")
+    end
+  end, { desc = "qf_toggle" })
 
   -- Command line (tcsh style).
   vim.keymap.set("c", "<c-a>", "<home>")

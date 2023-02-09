@@ -107,16 +107,6 @@ M.plugins = function()
   vim.keymap.set("n", "<leader>oy", "<cmd>lua require'notes'.diary_open_file()<cr>")
   vim.keymap.set("n", "<leader>ot", "<cmd>lua require'notes'.todos_new_entry()<cr>")
   vim.keymap.set("n", "<leader>os", "<cmd>lua require'notes'.todos_open_file()<cr>")
-
-  -- Debugger.
-  vim.keymap.set("n", "<leader><Space>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
-  vim.keymap.set("n", "<leader>t", "<cmd>lua require'dap'.terminate(); require'dap'.clear_breakpoints()<cr>")
-  vim.keymap.set("n", "<leader>r", "<cmd>lua require'dap'.run_last()<cr>")
-  vim.keymap.set("n", "<leader>c", "<cmd>lua require'dap'.continue()<cr>")
-  vim.keymap.set("n", "<leader>n", "<cmd>lua require'dap'.step_over()<cr>")
-  vim.keymap.set("n", "<leader>i", "<cmd>lua require'dap'.step_into()<cr>")
-  vim.keymap.set("n", "<leader>u", "<cmd>lua require'dapui'.toggle()<cr>")
-  vim.keymap.set("v", "<leader>e", "<cmd>lua require'dapui'.eval(); vim.fn.feedkeys('v')<cr>")
 end
 -- stylua: ignore end
 

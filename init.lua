@@ -71,12 +71,9 @@ packer.startup(function(use)
   })
   use({ "aserowy/tmux.nvim", config = config.tmux })
   use({ "folke/zen-mode.nvim", config = config.zen_mode })
-  use({
-    "mfussenegger/nvim-dap",
-    requires = { "rcarriga/nvim-dap-ui" },
-    config = config.dap,
-  })
   use({ "rest-nvim/rest.nvim", config = config.rest_nvim })
+
+  require("debugger").setup(use)
   if packer_bootstrap then
     packer.sync()
   end

@@ -64,19 +64,7 @@ end
 M.plugins = function()
   -- Plugins.
   vim.keymap.set("n", "-", "<cmd>nohlsearch | Lf<cr>")
-  vim.keymap.set("n", "<localleader>g?", "<cmd>lua require'gitsigns'.blame_line({full=true})<cr>")
-  vim.keymap.set("n", "<localleader>gc", "<cmd>lua require'internal'.git_save_file_remote()<cr>")
-  vim.keymap.set("n", "<leader>hp", "<cmd>lua require'gitsigns'.preview_hunk()<cr>")
-  vim.keymap.set("n", "<leader>hu", "<cmd>lua require'gitsigns'.reset_hunk()<cr>")
-  vim.keymap.set("n", "<leader>hs", "<cmd>lua require'gitsigns'.stage_hunk()<cr>")
-  vim.keymap.set("n", "<leader>h#", "<cmd>lua require'gitsigns'.reset_buffer()<cr>")
-  vim.keymap.set("n", "]c", "<cmd>lua require'internal'.next_hunk()<cr>")
-  vim.keymap.set("n", "[c", "<cmd>lua require'internal'.prev_hunk()<cr>")
   vim.keymap.set("n", "<localleader>tc", "<cmd>ColorizerToggle<cr>")
-
-  vim.keymap.set("n", "<localleader>gu", "<cmd>lua require'internal'.git_url_at_point()<cr>")
-  vim.keymap.set("v", "<localleader>gu", "<cmd>lua require'internal'.git_url_range()<cr>")
-  vim.keymap.set("n", "<localleader>gU", "<cmd>lua require'internal'.git_url_in_browser()<cr>")
 
   vim.keymap.set("n", "<localleader>do", "<cmd>lua require'internal'.del_buf_others()<cr>")
   vim.keymap.set("n", "<localleader>d#", "<cmd>lua require'internal'.del_buf_all()<cr>")

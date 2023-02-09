@@ -18,12 +18,6 @@ M.lf = function()
   vim.g.lf_map_keys = 0
 end
 
-M.gitlinker = function()
-  require("gitlinker").setup({
-    mappings = nil, -- don't use default mappings
-  })
-end
-
 M.comment_nvim = function()
   require("Comment").setup({})
 end
@@ -39,26 +33,6 @@ M.theme = function()
     highlights = { QuickFixLine = { fmt = "none" } }, -- overrides
   })
   require("onedark").load()
-end
-
-M.gitsigns = function()
-  require("gitsigns").setup({
-    on_attach = function(bufnr)
-      if vim.o.diff or vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":e") == "gpg" then
-        return false
-      end
-      return true
-    end,
-    keymaps = {},
-    signs = {
-      add = { text = "" },
-      change = { text = "" },
-      delete = { text = "" },
-      topdelete = { text = "" },
-      changedelete = { text = "" },
-    },
-    attach_to_untracked = false, -- don't highlight new files
-  })
 end
 
 M.status_line = function()

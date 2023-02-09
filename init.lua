@@ -23,11 +23,9 @@ packer.startup(function(use)
     requires = { "rbgrouleff/bclose.vim" },
     config = config.lf,
   })
-  use({ "ruifm/gitlinker.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitlinker })
   use({ "numToStr/Comment.nvim", config = config.comment_nvim })
   use({ "kylechui/nvim-surround", config = config.nvim_surround })
   use({ "navarasu/onedark.nvim", config = config.theme })
-  use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitsigns })
   use({ "jose-elias-alvarez/null-ls.nvim", config = config.null_ls })
   use({ "folke/which-key.nvim", config = config.which_key })
   use({ "nvim-lualine/lualine.nvim", config = config.status_line })
@@ -51,7 +49,7 @@ packer.startup(function(use)
   require("edit_completion").setup(use)
   require("treesitter").setup(use)
   require("debugger").setup(use)
-
+  require("vc").setup(use)
   require("tools").setup(use)
 
   if packer_bootstrap then
@@ -67,6 +65,7 @@ require("options")
 require("keymap")
 require("event")
 require("event_gpg")
+require("vc").hook()
 
 vim.keymap.set("n", "<leader>pc", "<cmd>PackerCompile<cr>")
 vim.keymap.set("n", "<leader>ps", "<cmd>PackerSync<cr>")

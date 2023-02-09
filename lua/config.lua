@@ -20,15 +20,6 @@ M.project_nvim = function()
   })
 end
 
-M.yanky = function()
-  require("yanky").setup({
-    highlight = {
-      on_put = false,
-      on_yank = false,
-    },
-  })
-end
-
 M.tmux = function()
   require("tmux").setup({
     copy_sync = {

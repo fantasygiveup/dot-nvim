@@ -13,13 +13,6 @@ end
 
 disable_distribution_plugins()
 
-M.project_nvim = function()
-  local project_nvim = require("project_nvim").setup({
-    patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "go.mod" },
-    detection_methods = { "pattern", "lsp" },
-  })
-end
-
 M.tmux = function()
   require("tmux").setup({
     copy_sync = {

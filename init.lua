@@ -18,7 +18,6 @@ packer.startup(function(use)
   config.global()
 
   use({ "wbthomason/packer.nvim" })
-  use({ "ahmedkhalf/project.nvim", config = config.project_nvim })
   use({
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
@@ -30,6 +29,12 @@ packer.startup(function(use)
   use({ "aserowy/tmux.nvim", config = config.tmux })
   use({ "rest-nvim/rest.nvim", config = config.rest_nvim })
 
+  require("tools.project_nvim").setup(use)
+  require("tools.icon_picker").setup(use)
+  require("tools.lf").setup(use)
+  require("tools.colorizer").setup(use)
+  require("tools.close_buffers").setup(use)
+
   require("formatter_diagnostics").setup(use)
   require("general_completion").setup(use)
   require("edit_completion").setup(use)
@@ -38,11 +43,6 @@ packer.startup(function(use)
   require("debugger").setup(use)
   require("edit").setup(use)
   require("vc").setup(use)
-
-  require("tools.icon_picker").setup(use)
-  require("tools.lf").setup(use)
-  require("tools.colorizer").setup(use)
-  require("tools.close_buffers").setup(use)
 
   if packer_bootstrap then
     packer.sync()

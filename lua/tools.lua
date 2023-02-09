@@ -3,6 +3,7 @@ local M = {}
 M.setup = function(use)
   use({ "ziontee113/icon-picker.nvim", config = M.icon_picker })
   use({ "illia-danko/lf.vim", requires = { "rbgrouleff/bclose.vim" }, config = M.lf })
+  use({ "norcalli/nvim-colorizer.lua", config = M.colorizer })
 end
 
 M.icon_picker = function()
@@ -22,6 +23,19 @@ M.lf = function()
   vim.g.lf_map_keys = 0
 
   vim.keymap.set("n", "-", "<cmd>nohlsearch | Lf<cr>")
+end
+
+M.colorizer = function()
+  local ok, colorizer = pcall(require, "colorizer")
+  if not ok then
+    return
+  end
+
+  colorizer.setup({
+    DEFAULT_OPTIONS = { names = false },
+  })
+
+  vim.keymap.set("n", "<localleader>tc", "<cmd>ColorizerToggle<cr>")
 end
 
 return M

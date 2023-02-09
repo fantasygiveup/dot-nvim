@@ -24,7 +24,6 @@ packer.startup(function(use)
   use({ "jose-elias-alvarez/null-ls.nvim", config = config.null_ls })
   use({ "folke/which-key.nvim", config = config.which_key })
   use({ "nvim-lualine/lualine.nvim", config = config.status_line })
-  use({ "norcalli/nvim-colorizer.lua", config = config.colorizer })
   use({ "ahmedkhalf/project.nvim", config = config.project_nvim })
   use({ "windwp/nvim-autopairs", config = config.autopairs })
   use({

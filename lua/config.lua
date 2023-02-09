@@ -84,14 +84,6 @@ M.status_line = function()
   })
 end
 
-M.colorizer = function()
-  require("colorizer").setup({
-    DEFAULT_OPTIONS = {
-      names = false,
-    },
-  })
-end
-
 M.autopairs = function()
   require("nvim-autopairs").setup()
 end

@@ -12,12 +12,12 @@ M.setup = function(use)
       { "andersevenrud/cmp-tmux" },
       { "hrsh7th/cmp-calc" },
     },
-    config = M.cmp,
+    config = M.cmp_setup,
   })
-  use({ "neovim/nvim-lspconfig", config = M.lspconfig })
+  use({ "neovim/nvim-lspconfig", config = M.lspconfig_setup })
 end
 
-M.cmp = function()
+M.cmp_setup = function()
   local ok, cmp = pcall(require, "cmp")
   if not ok then
     return
@@ -89,7 +89,7 @@ M.cmp = function()
   })
 end
 
-M.lspconfig = function()
+M.lspconfig_setup = function()
   local ok, lspconfig = pcall(require, "lspconfig")
   if not ok then
     return

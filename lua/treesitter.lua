@@ -4,11 +4,11 @@ M.setup = function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     requires = { "nvim-treesitter/playground", "p00f/nvim-ts-rainbow" },
-    config = M.treesitter,
+    config = M.treesitter_setup,
   })
 end
 
-M.treesitter = function()
+M.treesitter_setup = function()
   require("nvim-treesitter.configs").setup({
     highlight = {
       enable = true,

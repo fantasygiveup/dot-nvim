@@ -4,7 +4,7 @@ local utils = require("utils")
 
 M.diary_open_file = function()
   utils.open_buffer_file(require("global").diary)
-  require("internal").zen_mode(5, 1)
+  require("frontend").zen_mode(5, 1)
 end
 
 local function diary_new_entry(title)
@@ -23,7 +23,7 @@ local function diary_new_entry(title)
     vim.cmd(":edit")
     utils.win_scroll_last_line()
     pcall(vim.cmd, "normal! zo") -- open the fold
-    require("internal").zen_mode(5, 1)
+    require("frontend").zen_mode(5, 1)
   end
 end
 
@@ -33,7 +33,7 @@ end
 
 M.todos_open_file = function()
   if utils.open_buffer_file(require("global").todos) then
-    require("internal").zen_mode(5, 1)
+    require("frontend").zen_mode(5, 1)
   end
 end
 

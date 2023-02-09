@@ -1,11 +1,11 @@
 local M = {}
 
 M.setup = function(use)
-  use({ "ruifm/gitlinker.nvim", requires = "nvim-lua/plenary.nvim", config = M.gitlinker })
-  use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = M.gitsigns })
+  use({ "ruifm/gitlinker.nvim", requires = "nvim-lua/plenary.nvim", config = M.gitlinker_setup })
+  use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = M.gitsigns_setup })
 end
 
-M.gitlinker = function()
+M.gitlinker_setup = function()
   local ok, gitlinker = pcall(require, "gitlinker")
   if not ok then
     return
@@ -33,7 +33,7 @@ M.gitlinker = function()
   end, { desc = "vc_open_in_browser" })
 end
 
-M.gitsigns = function()
+M.gitsigns_setup = function()
   local ok, gitsigns = pcall(require, "gitsigns")
   if not ok then
     return

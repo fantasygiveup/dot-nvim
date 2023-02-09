@@ -9,27 +9,6 @@ M.qf_toggle = function()
   end
 end
 
-M.zen_mode = function(extra_width, direction)
-  local extra_width = extra_width or 0
-  local direction = direction or 0
-  local zen_mode = require("zen-mode.view")
-
-  local fn = zen_mode.toggle
-  if direction > 0 then
-    fn = zen_mode.open
-  elseif direction < 0 then
-    fn = zen_mode.close
-  end
-
-  local opts = {
-    window = {
-      width = vim.bo.textwidth + extra_width,
-    },
-  }
-
-  fn(opts)
-end
-
 M.diagnostic_severity = function()
   local severity = require("global").diagnostic_severity
   if severity == vim.diagnostic.severity.ERROR then

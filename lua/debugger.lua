@@ -1,10 +1,10 @@
 local M = {}
 
 M.setup = function(use)
-  use({ "mfussenegger/nvim-dap", requires = { "rcarriga/nvim-dap-ui" }, config = M.dap })
+  use({ "mfussenegger/nvim-dap", requires = { "rcarriga/nvim-dap-ui" }, config = M.dap_setup })
 end
 
-M.dap = function()
+M.dap_setup = function()
   ok, dap = pcall(require, "dap")
   if not ok then
     return

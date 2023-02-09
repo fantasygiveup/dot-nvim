@@ -1,11 +1,11 @@
 local M = {}
 
 M.setup = function(use)
-  use({ "ibhagwan/fzf-lua", requires = { "kyazdani42/nvim-web-devicons" }, config = M.finder })
-  use({ "stevearc/dressing.nvim", config = M.dressing })
+  use({ "ibhagwan/fzf-lua", requires = { "kyazdani42/nvim-web-devicons" }, config = M.finder_setup })
+  use({ "stevearc/dressing.nvim", config = M.dressing_setup })
 end
 
-M.finder = function()
+M.finder_setup = function()
   local ok, fzf_lua = pcall(require, "fzf-lua")
   if not ok then
     return
@@ -64,7 +64,7 @@ M.finder = function()
   end, { desc = "grep_notes" })
 end
 
-M.dressing = function()
+M.dressing_setup = function()
   local ok, dressing = pcall(require, "dressing")
   if not ok then
     return

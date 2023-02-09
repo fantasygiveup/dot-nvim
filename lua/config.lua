@@ -21,69 +21,6 @@ M.nvim_surround = function()
   require("nvim-surround").setup({})
 end
 
-M.theme = function()
-  vim.o.background = os.getenv("SYSTEM_COLOR_THEME")
-  require("onedark").setup({
-    style = vim.o.background,
-    highlights = { QuickFixLine = { fmt = "none" } }, -- overrides
-  })
-  require("onedark").load()
-end
-
-M.status_line = function()
-  local function spell()
-    if not vim.o.spell then
-      return ""
-    end
-    return "SPELL[" .. vim.o.spelllang .. "]"
-  end
-
-  local function lsp_active_client(msg)
-    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-    local clients = vim.lsp.get_active_clients()
-    if next(clients) == nil then
-      return ""
-    end
-
-    for _, client in ipairs(clients) do
-      local filetypes = client.config.filetypes
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        return " " .. client.name
-      end
-    end
-    return ""
-  end
-
-  local ll = require("lualine")
-  ll.setup({
-    options = {
-      theme = "auto",
-      section_separators = { left = "", right = "" },
-      component_separators = { left = "", right = "" },
-    },
-    sections = {
-      lualine_a = { "mode", spell },
-      lualine_b = {
-        {
-          "diagnostics",
-          sources = { "nvim_diagnostic" },
-          sections = require("internal").diagnostic_severity(),
-          symbols = { error = " ", warn = " ", info = " ", hint = " " },
-        },
-      },
-      lualine_x = {
-        { lsp_active_client },
-        "encoding",
-        "fileformat",
-        "filetype",
-      },
-      lualine_y = {
-        "progress",
-      },
-    },
-  })
-end
-
 M.autopairs = function()
   require("nvim-autopairs").setup()
 end
@@ -188,31 +125,6 @@ M.tmux = function()
       -- enables default keybindings (A-hjkl) for normal mode
       enable_default_keybindings = true,
     },
-  })
-end
-
-M.zen_mode = function()
-  require("zen-mode").setup({
-    window = {
-      backdrop = 1.0,
-      width = 80,
-      options = {
-        wrap = true,
-        signcolumn = "no",
-        number = false,
-        relativenumber = false,
-        cursorline = false,
-        cursorcolumn = false,
-        foldcolumn = "0",
-        list = false,
-      },
-    },
-  })
-end
-
-M.which_key = function()
-  require("which-key").setup({
-    layout = { height = { min = 4, max = 15 } },
   })
 end
 

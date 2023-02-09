@@ -24,59 +24,6 @@ M.fzf_grep_notes = function()
   M.fzf_grep_project({ prompt = "Notes> ", cwd = require("global").notes_dir })
 end
 
-M.git_save_file_remote = function(file)
-  file = file or vim.api.nvim_buf_get_name(0)
-  if file == nil or file == "" then
-    print("Not a file")
-    return
-  end
-
-  local diff = vim.fn.system("git diff " .. file):gsub("\n", "")
-  if vim.v.shell_error ~= 0 then
-    print("Not in git")
-    return
-  end
-  if diff == "" then
-    print("Not modified")
-    return
-  end
-
-  local remote = vim.fn.system("git config --get remote.origin.url"):gsub("\n", "")
-  local name = vim.fn.fnamemodify(file, ":t")
-  local cmds = {
-    { "git", "add", file },
-    { "git", "commit", "-m", "Update " .. name },
-    { "git", "push" },
-  }
-
-  for _, cmd in ipairs(cmds) do
-    vim.fn.system(cmd)
-  end
-  print(name .. " pushed to " .. remote)
-end
-
--- gitlinker begin
-M.git_url_at_point = function()
-  require("gitlinker").get_buf_range_url(
-    "n",
-    { action_callback = require("gitlinker.actions").copy_to_clipboard }
-  )
-end
-
-M.git_url_range = function()
-  require("gitlinker").get_buf_range_url(
-    "v",
-    { action_callback = require("gitlinker.actions").copy_to_clipboard }
-  )
-end
-
-M.git_url_in_browser = function()
-  require("gitlinker").get_repo_url({
-    action_callback = require("gitlinker.actions").open_in_browser,
-  })
-end
--- gitlinker end
-
 -- delete buffers begin
 M.del_buf_others = function()
   require("close_buffers").wipe({ type = "other", force = true })
@@ -94,24 +41,6 @@ M.del_buf_current_project = function()
   print(string.format("Close buffers of %s", vim.fn.fnamemodify(project_root, ":t")))
 end
 -- delete buffers end
-
--- gitsigns begin
-M.next_hunk = function()
-  if vim.o.diff then
-    pcall(vim.cmd, "normal! ]czz")
-    return
-  end
-  require("gitsigns.actions").next_hunk()
-end
-
-M.prev_hunk = function()
-  if vim.o.diff then
-    pcall(vim.cmd, "normal! [czz")
-    return
-  end
-  require("gitsigns.actions").prev_hunk()
-end
--- gitsigns end
 
 -- telescope begin
 M.search_visual_selection = function()

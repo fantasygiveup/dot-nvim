@@ -96,28 +96,3 @@ api.nvim_create_autocmd({ "TermLeave" }, {
     toggle_guideline(0)
   end,
 })
-
---- Code format.
-
-local fmt_group = api.nvim_create_augroup("FormatGroup", {})
-
-api.nvim_create_autocmd({ "BufWritePost" }, {
-  group = fmt_group,
-  pattern = {
-    "*.c",
-    "*.cpp",
-    "*.cc",
-    "*.C",
-    "*.cxx",
-    "*.c++",
-    "*.h",
-    "*.hh",
-    "*.H",
-    "*.hxx",
-    "*.hpp",
-    "*.h++",
-  },
-  callback = function()
-    require("formatter"):formatter()
-  end,
-})

@@ -18,28 +18,6 @@ M.lf = function()
   vim.g.lf_map_keys = 0
 end
 
-M.fzf = function()
-  require("fzf-lua").setup({
-    winopts = {
-      fullscreen = true,
-      preview = {
-        vertical = "down:50%",
-        horizontal = "right:50%",
-        flip_columns = 160,
-        scrollbar = false,
-      },
-    },
-    keymap = {
-      builtin = {
-        ["<A-p>"] = "toggle-preview",
-        ["<C-f>"] = "preview-page-down",
-        ["<C-b>"] = "preview-page-up",
-      },
-      fzf = {},
-    },
-  })
-end
-
 M.gitlinker = function()
   require("gitlinker").setup({
     mappings = nil, -- don't use default mappings
@@ -165,16 +143,6 @@ M.yanky = function()
   })
 end
 
-M.dressing = function()
-  require("dressing").setup({
-    input = {
-      get_config = function(opts)
-        return opts
-      end,
-    },
-  })
-end
-
 M.null_ls = function()
   local null_ls = require("null-ls")
 
@@ -243,10 +211,6 @@ M.null_ls = function()
       }),
     },
   })
-end
-
-M.icon_picker = function()
-  require("icon-picker").setup({})
 end
 
 M.tmux = function()

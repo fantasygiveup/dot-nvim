@@ -63,8 +63,6 @@ end
 -- stylua: ignore start
 M.plugins = function()
   -- Plugins.
-  vim.keymap.set("n", "<leader>pc", "<cmd>PackerCompile<cr>")
-  vim.keymap.set("n", "<leader>ps", "<cmd>PackerSync<cr>")
   vim.keymap.set("n", "-", "<cmd>nohlsearch | Lf<cr>")
   vim.keymap.set("n", "<localleader>g?", "<cmd>lua require'gitsigns'.blame_line({full=true})<cr>")
   vim.keymap.set("n", "<localleader>gc", "<cmd>lua require'internal'.git_save_file_remote()<cr>")

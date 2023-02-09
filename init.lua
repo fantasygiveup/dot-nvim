@@ -2,13 +2,13 @@ local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({
-    "git",
-    "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  })
+          "git",
+          "clone",
+          "--depth",
+          "1",
+          "https://github.com/wbthomason/packer.nvim",
+          install_path,
+      })
 end
 
 local packer = require("packer")
@@ -19,9 +19,9 @@ packer.startup(function(use)
 
   use({ "wbthomason/packer.nvim" })
   use({
-    "illia-danko/lf.vim",
-    requires = { "rbgrouleff/bclose.vim" },
-    config = config.lf,
+      "illia-danko/lf.vim",
+      requires = { "rbgrouleff/bclose.vim" },
+      config = config.lf,
   })
   use({ "ruifm/gitlinker.nvim", requires = "nvim-lua/plenary.nvim", config = config.gitlinker })
   use({ "numToStr/Comment.nvim", config = config.comment_nvim })
@@ -37,18 +37,18 @@ packer.startup(function(use)
   use({ "ahmedkhalf/project.nvim", config = config.project_nvim })
   use({ "windwp/nvim-autopairs", config = config.autopairs })
   use({
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    setup = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    ft = { "markdown" },
+      "iamcco/markdown-preview.nvim",
+      run = "cd app && npm install",
+      setup = function()
+        vim.g.mkdp_filetypes = { "markdown" }
+      end,
+      ft = { "markdown" },
   })
   use({ "kazhala/close-buffers.nvim", config = config.close_buffers })
   use({ "stevearc/dressing.nvim", config = config.dressing }) -- better ui of vim.ui.input, vim.ui.select
   use({
-    "ziontee113/icon-picker.nvim",
-    config = config.icon_picker,
+      "ziontee113/icon-picker.nvim",
+      config = config.icon_picker,
   })
   use({ "aserowy/tmux.nvim", config = config.tmux })
   use({ "folke/zen-mode.nvim", config = config.zen_mode })
@@ -71,3 +71,6 @@ require("options")
 require("keymap")
 require("event")
 require("event_gpg")
+
+vim.keymap.set("n", "<leader>pc", "<cmd>PackerCompile<cr>")
+vim.keymap.set("n", "<leader>ps", "<cmd>PackerSync<cr>")

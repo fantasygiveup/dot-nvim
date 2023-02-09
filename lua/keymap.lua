@@ -60,17 +60,6 @@ M.core = function()
   vim.keymap.set("i", "<c-c>", "<esc>:noh<cr>", opts)
 end
 
--- stylua: ignore start
-M.plugins = function()
-  -- Plugins.
-  vim.keymap.set("n", "<leader>od", "<cmd>lua require'notes'.diary_new_entry()<cr>")
-  vim.keymap.set("n", "<leader>oy", "<cmd>lua require'notes'.diary_open_file()<cr>")
-  vim.keymap.set("n", "<leader>ot", "<cmd>lua require'notes'.todos_new_entry()<cr>")
-  vim.keymap.set("n", "<leader>os", "<cmd>lua require'notes'.todos_open_file()<cr>")
-end
--- stylua: ignore end
-
 M.core()
-M.plugins()
 
 return M

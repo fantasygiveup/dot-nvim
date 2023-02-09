@@ -2,13 +2,13 @@ local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({
-    "git",
-    "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  })
+          "git",
+          "clone",
+          "--depth",
+          "1",
+          "https://github.com/wbthomason/packer.nvim",
+          install_path,
+      })
 end
 
 local packer = require("packer")
@@ -24,12 +24,12 @@ packer.startup(function(use)
   use({ "ahmedkhalf/project.nvim", config = config.project_nvim })
   use({ "windwp/nvim-autopairs", config = config.autopairs })
   use({
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    setup = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    ft = { "markdown" },
+      "iamcco/markdown-preview.nvim",
+      run = "cd app && npm install",
+      setup = function()
+        vim.g.mkdp_filetypes = { "markdown" }
+      end,
+      ft = { "markdown" },
   })
   use({ "aserowy/tmux.nvim", config = config.tmux })
   use({ "rest-nvim/rest.nvim", config = config.rest_nvim })
@@ -55,7 +55,9 @@ require("options")
 require("keymap")
 require("event")
 require("event_gpg")
+
 require("vc").hook()
+require("notes").hook()
 
 vim.keymap.set("n", "<leader>pc", "<cmd>PackerCompile<cr>")
 vim.keymap.set("n", "<leader>ps", "<cmd>PackerSync<cr>")

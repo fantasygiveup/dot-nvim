@@ -1,10 +1,37 @@
 local M = {}
 
-local utils = require("utils")
+local function open_buffer_file(path)
+  if vim.api.nvim_buf_get_name(0) == path then
+    return
+  end
 
-M.diary_open_file = function()
-  utils.open_buffer_file(require("global").diary)
-  require("frontend").zen_mode(5, 1)
+  local ok, _ = pcall(vim.cmd, "e " .. path)
+  if not ok then
+    error("Could not open file: " .. path)
+  end
+
+  return ok
+end
+
+local function append_to_file(path, s)
+  local fd = io.open(path, "r+")
+  if not fd then
+    error("Unable to open " .. path)
+    return
+  end
+
+  -- Append a new line if it's not already appended.
+  local maybe_eol = "\n"
+  local eof = fd:seek("end")
+  fd:seek("set", eof - 1)
+  if fd:read(1) == maybe_eol then
+    maybe_eol = ""
+  end
+  fd:seek("end")
+
+  fd:write(string.format("%s%s", maybe_eol, s))
+  fd:close()
+  return 1
 end
 
 local function diary_new_entry(title)
@@ -18,13 +45,18 @@ local function diary_new_entry(title)
 
   local file_path = require("global").diary
 
-  if utils.append_to_file(file_path, new_entry) then
-    utils.open_buffer_file(file_path)
+  if append_to_file(file_path, new_entry) then
+    open_buffer_file(file_path)
     vim.cmd(":edit")
-    utils.win_scroll_last_line()
+    win_scroll_last_line()
     pcall(vim.cmd, "normal! zo") -- open the fold
     require("frontend").zen_mode(5, 1)
   end
+end
+
+M.diary_open_file = function()
+  open_buffer_file(require("global").diary)
+  require("frontend").zen_mode(5, 1)
 end
 
 M.diary_new_entry = function()
@@ -32,9 +64,16 @@ M.diary_new_entry = function()
 end
 
 M.todos_open_file = function()
-  if utils.open_buffer_file(require("global").todos) then
+  if open_buffer_file(require("global").todos) then
     require("frontend").zen_mode(5, 1)
   end
+end
+
+local function win_scroll_last_line(win, bufnr)
+  local win = win or 0
+  local bufnr = bufnr or 0
+  local buf_lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, true)
+  vim.api.nvim_win_set_cursor(win, { #buf_lines, 0 })
 end
 
 local function todos_new_entry(title)
@@ -45,18 +84,35 @@ local function todos_new_entry(title)
   local file_path = require("global").todos
   local new_entry = string.format("- [ ] %s", title)
 
-  if utils.append_to_file(file_path, new_entry) then
+  if append_to_file(file_path, new_entry) then
     print("New todo: " .. title)
 
     if vim.api.nvim_buf_get_name(0) == file_path then
       vim.cmd(":edit")
-      utils.win_scroll_last_line()
+      win_scroll_last_line()
     end
   end
 end
 
-M.todos_new_entry = function()
-  vim.ui.input({ prompt = "New Todo", relative = "win" }, todos_new_entry)
+M.hook = function()
+  vim.keymap.set("n", "<leader>od", function()
+    vim.ui.input({ prompt = "New Diary", relative = "win" }, diary_new_entry)
+  end, { desc = "diary_new_entry" })
+
+  vim.keymap.set("n", "<leader>oo", function()
+    open_buffer_file(require("global").diary)
+    require("frontend").zen_mode(5, 1)
+  end, { desc = "diary_overview" })
+
+  vim.keymap.set("n", "<leader>ot", function()
+    vim.ui.input({ prompt = "New Todo", relative = "win" }, todos_new_entry)
+  end, { desc = "todos_new_entry" })
+
+  vim.keymap.set("n", "<leader>ol", function()
+    if open_buffer_file(require("global").todos) then
+      require("frontend").zen_mode(5, 1)
+    end
+  end, { desc = "todos_list" })
 end
 
 return M

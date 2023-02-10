@@ -17,15 +17,7 @@ packer.startup(function(use)
   vars:load_variables()
   vars:ensure_dir()
 
-  use({ "wbthomason/packer.nvim" })
-  use({
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    setup = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    ft = { "markdown" },
-  })
+  use({ "wbthomason/packer.nvim" }) -- add packer itself
 
   require("tools.project_nvim").setup(use)
   require("tools.icon_picker").setup(use)
@@ -34,6 +26,7 @@ packer.startup(function(use)
   require("tools.close_buffers").setup(use)
   require("tools.tmux").setup(use)
   require("tools.rest_client").setup(use)
+  require("tools.markdown_preview").setup(use)
 
   require("formatter_diagnostics").setup(use)
   require("general_completion").setup(use)

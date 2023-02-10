@@ -152,9 +152,6 @@ M.lspconfig_setup = function()
   local function on_attach(client, bufnr)
     lsp_highlight_document(client, bufnr)
 
-    -- Use null-ls only for formatting.
-    vim.lsp.handlers["textDocument/formatting"] = function() end
-
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
     local opts = { noremap = true, silent = true }

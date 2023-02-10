@@ -27,7 +27,12 @@ M.null_ls_setup = function()
           group = augroup,
           buffer = bufnr,
           callback = function()
-            vim.lsp.buf.format({ bufnr = bufnr })
+            vim.lsp.buf.format({
+              bufnr = bufnr,
+              filter = function(client)
+                return client.name ~= "sumneko_lua"
+              end,
+            })
           end,
         })
       end

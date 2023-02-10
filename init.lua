@@ -25,7 +25,6 @@ packer.startup(function(use)
     end,
     ft = { "markdown" },
   })
-  use({ "aserowy/tmux.nvim", config = config.tmux })
   use({ "rest-nvim/rest.nvim", config = config.rest_nvim })
 
   require("tools.project_nvim").setup(use)
@@ -33,6 +32,7 @@ packer.startup(function(use)
   require("tools.lf").setup(use)
   require("tools.colorizer").setup(use)
   require("tools.close_buffers").setup(use)
+  require("tools.tmux").setup(use)
 
   require("formatter_diagnostics").setup(use)
   require("general_completion").setup(use)

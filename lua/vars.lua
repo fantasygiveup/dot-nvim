@@ -28,6 +28,8 @@ function vars:load_variables()
   self.home = home
   self.user_name = "Illia Danko"
   self.diagnostic_severity = vim.diagnostic.severity.ERROR
+  self.rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512 "
+    .. vim.env.RG_OPTS_FILTER
 end
 
 function vars:ensure_dir()

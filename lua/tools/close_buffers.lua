@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({ "kazhala/close-buffers.nvim", config = M.close_buffers_setup })
 end
 

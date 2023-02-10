@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     requires = { "nvim-treesitter/playground", "p00f/nvim-ts-rainbow" },

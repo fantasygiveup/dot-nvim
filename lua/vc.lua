@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({ "ruifm/gitlinker.nvim", requires = "nvim-lua/plenary.nvim", config = M.gitlinker_setup })
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = M.gitsigns_setup })
 end
@@ -86,7 +86,7 @@ M.gitsigns_setup = function()
   end, { desc = "prev_hunk" })
 end
 
-M.load = function()
+M.setup = function()
   -- vc_save_file_remote.
   vim.keymap.set("n", "<localleader>gc", function()
     local file = vim.api.nvim_buf_get_name(0)

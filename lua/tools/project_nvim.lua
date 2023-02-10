@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({ "ahmedkhalf/project.nvim", config = M.project_nvim_setup })
 end
 

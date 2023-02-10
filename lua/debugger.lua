@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({ "mfussenegger/nvim-dap", requires = { "rcarriga/nvim-dap-ui" }, config = M.dap_setup })
 end
 

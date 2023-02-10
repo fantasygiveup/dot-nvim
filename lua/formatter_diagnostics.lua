@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({ "jose-elias-alvarez/null-ls.nvim", config = M.null_ls_setup })
 end
 

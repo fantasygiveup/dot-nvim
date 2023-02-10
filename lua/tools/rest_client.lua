@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({ "rest-nvim/rest.nvim", ft = { "http" }, config = M.rest_nvim_setup })
 end
 

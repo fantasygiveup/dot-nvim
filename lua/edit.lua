@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({ "numToStr/Comment.nvim", config = M.comment_nvim_setup })
   use({ "kylechui/nvim-surround", config = M.nvim_surround_setup })
   use({ "windwp/nvim-autopairs", config = M.autopairs_setup })

@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({ "norcalli/nvim-colorizer.lua", config = M.colorizer_setup })
 end
 

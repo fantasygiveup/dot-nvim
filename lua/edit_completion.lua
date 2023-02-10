@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({
     "hrsh7th/nvim-cmp",
     requires = {

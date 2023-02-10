@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({ "navarasu/onedark.nvim", config = M.theme_setup })
   use({ "folke/which-key.nvim", config = M.which_key_setup })
   use({ "nvim-lualine/lualine.nvim", config = M.status_line_setup })

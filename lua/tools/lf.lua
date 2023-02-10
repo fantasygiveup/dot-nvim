@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({ "illia-danko/lf.vim", requires = { "rbgrouleff/bclose.vim" }, config = M.lf_setup })
 end
 

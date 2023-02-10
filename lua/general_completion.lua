@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({ "ibhagwan/fzf-lua", requires = { "kyazdani42/nvim-web-devicons" }, config = M.finder_setup })
   use({ "stevearc/dressing.nvim", config = M.dressing_setup })
 end

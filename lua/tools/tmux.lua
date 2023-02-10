@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({ "aserowy/tmux.nvim", config = M.tmux })
 end
 

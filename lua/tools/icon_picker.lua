@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(use)
+M.config = function(use)
   use({ "ziontee113/icon-picker.nvim", config = M.icon_picker_setup })
 end
 

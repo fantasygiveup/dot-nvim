@@ -13,8 +13,4 @@ end
 
 disable_distribution_plugins()
 
-M.rest_nvim = function()
-  require("rest-nvim").setup({})
-end
-
 return M

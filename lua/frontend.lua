@@ -18,6 +18,7 @@ M.theme_setup = function()
   onedark.setup({
     style = vim.o.background,
     highlights = { QuickFixLine = { fmt = "none" } }, -- overrides
+    term_colors = true,
   })
   onedark.load()
 end
@@ -46,7 +47,7 @@ M.status_line_setup = function()
     return "SPELL[" .. vim.o.spelllang .. "]"
   end
 
-  local function lsp_active_client(msg)
+  local function lsp_active_clients(msg)
     local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
     local clients = vim.lsp.get_active_clients()
     local str = ""
@@ -64,7 +65,7 @@ M.status_line_setup = function()
       end
     end
     if string.len(str) > 0 then
-      str = " [" .. str .. "]"
+      str = "[" .. str .. "]"
     end
     return str
   end
@@ -102,7 +103,7 @@ M.status_line_setup = function()
         },
       },
       lualine_x = {
-        { lsp_active_client },
+        { lsp_active_clients, color = { fg = vim.g.terminal_color_6 } },
         "encoding",
         "fileformat",
         "filetype",

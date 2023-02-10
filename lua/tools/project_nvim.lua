@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function(use)
-  use({ "ahmedkhalf/project.nvim", config = M.project_nvim })
+  use({ "ahmedkhalf/project.nvim", config = M.project_nvim_setup })
 end
 
 M.project_nvim_setup = function()

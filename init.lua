@@ -1,21 +1,28 @@
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   packer_bootstrap = vim.fn.system({
-    "git",
-    "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  })
+          "git",
+          "clone",
+          "--depth",
+          "1",
+          "https://github.com/wbthomason/packer.nvim",
+          install_path,
+      })
 end
 
-local packer = require("packer")
+local ok, packer = pcall(require, "packer")
+if not ok then
+  return
+end
 
-packer.startup(function(use)
+local function ensure_vars()
   local vars = require("vars")
   vars:load_variables()
   vars:ensure_dir()
+end
+
+packer.startup(function(use)
+  ensure_vars()
 
   use({ "wbthomason/packer.nvim" }) -- add packer itself
 
@@ -41,6 +48,8 @@ packer.startup(function(use)
     packer.sync()
   end
 end)
+
+ensure_vars()
 
 require("options")
 require("keymap").load()

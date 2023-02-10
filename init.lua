@@ -24,8 +24,7 @@ end
 packer.startup(function(use)
   ensure_vars()
 
-  use({ "wbthomason/packer.nvim" }) -- add packer itself
-
+  require("tools.packer").config(use)
   require("tools.project_nvim").config(use)
   require("tools.icon_picker").config(use)
   require("tools.lf").config(use)
@@ -58,6 +57,3 @@ require("event_gpg")
 
 require("vc").setup()
 require("notes").setup()
-
-vim.keymap.set("n", "<leader>pc", "<cmd>PackerCompile<cr>")
-vim.keymap.set("n", "<leader>ps", "<cmd>PackerSync<cr>")

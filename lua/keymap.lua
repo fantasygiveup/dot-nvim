@@ -14,11 +14,11 @@ M.setup = function()
   vim.keymap.set("x", ",", "")
   vim.keymap.set("n", vim.g.maplocalleader, "")
   vim.keymap.set("x", vim.g.maplocalleader, "")
-  vim.keymap.set("x", "p", "pgvy")
+
   vim.keymap.set("n", "[f", "<cmd>cprev<cr>")
   vim.keymap.set("n", "]f", "<cmd>cnext<cr>")
   vim.keymap.set("n", "<localleader>ts", "<cmd>setlocal spell! spelllang=en_us<cr>")
-  vim.keymap.set("n", "<localleader>cw", [[<cmd>keeppatterns %s/\s\+$//e<cr>]])
+  vim.keymap.set("n", "<localleader>cw", [[<cmd>keeppatterns %s/\s\+$//e<cr>]]) -- remove white spaces
   vim.keymap.set("n", "ZZ", "<cmd>xa<cr>")
   vim.keymap.set("n", "ZQ", "<cmd>qa!<cr>")
 

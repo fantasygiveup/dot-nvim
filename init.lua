@@ -50,10 +50,10 @@ end)
 
 ensure_vars()
 
-require("options")
+require("options").setup()
 require("keymap").setup()
-require("event")
-require("event_gpg")
+require("event").setup()
 
 require("vc").setup()
 require("notes").setup()
+require("gpg").setup()

@@ -60,7 +60,7 @@ M.finder_setup = function()
   vim.keymap.set("n", "<leader>/", grep_project, { desc = "grep_project" })
 
   vim.keymap.set("n", "<c-s>", function()
-    grep_project({ prompt = "Notes> ", cwd = require("global").notes_dir })
+    grep_project({ prompt = "Notes> ", cwd = require("vars").notes_dir })
   end, { desc = "grep_notes" })
 end
 

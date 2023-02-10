@@ -13,8 +13,9 @@ end
 local packer = require("packer")
 
 packer.startup(function(use)
-  local config = require("config")
-  config.global()
+  local vars = require("vars")
+  vars:load_variables()
+  vars:ensure_dir()
 
   use({ "wbthomason/packer.nvim" })
   use({
@@ -47,10 +48,6 @@ packer.startup(function(use)
     packer.sync()
   end
 end)
-
-local gl = require("global")
-gl:load_variables()
-gl:ensure_dir()
 
 require("options")
 require("keymap").load()

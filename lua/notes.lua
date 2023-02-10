@@ -43,7 +43,7 @@ local function diary_new_entry(title)
   local weekday = os.date("%A")
   local new_entry = string.format("\n# %s %s: %s\n\n", day, weekday, title)
 
-  local file_path = require("global").diary
+  local file_path = require("vars").diary
 
   if append_to_file(file_path, new_entry) then
     open_buffer_file(file_path)
@@ -55,7 +55,7 @@ local function diary_new_entry(title)
 end
 
 M.diary_open_file = function()
-  open_buffer_file(require("global").diary)
+  open_buffer_file(require("vars").diary)
   require("frontend").zen_mode(5, 1)
 end
 
@@ -64,7 +64,7 @@ M.diary_new_entry = function()
 end
 
 M.todos_open_file = function()
-  if open_buffer_file(require("global").todos) then
+  if open_buffer_file(require("vars").todos) then
     require("frontend").zen_mode(5, 1)
   end
 end
@@ -81,7 +81,7 @@ local function todos_new_entry(title)
     return
   end
 
-  local file_path = require("global").todos
+  local file_path = require("vars").todos
   local new_entry = string.format("- [ ] %s", title)
 
   if append_to_file(file_path, new_entry) then
@@ -100,7 +100,7 @@ M.load = function()
   end, { desc = "diary_new_entry" })
 
   vim.keymap.set("n", "<leader>oo", function()
-    open_buffer_file(require("global").diary)
+    open_buffer_file(require("vars").diary)
     require("frontend").zen_mode(5, 1)
   end, { desc = "diary_overview" })
 
@@ -109,7 +109,7 @@ M.load = function()
   end, { desc = "todos_new_entry" })
 
   vim.keymap.set("n", "<leader>ol", function()
-    if open_buffer_file(require("global").todos) then
+    if open_buffer_file(require("vars").todos) then
       require("frontend").zen_mode(5, 1)
     end
   end, { desc = "todos_list" })

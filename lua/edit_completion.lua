@@ -163,14 +163,14 @@ M.lspconfig_setup = function()
       bufnr,
       "n",
       "]d",
-      "<cmd>lua vim.diagnostic.goto_next({ severity = require'global'.diagnostic_severity })<cr>",
+      "<cmd>lua vim.diagnostic.goto_next({ severity = require'vars'.diagnostic_severity })<cr>",
       opts
     )
     vim.api.nvim_buf_set_keymap(
       bufnr,
       "n",
       "[d",
-      "<cmd>lua vim.diagnostic.goto_prev({ severity = require'global'.diagnostic_severity })<cr>",
+      "<cmd>lua vim.diagnostic.goto_prev({ severity = require'vars'.diagnostic_severity })<cr>",
       opts
     )
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)

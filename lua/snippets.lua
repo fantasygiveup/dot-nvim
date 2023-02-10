@@ -1,4 +1,4 @@
-local global = require("global")
+local vars = require("vars")
 local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
@@ -42,7 +42,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     ]],
-      { global.user_name, os.date("%Y") }
+      { vars.user_name, os.date("%Y") }
     )
   ),
 })

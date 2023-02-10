@@ -1,4 +1,4 @@
-local global = require("global")
+local vars = require("vars")
 
 vim.o.termguicolors = true
 vim.o.hidden = true -- switch between buffers without having to save first
@@ -19,7 +19,7 @@ vim.o.softtabstop = 4 -- tab key indents by 4 spaces
 vim.o.shiftwidth = 4 -- indents by 4 spaces
 vim.o.shiftround = true -- >> indents to next multiple of 'shiftwidth'
 -- Preserve undo state.
-vim.o.undodir = global.undo_dir
+vim.o.undodir = vars.undo_dir
 vim.o.ruler = false -- don't show buffer info bottom screen
 vim.o.pumheight = 15
 vim.o.showtabline = 0
@@ -38,7 +38,7 @@ vim.o.foldenable = true
 vim.o.signcolumn = "yes"
 vim.o.number = true
 vim.o.undofile = true
-vim.o.spellfile = global.cache_dir .. "spell/en.uft-8.add"
+vim.o.spellfile = vars.cache_dir .. "spell/en.uft-8.add"
 vim.o.updatetime = 500 -- used by vim.lsp.buf.document_highlight()
 vim.o.autoread = true -- informed when changed outside
 vim.o.completeopt = "menu,menuone,noselect"

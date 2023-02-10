@@ -86,12 +86,38 @@ M.gitsigns_setup = function()
   end, { desc = "prev_hunk" })
 end
 
+-- vc_save_file_remote.
 M.setup = function()
-  -- vc_save_file_remote.
   vim.keymap.set("n", "<localleader>gc", function()
     local file = vim.api.nvim_buf_get_name(0)
     if file == nil or file == "" then
       print("Not a file")
+      return
+    end
+
+    local ok, project = pcall(require, "project_nvim.project")
+    if not ok then
+      return
+    end
+
+    local project_root = project.get_project_root()
+    if not project_root then
+      return
+    end
+    project_root = vim.fn.fnamemodify(project_root, ":t")
+
+    local include_project_patterns = { "dotfiles", "docs" }
+
+    local found = false
+    for _, pat in ipairs(include_project_patterns) do
+      if project_root:sub(-#pat) == pat then
+        found = true
+      end
+    end
+
+    local name = vim.fn.fnamemodify(file, ":t")
+    if not found then
+      print("Not allowed for <" .. project_root .. ">")
       return
     end
 

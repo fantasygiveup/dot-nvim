@@ -202,30 +202,13 @@ M.lspconfig_setup = function()
   capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  local servers = { "ccls", "gopls", "pyright", "tsserver", "rust_analyzer" }
+  local servers = { "ccls", "gopls", "pyright", "tsserver", "rust_analyzer", "lua_ls" }
   for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup({
       on_attach = on_attach,
       capabilities = capabilities,
     })
   end
-
-  -- See https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua.
-  lspconfig.sumneko_lua.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-      Lua = {
-        runtime = { version = "LuaJIT" },
-        diagnostics = { globals = { "vim" } },
-        workspace = {
-          library = vim.api.nvim_get_runtime_file("", true),
-          checkThirdParty = false,
-        },
-        telemetry = { enable = false },
-      },
-    },
-  })
 end
 
 return M

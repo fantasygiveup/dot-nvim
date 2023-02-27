@@ -52,7 +52,7 @@ M.setup = function()
     group = gr,
     pattern = { "*" },
     callback = function()
-      require("utils").restore_buf_cursor()
+      require("utils.cursor").restore_buffer_pos()
     end,
   })
 

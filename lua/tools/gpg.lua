@@ -1,10 +1,9 @@
 -- Decrypt (buffer read) end encrypt (buffer write) gpg file using system local gpg settings. Works
 -- the best with gpg-agent enabled. It is a limited alternative to
 -- https://github.com/jamessan/vim-gnupg but written in lua.
+local M = {}
 
 local gr = vim.api.nvim_create_augroup("MyEcryptedGroup", {})
-
-local M = {}
 
 M.setup = function()
   vim.api.nvim_create_autocmd({ "BufReadPre", "FileReadPre" }, {

@@ -1,26 +1,23 @@
 local M = {}
 
 M.config = function(use)
-  use({ "navarasu/onedark.nvim", config = M.theme_setup })
+  use({ "projekt0n/github-nvim-theme", config = M.theme_setup })
   use({ "folke/which-key.nvim", config = M.which_key_setup })
   use({ "nvim-lualine/lualine.nvim", config = M.status_line_setup })
   use({ "folke/zen-mode.nvim", config = M.zen_mode_setup })
 end
 
 M.theme_setup = function()
-  local ok, onedark = pcall(require, "onedark")
+  local ok, theme = pcall(require, "github-theme")
   if not ok then
     return
   end
 
   vim.o.background = os.getenv("SYSTEM_COLOR_THEME")
 
-  onedark.setup({
-    style = vim.o.background,
-    highlights = { QuickFixLine = { fmt = "none" } }, -- overrides
-    term_colors = true,
+  theme.setup({
+    theme_style = vim.o.background,
   })
-  onedark.load()
 end
 
 M.which_key_setup = function()
@@ -141,7 +138,7 @@ M.zen_mode_setup = function()
   vim.keymap.set(
     "n",
     "<localleader>z",
-    "<cmd>lua require'frontend'.zen_mode()<cr>",
+    "<cmd>lua require'appearance'.zen_mode()<cr>",
     { desc = "zen_mode_toggle" }
   )
 end

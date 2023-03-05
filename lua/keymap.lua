@@ -59,6 +59,11 @@ M.setup = function()
   vim.keymap.set("i", "<c-p>", "<up>")
   vim.keymap.set("i", "<c-n>", "<down>")
 
+  -- Misc.
+  vim.keymap.set("n", "<localleader>1", function()
+    vim.cmd("e " .. require("vars").scratchpad_path)
+  end, { desc = "scratchpad" })
+
   -- Post.
   -- Bind C-c to ESC, also clean up the highlight.
   vim.keymap.set("n", "<c-c>", "<esc>:noh<cr>", { noremap = true, silent = true })

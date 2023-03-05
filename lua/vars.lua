@@ -5,6 +5,7 @@ local path_sep = vars.is_windows and "\\" or "/"
 local os_name = vim.loop.os_uname().sysname
 local user_repo = home .. path_sep .. "github.com" .. path_sep .. "illia-danko" .. path_sep
 local notes_dir = user_repo .. "docs"
+local cache_dir = home .. path_sep .. ".cache" .. path_sep .. "nvim" .. path_sep
 
 function vars:load_variables()
   vim.g.loaded_python3_provider = 0
@@ -21,15 +22,17 @@ function vars:load_variables()
   self.notes_dir = notes_dir
   self.diary = notes_dir .. path_sep .. "diary.md"
   self.todos = notes_dir .. path_sep .. "todos.md"
-  self.cache_dir = home .. path_sep .. ".cache" .. path_sep .. "nvim" .. path_sep
+  self.cache_dir = cache_dir
   self.undo_dir = home .. path_sep .. ".cache" .. path_sep .. "undo" .. path_sep
   self.modules_dir = self.vim_path .. path_sep .. "modules"
   self.path_sep = path_sep
   self.home = home
   self.user_name = "Illia Danko"
   self.diagnostic_severity = vim.diagnostic.severity.ERROR
-  self.rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512 "
-    .. vim.env.RG_OPTS_FILTER
+  self.rg_opts =
+      "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512 "
+      .. vim.env.RG_OPTS_FILTER
+  self.scratchpad_path = cache_dir .. "scratchpad.txt"
 end
 
 function vars:ensure_dir()

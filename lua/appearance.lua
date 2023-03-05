@@ -139,7 +139,7 @@ M.zen_mode_setup = function()
   vim.keymap.set(
     "n",
     "<localleader>z",
-    "<cmd>lua require'frontend'.zen_mode()<cr>",
+    "<cmd>lua require'appearance'.zen_mode()<cr>",
     { desc = "zen_mode_toggle" }
   )
 end

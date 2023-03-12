@@ -30,7 +30,7 @@ M.null_ls_setup = function()
             vim.lsp.buf.format({
               bufnr = bufnr,
               filter = function(client)
-                return client.name ~= "sumneko_lua"
+                return client.name ~= "lua_ls"
               end,
             })
           end,

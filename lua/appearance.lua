@@ -17,6 +17,7 @@ M.theme_setup = function()
 
   theme.setup({
     style = vim.o.background,
+    highlights = { QuickFixLine = { fmt = "none" } }, -- overrides
   })
   theme.load()
 end

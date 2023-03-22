@@ -42,6 +42,23 @@ M.setup = function()
   vim.keymap.set("c", "<esc>f", "<s-right>")
   vim.keymap.set("c", "<c-t>", [[<c-r>=expand("%:p:h") . "/" <cr>]])
 
+  -- Insert mode (tcsh style).
+  vim.keymap.set("i", "<a-b>", "<c-o>b")
+  vim.keymap.set("i", "<a-f>", "<c-o>w")
+  vim.keymap.set("i", "<a-d>", "<c-o>dw")
+  vim.keymap.set("i", "<c-y>", "<c-o>gP")
+  vim.keymap.set("i", "<c-w>", "<c-o>db")
+  vim.keymap.set("i", "<c-k>", "<c-o>D")
+  vim.keymap.set("i", "<c-a>", "<c-o>0")
+  vim.keymap.set("i", "<c-e>", "<c-o>$")
+  vim.keymap.set("i", "<c-_>", "<c-o>u") -- [C-/] to undo
+  vim.keymap.set("i", "<c-d>", "<del>")
+  vim.keymap.set("i", "<c-u>", "<c-g>u<c-u>")
+  vim.keymap.set("i", "<c-b>", "<left>")
+  vim.keymap.set("i", "<c-f>", "<right>")
+  vim.keymap.set("i", "<c-p>", "<up>")
+  vim.keymap.set("i", "<c-n>", "<down>")
+
   -- Misc.
   vim.keymap.set("n", "<localleader>1", function()
     vim.cmd("e " .. require("vars").scratchpad_path)

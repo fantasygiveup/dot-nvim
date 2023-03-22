@@ -58,7 +58,12 @@ M.finder_setup = function()
   vim.keymap.set("n", "<localleader>gg", "<cmd>lua require'telescope.builtin'.git_status()<cr>")
   vim.keymap.set("n", "<localleader>gb", "<cmd>lua require'telescope.builtin'.git_bcommits()<cr>")
   vim.keymap.set("n", "<localleader>gl", "<cmd>lua require'telescope.builtin'.git_commits()<cr>")
-  vim.keymap.set({ "n", "v" }, "<leader>/", "<cmd>lua require'telescope.builtin'.grep_string()<cr>")
+  vim.keymap.set(
+    { "n" },
+    "<leader>/",
+    "<cmd>lua require'telescope.builtin'.grep_string({search = ''})<cr>"
+  )
+  vim.keymap.set({ "v" }, "<leader>/", "<cmd>lua require'telescope.builtin'.grep_string()<cr>")
   vim.keymap.set(
     "n",
     "<c-s>",

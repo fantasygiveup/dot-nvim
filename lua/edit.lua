@@ -5,6 +5,7 @@ M.config = function(use)
   use({ "kylechui/nvim-surround", config = M.nvim_surround_setup })
   use({ "windwp/nvim-autopairs", config = M.autopairs_setup })
   use({ "gbprod/yanky.nvim", config = M.yanky_setup })
+  use({ "phaazon/hop.nvim", branch = "v2", config = M.hop_setup }) -- similar to emacs ace-jump-mode
 end
 
 M.comment_nvim_setup = function()
@@ -53,6 +54,26 @@ M.yanky_setup = function()
   vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
   vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleForward)")
   vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleBackward)")
+end
+
+M.hop_setup = function()
+  local ok, hop = pcall(require, "hop")
+  if not ok then
+    return
+  end
+
+  local ok, hop_hint = pcall(require, "hop.hint")
+  if not ok then
+    return
+  end
+
+  hop.setup({
+    { keys = "etovxqpdygfblzhckisuran" },
+  })
+
+  vim.keymap.set("", "f", function()
+    hop.hint_words()
+  end, { remap = true })
 end
 
 return M

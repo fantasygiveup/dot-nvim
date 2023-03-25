@@ -37,7 +37,9 @@ M.null_ls_setup = function()
         })
       end
     end,
+
     debug = false,
+
     sources = {
       diagnostics.golangci_lint,
       diagnostics.yamllint.with({
@@ -63,7 +65,7 @@ M.null_ls_setup = function()
             return default_args
           end
 
-          local file_names = { ".prettierrc.js", "prettier.config.js" }
+          local file_names = { ".prettierrc.js", ".prettierrc", "prettier.config.js" }
 
           for _, file_name in ipairs(file_names) do
             local conf_path = project_root.get_project_root() .. vars.path_sep .. file_name

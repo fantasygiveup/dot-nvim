@@ -61,13 +61,13 @@ M.finder_setup = function()
   vim.keymap.set(
     { "n" },
     "<leader>/",
-    "<cmd>lua require'telescope.builtin'.grep_string({search = ''})<cr>"
+    "<cmd>lua require'telescope.builtin'.grep_string({ search = '' })<cr>"
   )
   vim.keymap.set({ "v" }, "<leader>/", "<cmd>lua require'telescope.builtin'.grep_string()<cr>")
   vim.keymap.set(
     "n",
     "<c-s>",
-    "<cmd>lua require'telescope.builtin'.grep_string({ cwd = require'vars'.notes_dir })<cr>",
+    "<cmd>lua require'telescope.builtin'.grep_string({ cwd = require'vars'.notes_dir, search = '' })<cr>",
     { desc = "grep_notes" }
   )
 end

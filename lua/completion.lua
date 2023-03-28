@@ -202,7 +202,7 @@ M.lspconfig_setup = function()
   capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  local servers = { "ccls", "gopls", "pyright", "tsserver", "rust_analyzer", "lua_ls" }
+  local servers = { "ccls", "gopls", "pyright", "tsserver", "rust_analyzer", "lua_ls", "cssls" }
   for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup({
       on_attach = on_attach,

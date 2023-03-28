@@ -6,23 +6,6 @@ local os_name = vim.loop.os_uname().sysname
 local user_repo = home .. path_sep .. "github.com" .. path_sep .. "illia-danko" .. path_sep
 local notes_dir = user_repo .. "docs"
 local cache_dir = home .. path_sep .. ".cache" .. path_sep .. "nvim" .. path_sep
-local rg_opts = {
-  "rg",
-  "--color=never",
-  "--no-heading",
-  "--with-filename",
-  "--line-number",
-  "--column",
-  "--smart-case",
-}
--- TODO(idanko): move to utils (split string, merge table)
-for word in vim.env.RG_OPTS_FILTER:gmatch("%S+") do
-  table.insert(rg_opts, word)
-end
-local fzf_default_command = {}
-for word in vim.env.FZF_DEFAULT_COMMAND:gmatch("%S+") do
-  table.insert(fzf_default_command, word)
-end
 
 function vars:load_variables()
   vim.g.loaded_python3_provider = 0
@@ -46,8 +29,8 @@ function vars:load_variables()
   self.home = home
   self.user_name = "Illia Danko"
   self.diagnostic_severity = vim.diagnostic.severity.ERROR
-  self.rg_opts = rg_opts
-  self.fzf_default_command = fzf_default_command
+  self.rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512 "
+    .. vim.env.RG_OPTS_FILTER
   self.scratchpad_path = cache_dir .. "scratchpad.txt"
 end
 

@@ -3,7 +3,7 @@ local M = {}
 M.config = function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
-    requires = { "nvim-treesitter/playground", "p00f/nvim-ts-rainbow" },
+    requires = { "nvim-treesitter/playground", "p00f/nvim-ts-rainbow", "windwp/nvim-ts-autotag" },
     config = M.treesitter_setup,
   })
 end
@@ -12,12 +12,19 @@ M.treesitter_setup = function()
   require("nvim-treesitter.configs").setup({
     highlight = {
       enable = true,
+      additional_vim_regex_highlighting = true,
     },
     rainbow = {
       enable = true,
-      disable = { "lua", "jsx", "javascript", "json", "c", "cpp", "go" },
+      disable = { "lua", "jsx", "tsx", "ts", "javascript", "json", "c", "cpp", "go" },
       extended_mode = true,
       max_file_lines = nil,
+    },
+    autotag = {
+      enable = true,
+    },
+    indent = {
+      enable = true,
     },
     ensure_installed = {
       "go",
@@ -45,6 +52,8 @@ M.treesitter_setup = function()
       "rust",
       "http",
       "comment",
+      "typescript",
+      "tsx",
     },
   })
 

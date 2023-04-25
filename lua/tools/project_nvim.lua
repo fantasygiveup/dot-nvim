@@ -11,7 +11,7 @@ M.project_nvim_setup = function()
   end
 
   project_nvim.setup({
-    patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "go.mod" },
+    patterns = { ".git", ".hg", ".bzr", ".svn" },
     detection_methods = { "pattern", "lsp" },
   })
 end

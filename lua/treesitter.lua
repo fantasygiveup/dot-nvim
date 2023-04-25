@@ -3,6 +3,7 @@ local M = {}
 M.config = function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
+    commit = "eedc5198a1b4bb1b08ae6d4f64f3d76e376957aa",
     requires = { "nvim-treesitter/playground", "p00f/nvim-ts-rainbow", "windwp/nvim-ts-autotag" },
     config = M.treesitter_setup,
   })

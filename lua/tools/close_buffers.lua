@@ -15,6 +15,12 @@ M.close_buffers_setup = function()
     return
   end
 
+  vim.keymap.set("n", "<localleader>dd", function()
+    local file_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), "%")
+    close_buffers.wipe({ type = "this", force = true })
+    print("Close " .. file_name)
+  end, { desc = "close_current_buffer" })
+
   vim.keymap.set("n", "<localleader>do", function()
     close_buffers.wipe({ type = "other", force = true })
     print("Close other buffers")

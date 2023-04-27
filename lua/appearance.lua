@@ -1,25 +1,22 @@
 local M = {}
 
 M.config = function(use)
-  use({ "navarasu/onedark.nvim", config = M.theme_setup })
+  use({ "folke/tokyonight.nvim", config = M.theme_setup })
   use({ "folke/which-key.nvim", config = M.which_key_setup })
   use({ "nvim-lualine/lualine.nvim", config = M.status_line_setup })
   use({ "folke/zen-mode.nvim", config = M.zen_mode_setup })
 end
 
 M.theme_setup = function()
-  local ok, theme = pcall(require, "onedark")
+  local ok, theme = pcall(require, "tokyonight")
   if not ok then
     return
   end
 
   vim.o.background = os.getenv("SYSTEM_COLOR_THEME")
 
-  theme.setup({
-    style = vim.o.background,
-    highlights = { QuickFixLine = { fmt = "none" } }, -- overrides
-  })
-  theme.load()
+  theme.setup({})
+  vim.cmd([[colorscheme tokyonight]])
 end
 
 M.which_key_setup = function()
@@ -87,7 +84,7 @@ M.status_line_setup = function()
 
   lualine.setup({
     options = {
-      theme = "auto",
+      theme = "tokyonight",
       section_separators = { left = "", right = "" },
       component_separators = { left = "", right = "" },
     },

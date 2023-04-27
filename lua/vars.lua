@@ -32,6 +32,13 @@ function vars:load_variables()
   self.rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512 "
     .. vim.env.RG_OPTS_FILTER
   self.scratchpad_path = cache_dir .. "scratchpad.txt"
+  self.system_theme_file = home
+    .. path_sep
+    .. ".config"
+    .. path_sep
+    .. "custom-appearance"
+    .. path_sep
+    .. "background"
 end
 
 function vars:ensure_dir()

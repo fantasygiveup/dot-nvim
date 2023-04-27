@@ -5,6 +5,7 @@ M.config = function(use)
   use({ "folke/which-key.nvim", config = M.which_key_setup })
   use({ "nvim-lualine/lualine.nvim", config = M.status_line_setup })
   use({ "folke/zen-mode.nvim", config = M.zen_mode_setup })
+  use({ "rktjmp/fwatch.nvim" })
 end
 
 M.theme_setup = function()
@@ -13,7 +14,17 @@ M.theme_setup = function()
     return
   end
 
-  vim.o.background = os.getenv("SYSTEM_COLOR_THEME")
+  local ok, fwatch = pcall(require, "fwatch")
+  if not ok then
+    return
+  end
+
+  require("utils.system_theme").load_background()
+  fwatch.watch(require("vars").system_theme_file, {
+    on_event = function()
+      require("utils.system_theme").load_background_async()
+    end,
+  })
 
   theme.setup({})
   vim.cmd([[colorscheme tokyonight]])

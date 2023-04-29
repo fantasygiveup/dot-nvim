@@ -25,8 +25,8 @@ M.finder_setup = function()
     keymap = {
       builtin = {
         ["<A-p>"] = "toggle-preview",
-        ["<C-f>"] = "preview-page-down",
-        ["<C-b>"] = "preview-page-up",
+        ["<C-d>"] = "preview-page-down",
+        ["<C-u>"] = "preview-page-up",
       },
       fzf = {},
     },

@@ -14,6 +14,7 @@ M.finder_setup = function()
   fzf_lua.setup({
     winopts = {
       fullscreen = true,
+      number = false,
       preview = {
         vertical = "down:50%",
         horizontal = "right:50%",

@@ -57,3 +57,4 @@ require("vc").setup()
 
 require("tools.notes").setup()
 require("tools.gpg").setup()
+require("tools.fzf_project").setup()

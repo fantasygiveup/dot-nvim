@@ -90,14 +90,6 @@ M.setup = function()
       end)
     end,
   })
-
-  vim.api.nvim_create_autocmd({ "TermLeave" }, {
-    group = gr,
-    pattern = { "*" },
-    callback = function()
-      zen(0)
-    end,
-  })
 end
 
 return M

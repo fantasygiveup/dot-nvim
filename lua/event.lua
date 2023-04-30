@@ -80,16 +80,6 @@ M.setup = function()
       end
     end,
   })
-
-  vim.api.nvim_create_autocmd({ "TermOpen", "VimEnter" }, {
-    group = gr,
-    pattern = { "*" },
-    callback = function()
-      on_buf_pat("term://", function()
-        zen(1)
-      end)
-    end,
-  })
 end
 
 return M

@@ -14,15 +14,6 @@ local function zen(enable)
   end
 end
 
-local function on_buf_pat(pat, fn)
-  local win = vim.api.nvim_get_current_win()
-  local buf = vim.api.nvim_win_get_buf(win)
-  local buf_name = vim.api.nvim_buf_get_name(buf)
-  if buf_name:find(pat, 1, true) == 1 then
-    fn()
-  end
-end
-
 M.setup = function()
   vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     group = gr,

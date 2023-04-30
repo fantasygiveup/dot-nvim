@@ -33,6 +33,7 @@ packer.startup(function(use)
   require("tools.tmux").config(use)
   require("tools.rest_client").config(use)
   require("tools.markdown_preview").config(use)
+  require("tools.toggleterm").config(use)
 
   require("formatter_diagnostics").config(use)
   require("fuzzy_finder").config(use)

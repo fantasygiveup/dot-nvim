@@ -62,36 +62,11 @@ M.hop_setup = function()
     return
   end
 
-  local ok, hop_hint = pcall(require, "hop.hint")
-  if not ok then
-    return
-  end
+  hop.setup({})
 
-  hop.setup({
-    { keys = "etovxqpdygfblzhckisuran" },
-  })
-
-  local directions = hop_hint.HintDirection
-  vim.keymap.set("", "f", function()
-    hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
-  end, { remap = true })
-  vim.keymap.set("", "F", function()
-    hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
-  end, { remap = true })
-  vim.keymap.set("", "t", function()
-    hop.hint_char1({
-      direction = directions.AFTER_CURSOR,
-      current_line_only = true,
-      hint_offset = -1,
-    })
-  end, { remap = true })
-  vim.keymap.set("", "T", function()
-    hop.hint_char1({
-      direction = directions.BEFORE_CURSOR,
-      current_line_only = true,
-      hint_offset = 1,
-    })
-  end, { remap = true })
+  vim.keymap.set("", "<a-t>", function()
+    hop.hint_words({})
+  end, { remap = true, desc = "hop_words" })
 end
 
 return M

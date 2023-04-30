@@ -34,6 +34,13 @@ local function append_to_file(path, s)
   return 1
 end
 
+local function win_scroll_last_line(win, bufnr)
+  local win = win or 0
+  local bufnr = bufnr or 0
+  local buf_lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, true)
+  vim.api.nvim_win_set_cursor(win, { #buf_lines, 0 })
+end
+
 local function diary_new_entry(title)
   if not title or title == "" then
     return
@@ -67,13 +74,6 @@ M.todos_open_file = function()
   if open_buffer_file(require("vars").todos) then
     require("appearance").zen_mode(5, 1)
   end
-end
-
-local function win_scroll_last_line(win, bufnr)
-  local win = win or 0
-  local bufnr = bufnr or 0
-  local buf_lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, true)
-  vim.api.nvim_win_set_cursor(win, { #buf_lines, 0 })
 end
 
 local function todos_new_entry(title)

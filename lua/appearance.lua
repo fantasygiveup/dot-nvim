@@ -65,13 +65,17 @@ M.status_line_setup = function()
       return str
     end
 
+    local unique_clients = {} -- handle the case when several projects are opened
     for _, client in ipairs(clients) do
       local filetypes = client.config.filetypes
       if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        if string.len(str) > 0 then
-          str = str .. " "
+        if unique_clients[client.name] == nil then
+          if string.len(str) > 0 then
+            str = str .. " "
+          end
+          str = str .. client.name
+          unique_clients[client.name] = true
         end
-        str = str .. client.name
       end
     end
     if string.len(str) > 0 then

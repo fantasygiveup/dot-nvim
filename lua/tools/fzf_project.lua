@@ -31,7 +31,10 @@ M.navigate = function()
         if #selected < 1 then
           return
         end
-        fzf_lua.files({ cwd = root_path .. path_sep .. selected[1] })
+        fzf_lua.files({
+          cwd = root_path .. path_sep .. selected[1],
+          cmd = vim.env.FZF_DEFAULT_COMMAND,
+        })
       end,
     },
   })

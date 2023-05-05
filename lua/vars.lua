@@ -13,6 +13,8 @@ function vars:load_variables()
   vim.g.loaded_node_provider = 0
   vim.g.loaded_perl_provider = 0
   vim.g.omni_sql_no_default_maps = 1
+  vim.g.loaded_netrw = 1 -- required by nvim-tree file_manager.lua
+  vim.g.loaded_netrwPlugin = 1 -- required by nvim-tree file_manager.lua
 
   -- Custom.
   self.is_mac = os_name == "Darwin"

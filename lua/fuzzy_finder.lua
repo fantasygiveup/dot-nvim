@@ -27,6 +27,8 @@ M.finder_setup = function()
         ["<A-p>"] = "toggle-preview",
         ["<C-d>"] = "preview-page-down",
         ["<C-u>"] = "preview-page-up",
+        ["<F1>"] = "toggle-help",
+        ["<F2>"] = "toggle-fullscreen",
       },
       fzf = {},
     },

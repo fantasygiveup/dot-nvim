@@ -19,9 +19,21 @@ M.toggleterm_setup = function()
     start_in_insert = false, -- manually handle autoinsert in all cases (see below)
   })
 
+  -- Remember the opened project assosiated with a terminal session.
+  local opened_projects = {}
   vim.keymap.set("n", "<localleader>tt", function()
     local project_root = project.get_project_root()
-    toggleterm.toggle(0, 0, project_root, "float")
+    index = table.getn(opened_projects) + 1
+    for n, p in ipairs(opened_projects) do
+      if p == project_root then
+        index = n
+        break
+      end
+    end
+    if index == table.getn(opened_projects) + 1 then
+      table.insert(opened_projects, project_root)
+    end
+    toggleterm.toggle(index, 0, project_root, "float")
   end, { desc = "toggle_term_project" })
 
   local gr = vim.api.nvim_create_augroup("TermToggle", {})

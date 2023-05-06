@@ -2,20 +2,35 @@ local M = {}
 
 M.config = function(use)
   use({
-    "nvim-tree/nvim-tree.lua",
+    "lmburns/lf.nvim",
+    requires = { "nvim-lua/plenary.nvim", "akinsho/toggleterm.nvim" },
     config = M.file_manager_setup,
   })
 end
 
 M.file_manager_setup = function()
-  local ok, nvim_tree = pcall(require, "nvim-tree")
+  local ok, lf = pcall(require, "lf")
   if not ok then
     return
   end
 
-  nvim_tree.setup({})
+  vim.g.loaded_netrw = 1 -- required by nvim-tree file_manager.lua
+  vim.g.loaded_netrwPlugin = 1 -- required by nvim-tree file_manager.lua
+  vim.g.lf_netrw = 1
+  vim.g.lf_replace_netrw = 1 -- use lf over netrw
 
-  vim.keymap.set("n", "-", "<cmd>nohlsearch | NvimTreeFindFileToggle<cr>")
+  lf.setup({
+    border = "none",
+    winblend = 0, -- disable transparency
+    height = 1.0, -- full height
+    width = 1.0, -- full width
+    highlights = {
+      NormalFloat = { link = "Normal" },
+    },
+    mappings = false,
+  })
+
+  vim.keymap.set("n", "-", "<cmd>nohlsearch | Lf<cr>")
 end
 
 return M

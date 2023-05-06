@@ -10,6 +10,11 @@ M.toggleterm_setup = function()
     return
   end
 
+  local ok, terminal = pcall(require, "toggleterm.terminal")
+  if not ok then
+    return
+  end
+
   local ok, project = pcall(require, "project_nvim.project")
   if not ok then
     return
@@ -17,6 +22,9 @@ M.toggleterm_setup = function()
 
   toggleterm.setup({
     start_in_insert = false, -- manually handle autoinsert in all cases (see below)
+    float_opts = {
+      border = "double",
+    },
   })
 
   -- Remember the opened project assosiated with a terminal session.
@@ -53,6 +61,31 @@ M.toggleterm_setup = function()
       vim.cmd("startinsert")
     end,
   })
+
+  local Terminal = terminal.Terminal
+  local lazygit = Terminal:new({
+    cmd = "lazygit",
+    count = 100, -- use high number to no intersect with regular OpenTerm
+    dir = "git_dir",
+    direction = "float",
+    on_open = function(term)
+      vim.cmd("startinsert!")
+      vim.api.nvim_buf_set_keymap(
+        term.bufnr,
+        "n",
+        "q",
+        "<cmd>close<CR>",
+        { noremap = true, silent = true }
+      )
+    end,
+    on_close = function(term)
+      vim.cmd("startinsert!")
+    end,
+  })
+
+  vim.keymap.set("n", "<localleader>gg", function()
+    lazygit:toggle()
+  end, { desc = "lazygit" })
 end
 
 return M

@@ -13,18 +13,7 @@ M.file_manager_setup = function()
     return
   end
 
-  nvim_tree.setup({
-    sort_by = "case_sensitive",
-    view = {
-      width = 30,
-    },
-    renderer = {
-      group_empty = true,
-    },
-    filters = {
-      dotfiles = true,
-    },
-  })
+  nvim_tree.setup({})
 
   vim.keymap.set("n", "-", "<cmd>nohlsearch | NvimTreeFindFileToggle<cr>")
 end

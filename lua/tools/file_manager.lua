@@ -20,10 +20,8 @@ M.file_manager_setup = function()
   vim.g.lf_replace_netrw = 1 -- use lf over netrw
 
   lf.setup({
-    border = "none",
+    border = "double",
     winblend = 0, -- disable transparency
-    height = 1.0, -- full height
-    width = 1.0, -- full width
     highlights = {
       NormalFloat = { link = "Normal" },
     },

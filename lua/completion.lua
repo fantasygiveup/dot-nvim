@@ -125,15 +125,16 @@ M.lspconfig_setup = function()
     virtual_text = false,
     signs = {
       active = {
-        { name = "DiagnosticSignError", text = "" },
-        { name = "DiagnosticSignWarn", text = "" },
-        { name = "DiagnosticSignHint", text = "" },
-        { name = "DiagnosticSignInfo", text = "" },
+        -- Disable signs.
+        { name = "DiagnosticSignError", text = "" },
+        { name = "DiagnosticSignWarn", text = "" },
+        { name = "DiagnosticSignHint", text = "" },
+        { name = "DiagnosticSignInfo", text = "" },
       },
-      severity = vim.diagnostic.severity.ERROR,
+      severity = require("vars").diagnostic_severity,
     },
     update_in_insert = true,
-    underline = { severity = vim.diagnostic.severity.ERROR },
+    underline = false,
     severity_sort = true,
     float = {
       focusable = false,

@@ -114,7 +114,12 @@ M.status_line_setup = function()
           sources = { "nvim_diagnostic" },
           sections = diagnostics_severity(),
           symbols = { error = " ", warn = " ", info = " ", hint = " " },
+          diagnostics_color = {
+            error = "MiniStatuslineModeReplace", -- red background
+            warn = "MiniStatuslineModeCommand", -- yellow background
+          },
         },
+        "branch",
       },
       lualine_x = {
         { lsp_active_clients, color = { fg = vim.g.terminal_color_6 } },

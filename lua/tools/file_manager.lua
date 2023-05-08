@@ -14,8 +14,6 @@ M.file_manager_setup = function()
     return
   end
 
-  vim.g.loaded_netrw = 1 -- required by nvim-tree file_manager.lua
-  vim.g.loaded_netrwPlugin = 1 -- required by nvim-tree file_manager.lua
   vim.g.lf_netrw = 1
   vim.g.lf_replace_netrw = 1 -- use lf over netrw
 

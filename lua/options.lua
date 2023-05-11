@@ -12,7 +12,7 @@ M.setup = function()
   vim.o.swapfile = false
   -- Show non-printable characters.
   vim.o.list = true
-  vim.o.listchars = "tab:»·,nbsp:+,trail:,extends:→,precedes:←"
+  vim.o.listchars = "nbsp:+,trail:,extends:→,precedes:←"
   vim.o.showmode = false -- don't show current mode in command-line
   vim.o.showcmd = false -- don't show typed keys
   vim.o.autoindent = true -- indent according to previous line

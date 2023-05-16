@@ -29,7 +29,7 @@ end
 
 lazy.setup({
   { "ahmedkhalf/project.nvim", config = require("tools.project_nvim").config },
-  { "akinsho/toggleterm.nvim", config = require("tools.toggleterm") },
+  { "akinsho/toggleterm.nvim", config = require("tools.toggleterm").config },
   {
     "navarasu/onedark.nvim",
     dependencies = { "rktjmp/fwatch.nvim" },
@@ -45,7 +45,7 @@ lazy.setup({
   },
   { "norcalli/nvim-colorizer.lua", config = require("tools.colorizer").config },
   { "kazhala/close-buffers.nvim", config = require("tools.close_buffers").config },
-  { "rest-nvim/rest.nvim", config = require("tools.rest_client").config, ft = "http" },
+  { "rest-nvim/rest.nvim", ft = "http", config = require("tools.rest_client").config },
   {
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",

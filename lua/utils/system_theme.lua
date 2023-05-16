@@ -1,6 +1,6 @@
 local M = {}
 
--- load_system_theme relies on $HOME/.config/custom-appearance/background
+-- load_system_theme relies on $HOME/.config/appearance/background
 
 M.theme = function(theme_file)
   local fd = io.open(theme_file)

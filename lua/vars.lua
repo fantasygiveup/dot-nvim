@@ -36,7 +36,7 @@ function vars:load_variables()
     .. path_sep
     .. ".config"
     .. path_sep
-    .. "custom-appearance"
+    .. "appearance"
     .. path_sep
     .. "background"
 end

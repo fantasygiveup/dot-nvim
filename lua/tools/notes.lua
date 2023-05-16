@@ -94,7 +94,7 @@ local function todos_new_entry(title)
   end
 end
 
-M.setup = function()
+M.config = function()
   vim.keymap.set("n", "<leader>od", function()
     vim.ui.input({ prompt = "New Diary", relative = "win" }, diary_new_entry)
   end, { desc = "diary_new_entry" })

@@ -5,7 +5,7 @@ local M = {}
 
 local gr = vim.api.nvim_create_augroup("MyEcryptedGroup", {})
 
-M.setup = function()
+M.config = function()
   vim.api.nvim_create_autocmd({ "BufReadPre", "FileReadPre" }, {
     group = gr,
     pattern = { "*.gpg" },

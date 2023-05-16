@@ -1,15 +1,23 @@
 local M = {}
 
-M.config = function(use)
-  use({ "ibhagwan/fzf-lua", requires = { "kyazdani42/nvim-web-devicons" }, config = M.finder_setup })
-  use({ "stevearc/dressing.nvim", config = M.dressing_setup })
-end
+M.config = function()
+  local ok, dressing = pcall(require, "dressing")
+  if not ok then
+    return
+  end
 
-M.finder_setup = function()
   local ok, fzf_lua = pcall(require, "fzf-lua")
   if not ok then
     return
   end
+
+  dressing.setup({
+    input = {
+      get_config = function(opts)
+        return opts
+      end,
+    },
+  })
 
   fzf_lua.setup({
     winopts = {
@@ -64,21 +72,6 @@ M.finder_setup = function()
   vim.keymap.set("n", "<c-s>", function()
     grep_project({ prompt = "Notes> ", cwd = require("vars").notes_dir })
   end, { desc = "grep_notes" })
-end
-
-M.dressing_setup = function()
-  local ok, dressing = pcall(require, "dressing")
-  if not ok then
-    return
-  end
-
-  dressing.setup({
-    input = {
-      get_config = function(opts)
-        return opts
-      end,
-    },
-  })
 end
 
 return M

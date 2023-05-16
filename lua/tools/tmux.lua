@@ -1,10 +1,6 @@
 local M = {}
 
-M.config = function(use)
-  use({ "aserowy/tmux.nvim", config = M.tmux })
-end
-
-M.tmux = function()
+M.config = function()
   local ok, tmux = pcall(require, "tmux")
   if not ok then
     return

@@ -1,18 +1,6 @@
 local M = {}
 
-M.config = function(use)
-  use({
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    setup = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    ft = { "markdown" },
-    config = M.markdown_preview_setup,
-  })
-end
-
-M.markdown_preview_setup = function()
+M.config = function()
   vim.api.nvim_create_autocmd({ "FileType" }, {
     group = vim.api.nvim_create_augroup("MarkdownPreview", {}),
     pattern = { "markdown" },

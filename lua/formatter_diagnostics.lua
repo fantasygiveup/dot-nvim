@@ -1,10 +1,6 @@
 local M = {}
 
-M.config = function(use)
-  use({ "jose-elias-alvarez/null-ls.nvim", config = M.null_ls_setup })
-end
-
-M.null_ls_setup = function()
+M.config = function()
   local ok, null_ls = pcall(require, "null-ls")
   if not ok then
     return

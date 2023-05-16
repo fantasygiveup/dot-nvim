@@ -1,50 +1,6 @@
 local M = {}
 
-M.config = function(use)
-  use({ "navarasu/onedark.nvim", config = M.theme_setup })
-  use({ "folke/which-key.nvim", config = M.which_key_setup })
-  use({ "nvim-lualine/lualine.nvim", config = M.status_line_setup })
-  use({ "folke/zen-mode.nvim", config = M.zen_mode_setup })
-  use({ "rktjmp/fwatch.nvim" })
-end
-
-M.theme_setup = function()
-  local ok, theme = pcall(require, "onedark")
-  if not ok then
-    return
-  end
-
-  local ok, fwatch = pcall(require, "fwatch")
-  if not ok then
-    return
-  end
-
-  require("utils.system_theme").load_background()
-  fwatch.watch(require("vars").system_theme_file, {
-    on_event = function()
-      require("utils.system_theme").load_background_async()
-    end,
-  })
-
-  theme.setup({
-    style = vim.o.background,
-    highlights = { QuickFixLine = { fmt = "none" } }, -- overrides
-  })
-  theme.load()
-end
-
-M.which_key_setup = function()
-  local ok, which_key = pcall(require, "which-key")
-  if not ok then
-    return
-  end
-
-  which_key.setup({
-    layout = { height = { min = 4, max = 15 } },
-  })
-end
-
-M.status_line_setup = function()
+M.config = function()
   local ok, lualine = pcall(require, "lualine")
   if not ok then
     return
@@ -132,61 +88,6 @@ M.status_line_setup = function()
       },
     },
   })
-end
-
-M.zen_mode_setup = function()
-  local ok, zen_mode = pcall(require, "zen-mode")
-  if not ok then
-    return
-  end
-
-  zen_mode.setup({
-    window = {
-      backdrop = 1.0,
-      width = 80,
-      options = {
-        wrap = true,
-        signcolumn = "no",
-        number = false,
-        relativenumber = false,
-        cursorline = false,
-        cursorcolumn = false,
-        foldcolumn = "0",
-        list = false,
-      },
-    },
-  })
-
-  vim.keymap.set(
-    "n",
-    "<localleader>z",
-    "<cmd>lua require'appearance'.zen_mode()<cr>",
-    { desc = "zen_mode_toggle" }
-  )
-end
-
-M.zen_mode = function(extra_width, direction)
-  local ok, view = pcall(require, "zen-mode.view")
-  if not ok then
-    return
-  end
-  local extra_width = extra_width or 0
-  local direction = direction or 0
-
-  local fn = view.toggle
-  if direction > 0 then
-    fn = view.open
-  elseif direction < 0 then
-    fn = view.close
-  end
-
-  local opts = {
-    window = {
-      width = vim.bo.textwidth + extra_width,
-    },
-  }
-
-  fn(opts)
 end
 
 return M

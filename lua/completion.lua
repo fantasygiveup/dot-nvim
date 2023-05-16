@@ -1,23 +1,6 @@
 local M = {}
 
-M.config = function(use)
-  use({
-    "hrsh7th/nvim-cmp",
-    requires = {
-      { "L3MON4D3/LuaSnip" },
-      { "hrsh7th/cmp-path" },
-      { "hrsh7th/cmp-buffer" },
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "saadparwaiz1/cmp_luasnip" },
-      { "andersevenrud/cmp-tmux" },
-      { "hrsh7th/cmp-calc" },
-    },
-    config = M.cmp_setup,
-  })
-  use({ "neovim/nvim-lspconfig", config = M.lspconfig_setup })
-end
-
-M.cmp_setup = function()
+M.cmp_config = function()
   local ok, cmp = pcall(require, "cmp")
   if not ok then
     return
@@ -89,7 +72,7 @@ M.cmp_setup = function()
   })
 end
 
-M.lspconfig_setup = function()
+M.lsp_config = function()
   local ok, lspconfig = pcall(require, "lspconfig")
   if not ok then
     return
@@ -210,6 +193,11 @@ M.lspconfig_setup = function()
       capabilities = capabilities,
     })
   end
+end
+
+M.config = function()
+  M.cmp_config()
+  M.lsp_config()
 end
 
 return M

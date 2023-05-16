@@ -1,14 +1,6 @@
 local M = {}
 
-M.config = function(use)
-  use({
-    "lmburns/lf.nvim",
-    requires = { "nvim-lua/plenary.nvim", "akinsho/toggleterm.nvim" },
-    config = M.file_manager_setup,
-  })
-end
-
-M.file_manager_setup = function()
+M.config = function()
   local ok, lf = pcall(require, "lf")
   if not ok then
     return

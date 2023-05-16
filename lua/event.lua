@@ -14,7 +14,7 @@ local function zen(enable)
   end
 end
 
-M.setup = function()
+M.config = function()
   vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     group = gr,
     pattern = { "COMMIT_EDITMSG" },

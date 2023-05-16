@@ -40,7 +40,7 @@ M.navigate = function()
   })
 end
 
-M.setup = function()
+M.config = function()
   vim.keymap.set(
     "n",
     "<C-g>",

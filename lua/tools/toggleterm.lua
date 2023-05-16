@@ -1,10 +1,6 @@
 local M = {}
 
-M.config = function(use)
-  use({ "akinsho/toggleterm.nvim", config = M.toggleterm_setup })
-end
-
-M.toggleterm_setup = function()
+M.config = function()
   local ok, toggleterm = pcall(require, "toggleterm")
   if not ok then
     return

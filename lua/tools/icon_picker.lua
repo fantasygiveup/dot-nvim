@@ -1,10 +1,6 @@
 local M = {}
 
-M.config = function(use)
-  use({ "ziontee113/icon-picker.nvim", config = M.icon_picker_setup })
-end
-
-M.icon_picker_setup = function()
+M.config = function()
   local ok, icon_picker = pcall(require, "icon-picker")
   if not ok then
     return

@@ -1,14 +1,6 @@
 local M = {}
 
-M.config = function(use)
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    requires = { "nvim-treesitter/playground", "p00f/nvim-ts-rainbow", "windwp/nvim-ts-autotag" },
-    config = M.treesitter_setup,
-  })
-end
-
-M.treesitter_setup = function()
+M.config = function()
   require("nvim-treesitter.configs").setup({
     highlight = {
       enable = true,

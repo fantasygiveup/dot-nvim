@@ -1,10 +1,6 @@
 local M = {}
 
-M.config = function(use)
-  use({ "kazhala/close-buffers.nvim", config = M.close_buffers_setup })
-end
-
-M.close_buffers_setup = function()
+M.config = function()
   local ok, close_buffers = pcall(require, "close_buffers")
   if not ok then
     return
@@ -14,6 +10,13 @@ M.close_buffers_setup = function()
   if not ok then
     return
   end
+
+  vim.keymap.set(
+    "n",
+    "<localleader>db",
+    "<cmd>bp | sp | bn | bd<cr>",
+    { desc = "close_buffer_no_window" }
+  )
 
   vim.keymap.set("n", "<localleader>dd", function()
     local file_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), "%")

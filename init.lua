@@ -59,7 +59,7 @@ lazy.setup({
   { "folke/which-key.nvim", config = require("my_which_key").config },
   {
     "ibhagwan/fzf-lua",
-    dependencies = { "stevearc/dressing.nvim" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "stevearc/dressing.nvim" },
     config = require("fuzzy_finder").config,
   },
   {

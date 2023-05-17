@@ -26,7 +26,7 @@ M.config = function()
   vim.keymap.set(
     "n",
     "<localleader>z",
-    "<cmd>lua require'appearance'.zen_mode()<cr>",
+    "<cmd>lua require'view.zen_mode'.zen_mode()<cr>",
     { desc = "zen_mode_toggle" }
   )
 end

@@ -63,7 +63,7 @@ end
 
 M.diary_open_file = function()
   open_buffer_file(require("vars").diary)
-  require("appearance").zen_mode(5, 1)
+  require("view.zen_mode").zen_mode(5, 1)
 end
 
 M.diary_new_entry = function()

@@ -58,8 +58,12 @@ lazy.setup({
   { "jose-elias-alvarez/null-ls.nvim", config = require("formatter_diagnostics").config },
   { "folke/zen-mode.nvim", config = require("view.zen_mode").config },
   {
-    "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons", "stevearc/dressing.nvim" },
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "stevearc/dressing.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    },
     config = require("fuzzy_finder").config,
   },
   {
@@ -102,5 +106,4 @@ lazy.setup({
 require("event").config()
 require("tools.notes").config()
 require("tools.gpg").config()
-require("tools.fzf_project").config()
 require("vc.git_save_file_remote").config()

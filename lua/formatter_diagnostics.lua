@@ -51,7 +51,31 @@ M.config = function()
         },
       }),
       formatting.yapf,
-      formatting.prettier,
+      formatting.prettier.with({
+        extra_args = function()
+          local default_args =
+            { "--config=" .. config_dir .. "prettier" .. vars.path_sep .. "prettier.config.js" }
+
+          local ok, project_root = pcall(require, "project_nvim.project")
+          if not ok then
+            return default_args
+          end
+
+          local file_names = { ".prettierrc.js", ".prettierrc", "prettier.config.js" }
+
+          for _, file_name in ipairs(file_names) do
+            local conf_path = project_root.get_project_root() .. vars.path_sep .. file_name
+            local prettierrc_fd = io.open(conf_path, "r")
+
+            if prettierrc_fd ~= nil then
+              io.close(prettierrc_fd)
+              return { "--config=" .. conf_path }
+            end
+          end
+
+          return default_args
+        end,
+      }),
     },
   })
 end

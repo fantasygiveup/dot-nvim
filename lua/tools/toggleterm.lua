@@ -16,11 +16,15 @@ M.config = function()
     return
   end
 
+  local toggleterm_float_opts = {
+    border = "none",
+    width = 1000,
+    height = 1000,
+  }
+
   toggleterm.setup({
     start_in_insert = false, -- manually handle autoinsert in all cases (see below)
-    float_opts = {
-      border = "double",
-    },
+    float_opts = toggleterm_float_opts,
   })
 
   -- Remember the opened project assosiated with a terminal session.
@@ -46,7 +50,8 @@ M.config = function()
     pattern = { "*#toggleterm#*" },
     callback = function()
       local opts = { buffer = 0 }
-      vim.keymap.set("t", "<esc>", [[<C-\><C-n>:ToggleTerm<cr>]], opts)
+      vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+      vim.keymap.set("n", "<esc>", [[:ToggleTerm<cr>]], opts)
     end,
   })
 
@@ -65,6 +70,7 @@ M.config = function()
       count = 100, -- use high number to no intersect with regular OpenTerm
       dir = "git_dir",
       direction = "float",
+      float_opts = toggleterm_float_opts,
       on_open = function(term)
         vim.cmd("startinsert!")
         vim.api.nvim_buf_set_keymap(

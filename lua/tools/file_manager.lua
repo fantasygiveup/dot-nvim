@@ -10,7 +10,9 @@ M.config = function()
   vim.g.lf_replace_netrw = 1 -- use lf over netrw
 
   lf.setup({
-    border = "double",
+    border = "none",
+    width = 1000,
+    height = 1000,
     winblend = 0, -- disable transparency
     highlights = {
       NormalFloat = { link = "Normal" },

@@ -16,15 +16,17 @@ M.config = function()
     return
   end
 
-  local toggleterm_float_opts = {
-    border = "none",
-    width = 1000,
-    height = 1000,
-  }
+  local toggleterm_float_opts = function()
+    return {
+      border = "none",
+      width = vim.o.columns,
+      height = vim.o.lines - 1,
+    }
+  end
 
   toggleterm.setup({
     start_in_insert = false, -- manually handle autoinsert in all cases (see below)
-    float_opts = toggleterm_float_opts,
+    float_opts = toggleterm_float_opts(),
   })
 
   -- Remember the opened project assosiated with a terminal session.
@@ -67,10 +69,10 @@ M.config = function()
   vim.keymap.set("n", "<localleader>gg", function()
     local lazygit = Terminal:new({
       cmd = "lazygit",
-      count = 100, -- use high number to no intersect with regular OpenTerm
+      count = 100, -- use high value to no intersect with regular OpenTerm cmd
       dir = "git_dir",
       direction = "float",
-      float_opts = toggleterm_float_opts,
+      float_opts = toggleterm_float_opts(),
       on_open = function(term)
         vim.cmd("startinsert!")
         vim.api.nvim_buf_set_keymap(
@@ -88,6 +90,39 @@ M.config = function()
 
     lazygit:toggle()
   end, { desc = "lazygit" })
+
+  -- `lf` file manager.
+  vim.g.lf_netrw = 1
+  vim.g.lf_replace_netrw = 1 -- use lf over netrw
+
+  vim.keymap.set("n", "-", function()
+    local lf_temp_path = "/tmp/lfpickerpath"
+    local lfpicker = Terminal:new({
+      cmd = "lf -selection-path " .. lf_temp_path,
+      count = 101, -- use high value to no intersect with regular OpenTerm cmd
+      direction = "float",
+      float_opts = toggleterm_float_opts(),
+      on_close = function(term)
+        local file = io.open(lf_temp_path, "r")
+        if file == nil then
+          return
+        end
+        local name = file:read("*a")
+        file:close()
+        os.remove(lf_temp_path)
+        local timer = vim.loop.new_timer()
+        timer:start(
+          0,
+          0,
+          vim.schedule_wrap(function()
+            vim.cmd("edit " .. name)
+          end)
+        )
+      end,
+    })
+
+    lfpicker:toggle()
+  end, { desc = "lf" })
 end
 
 return M

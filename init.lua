@@ -39,11 +39,6 @@ lazy.setup({
   { "nvim-lualine/lualine.nvim", config = require("status_line").config },
   { "ziontee113/icon-picker.nvim", config = require("tools.icon_picker").config },
   { "aserowy/tmux.nvim", config = require("tools.tmux").config },
-  {
-    "lmburns/lf.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "akinsho/toggleterm.nvim" },
-    config = require("tools.file_manager").config,
-  },
   { "norcalli/nvim-colorizer.lua", config = require("tools.colorizer").config },
   { "kazhala/close-buffers.nvim", config = require("tools.close_buffers").config },
   { "rest-nvim/rest.nvim", ft = "http", config = require("tools.rest_client").config },

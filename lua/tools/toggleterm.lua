@@ -98,7 +98,7 @@ M.config = function()
   vim.keymap.set("n", "-", function()
     local lf_temp_path = "/tmp/lfpickerpath"
     local lfpicker = Terminal:new({
-      cmd = "lf -selection-path " .. lf_temp_path,
+      cmd = "lf -selection-path " .. lf_temp_path .. " " .. vim.api.nvim_buf_get_name(0),
       count = 101, -- use high value to no intersect with regular OpenTerm cmd
       direction = "float",
       float_opts = toggleterm_float_opts(),

@@ -193,6 +193,12 @@ M.lsp_config = function()
       capabilities = capabilities,
     })
   end
+
+  lspconfig.elixirls.setup({
+    cmd = { "elixir-ls" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
 end
 
 M.config = function()

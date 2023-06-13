@@ -43,6 +43,7 @@ M.config = function()
       }),
       diagnostics.shellcheck,
       diagnostics.eslint,
+      diagnostics.credo, -- elixir
       formatting.goimports,
       formatting.golines.with({ extra_args = { "--max-len=150" } }),
       formatting.stylua.with({
@@ -76,6 +77,7 @@ M.config = function()
           return default_args
         end,
       }),
+      formatting.mix, -- elixir
     },
   })
 end

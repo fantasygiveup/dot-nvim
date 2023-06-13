@@ -47,6 +47,7 @@ M.config = function()
       "typescript",
       "tsx",
       "org",
+      "elixir",
     },
   })
 

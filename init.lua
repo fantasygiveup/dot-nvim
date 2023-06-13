@@ -54,7 +54,11 @@ lazy.setup({
   { "folke/zen-mode.nvim", config = require("view.zen_mode").config },
   {
     "ibhagwan/fzf-lua",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "stevearc/dressing.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "stevearc/dressing.nvim",
+    },
     config = require("fuzzy_finder").config,
   },
   {
@@ -92,6 +96,7 @@ lazy.setup({
   { "phaazon/hop.nvim", branch = "v2", config = require("edit.my_hop").config },
   { "ruifm/gitlinker.nvim", config = require("vc.my_gitlinker").config },
   { "lewis6991/gitsigns.nvim", config = require("vc.my_gitsigns").config },
+  { "nvim-orgmode/orgmode", config = require("lang.my_orgmode").config },
 })
 
 require("event").config()

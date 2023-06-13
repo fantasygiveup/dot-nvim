@@ -46,6 +46,7 @@ M.config = function()
       "comment",
       "typescript",
       "tsx",
+      "org",
     },
   })
 

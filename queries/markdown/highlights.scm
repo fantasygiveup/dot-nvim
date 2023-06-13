@@ -1,25 +1,22 @@
 ;; This file is a simple copy of nvim-treesitter/queries/markdown/highlights.scm
 ;; with a little changes in the end of file.
 
-(atx_heading (inline) @text.title)
-(setext_heading (paragraph) @text.title)
+;From MDeiml/tree-sitter-markdown & Helix
+(setext_heading (paragraph) @text.title.1 (setext_h1_underline) @text.title.1.marker)
+(setext_heading (paragraph) @text.title.2 (setext_h2_underline) @text.title.2.marker)
 
-[
-  (atx_h1_marker)
-  (atx_h2_marker)
-  (atx_h3_marker)
-  (atx_h4_marker)
-  (atx_h5_marker)
-  (atx_h6_marker)
-  (setext_h1_underline)
-  (setext_h2_underline)
-] @punctuation.special
+(atx_heading (atx_h1_marker) @text.title.1.marker (inline) @text.title.1)
+(atx_heading (atx_h2_marker) @text.title.2.marker (inline) @text.title.2)
+(atx_heading (atx_h3_marker) @text.title.3.marker (inline) @text.title.3)
+(atx_heading (atx_h4_marker) @text.title.4.marker (inline) @text.title.4)
+(atx_heading (atx_h5_marker) @text.title.5.marker (inline) @text.title.5)
+(atx_heading (atx_h6_marker) @text.title.6.marker (inline) @text.title.6)
 
-[
-  (link_title)
-  (indented_code_block)
-  (fenced_code_block)
-] @text.literal
+(link_title) @text.literal
+(indented_code_block) @text.literal.block
+((fenced_code_block) @text.literal.block (#set! "priority" 90))
+
+(info_string) @label
 
 (pipe_table_header (pipe_table_cell) @text.title)
 
@@ -50,6 +47,12 @@
   (list_marker_parenthesis)
   (thematic_break)
 ] @punctuation.special
+
+
+(task_list_marker_unchecked) @text.todo.unchecked
+(task_list_marker_checked) @text.todo.checked
+
+(block_quote) @text.quote
 
 [
   (block_continuation)

@@ -20,7 +20,7 @@ M.config = function()
     end
     project_root = vim.fn.fnamemodify(project_root, ":t")
 
-    local include_project_patterns = { "dotfiles", "docs" }
+    local include_project_patterns = { "dotfiles", "docs", "org" }
 
     local found = false
     for _, pat in ipairs(include_project_patterns) do

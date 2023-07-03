@@ -18,7 +18,7 @@ M.config = function()
       end
       return true
     end,
-    keymaps = {},
+    keymaps = nil,
     signs = {
       add = { text = "" },
       change = { text = "" },

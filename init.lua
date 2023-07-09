@@ -102,5 +102,6 @@ lazy.setup({
 require("event").config()
 require("tools.notes").config()
 require("tools.gpg").config()
+require("tools.fzf_project").config()
 require("vc.git_save_file_remote").config()
 require("custom").config()

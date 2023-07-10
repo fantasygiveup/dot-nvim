@@ -151,3 +151,17 @@ int main() {{
     )
   ),
 })
+
+ls.add_snippets("org", {
+  s(
+    "<s",
+    fmt(
+      [[
+#+begin_src {}
+  {}
+#+end_src
+  ]],
+      { i(1), i(0) }
+    )
+  ),
+})

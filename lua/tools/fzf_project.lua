@@ -7,23 +7,20 @@ end
 local M = {}
 
 local path_sep = vim.loop.os_uname().sysname == "Windows" and "\\" or "/"
-local pattern = "'^.git$|^.hg$|^.bzr$|^.svn$'"
+local pattern = ".git"
 local root_path = os.getenv("HOME")
-local unique_cmd = "awk '!x[$0]++'"
+local unique_cmd = "sort -u"
 local preview_cmd = "tree -C -L 1 " .. root_path .. "/{}"
 local prompt = "Projects> "
-local fd_exec = "fd"
-if vim.fn.executable("fdfind") == 1 then
-  fd_exec = "fdfind"
-end
+local fd_exec = "fdir"
 local fd_cmd = fd_exec
-  .. " --hidden --case-sensitive --base-directory "
-  .. root_path
-  .. " --relative-path --exec echo '{//}' ';' "
-  .. pattern
+  .. " "
+  .. vim.env.FZF_PROJECTS_ROOT_DIRS
+  .. " --patterns "
+  .. vim.env.FZF_PROJECTS_PATTERNS
 
 M.navigate = function()
-  fzf_lua.fzf_exec(fd_cmd .. " | cut -c 3- | " .. unique_cmd, {
+  fzf_lua.fzf_exec(fd_cmd .. " | " .. unique_cmd, {
     preview = preview_cmd,
     prompt = prompt,
     actions = {
@@ -32,8 +29,7 @@ M.navigate = function()
           return
         end
         fzf_lua.files({
-          cwd = root_path .. path_sep .. selected[1],
-          cmd = vim.env.FZF_DEFAULT_COMMAND,
+          cwd = vim.env.HOME .. path_sep .. selected[1],
         })
       end,
     },

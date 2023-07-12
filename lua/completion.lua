@@ -147,8 +147,8 @@ M.lsp_config = function()
       "<cmd>lua vim.lsp.buf.signature_help()<cr>",
       opts
     )
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gu", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
   end
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] =

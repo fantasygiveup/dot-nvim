@@ -180,6 +180,36 @@ M.lsp_config = function()
     on_attach = on_attach,
     capabilities = capabilities,
   })
+
+  lspconfig.emmet_ls.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    filetypes = {
+      "html",
+      "typescriptreact",
+      "javascriptreact",
+      "css",
+      "sass",
+      "scss",
+      "less",
+      "elixir",
+      "eelixir",
+      "heex",
+    },
+    init_options = {
+      userLanguages = {
+        elixir = "html-eex",
+        eelixir = "html-eex",
+        heex = "html-eex",
+      },
+      html = {
+        options = {
+          -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+          ["bem.enabled"] = true,
+        },
+      },
+    },
+  })
 end
 
 M.config = function()

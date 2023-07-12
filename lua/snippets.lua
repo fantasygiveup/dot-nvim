@@ -165,3 +165,15 @@ ls.add_snippets("org", {
     )
   ),
 })
+
+ls.add_snippets("elixir", {
+  s(
+    "credo",
+    fmt(
+      [[
+      {{:credo, "~> 1.7", only: [:dev, :test], runtime: false}}{}
+  ]],
+      { i(0) }
+    )
+  ),
+})

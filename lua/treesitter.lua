@@ -48,6 +48,7 @@ M.config = function()
       "tsx",
       "org",
       "elixir",
+      "heex", -- elixir templates
     },
   })
 

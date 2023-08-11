@@ -96,6 +96,7 @@ lazy.setup({
   { "ruifm/gitlinker.nvim", config = require("vc.my_gitlinker").config },
   { "lewis6991/gitsigns.nvim", config = require("vc.my_gitsigns").config },
   { "nvim-orgmode/orgmode", config = require("lang.my_orgmode").config },
+  { "kevinhwang91/nvim-bqf", ft = "qf" },
 })
 
 require("event").config()

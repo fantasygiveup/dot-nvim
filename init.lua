@@ -79,7 +79,6 @@ lazy.setup({
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
       "nvim-treesitter/playground",
-      "p00f/nvim-ts-rainbow",
       "windwp/nvim-ts-autotag",
     },
     config = require("treesitter").config,

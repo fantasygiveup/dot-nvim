@@ -121,20 +121,7 @@ M.lsp_config = function()
 
     local opts = { noremap = true, silent = true }
 
-    vim.api.nvim_buf_set_keymap(
-      bufnr,
-      "n",
-      "]d",
-      "<cmd>lua vim.diagnostic.goto_next({ severity = require'vars'.diagnostic_severity })<cr>",
-      opts
-    )
-    vim.api.nvim_buf_set_keymap(
-      bufnr,
-      "n",
-      "[d",
-      "<cmd>lua vim.diagnostic.goto_prev({ severity = require'vars'.diagnostic_severity })<cr>",
-      opts
-    )
+    require("utils.lsp").lsp_diagnostic_keymap(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)

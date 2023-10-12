@@ -23,14 +23,6 @@ M.config = function()
     end,
   })
 
-  vim.api.nvim_create_autocmd({ "BufRead, BufNewFile" }, {
-    group = gr,
-    pattern = { "gitconfig" },
-    callback = function()
-      vim.bo.filetype = "gitconfig"
-    end,
-  })
-
   vim.api.nvim_create_autocmd({ "FileType" }, {
     group = gr,
     pattern = { "help" },

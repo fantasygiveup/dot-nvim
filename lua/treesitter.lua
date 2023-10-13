@@ -12,6 +12,19 @@ M.config = function()
     indent = {
       enable = true,
     },
+    textobjects = {
+      select = {
+        enable = true,
+        keymaps = {
+          ["af"] = { query = "@function.outer", desc = "Select outer part function region" },
+          ["if"] = { query = "@function.inner", desc = "Select innter part function region" },
+          ["ac"] = { query = "@class.outer", desc = "Select outer part of a class region" },
+          ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+          ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+        },
+        include_surrounding_whitespace = true,
+      },
+    },
     ensure_installed = {
       "go",
       "javascript",

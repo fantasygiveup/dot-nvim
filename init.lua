@@ -91,7 +91,6 @@ lazy.setup({
   { "numToStr/Comment.nvim", config = require("edit.my_comment").config },
   { "kylechui/nvim-surround", config = require("edit.my_surround").config },
   { "windwp/nvim-autopairs", config = require("edit.my_autopairs").config },
-  { "gbprod/yanky.nvim", config = require("edit.my_yanky").config },
   { "phaazon/hop.nvim", branch = "v2", config = require("edit.my_hop").config },
   { "ruifm/gitlinker.nvim", config = require("vc.my_gitlinker").config },
   { "lewis6991/gitsigns.nvim", config = require("vc.my_gitsigns").config },

@@ -12,6 +12,7 @@ M.config = function()
       mappings = {
         i = {
           ["<c-a>"] = "toggle_all",
+          ["<c-h>"] = "which_key",
         },
       },
       prompt_prefix = "🔭 ",

@@ -97,6 +97,11 @@ lazy.setup({
   { "lewis6991/gitsigns.nvim", config = require("vc.my_gitsigns").config },
   { "nvim-orgmode/orgmode", config = require("lang.my_orgmode").config },
   { "kevinhwang91/nvim-bqf", ft = "qf" },
+  {
+    "https://codeberg.org/esensar/nvim-dev-container",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = require("tools.devcontainer").config,
+  },
 })
 
 require("event").config()

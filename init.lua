@@ -102,6 +102,10 @@ lazy.setup({
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = require("tools.devcontainer").config,
   },
+  {
+    "renerocksai/telekasten.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", config = require("tools.telecasten").config },
+  },
 })
 
 require("event").config()

@@ -29,8 +29,10 @@ function vars:load_variables()
   self.home = home
   self.user_name = "Illia Danko"
   self.diagnostic_severity = vim.diagnostic.severity.ERROR
-  self.rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512 "
-    .. vim.env.RG_OPTS_FILTER
+  self.rg_opts = require("utils.string_helper").fields(
+    "rg --color=never --no-heading --with-filename --line-number --column --smart-case  "
+      .. vim.env.RG_OPTS_FILTER
+  )
   self.scratchpad_path = cache_dir .. "scratchpad.txt"
   self.system_theme_file = home
     .. path_sep
@@ -39,6 +41,7 @@ function vars:load_variables()
     .. "appearance"
     .. path_sep
     .. "background"
+  self.fzf_default_command = require("utils.string_helper").fields(vim.env.FZF_DEFAULT_COMMAND)
 end
 
 function vars:ensure_dir()

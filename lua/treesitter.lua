@@ -56,6 +56,7 @@ M.config = function()
       "org",
       "elixir",
       "heex", -- elixir templates
+      "jsonc",
     },
   })
 

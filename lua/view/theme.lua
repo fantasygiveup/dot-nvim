@@ -6,23 +6,50 @@ M.config = function()
     return
   end
 
-  local ok, fwatch = pcall(require, "fwatch")
-  if not ok then
-    return
-  end
-
-  require("utils.system_theme").load_background()
-  fwatch.watch(require("vars").system_theme_file, {
-    on_event = function()
-      require("utils.system_theme").load_background_async()
-    end,
-  })
+  M.load_background()
+  M.listen_to_system_background_change()
 
   theme.setup({
     style = vim.o.background,
     highlights = { QuickFixLine = { fmt = "none" } }, -- overrides
   })
   theme.load()
+end
+
+M.listen_to_system_background_change = function()
+  local ok, fwatch = pcall(require, "fwatch")
+  if not ok then
+    return
+  end
+
+  fwatch.watch(require("vars").system_theme_file, {
+    on_event = function()
+      M.load_background_async()
+    end,
+  })
+end
+
+M.system_theme = function(theme_file)
+  local fd = io.open(theme_file)
+  local theme = fd:read()
+  fd:close()
+  return theme
+end
+
+M.load_background = function()
+  local system_theme_file = require("vars").system_theme_file
+  vim.o.background = M.system_theme(system_theme_file)
+end
+
+M.load_background_async = function()
+  local timer = vim.loop.new_timer()
+  timer:start(
+    0,
+    0,
+    vim.schedule_wrap(function()
+      M.load_background()
+    end)
+  )
 end
 
 return M

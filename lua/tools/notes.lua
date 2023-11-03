@@ -57,13 +57,11 @@ local function diary_new_entry(title)
     vim.cmd(":edit")
     win_scroll_last_line()
     pcall(vim.cmd, "normal! zo") -- open the fold
-    require("view.zen_mode").zen_mode(5, 1)
   end
 end
 
 M.diary_open_file = function()
   open_buffer_file(require("vars").diary)
-  require("view.zen_mode").zen_mode(5, 1)
 end
 
 M.diary_new_entry = function()
@@ -72,7 +70,6 @@ end
 
 M.todos_open_file = function()
   if open_buffer_file(require("vars").todos) then
-    require("view.zen_mode").zen_mode(5, 1)
   end
 end
 
@@ -101,7 +98,6 @@ M.config = function()
 
   vim.keymap.set("n", "<leader>oa", function()
     open_buffer_file(require("vars").diary)
-    require("view.zen_mode").zen_mode(5, 1)
   end, { desc = "diary_overview" })
 
   vim.keymap.set("n", "<leader>ot", function()
@@ -110,7 +106,6 @@ M.config = function()
 
   vim.keymap.set("n", "<leader>ol", function()
     if open_buffer_file(require("vars").todos) then
-      require("view.zen_mode").zen_mode(5, 1)
     end
   end, { desc = "todos_list" })
 end

@@ -23,12 +23,9 @@ M.config = function()
     },
   })
 
-  vim.keymap.set(
-    "n",
-    "<localleader>z",
-    "<cmd>lua require'view.zen_mode'.zen_mode()<cr>",
-    { desc = "zen_mode_toggle" }
-  )
+  vim.keymap.set("n", "<localleader>z", function()
+    require("view.zen_mode").zen_mode()
+  end, { desc = "zen_mode_toggle" })
 end
 
 M.zen_mode = function(extra_width, direction)

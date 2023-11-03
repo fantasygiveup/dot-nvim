@@ -6,6 +6,15 @@ M.config = function()
     return
   end
 
+  -- Allow to pass options, e.g. center widget screen.
+  dressing.setup({
+    input = {
+      get_config = function(opts)
+        return opts
+      end,
+    },
+  })
+
   local ok, fzf_lua = pcall(require, "fzf-lua")
   if not ok then
     return

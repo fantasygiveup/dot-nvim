@@ -99,7 +99,7 @@ M.config = function()
     vim.ui.input({ prompt = "New Diary", relative = "win" }, diary_new_entry)
   end, { desc = "diary_new_entry" })
 
-  vim.keymap.set("n", "<leader>oo", function()
+  vim.keymap.set("n", "<leader>oa", function()
     open_buffer_file(require("vars").diary)
     require("view.zen_mode").zen_mode(5, 1)
   end, { desc = "diary_overview" })

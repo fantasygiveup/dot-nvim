@@ -21,13 +21,13 @@ M.config = function()
       border = "curved",
       width = vim.o.columns,
       height = vim.o.lines - 4,
-      shell = "zsh",
     }
   end
 
   toggleterm.setup({
     start_in_insert = false, -- manually handle autoinsert in all cases (see below)
     float_opts = toggleterm_float_opts(),
+    shell = "zsh",
   })
 
   -- Remember the opened project assosiated with a terminal session.

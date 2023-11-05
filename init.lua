@@ -96,6 +96,7 @@ lazy.setup({
   { "ruifm/gitlinker.nvim", config = require("vc.my_gitlinker").config },
   { "lewis6991/gitsigns.nvim", config = require("vc.my_gitsigns").config },
   { "kevinhwang91/nvim-bqf", ft = "qf" },
+  { "nvimdev/dashboard-nvim", config = require("tools.dashboard").config },
   {
     "https://codeberg.org/esensar/nvim-dev-container",
     dependencies = { "nvim-treesitter/nvim-treesitter" },

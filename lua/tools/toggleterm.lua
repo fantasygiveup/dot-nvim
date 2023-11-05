@@ -18,9 +18,10 @@ M.config = function()
 
   local toggleterm_float_opts = function()
     return {
-      border = "none",
+      border = "curved",
       width = vim.o.columns,
-      height = vim.o.lines - 1,
+      height = vim.o.lines - 4,
+      shell = "zsh",
     }
   end
 

@@ -3,7 +3,7 @@ local vars = {}
 local home = os.getenv("HOME")
 local path_sep = vars.is_windows and "\\" or "/"
 local os_name = vim.loop.os_uname().sysname
-local user_repo = home .. path_sep .. "github.com" .. path_sep .. "illia-danko" .. path_sep
+local user_repo = home .. path_sep .. "codeberg.org" .. path_sep .. "eli87" .. path_sep
 local notes_dir = user_repo .. "docs"
 local cache_dir = home .. path_sep .. ".cache" .. path_sep .. "nvim" .. path_sep
 

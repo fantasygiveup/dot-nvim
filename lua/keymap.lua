@@ -62,7 +62,7 @@ M.setup = function()
   -- Misc.
   vim.keymap.set("n", "<localleader>1", function()
     vim.cmd("e " .. require("vars").scratchpad_path)
-  end, { desc = "scratchpad" })
+  end, { desc = "open scratchpad" })
 
   vim.keymap.set("n", "<leader>tl", function()
     vim.wo.number = not vim.wo.number

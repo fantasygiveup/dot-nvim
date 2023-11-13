@@ -64,6 +64,10 @@ M.setup = function()
     vim.cmd("e " .. require("vars").scratchpad_path)
   end, { desc = "scratchpad" })
 
+  vim.keymap.set("n", "<leader>tl", function()
+    vim.wo.number = not vim.wo.number
+  end, { desc = "toggle line number" })
+
   -- Post.
   -- Bind C-c to ESC, also clean up the highlight.
   vim.keymap.set("n", "<c-c>", "<esc>:noh<cr>", { noremap = true, silent = true })

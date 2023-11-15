@@ -64,7 +64,7 @@ M.setup = function()
     vim.cmd("e " .. require("vars").scratchpad_path)
   end, { desc = "open scratchpad" })
 
-  vim.keymap.set("n", "<leader>tl", function()
+  vim.keymap.set("n", "<localleader>tl", function()
     vim.wo.number = not vim.wo.number
   end, { desc = "toggle line number" })
 

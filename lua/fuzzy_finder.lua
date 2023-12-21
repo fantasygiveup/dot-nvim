@@ -42,7 +42,7 @@ M.config = function()
     },
   })
 
-  vim.keymap.set("n", "<localleader>b", function()
+  vim.keymap.set("n", "<leader><", function()
     fzf_lua.buffers()
   end, { desc = "buffers" })
 

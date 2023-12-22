@@ -4,7 +4,7 @@ local home = os.getenv("HOME")
 local path_sep = vars.is_windows and "\\" or "/"
 local os_name = vim.loop.os_uname().sysname
 local user_repo = home .. path_sep .. "codeberg.org" .. path_sep .. "eli87" .. path_sep
-local notes_dir = user_repo .. "docs"
+local org_dir = user_repo .. "neorg"
 local cache_dir = home .. path_sep .. ".cache" .. path_sep .. "nvim" .. path_sep
 
 function vars:load_variables()
@@ -19,9 +19,7 @@ function vars:load_variables()
   self.is_linux = os_name == "Linux"
   self.is_windows = os_name == "Windows"
   self.vim_path = vim.fn.stdpath("config")
-  self.notes_dir = notes_dir
-  self.diary = notes_dir .. path_sep .. "diary.md"
-  self.todos = notes_dir .. path_sep .. "todos.md"
+  self.org_dir = org_dir
   self.cache_dir = cache_dir
   self.undo_dir = home .. path_sep .. ".cache" .. path_sep .. "undo" .. path_sep
   self.modules_dir = self.vim_path .. path_sep .. "modules"

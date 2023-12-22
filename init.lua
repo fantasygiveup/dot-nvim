@@ -102,10 +102,15 @@ lazy.setup({
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = require("tools.devcontainer").config,
   },
+  {
+    "nvim-neorg/neorg",
+    build = ":Neorg sync-parsers",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = require("tools.neorg").config,
+  },
 })
 
 require("event").config()
-require("tools.notes").config()
 require("tools.gpg").config()
 require("tools.fzf_project").config()
 require("vc.git_save_file_remote").config()

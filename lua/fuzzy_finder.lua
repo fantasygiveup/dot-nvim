@@ -90,7 +90,8 @@ M.config = function()
   vim.keymap.set("n", "<leader>/", grep_project, { desc = "grep_project" })
 
   vim.keymap.set("n", "<c-s>", function()
-    grep_project({ prompt = "Notes> ", cwd = require("vars").notes_dir })
+    local vars = require("vars")
+    grep_project({ prompt = "Notes> ", cwd = vars.org_dir .. vars.path_sep .. "notes" })
   end, { desc = "grep_notes" })
 
   vim.keymap.set("n", "<leader>lw", function()

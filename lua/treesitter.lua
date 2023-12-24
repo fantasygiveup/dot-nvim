@@ -49,6 +49,7 @@ M.config = function()
       "norg",
       "python",
       "query",
+      "regex",
       "ruby",
       "rust",
       "scheme",
@@ -56,6 +57,7 @@ M.config = function()
       "tsx",
       "typescript",
       "vim",
+      "vimdoc",
       "yaml",
     },
   })

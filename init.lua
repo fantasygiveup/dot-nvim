@@ -2,10 +2,10 @@ local function ensure_vars()
   local vars = require("vars")
   vars:load_variables()
   vars:ensure_dir()
+  vars:load_options()
 end
 
 ensure_vars()
-require("options").setup()
 require("keymap").setup()
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

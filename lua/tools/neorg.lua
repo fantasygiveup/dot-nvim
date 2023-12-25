@@ -17,13 +17,13 @@ M.config = function()
       ["core.concealer"] = {}, -- adds pretty icons to your documents
       ["core.pivot"] = {}, -- toggle list types (ordered to unordered and vise versa)
       ["core.itero"] = {}, -- repeat same operation
+      ["core.summary"] = {}, -- generate summary (you do not need to maintain index.norg anymore!)
       ["core.dirman"] = { -- manages Neorg workspaces
         config = {
           workspaces = {
-            notes = vars.org_dir .. vars.path_sep .. "notes",
-            docs = vars.org_dir .. vars.path_sep .. "docs",
+            org = vars.org_dir,
           },
-          default_workspace = "notes",
+          default_workspace = "org",
         },
       },
       ["core.keybinds"] = { config = { neorg_leader = "<leader>" } },
@@ -32,6 +32,12 @@ M.config = function()
 
   vim.keymap.set("n", "<leader>nw", ":Neorg workspace ", { desc = "neorg workspace" })
   vim.keymap.set("n", "<leader>ni", "<cmd>Neorg index<cr>", { desc = "neorg index" })
+  vim.keymap.set(
+    "n",
+    "<leader>nt",
+    "<cmd>e " .. vars.org_dir .. vars.path_sep .. "todos.norg" .. " <cr>",
+    { desc = "open todo file" }
+  )
 
   vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     group = vim.api.nvim_create_augroup("NorgGroup", {}),
@@ -66,7 +72,7 @@ M.config = function()
       )
 
       vim.keymap.set(
-        "i",
+        { "i", "n" },
         "<c-cr>",
         "<cmd>Neorg keybind all core.itero.next-iteration<cr>",
         { desc = "neorg repeat last", buffer = 0 }
@@ -74,9 +80,9 @@ M.config = function()
 
       vim.keymap.set(
         "n",
-        "<leader>ni",
+        "<leader>nh",
         "<cmd>Neorg inject-metadata<cr>",
-        { desc = "neorg inject metadata", buffer = 0 }
+        { desc = "neorg insert header", buffer = 0 }
       )
     end,
   })

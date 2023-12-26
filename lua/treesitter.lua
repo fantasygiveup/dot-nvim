@@ -46,6 +46,7 @@ M.config = function()
       "make",
       "markdown",
       "markdown_inline",
+      "nix",
       "norg",
       "python",
       "query",

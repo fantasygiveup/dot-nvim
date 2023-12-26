@@ -22,13 +22,89 @@ M.config = function()
       inc_rename = false, -- enables an input dialog for inc-rename.nvim
       lsp_doc_border = false, -- add a border to hover docs and signature help
     },
-    -- Avoid write file (:w) messages.
+    -- Filter messages.
     routes = {
+      -- Write to file.
       {
         filter = {
           event = "msg_show",
           kind = "",
-          find = "written",
+          find = "%dB written",
+        },
+        opts = { skip = true },
+      },
+      -- Yank.
+      {
+        filter = {
+          event = "msg_show",
+          kind = "",
+          find = "%d lines yanked",
+        },
+        opts = { skip = true },
+      },
+      -- Paste.
+      {
+        filter = {
+          event = "msg_show",
+          kind = "",
+          find = "%d lines changed",
+        },
+        opts = { skip = true },
+      },
+      -- Undo|Redo.
+      {
+        filter = {
+          event = "msg_show",
+          kind = "",
+          find = "%d fewer lines",
+        },
+        opts = { skip = true },
+      },
+      {
+        filter = {
+          event = "msg_show",
+          kind = "",
+          find = "%d more line",
+        },
+        opts = { skip = true },
+      },
+      {
+        filter = {
+          event = "msg_show",
+          kind = "",
+          find = "%d line less",
+        },
+        opts = { skip = true },
+      },
+      {
+        filter = {
+          event = "msg_show",
+          kind = "",
+          find = "%d changes; before #%d",
+        },
+        opts = { skip = true },
+      },
+      {
+        filter = {
+          event = "msg_show",
+          kind = "",
+          find = "%d changes; after #%d",
+        },
+        opts = { skip = true },
+      },
+      {
+        filter = {
+          event = "msg_show",
+          kind = "",
+          find = "%d change; before #%d",
+        },
+        opts = { skip = true },
+      },
+      {
+        filter = {
+          event = "msg_show",
+          kind = "",
+          find = "%d change; after #%d",
         },
         opts = { skip = true },
       },

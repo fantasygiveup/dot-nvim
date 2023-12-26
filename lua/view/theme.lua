@@ -11,7 +11,13 @@ M.config = function()
 
   theme.setup({
     style = vim.o.background,
-    highlights = { QuickFixLine = { fmt = "none" } }, -- overrides
+    highlights = {
+      QuickFixLine = { fmt = "none" },
+      -- Override https://github.com/rcarriga/nvim-notify colors.
+      NotifyINFOTitle = { fg = "$green" },
+      NotifyINFOIcon = { fg = "$green" },
+      NotifyINFOBorder = { fg = "$green" },
+    }, -- overrides
   })
   theme.load()
 end

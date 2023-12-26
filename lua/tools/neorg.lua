@@ -45,7 +45,7 @@ M.config = function()
     callback = function()
       vim.keymap.set(
         "n",
-        "<leader>n<cr>",
+        "<leader><cr>",
         "<cmd>Neorg return<cr>",
         { desc = "neorg return", buffer = 0 }
       )

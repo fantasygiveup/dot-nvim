@@ -7,7 +7,7 @@ M.config = function()
   end
 
   project_nvim.setup({
-    patterns = { ".git", ".hg", ".bzr", ".svn" },
+    patterns = { ".git", ".hg", ".bzr", ".svn", "go.mod", "Makefile" },
     detection_methods = { "pattern", "lsp" },
   })
 end

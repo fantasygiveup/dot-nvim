@@ -116,7 +116,6 @@ lazy.setup({
       "rcarriga/nvim-notify",
     },
     config = require("tools.noice").config,
-    opts = require("tools.noice").opts,
   },
 })
 

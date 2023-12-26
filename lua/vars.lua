@@ -30,7 +30,6 @@ function vars:load_variables()
   self.diagnostic_severity = vim.diagnostic.severity.ERROR
   self.rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512 "
     .. vim.env.RG_OPTS_FILTER
-  self.scratchpad_path = cache_dir .. "scratchpad.txt"
   self.system_theme_file = home
     .. path_sep
     .. ".config"
@@ -93,7 +92,7 @@ function vars:load_options()
   vim.o.signcolumn = "yes"
   vim.o.number = false
   vim.o.undofile = true
-  vim.o.spellfile = cache_dir .. "spell/en.uft-8.add"
+  vim.o.spellfile = cache_dir .. "spell/en.uft-8.add" .. "," .. cache_dir .. "spell/ua.uft-8.add"
   vim.o.updatetime = 500 -- used by vim.lsp.buf.document_highlight()
   vim.o.autoread = true -- informed when changed outside
   vim.o.completeopt = "menu,menuone,noselect"

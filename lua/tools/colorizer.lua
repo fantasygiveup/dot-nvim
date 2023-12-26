@@ -10,7 +10,7 @@ M.config = function()
     DEFAULT_OPTIONS = { names = false },
   })
 
-  vim.keymap.set("n", "<localleader>tc", "<cmd>ColorizerToggle<cr>")
+  vim.keymap.set("n", "<localleader>^", "<cmd>ColorizerToggle<cr>")
 end
 
 return M

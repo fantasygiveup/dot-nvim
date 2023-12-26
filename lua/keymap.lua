@@ -17,7 +17,8 @@ M.setup = function()
 
   vim.keymap.set("n", "[f", "<cmd>cprev<cr>")
   vim.keymap.set("n", "]f", "<cmd>cnext<cr>")
-  vim.keymap.set("n", "<localleader>ts", "<cmd>setlocal spell! spelllang=en_us<cr>")
+  vim.keymap.set("n", "<localleader>ss", "<cmd>setlocal spell! spelllang=en_us<cr>")
+  vim.keymap.set("n", "<localleader>su", "<cmd>setlocal spell! spelllang=uk_ua<cr>")
   vim.keymap.set("n", "<localleader>cw", [[<cmd>keeppatterns %s/\s\+$//e<cr>]]) -- remove white spaces
   vim.keymap.set("n", "ZZ", "<cmd>xa<cr>")
   vim.keymap.set("n", "ZQ", "<cmd>qa!<cr>")
@@ -60,11 +61,7 @@ M.setup = function()
   vim.keymap.set("i", "<c-n>", "<down>")
 
   -- Misc.
-  vim.keymap.set("n", "<localleader>1", function()
-    vim.cmd("e " .. require("vars").scratchpad_path)
-  end, { desc = "open scratchpad" })
-
-  vim.keymap.set("n", "<localleader>tl", function()
+  vim.keymap.set("n", "<leader>on", function()
     vim.wo.number = not vim.wo.number
   end, { desc = "toggle line number" })
 

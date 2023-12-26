@@ -38,6 +38,12 @@ M.config = function()
     "<cmd>e " .. vars.org_dir .. vars.path_sep .. "todos.norg" .. " <cr>",
     { desc = "open todo file" }
   )
+  vim.keymap.set(
+    "n",
+    "<leader>ns",
+    "<cmd>e " .. vars.org_dir .. vars.path_sep .. "scratchpad.norg" .. " <cr>",
+    { desc = "open scratchpad file" }
+  )
 
   vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     group = vim.api.nvim_create_augroup("NorgGroup", {}),

@@ -94,7 +94,7 @@ M.config = function()
     grep_project({ prompt = "Notes> ", cwd = vars.org_dir })
   end, { desc = "grep_notes" })
 
-  vim.keymap.set("n", "<leader>lw", function()
+  vim.keymap.set("n", "<localleader>v", function()
     fzf_lua.lsp_document_symbols()
   end, { desc = "lsp document symbols" })
 end

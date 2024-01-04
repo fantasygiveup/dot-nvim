@@ -108,15 +108,6 @@ lazy.setup({
     dependencies = { "nvim-lua/plenary.nvim" },
     config = require("tools.neorg").config,
   },
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-    config = require("tools.noice").config,
-  },
 })
 
 require("event").config()

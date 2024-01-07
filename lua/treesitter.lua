@@ -63,7 +63,7 @@ M.config = function()
     },
   })
 
-  vim.g.markdown_folding = 1 -- enable markdown folding
+  vim.g.markdown_folding = 0
 end
 
 return M

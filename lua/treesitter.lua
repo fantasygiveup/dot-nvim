@@ -47,7 +47,7 @@ M.config = function()
       "markdown",
       "markdown_inline",
       "nix",
-      "norg",
+      "org",
       "python",
       "query",
       "regex",

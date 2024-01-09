@@ -96,6 +96,7 @@ lazy.setup({
   { "phaazon/hop.nvim", branch = "v2", config = require("edit.hop").config },
   { "ruifm/gitlinker.nvim", config = require("vc.gitlinker").config },
   { "lewis6991/gitsigns.nvim", config = require("vc.gitsigns").config },
+  { "nvim-orgmode/orgmode", config = require("lang.orgmode").config },
   { "kevinhwang91/nvim-bqf", ft = "qf" },
   { "nvimdev/dashboard-nvim", config = require("tools.dashboard").config },
   {

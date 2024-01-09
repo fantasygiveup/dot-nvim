@@ -34,7 +34,7 @@ M.config = function()
 
   vim.keymap.set(
     "n",
-    "<localleader>b",
+    "<leader><",
     "<cmd>lua require'telescope.builtin'.buffers({sort_lastused = true})<cr>"
   )
 

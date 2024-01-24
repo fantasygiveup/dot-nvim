@@ -6,8 +6,6 @@ M.config = function()
     return
   end
 
-  -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-  local diagnostics = null_ls.builtins.diagnostics
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
   local formatting = null_ls.builtins.formatting
 
@@ -39,13 +37,6 @@ M.config = function()
     debug = false,
 
     sources = {
-      diagnostics.golangci_lint,
-      diagnostics.yamllint.with({
-        extra_args = { "-c", config_dir .. "yamllint" .. vars.path_sep .. "config.yaml" },
-      }),
-      diagnostics.shellcheck,
-      diagnostics.eslint,
-      diagnostics.credo, -- elixir
       formatting.goimports,
       formatting.golines.with({ extra_args = { "--max-len=150" } }),
       formatting.stylua.with({

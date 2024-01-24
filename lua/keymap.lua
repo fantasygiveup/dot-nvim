@@ -98,9 +98,9 @@ M.lsp_flow = function(bufnr)
   vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
   vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
   vim.keymap.set("n", "gh", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-  vim.keymap.set("i", "<C-h>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-  vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-  vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+  vim.keymap.set("i", "<c-h>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+  vim.keymap.set("n", "<a-?>", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+  vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 end
 
 return M

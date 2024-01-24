@@ -67,23 +67,8 @@ M.config = function()
 
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-    local opts = { noremap = true, silent = true }
-
     require("keymap").lsp_diagnostic(bufnr)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-    vim.api.nvim_buf_set_keymap(
-      bufnr,
-      "i",
-      "<C-h>",
-      "<cmd>lua vim.lsp.buf.signature_help()<cr>",
-      opts
-    )
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+    require("keymap").lsp_flow()
   end
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] =

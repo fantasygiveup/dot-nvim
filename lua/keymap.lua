@@ -71,6 +71,8 @@ M.setup = function()
   vim.keymap.set("i", "<c-c>", "<esc>:noh<cr>", { noremap = true, silent = true })
 end
 
+-- LSP stuff.
+
 M.lsp_diagnostic = function(bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -86,6 +88,19 @@ M.lsp_diagnostic = function(bufnr)
     "<cmd>lua vim.diagnostic.goto_prev({ severity = require'vars'.diagnostic_severity })<cr>",
     opts
   )
+end
+
+M.lsp_flow = function(bufnr)
+  local opts = { noremap = true, silent = true, buffer = bufnr }
+
+  vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+  vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+  vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+  vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+  vim.keymap.set("n", "gh", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+  vim.keymap.set("i", "<C-h>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+  vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+  vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 end
 
 return M

@@ -30,8 +30,6 @@ M.config = function()
           end,
         })
       end
-
-      require("utils.lsp").lsp_diagnostic_keymap(bufnr)
     end,
 
     debug = false,

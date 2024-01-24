@@ -96,6 +96,8 @@ function vars:load_options()
   vim.o.updatetime = 500 -- used by vim.lsp.buf.document_highlight()
   vim.o.autoread = true -- informed when changed outside
   vim.o.completeopt = "menu,menuone,noselect"
+  vim.o.number = true
+  vim.o.relativenumber = true
 end
 
 return vars

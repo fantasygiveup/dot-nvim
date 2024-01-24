@@ -71,4 +71,21 @@ M.setup = function()
   vim.keymap.set("i", "<c-c>", "<esc>:noh<cr>", { noremap = true, silent = true })
 end
 
+M.lsp_diagnostic = function(bufnr)
+  local opts = { noremap = true, silent = true, buffer = bufnr }
+
+  vim.keymap.set(
+    "n",
+    "]d",
+    "<cmd>lua vim.diagnostic.goto_next({ severity = require'vars'.diagnostic_severity })<cr>",
+    opts
+  )
+  vim.keymap.set(
+    "n",
+    "[d",
+    "<cmd>lua vim.diagnostic.goto_prev({ severity = require'vars'.diagnostic_severity })<cr>",
+    opts
+  )
+end
+
 return M

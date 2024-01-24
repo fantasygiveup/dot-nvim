@@ -30,6 +30,8 @@ M.config = function()
           end,
         })
       end
+
+      require("keymap").lsp_diagnostic(bufnr)
     end,
 
     debug = false,

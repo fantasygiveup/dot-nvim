@@ -62,18 +62,21 @@ lazy.setup({
     config = require("fuzzy_finder").config,
   },
   {
-    "neovim/nvim-lspconfig",
+    "hrsh7th/nvim-cmp",
     dependencies = {
-      "hrsh7th/nvim-cmp",
       "L3MON4D3/LuaSnip",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-nvim-lsp",
       "saadparwaiz1/cmp_luasnip",
       "andersevenrud/cmp-tmux",
       "hrsh7th/cmp-calc",
     },
     config = require("completion").config,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = { "hrsh7th/cmp-nvim-lsp" },
+    config = require("lsp").config,
   },
   {
     "nvim-treesitter/nvim-treesitter",

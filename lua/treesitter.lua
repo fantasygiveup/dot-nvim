@@ -32,6 +32,7 @@ M.config = function()
       "commonlisp",
       "cpp",
       "css",
+      "dart",
       "elixir",
       "elm",
       "fennel",

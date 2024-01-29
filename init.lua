@@ -100,12 +100,6 @@ lazy.setup({
   { "lewis6991/gitsigns.nvim", config = require("vc.gitsigns").config },
   { "kevinhwang91/nvim-bqf", ft = "qf" },
   { "nvimdev/dashboard-nvim", config = require("tools.dashboard").config },
-  {
-    "nvim-neorg/neorg",
-    build = ":Neorg sync-parsers",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = require("lang.neorg").config,
-  },
 })
 
 require("event").config()

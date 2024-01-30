@@ -100,10 +100,12 @@ lazy.setup({
   { "lewis6991/gitsigns.nvim", config = require("vc.gitsigns").config },
   { "kevinhwang91/nvim-bqf", ft = "qf" },
   { "nvimdev/dashboard-nvim", config = require("tools.dashboard").config },
+  { "zk-org/zk-nvim", config = require("tools.zettelkasten").config },
 })
 
 require("event").config()
 require("tools.gpg").config()
+require("tools.zettelkasten").config()
 require("tools.fzf_project").config()
 require("vc.git_save_file_remote").config()
 require("custom").config()

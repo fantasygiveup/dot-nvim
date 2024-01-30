@@ -5,6 +5,7 @@ local path_sep = vars.is_windows and "\\" or "/"
 local os_name = vim.loop.os_uname().sysname
 local user_repo = home .. path_sep .. "github.com" .. path_sep .. "illia-danko" .. path_sep
 local org_dir = user_repo .. "neorg"
+local zettelkasten_dir = user_repo .. "zettelkasten"
 local cache_dir = home .. path_sep .. ".cache" .. path_sep .. "nvim" .. path_sep
 local undo_dir = home .. path_sep .. ".cache" .. path_sep .. "undo" .. path_sep
 
@@ -37,6 +38,7 @@ function vars:load_variables()
     .. "appearance"
     .. path_sep
     .. "background"
+  self.zettelkasten_dir = zettelkasten_dir
 end
 
 function vars:ensure_dir()

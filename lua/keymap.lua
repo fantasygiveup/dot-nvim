@@ -103,4 +103,36 @@ M.lsp_flow = function(bufnr)
   vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 end
 
+M.zettelkasten = function()
+  local zettelkasten_dir = require("vars").zettelkasten_dir
+
+  vim.keymap.set(
+    "n",
+    "<leader>oe",
+    "<cmd>ZkNewInput { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
+    { desc = "zk new" }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<leader>os",
+    "<cmd>ZkEditOrNew { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
+    { desc = "zk list" }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<leader>ob",
+    "<cmd>ZkBacklinks { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
+    { desc = "zk backlinks" }
+  )
+
+  vim.keymap.set(
+    "v",
+    "<leader>oe",
+    ":ZkNewFromTitleSelection { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
+    { desc = "zk new from title selection", silent = true }
+  )
+end
+
 return M

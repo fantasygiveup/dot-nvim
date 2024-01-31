@@ -26,6 +26,16 @@ M.config = function()
   end)
 
   require("keymap").zettelkasten()
+
+  vim.api.nvim_create_autocmd({ "FileType" }, {
+    group = vim.api.nvim_create_augroup("ZettelkastenGroup", {}),
+    pattern = { "markdown" },
+    callback = function()
+      if require("zk.util").notebook_root(vim.fn.expand("%:p")) ~= nil then
+        require("keymap").zettelkasten_bufnr(0)
+      end
+    end,
+  })
 end
 
 function M.edit_or_new(options, picker_options)

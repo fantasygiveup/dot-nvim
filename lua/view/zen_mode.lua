@@ -23,7 +23,7 @@ M.config = function()
     },
   })
 
-  vim.keymap.set("n", "<localleader>z", function()
+  vim.keymap.set("n", "<leader>m", function()
     require("view.zen_mode").zen_mode()
   end, { desc = "zen_mode_toggle" })
 end

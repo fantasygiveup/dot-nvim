@@ -61,9 +61,14 @@ M.setup = function()
   vim.keymap.set("i", "<c-n>", "<down>")
 
   -- Misc.
-  vim.keymap.set("n", "<leader>on", function()
+  vim.keymap.set("n", "<localleader>wn", function()
     vim.wo.number = not vim.wo.number
+    vim.wo.relativenumber = not vim.wo.relativenumber
   end, { desc = "toggle line number" })
+
+  vim.keymap.set("n", "<localleader>wr", function()
+    vim.wo.relativenumber = not vim.wo.relativenumber
+  end, { desc = "toggle relative number" })
 
   -- Post.
   -- Bind C-c to ESC, also clean up the highlight.

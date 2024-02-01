@@ -20,6 +20,9 @@ M.config = function()
   -- Create a new note using vim.ui.input api.
   commands.add("ZkNewInput", function(options)
     vim.ui.input({ prompt = "Zk New", relative = "win" }, function(title)
+      if not title or title == "" then
+        return
+      end
       options = vim.tbl_extend("force", { title = title }, options or {})
       commands.get("ZkNew")(options)
     end)

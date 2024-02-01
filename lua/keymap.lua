@@ -70,6 +70,10 @@ M.setup = function()
     vim.wo.relativenumber = not vim.wo.relativenumber
   end, { desc = "toggle relative number" })
 
+  vim.keymap.set("n", "<localleader>wf", function()
+    vim.wo.foldenable = not vim.wo.foldenable
+  end, { desc = "toggle folding" })
+
   -- Post.
   -- Bind C-c to ESC, also clean up the highlight.
   vim.keymap.set("n", "<c-c>", "<esc>:noh<cr>", { noremap = true, silent = true })

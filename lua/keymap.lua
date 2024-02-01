@@ -115,9 +115,16 @@ M.zettelkasten = function()
 
   vim.keymap.set(
     "n",
-    "<localleader>zl",
+    "<localleader>zf",
     "<cmd>ZkEditOrNew { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
-    { desc = "zk list" }
+    { desc = "zk find notes" }
+  )
+
+  vim.keymap.set(
+    "v",
+    "<localleader>zf",
+    ":'<,'>ZkMatch { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
+    { desc = "zk match" }
   )
 
   vim.keymap.set(
@@ -126,10 +133,24 @@ M.zettelkasten = function()
     ":ZkNewFromTitleSelection { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
     { desc = "zk new from title selection", silent = true }
   )
+
+  vim.keymap.set(
+    "n",
+    "<localleader>zr",
+    ":ZkIndex { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
+    { desc = "zk refersh index", silent = true }
+  )
 end
 
 M.zettelkasten_bufnr = function(bufnr)
   local zettelkasten_dir = require("vars").zettelkasten_dir
+
+  vim.keymap.set(
+    "n",
+    "<cr>",
+    "<cmd>lua vim.lsp.buf.definition()<cr>",
+    { desc = "zk go to definition", buffer = bufnr, silent = true }
+  )
 
   vim.keymap.set(
     "n",
@@ -151,6 +172,15 @@ M.zettelkasten_bufnr = function(bufnr)
     ":'<,'>ZkInsertLinkAtSelection { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
     { desc = "zk insert link", buffer = bufnr }
   )
+
+  vim.keymap.set(
+    "n",
+    "<localleader>zl",
+    "<cmd>ZkLinks { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
+    { desc = "zk links", buffer = bufnr }
+  )
+end
+
 M.zen_mode = function()
   vim.keymap.set("n", "<leader>hh", function()
     require("view.zen_mode").zen_mode()

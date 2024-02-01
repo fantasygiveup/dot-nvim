@@ -74,6 +74,14 @@ M.setup = function()
     vim.wo.foldenable = not vim.wo.foldenable
   end, { desc = "toggle folding" })
 
+  vim.keymap.set("n", "<localleader>wc", function()
+    if vim.wo.conceallevel ~= 0 then
+      vim.wo.conceallevel = 0
+      return
+    end
+    vim.wo.conceallevel = 2
+  end, { desc = "toggle conceal level" })
+
   -- Post.
   -- Bind C-c to ESC, also clean up the highlight.
   vim.keymap.set("n", "<c-c>", "<esc>:noh<cr>", { noremap = true, silent = true })

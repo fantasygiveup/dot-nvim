@@ -151,6 +151,10 @@ M.zettelkasten_bufnr = function(bufnr)
     ":'<,'>ZkInsertLinkAtSelection { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
     { desc = "zk insert link", buffer = bufnr }
   )
+M.zen_mode = function()
+  vim.keymap.set("n", "<leader>hh", function()
+    require("view.zen_mode").zen_mode()
+  end, { desc = "zen mode toggle" })
 end
 
 return M

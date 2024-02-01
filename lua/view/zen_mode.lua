@@ -21,11 +21,20 @@ M.config = function()
         list = false,
       },
     },
+    plugins = {
+      options = {
+        enabled = true,
+        ruler = false, -- disables the ruler text in the cmd line area
+        showcmd = false, -- disables the command in the last line of the screen
+        -- you may turn on/off statusline in zen mode by setting 'laststatus'
+        -- statusline will be shown only if 'laststatus' == 3
+        laststatus = 0, -- turn off the statusline in zen mode
+      },
+      gitsigns = { enable = false },
+    },
   })
 
-  vim.keymap.set("n", "<leader>m", function()
-    require("view.zen_mode").zen_mode()
-  end, { desc = "zen_mode_toggle" })
+  require("keymap").zen_mode()
 end
 
 M.zen_mode = function(extra_width, direction)

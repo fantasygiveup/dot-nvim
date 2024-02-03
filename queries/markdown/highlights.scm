@@ -8,4 +8,4 @@
 ] @conceal
 (#set! conceal ""))
 
-(fenced_code_block) @visual
+(fenced_code_block) @codeblock

@@ -186,8 +186,8 @@ M.zettelkasten_bufnr = function(bufnr)
   vim.keymap.set(
     "v",
     "<localleader>zi",
-    ":'<,'>ZkInsertLinkAtSelection { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
-    { desc = "zk insert link", buffer = bufnr }
+    ":ZkInsertLinkAtSelection { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
+    { desc = "zk insert link", buffer = bufnr, silent = true }
   )
 
   vim.keymap.set(

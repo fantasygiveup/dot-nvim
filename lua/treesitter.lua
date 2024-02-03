@@ -67,6 +67,8 @@ M.config = function()
   })
 
   vim.g.markdown_folding = 0
+
+  require("keymap").tree_sitter()
 end
 
 return M

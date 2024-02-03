@@ -204,4 +204,15 @@ M.zen_mode = function()
   end, { desc = "zen mode toggle" })
 end
 
+M.tree_sitter = function()
+  M.zen_mode = function()
+    vim.keymap.set(
+      "n",
+      "<leader>it",
+      "<cmd>lua vim.treesitter.inspect_tree()<cr>",
+      { desc = "inspect tree sitter" }
+    )
+  end
+end
+
 return M

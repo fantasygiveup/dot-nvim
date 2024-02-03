@@ -90,7 +90,7 @@ function vars:load_options()
   vim.o.wrap = false
   vim.o.textwidth = 100
   vim.o.cursorline = true
-  vim.o.foldenable = true
+  vim.o.foldlevel = 99
   vim.o.signcolumn = "yes"
   vim.o.number = false
   vim.o.undofile = true

@@ -82,6 +82,10 @@ M.setup = function()
     vim.opt_local.conceallevel = 2
   end, { desc = "toggle conceal level" })
 
+  vim.keymap.set("n", "<localleader>ww", function()
+    vim.opt_local.wrap = not vim.opt_local.wrap
+  end, { desc = "toggle text wrapping" })
+
   -- Post.
   -- Bind C-c to ESC, also clean up the highlight.
   vim.keymap.set("n", "<c-c>", "<esc>:noh<cr>", { noremap = true, silent = true })

@@ -165,6 +165,10 @@ M.zettelkasten = function()
     ":ZkIndex { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
     { desc = "zk refersh index", silent = true }
   )
+
+  vim.keymap.set("n", "<localleader>zt", function()
+    vim.cmd("e " .. require("vars").todos_file)
+  end, { desc = "open todos file", silent = true })
 end
 
 M.zettelkasten_bufnr = function(bufnr)

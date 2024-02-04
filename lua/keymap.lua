@@ -86,6 +86,10 @@ M.setup = function()
     vim.opt_local.wrap = not vim.opt_local.wrap
   end, { desc = "toggle text wrapping" })
 
+  vim.keymap.set("n", "<localleader>1", function()
+    vim.cmd("e " .. require("vars").scratchpad_file)
+  end, { desc = "open scratchpad", silent = true })
+
   -- Post.
   -- Bind C-c to ESC, also clean up the highlight.
   vim.keymap.set("n", "<c-c>", "<esc>:noh<cr>", { noremap = true, silent = true })

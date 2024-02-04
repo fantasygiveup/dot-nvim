@@ -23,6 +23,7 @@ function vars:load_variables()
   self.vim_path = vim.fn.stdpath("config")
   self.org_dir = org_dir
   self.cache_dir = cache_dir
+  self.scratchpad_file = cache_dir .. "scratchpad.txt"
   self.undo_dir = undo_dir
   self.modules_dir = self.vim_path .. path_sep .. "modules"
   self.path_sep = path_sep

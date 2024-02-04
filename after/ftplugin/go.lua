@@ -1,4 +1,4 @@
-vim.bo.textwidth = 100
-vim.bo.softtabstop = 4
-vim.bo.expandtab = false
-vim.wo.listchars = "tab:  ,nbsp:+,trail:·,extends:→,precedes:←"
+vim.opt_local.textwidth = 100
+vim.opt_local.softtabstop = 4
+vim.opt_local.expandtab = false
+vim.opt_local.listchars = "tab:  ,nbsp:+,trail:·,extends:→,precedes:←"

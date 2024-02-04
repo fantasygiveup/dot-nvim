@@ -129,7 +129,7 @@ M.lsp_flow = function(bufnr)
 end
 
 M.zettelkasten = function()
-  local zettelkasten_dir = require("vars").zettelkasten_dir
+  local zettelkasten_dir = require("vars").zettelkasten_dir_path
 
   vim.keymap.set(
     "n",
@@ -172,7 +172,7 @@ M.zettelkasten = function()
 end
 
 M.zettelkasten_bufnr = function(bufnr)
-  local zettelkasten_dir = require("vars").zettelkasten_dir
+  local zettelkasten_dir_path = require("vars").zettelkasten_dir_path
 
   vim.keymap.set(
     "n",
@@ -184,28 +184,28 @@ M.zettelkasten_bufnr = function(bufnr)
   vim.keymap.set(
     "n",
     "<localleader>zb",
-    "<cmd>ZkBacklinks { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
+    "<cmd>ZkBacklinks { notebook_path = '" .. zettelkasten_dir_path .. "' }<cr>",
     { desc = "zk backlinks", buffer = bufnr }
   )
 
   vim.keymap.set(
     "n",
     "<localleader>zi",
-    "<cmd>ZkInsertLink { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
+    "<cmd>ZkInsertLink { notebook_path = '" .. zettelkasten_dir_path .. "' }<cr>",
     { desc = "zk insert link", buffer = bufnr }
   )
 
   vim.keymap.set(
     "v",
     "<localleader>zi",
-    ":ZkInsertLinkAtSelection { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
+    ":ZkInsertLinkAtSelection { notebook_path = '" .. zettelkasten_dir_path .. "' }<cr>",
     { desc = "zk insert link", buffer = bufnr, silent = true }
   )
 
   vim.keymap.set(
     "n",
     "<localleader>zl",
-    "<cmd>ZkLinks { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
+    "<cmd>ZkLinks { notebook_path = '" .. zettelkasten_dir_path .. "' }<cr>",
     { desc = "zk links", buffer = bufnr }
   )
 end
@@ -225,6 +225,16 @@ M.tree_sitter = function()
       { desc = "inspect tree sitter" }
     )
   end
+end
+
+M.git_helpers = function()
+  git_helpers = require("vc.git_helpers")
+
+  vim.keymap.set("n", "<localleader>gc", function()
+    local org_dir_name = require("vars").org_dir_name
+
+    git_helpers.push_current_buffer({ org_dir_name })
+  end, { desc = "git push buffer", silent = true })
 end
 
 return M

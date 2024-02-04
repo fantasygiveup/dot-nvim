@@ -62,24 +62,24 @@ M.setup = function()
 
   -- Misc.
   vim.keymap.set("n", "<localleader>wn", function()
-    vim.wo.number = not vim.wo.number
-    vim.wo.relativenumber = not vim.wo.relativenumber
+    vim.opt_local.number = not vim.opt_local.number
+    vim.opt_local.relativenumber = not vim.opt_local.relativenumber
   end, { desc = "toggle line number" })
 
   vim.keymap.set("n", "<localleader>wr", function()
-    vim.wo.relativenumber = not vim.wo.relativenumber
+    vim.opt_local.relativenumber = not vim.opt_local.relativenumber
   end, { desc = "toggle relative number" })
 
   vim.keymap.set("n", "<localleader>wf", function()
-    vim.wo.foldenable = not vim.wo.foldenable
+    vim.opt_local.foldenable = not vim.opt_local.foldenable
   end, { desc = "toggle folding" })
 
   vim.keymap.set("n", "<localleader>wc", function()
-    if vim.wo.conceallevel ~= 0 then
-      vim.wo.conceallevel = 0
+    if vim.opt_local.conceallevel ~= 0 then
+      vim.opt_local.conceallevel = 0
       return
     end
-    vim.wo.conceallevel = 2
+    vim.opt_local.conceallevel = 2
   end, { desc = "toggle conceal level" })
 
   -- Post.

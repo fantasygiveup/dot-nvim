@@ -75,7 +75,7 @@ M.setup = function()
   end, { desc = "toggle folding" })
 
   vim.keymap.set("n", "<localleader>wc", function()
-    if vim.opt_local.conceallevel ~= 0 then
+    if vim.api.nvim_get_option_value("conceallevel", { buf = 0 }) ~= 0 then
       vim.opt_local.conceallevel = 0
       return
     end

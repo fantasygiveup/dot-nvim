@@ -70,7 +70,7 @@ M.config = function()
           return default_args
         end,
       }),
-      formatting.mix, -- elixir
+      formatting.mix.with({ filetypes = { "elixir", "heex" } }),
     },
   })
 end

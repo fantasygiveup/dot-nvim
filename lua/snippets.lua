@@ -109,28 +109,32 @@ ls.add_snippets("cpp", {
     fmt(
       [[
 #include <bits/stdc++.h>
-
 using namespace std;
+
+typedef long long ll;
+typedef vector<int> vi;
+typedef pair<int,int> pi;
 
 #define F first
 #define S second
 #define PB push_back
 #define MP make_pair
-
-typedef long long ll;
-typedef vector<int> vi;
-typedef pair<int, int> pi;
+#define REP(i,a,b) for (int i = a; i <= b; i++)
+#define SQ(a) a*a
 
 int main() {{
-  {}
-  return 0;
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    // Solution comes here.
+    {}
 }}
   ]],
       { i(0) }
     )
   ),
   s(
-    "cssol",
+    "csleet",
     fmt(
       [[
 #include <bits/stdc++.h>
@@ -146,6 +150,17 @@ int main() {{
     auto sol = Solution{{}};
     // cout << sol.your_method() << endl;
 }}
+  ]],
+      { i(0) }
+    )
+  ),
+  s(
+    "csio",
+    fmt(
+      [[
+freopen("input.txt", "r", stdin);
+freopen("output.txt", "w", stdout);
+{}
   ]],
       { i(0) }
     )

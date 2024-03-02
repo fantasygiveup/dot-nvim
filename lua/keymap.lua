@@ -244,4 +244,12 @@ M.git_helpers = function()
   end, { desc = "git push buffer", silent = true })
 end
 
+M.hop = function()
+  hop = require("hop")
+
+  vim.keymap.set("", "<a-t>", function()
+    hop.hint_words({})
+  end, { remap = true, desc = "hop_words" })
+end
+
 return M

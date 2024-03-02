@@ -8,9 +8,7 @@ M.config = function()
 
   hop.setup({})
 
-  vim.keymap.set("", "<a-t>", function()
-    hop.hint_words({})
-  end, { remap = true, desc = "hop_words" })
+  require("keymap").hop()
 end
 
 return M

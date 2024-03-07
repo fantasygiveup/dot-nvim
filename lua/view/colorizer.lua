@@ -11,6 +11,8 @@ M.config = function()
       heex = { names = true },
       elixir = { names = true },
       html = { names = false },
+      cmp_menu = { always_update = true, mode = "background" },
+      cmp_docs = { always_update = true, mode = "background" },
     },
     user_default_options = {
       mode = "virtualtext",

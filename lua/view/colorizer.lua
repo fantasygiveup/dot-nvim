@@ -8,8 +8,10 @@ M.config = function()
 
   colorizer.setup({
     filetypes = {
-      heex = { names = true },
-      elixir = { names = true },
+      css = {},
+      heex = { names = false },
+      elixir = { names = false },
+      eelixir = { names = false },
       html = { names = false },
       cmp_menu = { always_update = true, mode = "background" },
       cmp_docs = { always_update = true, mode = "background" },
@@ -17,6 +19,7 @@ M.config = function()
     user_default_options = {
       mode = "virtualtext",
       tailwind = true,
+      css_fn = true, -- rgb() and hsl() detection
     },
   })
 

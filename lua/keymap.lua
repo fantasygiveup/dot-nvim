@@ -252,4 +252,8 @@ M.hop = function()
   end, { remap = true, desc = "hop_words" })
 end
 
+M.colorizer = function()
+  vim.keymap.set("n", "<localleader>ct", "<cmd>ColorizerToggle<cr>", { desc = "colorized toggle" })
+end
+
 return M

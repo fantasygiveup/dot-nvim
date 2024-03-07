@@ -107,6 +107,28 @@ M.config = function()
     cmd = { "zk", "lsp" },
     name = "zk",
   })
+
+  lspconfig.tailwindcss.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { "html", "elixir", "eelixir", "heex" },
+    init_options = {
+      userLanguages = {
+        elixir = "html-eex",
+        eelixir = "html-eex",
+        heex = "html-eex",
+      },
+    },
+    settings = {
+      tailwindCSS = {
+        experimental = {
+          classRegex = {
+            'class[:]\\s*"([^"]*)"',
+          },
+        },
+      },
+    },
+  })
 end
 
 return M

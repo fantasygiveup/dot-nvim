@@ -39,7 +39,6 @@ lazy.setup({
   { "nvim-lualine/lualine.nvim", config = require("status_line").config },
   { "ziontee113/icon-picker.nvim", config = require("tools.icon_picker").config },
   { "aserowy/tmux.nvim", config = require("tools.tmux").config },
-  { "norcalli/nvim-colorizer.lua", config = require("tools.colorizer").config },
   { "kazhala/close-buffers.nvim", config = require("tools.close_buffers").config },
   { "rest-nvim/rest.nvim", ft = "http", config = require("tools.rest_client").config },
   {
@@ -101,6 +100,7 @@ lazy.setup({
   { "kevinhwang91/nvim-bqf", ft = "qf" },
   { "nvimdev/dashboard-nvim", config = require("tools.dashboard").config },
   { "zk-org/zk-nvim", config = require("tools.zettelkasten").config },
+  { "NvChad/nvim-colorizer.lua", config = require("view.colorizer").config },
 })
 
 require("event").config()

@@ -102,7 +102,6 @@ M.config = function()
   })
 
   lspconfig.zk.setup({
-    cmd = { "elixir-ls" },
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "zk", "lsp" },

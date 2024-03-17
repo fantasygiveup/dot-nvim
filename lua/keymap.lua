@@ -51,12 +51,14 @@ M.setup = function()
   vim.keymap.set("i", "<c-w>", "<c-o>db")
   vim.keymap.set("i", "<c-k>", "<c-o>D")
   vim.keymap.set("i", "<c-a>", "<c-o>0")
-  vim.keymap.set("i", "<c-e>", "<c-o>$")
+  -- See M.luasnip() for details.
+  -- vim.keymap.set("i", "<c-e>", "<c-o>$")
   vim.keymap.set("i", "<c-_>", "<c-o>u") -- [C-/] to undo
   vim.keymap.set("i", "<c-d>", "<del>")
   vim.keymap.set("i", "<c-u>", "<c-g>u<c-u>")
-  vim.keymap.set("i", "<c-b>", "<left>")
-  vim.keymap.set("i", "<c-f>", "<right>")
+  -- See M.luasnip() for details.
+  -- vim.keymap.set("i", "<c-b>", "<left>")
+  -- vim.keymap.set("i", "<c-f>", "<right>")
   vim.keymap.set("i", "<c-p>", "<up>")
   vim.keymap.set("i", "<c-n>", "<down>")
 
@@ -254,6 +256,32 @@ end
 
 M.colorizer = function()
   vim.keymap.set("n", "<localleader>ct", "<cmd>ColorizerToggle<cr>", { desc = "colorized toggle" })
+end
+
+M.luasnip = function()
+  local luasnip = require("luasnip")
+
+  vim.keymap.set({ "i" }, "<c-e>", function()
+    if luasnip.choice_active() then
+      luasnip.expand()
+    else
+      return "<c-o>$"
+    end
+  end, { silent = true, expr = true })
+  vim.keymap.set({ "i", "s" }, "<c-f>", function()
+    if luasnip.jumpable(1) then
+      luasnip.jump(1)
+    else
+      vim.cmd("normal! l")
+    end
+  end, { silent = true })
+  vim.keymap.set({ "i", "s" }, "<c-b>", function()
+    if luasnip.jumpable(-1) then
+      luasnip.jump(-1)
+    else
+      vim.cmd("normal! h")
+    end
+  end, { silent = true })
 end
 
 return M

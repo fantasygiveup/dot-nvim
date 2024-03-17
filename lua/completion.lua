@@ -5,6 +5,7 @@ M.config = function()
   if not ok then
     return
   end
+
   local ok, luasnip = pcall(require, "luasnip")
   if not ok then
     return
@@ -37,8 +38,8 @@ M.config = function()
       ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = "select", count = 1 }),
       ["<C-b>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-e>"] = cmp.mapping.abort(),
+      ["<C-q>"] = cmp.mapping.abort(),
+      ["<C-e>"] = cmp.mapping.confirm({ select = true }),
       ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({

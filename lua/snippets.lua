@@ -205,4 +205,20 @@ ls.add_snippets("heex", {
   s("h5", fmt([[<h5>{}</h5>]], { i(0) })),
   s("h6", fmt([[<h6>{}</h6>]], { i(0) })),
   s("a", fmt([[<a href="{}"></a>]], { i(0) })),
+  s(".flex", fmt([[<div class="flex">{}</div>]], { i(0) })),
+  -- Elixir specific.
+  s("=", fmt([[<%= {} %>]], { i(0) })),
+  s("%", fmt([[<% {} %>]], { i(0) })),
+  s("end", fmt([[<% end %>]], {})),
+  s(
+    "=for",
+    fmt(
+      [[
+  <%= for {} <- {} do %>
+    {}
+  <% end %>
+  ]],
+      { i(1), i(2), i(0) }
+    )
+  ),
 })

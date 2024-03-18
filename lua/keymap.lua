@@ -258,12 +258,57 @@ M.colorizer = function()
   vim.keymap.set("n", "<localleader>ct", "<cmd>ColorizerToggle<cr>", { desc = "colorized toggle" })
 end
 
-M.luasnip = function()
+M.cmp_preset = function()
+  local cmp = require("cmp")
+
+  return {
+    ["<C-n>"] = cmp.mapping.select_next_item({ behavior = "select", count = 1 }),
+    ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = "select", count = 1 }),
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-q>"] = cmp.mapping.abort(),
+    ["<C-e>"] = cmp.mapping.confirm({ select = true }),
+    ["<CR>"] = cmp.mapping({
+      i = function(fallback)
+        if cmp.visible() and cmp.get_active_entry() then
+          cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+        else
+          fallback()
+        end
+      end,
+      s = cmp.mapping.confirm({ select = true }),
+      c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+    }),
+    ["<Tab>"] = {
+      c = function(_)
+        if cmp.visible() then
+          if #cmp.get_entries() == 1 then
+            cmp.confirm({ select = true })
+          else
+            cmp.select_next_item()
+          end
+        else
+          cmp.complete()
+          if #cmp.get_entries() == 1 then
+            cmp.confirm({ select = true })
+          end
+        end
+      end,
+    },
+  }
+end
+
+M.completion = function()
   local luasnip = require("luasnip")
+  local cmp = require("cmp")
 
   vim.keymap.set({ "i" }, "<c-e>", function()
-    if luasnip.choice_active() then
-      luasnip.expand()
+    if cmp.visible() then
+      if #cmp.get_entries() == 1 then
+        cmp.confirm({ select = true })
+      else
+        cmp.select_next_item()
+      end
     else
       return "<c-o>$"
     end

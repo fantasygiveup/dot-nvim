@@ -52,29 +52,6 @@ ls.add_snippets("go", {
   s("pro", fmt([[fmt.Println("{}")]], { i(0) })),
 })
 
-ls.add_snippets("html", {
-  s(
-    "html5",
-    fmt(
-      [[
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{}</title>
-  </head>
-
-  <body>
-    {}
-  </body>
-</html>
-    ]],
-      { i(1), i(0) }
-    )
-  ),
-})
-
 ls.add_snippets("lua", {
   s(
     "fn",
@@ -193,8 +170,36 @@ ls.add_snippets("elixir", {
   ),
 })
 
-ls.add_snippets("heex", {
+html_templs = {
+  s(
+    "html5",
+    fmt(
+      [[
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{}</title>
+  </head>
+
+  <body>
+    {}
+  </body>
+</html>
+    ]],
+      { i(1), i(0) }
+    )
+  ),
+}
+
+ls.add_snippets("html", html_templs)
+
+elixir_templs = {
+  s("body", fmt([[<body>{}</body>]], { i(0) })),
+  s("header", fmt([[<header>{}</header>]], { i(0) })),
   s("img", fmt([[<img src="{}" alt="{}"/>]], { i(1), i(0) })),
+  s("button", fmt([[<button type="{}">{}</button>]], { i(1), i(0) })),
   s("div", fmt([[<div>{}</div>]], { i(0) })),
   s("p", fmt([[<p>{}</p>]], { i(0) })),
   s("span", fmt([[<span>{}</span>]], { i(0) })),
@@ -206,12 +211,11 @@ ls.add_snippets("heex", {
   s("h6", fmt([[<h6>{}</h6>]], { i(0) })),
   s("a", fmt([[<a href="{}"></a>]], { i(0) })),
   s(".flex", fmt([[<div class="flex">{}</div>]], { i(0) })),
-  -- Elixir specific.
-  s("=", fmt([[<%= {} %>]], { i(0) })),
-  s("%", fmt([[<% {} %>]], { i(0) })),
-  s("end", fmt([[<% end %>]], {})),
+  s("%=", fmt([[<%= {} %>]], { i(0) })),
+  s("%%", fmt([[<% {} %>]], { i(0) })),
+  s("%end", fmt([[<% end %>]], {})),
   s(
-    "=for",
+    "%for",
     fmt(
       [[
   <%= for {} <- {} do %>
@@ -221,4 +225,7 @@ ls.add_snippets("heex", {
       { i(1), i(2), i(0) }
     )
   ),
-})
+}
+
+ls.add_snippets("heex", elixir_templs)
+ls.add_snippets("elixir", elixir_templs)

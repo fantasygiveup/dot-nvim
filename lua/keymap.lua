@@ -255,7 +255,12 @@ M.hop = function()
 end
 
 M.colorizer = function()
-  vim.keymap.set("n", "<localleader>ct", "<cmd>ColorizerToggle<cr>", { desc = "colorized toggle" })
+  vim.keymap.set(
+    "n",
+    "<localleader>wl",
+    "<cmd>ColorizerToggle<cr>",
+    { desc = "co[l]orized toggle" }
+  )
 end
 
 M.cmp_preset = function()

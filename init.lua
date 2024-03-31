@@ -58,7 +58,6 @@ lazy.setup({
       "nvim-tree/nvim-web-devicons",
       "stevearc/dressing.nvim",
     },
-    url = "git@gitlab.com:ibhagwan/fzf-lua.git",
     config = require("fuzzy_finder").config,
   },
   {

@@ -226,14 +226,12 @@ M.zen_mode = function()
 end
 
 M.tree_sitter = function()
-  M.zen_mode = function()
-    vim.keymap.set(
-      "n",
-      "<leader>it",
-      "<cmd>lua vim.treesitter.inspect_tree()<cr>",
-      { desc = "inspect tree sitter" }
-    )
-  end
+  vim.keymap.set(
+    "n",
+    "<leader>it",
+    "<cmd>lua vim.treesitter.inspect_tree()<cr>",
+    { desc = "inspect tree sitter" }
+  )
 end
 
 M.git_helpers = function()

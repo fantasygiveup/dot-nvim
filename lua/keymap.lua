@@ -15,8 +15,8 @@ M.setup = function()
   vim.keymap.set("n", vim.g.maplocalleader, "")
   vim.keymap.set("x", vim.g.maplocalleader, "")
 
-  vim.keymap.set("n", "[f", "<cmd>cprev<cr>")
-  vim.keymap.set("n", "]f", "<cmd>cnext<cr>")
+  vim.keymap.set("n", "[x", "<cmd>cprev<cr>")
+  vim.keymap.set("n", "]x", "<cmd>cnext<cr>")
   vim.keymap.set("n", "<localleader>ss", "<cmd>setlocal spell! spelllang=en_us<cr>")
   vim.keymap.set("n", "<localleader>su", "<cmd>setlocal spell! spelllang=uk_ua<cr>")
   vim.keymap.set("n", "<localleader>cw", [[<cmd>keeppatterns %s/\s\+$//e<cr>]]) -- remove white spaces

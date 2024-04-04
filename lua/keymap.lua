@@ -271,17 +271,7 @@ M.cmp_preset = function()
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-q>"] = cmp.mapping.abort(),
     ["<C-e>"] = cmp.mapping.confirm({ select = true }),
-    ["<CR>"] = cmp.mapping({
-      i = function(fallback)
-        if cmp.visible() and cmp.get_active_entry() then
-          cmp.confirm({ select = false })
-        else
-          fallback()
-        end
-      end,
-      s = cmp.mapping.confirm({ select = true }),
-      c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-    }),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
     ["<Tab>"] = {
       c = function(_)
         if cmp.visible() then

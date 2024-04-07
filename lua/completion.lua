@@ -47,7 +47,7 @@ M.config = function()
     }),
   })
 
-  keymap.completion()
+  keymap.luasnip()
 end
 
 return M

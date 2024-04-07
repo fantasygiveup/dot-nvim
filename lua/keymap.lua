@@ -263,6 +263,7 @@ end
 
 M.cmp_preset = function()
   local cmp = require("cmp")
+  local luasnip = require("luasnip")
 
   return {
     ["<C-n>"] = cmp.mapping.select_next_item({ behavior = "select", count = 1 }),
@@ -270,7 +271,6 @@ M.cmp_preset = function()
     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-q>"] = cmp.mapping.abort(),
-    ["<C-e>"] = cmp.mapping.confirm({ select = true }),
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
     ["<Tab>"] = {
       c = function(_)
@@ -291,21 +291,16 @@ M.cmp_preset = function()
   }
 end
 
-M.completion = function()
+M.luasnip = function()
   local luasnip = require("luasnip")
-  local cmp = require("cmp")
 
-  vim.keymap.set({ "i" }, "<c-e>", function()
-    if cmp.visible() then
-      if #cmp.get_entries() == 1 then
-        cmp.confirm({ select = true })
-      else
-        cmp.select_next_item()
-      end
+  vim.keymap.set({ "i", "s" }, "<c-s>", function()
+    if luasnip.expand_or_jumpable() then
+      return "<plug>luasnip-expand-or-jump"
     else
       return "<c-o>$"
     end
-  end, { silent = true, expr = true })
+  end, { expr = true, remap = true })
   vim.keymap.set({ "i", "s" }, "<c-f>", function()
     if luasnip.jumpable(1) then
       luasnip.jump(1)

@@ -85,6 +85,7 @@ M.config = function()
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
   local servers = { "ccls", "gopls", "pyright", "tsserver", "rust_analyzer", "lua_ls", "cssls" }
@@ -125,6 +126,30 @@ M.config = function()
           classRegex = {
             'class[:]\\s*"([^"]*)"',
           },
+        },
+      },
+    },
+  })
+
+  lspconfig.emmet_ls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = {
+      "css",
+      "html",
+      "javascript",
+      "javascriptreact",
+      "less",
+      "sass",
+      "scss",
+      "heex",
+      "elixir",
+    },
+    init_options = {
+      html = {
+        options = {
+          -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+          ["bem.enabled"] = true,
         },
       },
     },

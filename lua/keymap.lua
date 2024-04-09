@@ -52,7 +52,7 @@ M.setup = function()
   vim.keymap.set("i", "<c-k>", "<c-o>D")
   vim.keymap.set("i", "<c-a>", "<c-o>0")
   -- See M.luasnip() for details.
-  -- vim.keymap.set("i", "<c-e>", "<c-o>$")
+  vim.keymap.set("i", "<c-e>", "<c-o>$")
   vim.keymap.set("i", "<c-_>", "<c-o>u") -- [C-/] to undo
   vim.keymap.set("i", "<c-d>", "<del>")
   vim.keymap.set("i", "<c-u>", "<c-g>u<c-u>")
@@ -294,11 +294,9 @@ end
 M.luasnip = function()
   local luasnip = require("luasnip")
 
-  vim.keymap.set({ "i", "s" }, "<c-s>", function()
+  vim.keymap.set({ "i", "s" }, "<c-x>", function()
     if luasnip.expand_or_jumpable() then
       return "<plug>luasnip-expand-or-jump"
-    else
-      return "<c-o>$"
     end
   end, { expr = true, remap = true })
   vim.keymap.set({ "i", "s" }, "<c-f>", function()

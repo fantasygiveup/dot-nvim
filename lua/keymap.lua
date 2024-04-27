@@ -332,7 +332,7 @@ M.fzf = function()
     fzf_lua.buffers()
   end, { desc = "buffers" })
 
-  vim.keymap.set("n", "<c-x>pf", function()
+  vim.keymap.set("n", "<c-t>", function()
     fzf_lua.files({ cmd = vim.env.FZF_DEFAULT_COMMAND })
   end, { desc = "files" })
 

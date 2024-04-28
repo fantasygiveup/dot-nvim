@@ -98,7 +98,9 @@ lazy.setup({
   { "ruifm/gitlinker.nvim", config = require("vc.gitlinker").config },
   { "lewis6991/gitsigns.nvim", config = require("vc.gitsigns").config },
   { "kevinhwang91/nvim-bqf", ft = "qf" },
-  { "nvimdev/dashboard-nvim", config = require("tools.dashboard").config },
+  -- By forcing use a commit hash, ensure that pipe to stdin works.
+  -- See https://github.com/nvimdev/dashboard-nvim/issues/443
+  { "nvimdev/dashboard-nvim", config = require("tools.dashboard").config, commit = "c71cab740e2a" },
   { "zk-org/zk-nvim", config = require("tools.zettelkasten").config },
   { "NvChad/nvim-colorizer.lua", config = require("view.colorizer").config },
 })

@@ -272,22 +272,7 @@ M.cmp_preset = function()
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-q>"] = cmp.mapping.abort(),
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
-    ["<Tab>"] = {
-      c = function(_)
-        if cmp.visible() then
-          if #cmp.get_entries() == 1 then
-            cmp.confirm({ select = true })
-          else
-            cmp.select_next_item()
-          end
-        else
-          cmp.complete()
-          if #cmp.get_entries() == 1 then
-            cmp.confirm({ select = true })
-          end
-        end
-      end,
-    },
+    ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
   }
 end
 

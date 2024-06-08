@@ -313,7 +313,7 @@ end
 M.fzf = function()
   local fzf_lua = require("fzf-lua")
 
-  vim.keymap.set("n", "<leader><", function()
+  vim.keymap.set("n", "<localleader>b", function()
     fzf_lua.buffers()
   end, { desc = "buffers" })
 

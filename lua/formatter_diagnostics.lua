@@ -71,6 +71,7 @@ M.config = function()
         end,
       }),
       formatting.mix.with({ filetypes = { "elixir", "heex" } }),
+      formatting.nixfmt,
     },
   })
 end

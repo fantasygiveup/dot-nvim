@@ -88,7 +88,8 @@ M.config = function()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  local servers = { "ccls", "gopls", "pyright", "tsserver", "rust_analyzer", "lua_ls", "cssls" }
+  local servers =
+    { "ccls", "gopls", "pyright", "tsserver", "rust_analyzer", "lua_ls", "cssls", "nixd" }
   for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup({
       on_attach = on_attach,

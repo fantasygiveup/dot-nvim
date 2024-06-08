@@ -8,8 +8,7 @@ M.config = function()
 
   icon_picker.setup({})
 
-  vim.keymap.set("n", "<a-e>", "<cmd>IconPickerNormal<cr>")
-  vim.keymap.set("i", "<a-e>", "<cmd>IconPickerInsert<cr>")
+  require("keymap").icon_picker()
 end
 
 return M

@@ -41,14 +41,6 @@ lazy.setup({
   { "aserowy/tmux.nvim", config = require("tools.tmux").config },
   { "kazhala/close-buffers.nvim", config = require("tools.close_buffers").config },
   { "rest-nvim/rest.nvim", ft = "http", config = require("tools.rest_client").config },
-  {
-    "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    config = require("tools.markdown_preview").config,
-  },
   { "jose-elias-alvarez/null-ls.nvim", config = require("formatter_diagnostics").config },
   { "folke/zen-mode.nvim", config = require("view.zen_mode").config },
   {

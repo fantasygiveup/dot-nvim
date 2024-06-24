@@ -2,20 +2,6 @@ local gr = vim.api.nvim_create_augroup("GenericGroup", {})
 
 local M = {}
 
-local function zen(enable)
-  if enable == 1 then
-    vim.opt_local.laststatus = 0
-    vim.opt_local.cursorline = false
-    vim.opt_local.number = false
-    vim.opt_local.relativenumber = false
-  else
-    vim.opt_local.relativenumber = true
-    vim.opt_local.number = true
-    vim.opt_local.cursorline = true
-    vim.opt_local.laststatus = 3
-  end
-end
-
 M.config = function()
   vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     group = gr,
@@ -56,7 +42,7 @@ M.config = function()
       if vim.o.diff then
         for _, win in ipairs(vim.api.nvim_list_wins()) do
           vim.api.nvim_set_current_win(win)
-          zen(1)
+          require("view.zen_mode").zen_window(1)
         end
         vim.cmd("normal! gg")
         return

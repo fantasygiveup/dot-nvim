@@ -61,4 +61,18 @@ M.zen_mode = function(extra_width, direction)
   fn(opts)
 end
 
+M.zen_window = function(enable)
+  if enable == 1 then
+    vim.opt_local.laststatus = 0
+    vim.opt_local.cursorline = false
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+  else
+    vim.opt_local.relativenumber = true
+    vim.opt_local.number = true
+    vim.opt_local.cursorline = true
+    vim.opt_local.laststatus = 3
+  end
+end
+
 return M

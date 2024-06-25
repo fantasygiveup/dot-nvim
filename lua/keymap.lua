@@ -217,6 +217,8 @@ M.zettelkasten_bufnr = function(bufnr)
     "<cmd>ZkLinks { notebook_path = '" .. zettelkasten_dir_path .. "' }<cr>",
     { desc = "zk links", buffer = bufnr }
   )
+
+  vim.keymap.set("n", "<tab>", "zA", { desc = "toggle fold", buffer = bufnr })
 end
 
 M.zen_mode = function()

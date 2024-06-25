@@ -11,14 +11,6 @@ M.init = function()
     end,
   })
 
-  vim.api.nvim_create_autocmd({ "FileType" }, {
-    group = gr,
-    pattern = { "help" },
-    callback = function()
-      pcall(vim.cmd, "only")
-    end,
-  })
-
   vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
     group = gr,
     pattern = { "*" },

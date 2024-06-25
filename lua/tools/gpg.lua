@@ -3,9 +3,9 @@
 -- https://github.com/jamessan/vim-gnupg but written in lua.
 local M = {}
 
-local gr = vim.api.nvim_create_augroup("MyEcryptedGroup", {})
+M.init = function()
+  local gr = vim.api.nvim_create_augroup("MyEcryptedGroup", {})
 
-M.config = function()
   vim.api.nvim_create_autocmd({ "BufReadPre", "FileReadPre" }, {
     group = gr,
     pattern = { "*.gpg" },

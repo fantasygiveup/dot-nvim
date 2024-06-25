@@ -7,7 +7,6 @@ M.config = function()
   end
 
   M.load_background()
-  M.listen_to_system_background_change()
 
   theme.setup({
     style = vim.o.background,
@@ -51,6 +50,10 @@ M.load_background_async = function()
   require("utils.async").timer(function()
     require("view.theme").load_background()
   end)
+end
+
+M.init = function()
+  M.listen_to_system_background_change()
 end
 
 return M

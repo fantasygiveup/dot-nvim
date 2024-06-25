@@ -96,9 +96,8 @@ lazy.setup({
   { "NvChad/nvim-colorizer.lua", config = require("view.colorizer").config },
 })
 
-require("event").config()
-require("tools.gpg").config()
-require("tools.zettelkasten").config()
-require("tools.fzf_project").config()
-require("vc.git_helpers").config()
-require("custom").config()
+require("event").init()
+require("tools.gpg").init()
+require("tools.fzf_project").init()
+require("vc.git_helpers").init()
+require("view.theme").init()

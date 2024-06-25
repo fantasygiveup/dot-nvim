@@ -1,6 +1,6 @@
 local M = {}
 
-M.config = function()
+M.init = function()
   require("keymap").git_helpers()
 end
 

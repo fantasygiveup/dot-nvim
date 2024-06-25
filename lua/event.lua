@@ -2,7 +2,7 @@ local gr = vim.api.nvim_create_augroup("GenericGroup", {})
 
 local M = {}
 
-M.config = function()
+M.init = function()
   vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     group = gr,
     pattern = { "COMMIT_EDITMSG" },

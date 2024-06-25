@@ -48,14 +48,9 @@ M.load_background = function()
 end
 
 M.load_background_async = function()
-  local timer = vim.loop.new_timer()
-  timer:start(
-    0,
-    0,
-    vim.schedule_wrap(function()
-      M.load_background()
-    end)
-  )
+  require("utils.async").timer(function()
+    require("view.theme").load_background()
+  end)
 end
 
 return M

@@ -1,4 +1,4 @@
-local gr = vim.api.nvim_create_augroup("GenericGroup", {})
+local gr = vim.api.nvim_create_augroup("GenericEventGroup", {})
 
 local M = {}
 
@@ -24,6 +24,7 @@ M.init = function()
     pattern = { "*" },
     callback = function()
       require("utils.cursor").restore_buffer_pos()
+      require("utils.cursor").toggle_fold_section()
     end,
   })
 

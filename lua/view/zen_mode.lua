@@ -34,6 +34,23 @@ M.config = function()
     },
   })
 
+  local gr = vim.api.nvim_create_augroup("ZenGroup", {})
+
+  vim.api.nvim_create_autocmd({ "VimEnter" }, {
+    group = gr,
+    pattern = { "*" },
+    callback = function()
+      if vim.o.diff then
+        for _, win in ipairs(vim.api.nvim_list_wins()) do
+          vim.api.nvim_set_current_win(win)
+          require("view.zen_mode").zen_current_window(1)
+        end
+        vim.cmd("normal! gg")
+        return
+      end
+    end,
+  })
+
   require("keymap").zen_mode()
 end
 
@@ -61,7 +78,8 @@ M.zen_mode = function(extra_width, direction)
   fn(opts)
 end
 
-M.zen_window = function(enable)
+-- zen_mode is great, but I did not find an option to apply it to per each neovim window.
+M.zen_current_window = function(enable)
   if enable == 1 then
     vim.opt_local.laststatus = 0
     vim.opt_local.cursorline = false

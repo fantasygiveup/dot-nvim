@@ -34,21 +34,6 @@ M.config = function()
       vim.cmd("tabdo wincmd =")
     end,
   })
-
-  vim.api.nvim_create_autocmd({ "VimEnter" }, {
-    group = gr,
-    pattern = { "*" },
-    callback = function()
-      if vim.o.diff then
-        for _, win in ipairs(vim.api.nvim_list_wins()) do
-          vim.api.nvim_set_current_win(win)
-          require("view.zen_mode").zen_window(1)
-        end
-        vim.cmd("normal! gg")
-        return
-      end
-    end,
-  })
 end
 
 return M

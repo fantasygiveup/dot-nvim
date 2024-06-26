@@ -178,6 +178,14 @@ M.zettelkasten = function()
   vim.keymap.set("n", "<localleader>z1", function()
     vim.cmd("e " .. require("vars").todos_file)
   end, { desc = "open todos file", silent = true })
+
+  vim.keymap.set("n", "<localleader>ze", function()
+    require("tools.zettelkasten").fleeting_new_entry()
+  end, { desc = "new fleeting note", silent = true })
+
+  vim.keymap.set("n", "<localleader>zs", function()
+    require("tools.zettelkasten").fleeting_open_file()
+  end, { desc = "open fleeting note", silent = true })
 end
 
 M.zettelkasten_bufnr = function(bufnr)

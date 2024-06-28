@@ -34,6 +34,73 @@ M.get_ts_parser = function(source, filetype)
   return ts_parser, iter_src
 end
 
+--- Extracts the document root from the current document or from the string
+---@param src number|string The number of the buffer to extract or string with code (can be nil)
+---@param filetype string? #The filetype of the buffer or the string with code
+---@return TSNode? #The root node of the document
+M.get_document_root = function(src, filetype)
+  local parser
+  if type(src) == "string" then
+    parser = vim.treesitter.get_string_parser(src, filetype)
+  else
+    parser = vim.treesitter.get_parser(src or 0, filetype)
+  end
+
+  local tree = parser:parse()[1]
+
+  if not tree or not tree:root() then
+    return
+  end
+
+  return tree:root()
+end
+
+--- Retrieves the first node at a specific line
+---@param buf number #The buffer to search in (0 for current)
+---@param line number #The line number (0-indexed) to get the node from
+-- the same line as `line`.
+---@param stop_type string|table? #Don't recurse to the provided type(s)
+---@param filetype string vim's filetype for current buffer
+---@return userdata|nil #The first node on `line`
+M.get_first_node_on_line = function(buf, line, stop_type, filetype)
+  if type(stop_type) == "string" then
+    stop_type = { stop_type }
+  end
+
+  local document_root = M.get_document_root(buf, filetype)
+
+  if not document_root then
+    return
+  end
+
+  local first_char = (vim.api.nvim_buf_get_lines(buf, line, line + 1, true)[1] or ""):match(
+    "^(%s+)[^%s]"
+  )
+  first_char = first_char and first_char:len() or 0
+
+  local descendant = document_root:descendant_for_range(line, first_char, line, first_char + 1) ---@diagnostic disable-line -- TODO: type error workaround <pysan3>
+
+  if not descendant then
+    return
+  end
+
+  while
+    descendant:parent()
+    and (descendant:parent():start()) == line
+    and descendant:parent():symbol() ~= document_root:symbol() ---@diagnostic disable-line -- TODO: type error workaround <pysan3>
+  do
+    local parent = descendant:parent()
+
+    if parent and stop_type and vim.tbl_contains(stop_type, parent:type()) then
+      break
+    end
+
+    descendant = parent
+  end
+
+  return descendant
+end
+
 M.get_node_text = function(node, source)
   if not node then
     return ""

@@ -183,9 +183,9 @@ M.zettelkasten = function()
     require("tools.zettelkasten").fleeting_new_entry()
   end, { desc = "new fleeting note", silent = true })
 
-  vim.keymap.set("n", "<localleader>zs", function()
+  vim.keymap.set("n", "<localleader>zv", function()
     require("tools.zettelkasten").fleeting_open_file()
-  end, { desc = "open fleeting note", silent = true })
+  end, { desc = "visit fleeting note", silent = true })
 end
 
 M.zettelkasten_bufnr = function(bufnr)
@@ -227,6 +227,10 @@ M.zettelkasten_bufnr = function(bufnr)
   )
 
   vim.keymap.set("n", "<tab>", "zA", { desc = "toggle fold", buffer = bufnr })
+
+  vim.keymap.set("n", "<Space><Space>", function()
+    require("tools.zettelkasten").fleeting_toggle_entry(bufnr)
+  end, { desc = "zk toggle fleeting entry", buffer = bufnr })
 end
 
 M.zen_mode = function()

@@ -107,6 +107,7 @@ function vars:load_options()
   vim.o.completeopt = "menu,menuone,noselect"
   vim.o.number = true
   vim.o.relativenumber = true
+  vim.o.linebreak = true -- do not split a word into lines
 end
 
 return vars

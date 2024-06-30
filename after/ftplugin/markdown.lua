@@ -1,6 +1,7 @@
 vim.opt_local.concealcursor = "nc" -- reveal on insert
 vim.opt_local.conceallevel = 2
 vim.opt_local.foldlevel = 0 -- close all folds by default
+vim.opt_local.foldnestmax = 3
 vim.opt_local.foldmethod = "expr"
 vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 

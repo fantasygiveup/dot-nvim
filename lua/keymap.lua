@@ -226,7 +226,7 @@ M.zettelkasten_bufnr = function(bufnr)
     { desc = "zk links", buffer = bufnr }
   )
 
-  vim.keymap.set("n", "<tab>", "zA", { desc = "toggle fold", buffer = bufnr })
+  vim.keymap.set("n", "<tab>", "za", { desc = "toggle fold", buffer = bufnr })
 
   vim.keymap.set("n", "<Space><Space>", function()
     require("tools.zettelkasten").fleeting_toggle_entry(bufnr)

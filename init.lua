@@ -6,7 +6,7 @@ local function ensure_vars()
 end
 
 ensure_vars()
-require("keymap").setup()
+require("keymap").init()
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -103,3 +103,4 @@ require("tools.fzf_project").init()
 require("vc.git_helpers").init()
 require("view.theme").init()
 require("custom").init()
+require("treesitter.markdown").init()

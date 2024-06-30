@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.init = function()
   -- Pre. Allows us to map C-c key sequence (see Post below).
   vim.keymap.set("n", "<c-c>", "<nop>")
   vim.keymap.set("i", "<c-c>", "<nop>")
@@ -387,6 +387,12 @@ end
 M.icon_picker = function()
   vim.keymap.set("n", "<a-e>", "<cmd>IconPickerNormal<cr>")
   vim.keymap.set("i", "<a-e>", "<cmd>IconPickerInsert<cr>")
+end
+
+M.markdown_common = function()
+  vim.keymap.set("n", "<space>t<space>", function()
+    require("treesitter.markdown").toggle_checkbox({ create = true })
+  end, { desc = "Toggle Markdown Checkbox" })
 end
 
 return M

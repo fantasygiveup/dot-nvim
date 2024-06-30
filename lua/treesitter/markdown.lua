@@ -1,25 +1,72 @@
 local M = {}
 
-local parser = require("treesitter.parser")
+local ts = require("nvim-treesitter.ts_utils")
+local ts_parser = require("treesitter.parser")
 
-M.get_ts_parser = function(source)
-  return parser.get_ts_parser(source, "markdown")
+local toggle_checkbox = function()
+  local node = ts.get_node_at_cursor(nil, true)
+  local item = ts_parser.find_parent_node(node, "list_item")
+  if not item then
+    return
+  end
+
+  local unchecked = ts_parser.find_child_node(item, "task_list_marker_unchecked")
+  local checked = ts_parser.find_child_node(item, "task_list_marker_checked")
+  local box = checked or unchecked
+
+  if box then
+    ts_parser.set_node_text(box, {})
+    local marker = item:child()
+    ts_parser.set_node_text(marker, ts_parser.get_node_text(marker):sub(1, 1))
+    return
+  end
+
+  local content = ts_parser.find_child_node(item, "paragraph")
+  if not content then
+    return
+  end
+  local text = ts_parser.get_node_text(content)
+
+  text[1] = "[ ] " .. text[1]
+  ts_parser.set_node_text(content, text)
 end
 
-M.get_document_root = function(src)
-  return parser.get_document_root(src, "markdown")
+M.toggle_checkbox = function(opts)
+  local opts = opts or {}
+
+  if not opts.create then
+    opts.create = true
+  end
+
+  local node = ts.get_node_at_cursor(nil, true)
+  local item = ts_parser.find_parent_node(node, "list_item")
+  if not item then
+    return
+  end
+
+  local unchecked = ts_parser.find_child_node(item, "task_list_marker_unchecked")
+  if unchecked then
+    ts_parser.set_node_text(unchecked, "[x]")
+    return
+  end
+
+  local checked = ts_parser.find_child_node(item, "task_list_marker_checked")
+  if checked then
+    if opts.remove then
+      toggle_checkbox()
+    else
+      ts_parser.set_node_text(checked, "[ ]")
+    end
+    return
+  end
+
+  if opts.create then
+    toggle_checkbox()
+  end
 end
 
-M.get_first_node_on_line = function(buf, line, stop_type)
-  return parser.get_first_node_on_line(buf, line, stop_type, "markdown")
-end
-
-M.get_node_text = function(node, source)
-  return parser.get_node_text(node, source)
-end
-
-M.execute_query = function(query_string, callback, source, start, finish)
-  return parser.execute_query(query_string, callback, source, "markdown", start, finish)
+M.init = function()
+  require("keymap").markdown_common()
 end
 
 return M

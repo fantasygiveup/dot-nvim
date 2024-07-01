@@ -66,7 +66,7 @@ M.toggle_checkbox = function(opts)
 end
 
 M.init = function()
-  require("keymap").markdown_common()
+  require("keymap").markdown()
 end
 
 return M

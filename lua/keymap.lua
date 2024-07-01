@@ -188,7 +188,7 @@ M.zettelkasten = function()
   end, { desc = "visit fleeting note", silent = true })
 end
 
-M.zettelkasten_bufnr = function(bufnr)
+M.zettelkasten_buffer = function(bufnr)
   local zettelkasten_dir_path = require("vars").zettelkasten_dir_path
 
   vim.keymap.set(

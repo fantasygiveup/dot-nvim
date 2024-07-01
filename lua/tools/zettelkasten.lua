@@ -35,7 +35,8 @@ M.config = function()
     pattern = { "markdown" },
     callback = function()
       if require("zk.util").notebook_root(vim.fn.expand("%:p")) ~= nil then
-        require("keymap").zettelkasten_bufnr(0)
+        require("keymap").zettelkasten_buffer(0)
+
         require("utils.async").timer(function()
           require("view.zen_mode").zen_mode(0, 1)
         end)

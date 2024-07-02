@@ -69,6 +69,7 @@ end
 
 local function open_buffer_file(path)
   if vim.api.nvim_buf_get_name(0) == path then
+    vim.cmd("edit")
     return
   end
 
@@ -110,14 +111,14 @@ end
 
 local function fleeting_new_entry()
   local now = string.format("%s", os.date("%Y-%m-%d %a %H:%M"))
-  local new_entry = string.format("\n\n# [%s]  ", now) -- two spaces for a room to edit the line
+  local new_entry = string.format("\n# [%s]  ", now) -- two spaces for a room to edit the line
 
   local file_path = require("vars").fleeting_notes
 
   if append_to_file(file_path, new_entry) then
     open_buffer_file(file_path)
     win_scroll_last_line()
-    pcall(vim.cmd, "normal! zo") -- open the fold
+    pcall(vim.cmd, "normal! zo") -- [zo]open the fold and [zz]recenter
     vim.cmd(":execute 'normal! A' | startinsert")
   end
 end

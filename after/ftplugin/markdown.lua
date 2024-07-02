@@ -7,6 +7,7 @@ vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt_local.textwidth = 80
 
 function _G.custom_markdown_fold(limit)
+  local limit = limit or 80
   return vim.fn.getline(vim.v.foldstart):sub(1, limit - 3) .. "..."
 end
 

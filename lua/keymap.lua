@@ -397,7 +397,7 @@ M.icon_picker = function()
 end
 
 M.markdown = function()
-  vim.keymap.set("n", "<space>x", function()
+  vim.keymap.set("n", "<localleader>xx", function()
     require("treesitter.markdown").toggle_checkbox({ create = true })
   end, { desc = "Toggle Markdown Checkbox" })
 end

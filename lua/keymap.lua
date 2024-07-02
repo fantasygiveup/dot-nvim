@@ -246,6 +246,13 @@ M.tree_sitter = function()
     "<cmd>lua vim.treesitter.inspect_tree()<cr>",
     { desc = "inspect tree sitter" }
   )
+
+  vim.keymap.set(
+    "n",
+    "<leader>ih",
+    "<cmd>TSHighlightCapturesUnderCursor<cr>",
+    { desc = "inspect tree sitter highlight" }
+  )
 end
 
 M.git_helpers = function()

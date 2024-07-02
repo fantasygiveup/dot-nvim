@@ -108,22 +108,17 @@ local function win_scroll_last_line(win, bufnr)
   vim.api.nvim_win_set_cursor(win, { #buf_lines, 0 })
 end
 
-local function fleeting_new_entry(title)
-  if not title or title == "" then
-    return
-  end
-
-  local day = os.date("%Y-%m-%d")
-  local weekday = os.date("%A")
-  local new_entry = string.format("\n# %s %s: %s\n\n", day, weekday, title)
+local function fleeting_new_entry()
+  local now = string.format("%s", os.date("%Y-%m-%d %a %H:%M"))
+  local new_entry = string.format("\n\n# [%s]  ", now) -- two spaces for a room to edit the line
 
   local file_path = require("vars").fleeting_notes
 
   if append_to_file(file_path, new_entry) then
     open_buffer_file(file_path)
-    vim.cmd(":edit")
     win_scroll_last_line()
     pcall(vim.cmd, "normal! zo") -- open the fold
+    vim.cmd(":execute 'normal! A' | startinsert")
   end
 end
 
@@ -146,9 +141,7 @@ M.fleeting_toggle_entry = function(bufnr)
   print(vim.inspect(ts_markdown.get_node_text(node)))
 end
 
-M.fleeting_new_entry = function()
-  vim.ui.input({ prompt = "New fleeting", relative = "win" }, fleeting_new_entry)
-end
+M.fleeting_new_entry = fleeting_new_entry
 
 M.todos_open_file = function()
   if open_buffer_file(require("vars").todos) then

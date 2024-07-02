@@ -229,8 +229,8 @@ M.zettelkasten_buffer = function(bufnr)
   vim.keymap.set("n", "<tab>", "za", { desc = "toggle fold", buffer = bufnr })
 
   vim.keymap.set("n", "<Space><Space>", function()
-    require("tools.zettelkasten").fleeting_toggle_entry(bufnr)
-  end, { desc = "zk toggle fleeting entry", buffer = bufnr })
+    require("tools.zettelkasten").fleeting_todo(bufnr)
+  end, { desc = "zk change fleeting todo state", buffer = bufnr })
 end
 
 M.zen_mode = function()

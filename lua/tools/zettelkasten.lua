@@ -127,19 +127,9 @@ M.fleeting_open_file = function()
   open_buffer_file(require("vars").fleeting_notes)
 end
 
-M.fleeting_toggle_entry = function(bufnr)
-  local bufnr = bufnr or 0
-
-  if not vim.api.nvim_buf_is_valid(bufnr) then
-    error("zettelkasten: buffer is not valid")
-    return
-  end
-
+M.fleeting_todo = function(bufnr)
   local ts_markdown = require("treesitter.markdown")
-
-  local cursor_position = vim.api.nvim_win_get_cursor(bufnr)
-  local node = ts_markdown.get_first_node_on_line(bufnr, cursor_position[1] - 1)
-  print(vim.inspect(ts_markdown.get_node_text(node)))
+  return ts_markdown.todo_heading(bufnr)
 end
 
 M.fleeting_new_entry = fleeting_new_entry

@@ -65,6 +65,39 @@ M.toggle_checkbox = function(opts)
   end
 end
 
+local states = { "TODO", "DONE" }
+
+M.todo_heading = function(bufnr)
+  local node = ts.get_node_at_cursor(nil, true)
+  local item = ts_parser.find_parent_node(node, "atx_heading")
+  if not item then
+    return
+  end
+
+  local content = ts_parser.find_child_node(item, "inline")
+  if not content then
+    return
+  end
+
+  local text = ts_parser.get_node_text(content, bufnr)[1]
+  if not text then
+    return
+  end
+
+  local b_pos, e_pos, match
+  for _, state in ipairs(states) do
+    b_pos, e_pos, match = text:find("^%s*(" .. state .. ":)")
+    if match then
+      break
+    end
+  end
+
+  if not match then
+    text = states[1] .. ": " .. text
+    ts_parser.set_node_text(content, text)
+  end
+end
+
 M.init = function()
   require("keymap").markdown()
 end

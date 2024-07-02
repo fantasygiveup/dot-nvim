@@ -31,10 +31,6 @@ M.config = function()
         laststatus = 0, -- turn off the statusline in zen mode
       },
       gitsigns = { enable = false },
-      alacritty = {
-        enabled = true,
-        font = "12", -- font size
-      },
     },
   })
 

@@ -86,14 +86,14 @@ M.todo_heading = function(bufnr)
 
   local b_pos, e_pos, match
   for _, state in ipairs(states) do
-    b_pos, e_pos, match = text:find("^%s*(" .. state .. ":)")
+    b_pos, e_pos, match = text:find("^%s*(" .. state .. ")")
     if match then
       break
     end
   end
 
   if not match then
-    text = states[1] .. ": " .. text
+    text = states[1] .. " " .. text
     ts_parser.set_node_text(content, text)
   end
 end

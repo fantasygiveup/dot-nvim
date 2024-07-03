@@ -11,7 +11,7 @@ M.config = function()
     highlight = {
       keyword = "fg",
       after = "",
-      pattern = [[.*<(KEYWORDS)\s*(\(.*\))?\s*:]],
+      pattern = [[.*<(KEYWORDS)\s*(\(.*\))?\s*:?]],
       comments_only = false,
     },
     keywords = {

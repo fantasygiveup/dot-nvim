@@ -65,7 +65,24 @@ M.toggle_checkbox = function(opts)
   end
 end
 
-local states = { "TODO", "DONE" }
+local todo_states = { "TODO", "DONE" }
+
+local next_todo_state = function(current)
+  local index
+
+  for i, state in ipairs(todo_states) do
+    if string.match(current, state) then
+      index = i
+      break
+    end
+  end
+
+  if index == #todo_states then
+    return
+  end
+
+  return todo_states[index + 1]
+end
 
 M.todo_heading = function(bufnr)
   local node = ts.get_node_at_cursor(nil, true)
@@ -84,18 +101,27 @@ M.todo_heading = function(bufnr)
     return
   end
 
-  local b_pos, e_pos, match
-  for _, state in ipairs(states) do
-    b_pos, e_pos, match = text:find("^%s*(" .. state .. ")")
-    if match then
+  local b_pos, e_pos, current_state
+  for _, state in ipairs(todo_states) do
+    b_pos, e_pos, current_state = text:find("^%s*(" .. state .. "%s+)")
+    if current_state then
       break
     end
   end
 
-  if not match then
-    text = states[1] .. " " .. text
+  if not current_state then
+    text = todo_states[1] .. " " .. text
     ts_parser.set_node_text(content, text)
+    return
   end
+
+  text = string.sub(text, e_pos + 1)
+  local next_state = next_todo_state(current_state)
+
+  if next_state then
+    text = next_state .. " " .. text
+  end
+  ts_parser.set_node_text(content, text)
 end
 
 M.init = function()

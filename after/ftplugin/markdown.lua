@@ -5,12 +5,4 @@ vim.opt_local.foldnestmax = 3
 vim.opt_local.foldmethod = "expr"
 vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt_local.textwidth = 80
-
-function _G.custom_markdown_fold(limit)
-  local limit = limit or 80
-  return vim.fn.getline(vim.v.foldstart):sub(1, limit - 3) .. "..."
-end
-
-vim.opt_local.foldtext = "v:lua.custom_markdown_fold()"
-
 -- vim.api.nvim_set_hl(0, "@codeblock", { link = "Visual" }) -- custom markdown tree-sitter highlight

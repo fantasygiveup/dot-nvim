@@ -16,6 +16,13 @@ M.config = function()
       NotifyINFOTitle = { fg = "$green" },
       NotifyINFOIcon = { fg = "$green" },
       NotifyINFOBorder = { fg = "$green" },
+      -- Markdown | Zettelkasten.
+      ["@markup.link.label"] = { fg = "$black", fmt = "bold" },
+      ["@markup.link"] = { fg = "$grey", fmt = "none" },
+      markdownAutomaticLink = { fg = "$cyan", fmt = "none" },
+      ["@markup.link.url"] = { fg = "none", fmt = "none" },
+      markdownUrl = { fmt = "none" },
+      markdownLink = { fmt = "none" },
     }, -- overrides
   })
   theme.load()

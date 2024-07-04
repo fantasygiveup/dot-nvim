@@ -1,6 +1,7 @@
 local vars = require("vars")
 local ls = require("luasnip")
 local s = ls.snippet
+local p = require("luasnip.extras").partial
 local t = ls.text_node
 local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
@@ -140,6 +141,25 @@ freopen("output.txt", "w", stdout);
 {}
   ]],
       { i(0) }
+    )
+  ),
+})
+
+ls.add_snippets("zettelkasten", {
+  s(
+    "header",
+    fmt(
+      [[
+---
+title: {}
+author: Illia Danko
+created: {}
+keywords: [{}]
+---
+
+{}
+  ]],
+      { i(1), p(os.date, "%Y-%m-%d"), i(2), i(0) }
     )
   ),
 })

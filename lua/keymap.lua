@@ -240,7 +240,7 @@ end
 M.zen_mode = function()
   vim.keymap.set("n", "<localleader>wz", function()
     require("view.zen_mode").zen_mode()
-  end, { desc = "zen mode toggle" })
+  end, { desc = "[z]en mode toggle" })
 end
 
 M.tree_sitter = function()

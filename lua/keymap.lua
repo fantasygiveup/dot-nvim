@@ -22,6 +22,7 @@ M.init = function()
   vim.keymap.set("n", "<localleader>cw", [[<cmd>keeppatterns %s/\s\+$//e<cr>]]) -- remove white spaces
   vim.keymap.set("n", "ZZ", "<cmd>xa<cr>")
   vim.keymap.set("n", "ZQ", "<cmd>qa!<cr>")
+  vim.keymap.set("n", "<c-tab>", "za", { desc = "toggle fold" })
 
   -- Quickfix.
   vim.keymap.set("n", "X", function()
@@ -225,8 +226,6 @@ M.zettelkasten_buffer = function(bufnr)
     "<cmd>ZkLinks { notebook_path = '" .. zettelkasten_dir_path .. "' }<cr>",
     { desc = "zk links", buffer = bufnr }
   )
-
-  vim.keymap.set("n", "<tab>", "za", { desc = "toggle fold", buffer = bufnr })
 
   vim.keymap.set("n", "<Space><Space>", function()
     require("tools.zettelkasten").fleeting_todo(bufnr)

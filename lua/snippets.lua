@@ -144,20 +144,6 @@ freopen("output.txt", "w", stdout);
   ),
 })
 
-ls.add_snippets("org", {
-  s(
-    "<s",
-    fmt(
-      [[
-#+begin_src {}
-  {}
-#+end_src
-  ]],
-      { i(1), i(0) }
-    )
-  ),
-})
-
 ls.add_snippets("elixir", {
   s(
     "credo",

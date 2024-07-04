@@ -17,7 +17,7 @@ M.config = function()
       NotifyINFOIcon = { fg = "$green" },
       NotifyINFOBorder = { fg = "$green" },
       -- Markdown | Zettelkasten.
-      ["@markup.link.label"] = { fg = "$black", fmt = "bold" },
+      ["@markup.link.label"] = { fg = "$blue", fmt = "bold" },
       ["@markup.link"] = { fg = "$grey", fmt = "none" },
       markdownAutomaticLink = { fg = "$cyan", fmt = "none" },
       ["@markup.link.url"] = { fg = "none", fmt = "none" },

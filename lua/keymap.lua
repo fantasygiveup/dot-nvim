@@ -231,6 +231,10 @@ M.zettelkasten_buffer = function(bufnr)
   vim.keymap.set("n", "<Space><Space>", function()
     require("tools.zettelkasten").fleeting_todo(bufnr)
   end, { desc = "zk change fleeting todo state", buffer = bufnr })
+
+  vim.keymap.set("n", "<Space><CR>", function()
+    require("tools.zettelkasten").return_back()
+  end, { desc = "zk [return] to editor", buffer = bufnr })
 end
 
 M.zen_mode = function()

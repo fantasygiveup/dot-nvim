@@ -35,7 +35,11 @@ M.config = function()
     pattern = { "markdown" },
     callback = function()
       if require("zk.util").notebook_root(vim.fn.expand("%:p")) ~= nil then
-        require("keymap").zettelkasten_buffer(0)
+        local buf = vim.api.nvim_get_current_buf()
+        local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
+        vim.api.nvim_buf_set_option(buf, "filetype", filetype .. ".zettelkasten") -- set file type zettelkasten
+
+        require("keymap").zettelkasten_buffer(buf)
 
         require("utils.async").timer(function()
           require("view.zen_mode").zen_mode(0, 1)
@@ -153,6 +157,21 @@ M.todos_new_entry = function(title)
     if vim.api.nvim_buf_get_name(0) == file_path then
       vim.cmd(":edit")
       win_scroll_last_line()
+    end
+  end
+end
+
+--- Return to the last no zettelkasten buffer.
+M.return_back = function()
+  local buffers = vim.api.nvim_list_bufs()
+
+  for _, buffer in ipairs(buffers) do
+    if vim.fn.buflisted(buffer) == 1 then
+      local filetype = vim.api.nvim_buf_get_option(buffer, "filetype")
+
+      if string.match(filetype, "zettelkasten") then
+        vim.api.nvim_buf_delete(buffer, {})
+      end
     end
   end
 end

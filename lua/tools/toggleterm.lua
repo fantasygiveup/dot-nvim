@@ -111,14 +111,10 @@ M.config = function()
         local name = file:read("*a")
         file:close()
         os.remove(lf_temp_path)
-        local timer = vim.loop.new_timer()
-        timer:start(
-          0,
-          0,
-          vim.schedule_wrap(function()
-            vim.cmd("edit " .. name)
-          end)
-        )
+
+        require("utils.async").timer(function()
+          vim.cmd("edit " .. name)
+        end)
       end,
     })
 

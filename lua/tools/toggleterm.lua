@@ -93,13 +93,19 @@ M.config = function()
   end, { desc = "lazygit" })
 
   -- `lf` file manager.
-  vim.g.lf_netrw = 1
-  vim.g.lf_replace_netrw = 1 -- use lf over netrw
+  -- Some parts are taken from https://github.com/lmburns/lf.nvim.
+  -- TODO(idanko): consider to move to a mudule.
 
-  vim.keymap.set("n", "-", function()
+  vim.g.lf_netrw = 1
+  vim.g.lf_replace_netrw = 1
+  vim.g.loaded_netrwPlugin = 1
+  vim.g.loaded_netrw = 1
+
+  local function open_lf(filename)
+    local filename = filename or vim.api.nvim_buf_get_name(0)
     local lf_temp_path = "/tmp/lfpickerpath"
     local lfpicker = Terminal:new({
-      cmd = "lf -selection-path " .. lf_temp_path .. " " .. vim.api.nvim_buf_get_name(0),
+      cmd = "lf -selection-path " .. lf_temp_path .. " " .. filename,
       count = 101, -- use high value to no intersect with regular OpenTerm cmd
       direction = "float",
       float_opts = toggleterm_float_opts(),
@@ -119,7 +125,54 @@ M.config = function()
     })
 
     lfpicker:toggle()
-  end, { desc = "lf" })
+  end
+
+  vim.keymap.set("n", "-", open_lf, { desc = "lf" })
+
+  -- Replace netrw.
+
+  ---Make `Lf` become the file manager that opens whenever a directory buffer is loaded
+  ---@param bufnr integer
+  ---@return boolean
+  local function become_dir_fman(bufnr)
+    local bufname = vim.api.nvim_buf_get_name(bufnr)
+    if bufname == "" then
+      return false
+    end
+    local stat = vim.loop.fs_stat(bufname)
+    if type(stat) ~= "table" or (type(stat) == "table" and stat.type ~= "directory") then
+      return false
+    end
+
+    return true
+  end
+
+  local gr = vim.api.nvim_create_augroup("Lf_ReplaceNetrw", { clear = true })
+  vim.api.nvim_create_autocmd("VimEnter", {
+    desc = "Override the default file manager (i.e., netrw)",
+    group = gr,
+    pattern = "*",
+    nested = true,
+    callback = function(a)
+      if vim.fn.exists("#FileExplorer") then
+        vim.api.nvim_create_augroup("FileExplorer", { clear = true })
+      end
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("BufEnter", {
+    desc = "After overriding default file manager, open Lf",
+    group = gr,
+    pattern = "*",
+    once = true,
+    callback = function(a)
+      if become_dir_fman(a.buf) then
+        vim.defer_fn(function()
+          open_lf(a.file)
+        end, 1)
+      end
+    end,
+  })
 end
 
 return M

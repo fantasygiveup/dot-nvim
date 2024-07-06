@@ -154,7 +154,7 @@ ls.add_snippets("zettelkasten", {
 title: {}
 author: Illia Danko
 created: {}
-keywords: [{}]
+tags: [{}]
 ---
 
 {}

@@ -94,7 +94,12 @@ lazy.setup({
   { "nvimdev/dashboard-nvim", config = require("tools.dashboard").config, commit = "c71cab740e2a" },
   { "zk-org/zk-nvim", config = require("tools.zettelkasten").config },
   { "NvChad/nvim-colorizer.lua", config = require("view.colorizer").config },
-  { "folke/todo-comments.nvim", config = require("edit.todo_comments").config },
+  {
+    "folke/todo-comments.nvim",
+    config = require("edit.todo_comments").config,
+    dependencies = { "nvim-lua/plenary.nvim" },
+    after = { "nvim-treesitter/nvim-treesitter" },
+  },
 })
 
 require("event").init()

@@ -19,7 +19,7 @@ M.config = function()
       -- Markdown | Zettelkasten.
       ["@markup.link.label"] = { fg = "$blue", fmt = "bold" },
       ["@markup.link"] = { fg = "$grey", fmt = "none" },
-      markdownAutomaticLink = { fg = "$cyan", fmt = "none" },
+      markdownAutomaticLink = { fg = "$cyan", fmt = "bold" },
       ["@markup.link.url"] = { fg = "none", fmt = "none" },
       markdownUrl = { fmt = "none" },
       markdownLink = { fmt = "none" },

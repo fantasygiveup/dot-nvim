@@ -42,15 +42,17 @@ function M.edit_or_new(options, picker_options)
   local zk = require("zk")
   local commands = require("zk.commands")
 
-  zk.pick_notes(options, picker_options, function(notes)
-    -- Create a new note if no selection.
-    if not notes or #notes == 0 then
-      local title = require("fzf-lua").get_last_query()
-      options = vim.tbl_extend("force", { title = title }, options or {})
-      commands.get("ZkNew")(options)
-      return
-    end
+  local picker_options = picker_options or {}
+  picker_options.fzf_lua = {
+    actions = {
+      ["ctrl-e"] = function(selected, opts)
+        options = vim.tbl_extend("force", { title = opts.last_query }, options or {})
+        commands.get("ZkNew")(options)
+      end,
+    },
+  }
 
+  zk.pick_notes(options, picker_options, function(notes)
     if picker_options and picker_options.multi_select == false then
       notes = { notes }
     end

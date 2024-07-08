@@ -379,6 +379,15 @@ M.fzf = function()
   end, { desc = "lsp document symbols" })
 end
 
+M.fzf_project = function()
+  vim.keymap.set(
+    "n",
+    "<C-g>",
+    "<Cmd>lua require'fzf.project'.navigate()<CR>",
+    { desc = "switch project" }
+  )
+end
+
 M.icon_picker = function()
   vim.keymap.set("n", "<a-e>", "<cmd>IconPickerNormal<cr>")
   vim.keymap.set("i", "<a-e>", "<cmd>IconPickerInsert<cr>")

@@ -49,7 +49,7 @@ lazy.setup({
       "nvim-tree/nvim-web-devicons",
       "stevearc/dressing.nvim",
     },
-    config = require("fuzzy_finder").config,
+    config = require("fzf").config,
   },
   {
     "hrsh7th/nvim-cmp",
@@ -104,7 +104,7 @@ lazy.setup({
 
 require("event").init()
 require("tools.gpg").init()
-require("tools.fzf_project").init()
+require("fzf.project").init()
 require("vc.git_helpers").init()
 require("view.theme").init()
 require("custom").init()

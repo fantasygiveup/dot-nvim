@@ -17,17 +17,6 @@ M.config = function()
     M.edit_or_new(options, { title = "Zk Notes" })
   end)
 
-  -- Create a new note using vim.ui.input api.
-  commands.add("ZkNewInput", function(options)
-    vim.ui.input({ prompt = "Zk New", relative = "win" }, function(title)
-      if not title or title == "" then
-        return
-      end
-      options = vim.tbl_extend("force", { title = title }, options or {})
-      commands.get("ZkNew")(options)
-    end)
-  end)
-
   require("keymap").zettelkasten()
 
   vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -55,7 +44,7 @@ function M.edit_or_new(options, picker_options)
 
   zk.pick_notes(options, picker_options, function(notes)
     -- Create a new note if no selection.
-    if #notes == 0 then
+    if not notes or #notes == 0 then
       local title = require("fzf-lua").get_last_query()
       options = vim.tbl_extend("force", { title = title }, options or {})
       commands.get("ZkNew")(options)

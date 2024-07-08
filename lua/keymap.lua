@@ -136,29 +136,15 @@ M.zettelkasten = function()
   vim.keymap.set(
     "n",
     "<localleader>zn",
-    "<cmd>ZkNewInput { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
-    { desc = "zk new" }
-  )
-
-  vim.keymap.set(
-    "n",
-    "<localleader>zf",
     "<cmd>ZkEditOrNew { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
-    { desc = "zk find notes" }
+    { desc = "zk find or create", silent = true }
   )
 
   vim.keymap.set(
     "v",
     "<localleader>zf",
     ":'<,'>ZkMatch { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
-    { desc = "zk match" }
-  )
-
-  vim.keymap.set(
-    "v",
-    "<localleader>zn",
-    ":ZkNewFromTitleSelection { notebook_path = '" .. zettelkasten_dir .. "' }<cr>",
-    { desc = "zk new from title selection", silent = true }
+    { desc = "zk match", silent = true }
   )
 
   vim.keymap.set(

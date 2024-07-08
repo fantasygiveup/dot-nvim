@@ -5,7 +5,7 @@ local path_sep = vars.is_windows and "\\" or "/"
 local os_name = vim.loop.os_uname().sysname
 local user_repo = home .. path_sep .. "github.com" .. path_sep .. "illia-danko" .. path_sep
 local zettelkasten_dir_name = "zettelkasten"
-local zettelkasten_dir_path = user_repo .. zettelkasten_dir_name .. path_sep
+local zettelkasten_dir_path = user_repo .. zettelkasten_dir_name
 local org_dir_name = zettelkasten_dir_name
 local org_dir_path = zettelkasten_dir_path
 local cache_dir = home .. path_sep .. ".cache" .. path_sep .. "nvim" .. path_sep
@@ -44,8 +44,8 @@ function vars:load_variables()
     .. "background"
   self.zettelkasten_dir_name = zettelkasten_dir_name
   self.zettelkasten_dir_path = zettelkasten_dir_path
-  self.todos_file = zettelkasten_dir_path .. "v11n.md"
-  self.fleeting_notes = zettelkasten_dir_path .. "sm9z.md"
+  self.todos_file = zettelkasten_dir_path .. path_sep .. "v11n.md"
+  self.fleeting_notes = zettelkasten_dir_path .. path_sep .. "sm9z.md"
 end
 
 function vars:ensure_dir()

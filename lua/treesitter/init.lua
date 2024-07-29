@@ -102,6 +102,7 @@ M.config = function()
       "rust",
       "scheme",
       "sql",
+      "terraform",
       "tsx",
       "typescript",
       "vim",

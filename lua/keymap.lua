@@ -429,24 +429,16 @@ M.buffers = function()
 end
 
 M.git_linker = function()
-  gitlinker = require("gitlinker")
-  actions = require("gitlinker.actions")
+  vim.keymap.set(
+    { "n", "v" },
+    "<localleader>gu",
+    require("gitlinker").link,
+    { silent = true, noremap = true, desc = "copy git url" }
+  )
 
-  vim.keymap.set("n", "<localleader>gu", function()
-    gitlinker.get_buf_range_url("n", { action_callback = actions.copy_to_clipboard })
-  end, { desc = "copy git line to clipboard" })
-
-  vim.keymap.set("v", "<localleader>gu", function()
-    gitlinker.get_buf_range_url("v", { action_callback = actions.copy_to_clipboard })
-  end, { desc = "copy git range to clipboard" })
-
-  vim.keymap.set("n", "<localleader>gU", function()
-    gitlinker.get_repo_url({ action_callback = actions.open_in_browser })
-  end, { desc = "open git line in browser" })
-
-  vim.keymap.set("v", "<localleader>gU", function()
-    gitlinker.get_buf_range_url("v", { action_callback = actions.open_in_browser })
-  end, { desc = "open selected git range in browser" })
+  vim.keymap.set({ "n", "v" }, "<localleader>gU", function()
+    require("gitlinker").link({ action = require("gitlinker.actions").system })
+  end, { silent = true, noremap = true, desc = "open git url" })
 end
 
 return M

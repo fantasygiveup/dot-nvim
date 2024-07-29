@@ -6,7 +6,7 @@ M.config = function()
     return
   end
 
-  require("keymap").buffers(close_buffers)
+  require("keymap").buffers()
 end
 
 return M

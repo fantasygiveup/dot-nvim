@@ -399,11 +399,9 @@ M.markdown = function()
   end, { desc = "Toggle Markdown Checkbox" })
 end
 
-M.buffers = function(close_buffers)
-  local ok, project = pcall(require, "project_nvim.project")
-  if not ok then
-    return
-  end
+M.buffers = function()
+  local project = require("project_nvim.project")
+  local close_buffers = require("close_buffers")
 
   vim.keymap.set("n", "<localleader>db", "<cmd>bp | bd#<cr>", { desc = "close_buffer_only" })
 

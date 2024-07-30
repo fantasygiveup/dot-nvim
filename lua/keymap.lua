@@ -194,9 +194,13 @@ M.zettelkasten_buffer = function(bufnr)
   vim.keymap.set(
     "n",
     "<localleader>zi",
-    "<cmd>ZkInsertLink { notebook_path = '" .. dir .. "' }<cr>",
+    "<cmd>ZkInsertLinkNormalMode { notebook_path = '" .. dir .. "' }<cr>",
     { desc = "zk insert link", buffer = bufnr }
   )
+
+  vim.keymap.set("i", "<c-v>", function()
+    vim.cmd("ZkInsertLinkInsertMode { notebook_path = '" .. dir .. "' }")
+  end, { desc = "zk insert link insert mode", buffer = bufnr })
 
   vim.keymap.set(
     "v",

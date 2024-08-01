@@ -11,19 +11,11 @@ M.init = function()
     end,
   })
 
-  vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+  vim.api.nvim_create_autocmd({ "BufReadPost" }, {
     group = gr,
     pattern = { "*" },
     callback = function()
       require("utils.cursor").restore_buffer_pos()
-    end,
-  })
-
-  vim.api.nvim_create_autocmd({ "BufRead" }, {
-    group = gr,
-    pattern = { "*" },
-    callback = function()
-      require("utils.cursor").open_fold()
     end,
   })
 

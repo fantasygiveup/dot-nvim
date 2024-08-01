@@ -7,8 +7,8 @@ M.restore_buffer_pos = function()
   end
 end
 
-M.toggle_fold_section = function()
-  vim.cmd([[try | exec 'normal! zA' | catch | endtry]])
+M.open_fold = function()
+  vim.cmd([[try | exec 'normal! zR' | catch | endtry]])
 end
 
 return M

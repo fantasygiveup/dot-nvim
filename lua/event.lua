@@ -16,7 +16,14 @@ M.init = function()
     pattern = { "*" },
     callback = function()
       require("utils.cursor").restore_buffer_pos()
-      require("utils.cursor").toggle_fold_section()
+    end,
+  })
+
+  vim.api.nvim_create_autocmd({ "BufRead" }, {
+    group = gr,
+    pattern = { "*" },
+    callback = function()
+      require("utils.cursor").open_fold()
     end,
   })
 

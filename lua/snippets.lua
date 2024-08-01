@@ -46,6 +46,7 @@ SOFTWARE.
       { vars.user_name, os.date("%Y") }
     )
   ),
+  s("now", fmt("{}", { os.date("%Y-%m-%d %a %H:%M") })), -- eg. 2024-08-01 Thu 18:56
 })
 
 ls.add_snippets("go", {

@@ -147,12 +147,10 @@ M.zettelkasten = function()
     { desc = "zk match", silent = true }
   )
 
-  vim.keymap.set(
-    "n",
-    "<localleader>zr",
-    ":ZkIndex { notebook_path = '" .. dir .. "' }<cr>",
-    { desc = "zk refersh index", silent = true }
-  )
+  vim.keymap.set("n", "<localleader>zr", function()
+    local zk = require("zk")
+    zk.index({ notebook_path = dir })
+  end, { desc = "zk refersh index", silent = true })
 
   vim.keymap.set(
     "n",

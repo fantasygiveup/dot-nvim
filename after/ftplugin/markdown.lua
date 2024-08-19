@@ -5,4 +5,8 @@ vim.opt_local.foldnestmax = 3
 vim.opt_local.foldmethod = "expr"
 vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt_local.textwidth = 80
+vim.opt_local.wrap = false
+-- 1. Do not auto break lines.
+-- 2. Turn off autowrap links.
+vim.opt_local.formatoptions = "jqln"
 -- vim.api.nvim_set_hl(0, "@codeblock", { link = "Visual" }) -- custom markdown tree-sitter highlight

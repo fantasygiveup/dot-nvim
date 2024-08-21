@@ -38,7 +38,10 @@ lazy.setup({
   { "folke/which-key.nvim", config = require("view.which_key").config },
   { "nvim-lualine/lualine.nvim", config = require("status_line").config },
   { "ziontee113/icon-picker.nvim", config = require("tools.icon_picker").config },
-  { "aserowy/tmux.nvim", config = require("tools.tmux").config },
+  {
+    "mrjones2014/smart-splits.nvim",
+    config = require("tools.terminal_multiplexer").config,
+  },
   { "kazhala/close-buffers.nvim", config = require("tools.buffers").config },
   { "jose-elias-alvarez/null-ls.nvim", config = require("formatter_diagnostics").config },
   { "folke/zen-mode.nvim", config = require("view.zen_mode").config },

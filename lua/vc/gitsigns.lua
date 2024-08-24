@@ -26,6 +26,14 @@ M.config = function()
       topdelete = { text = "" },
       changedelete = { text = "" },
     },
+    signs_staged = {
+      add = { text = "" },
+      change = { text = "" },
+      delete = { text = "" },
+      topdelete = { text = "" },
+      changedelete = { text = "" },
+    },
+
     attach_to_untracked = false, -- don't highlight new files
   })
 

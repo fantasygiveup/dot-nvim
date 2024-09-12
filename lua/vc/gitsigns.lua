@@ -37,27 +37,7 @@ M.config = function()
     attach_to_untracked = false, -- don't highlight new files
   })
 
-  vim.keymap.set("n", "<localleader>g?", "<cmd>lua require'gitsigns'.blame_line({full=true})<cr>")
-  vim.keymap.set("n", "<leader>hp", "<cmd>lua require'gitsigns'.preview_hunk()<cr>")
-  vim.keymap.set("n", "<leader>hu", "<cmd>lua require'gitsigns'.reset_hunk()<cr>")
-  vim.keymap.set("n", "<leader>hs", "<cmd>lua require'gitsigns'.stage_hunk()<cr>")
-  vim.keymap.set("n", "<leader>h#", "<cmd>lua require'gitsigns'.reset_buffer()<cr>")
-
-  vim.keymap.set("n", "]c", function()
-    if vim.o.diff then
-      pcall(vim.cmd, "normal! ]czz")
-      return
-    end
-    actions.next_hunk()
-  end, { desc = "next_hunk" })
-
-  vim.keymap.set("n", "[c", function()
-    if vim.o.diff then
-      pcall(vim.cmd, "normal! [czz")
-      return
-    end
-    actions.prev_hunk()
-  end, { desc = "prev_hunk" })
+  require("keymap").gitsigns()
 end
 
 return M

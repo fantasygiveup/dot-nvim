@@ -455,4 +455,30 @@ M.terminal_multiplexer = function()
   vim.keymap.set("n", "<A-l>", require("smart-splits").resize_right)
 end
 
+M.gitsigns = function()
+  local actions = require("gitsigns.actions")
+
+  vim.keymap.set("n", "<localleader>ga", "<cmd>lua require'gitsigns'.blame_line({full=true})<cr>")
+  vim.keymap.set("n", "ghp", "<cmd>lua require'gitsigns'.preview_hunk()<cr>")
+  vim.keymap.set("n", "ghu", "<cmd>lua require'gitsigns'.reset_hunk()<cr>")
+  vim.keymap.set("n", "ghs", "<cmd>lua require'gitsigns'.stage_hunk()<cr>")
+  vim.keymap.set("n", "gh#", "<cmd>lua require'gitsigns'.reset_buffer()<cr>")
+
+  vim.keymap.set("n", "]c", function()
+    if vim.o.diff then
+      pcall(vim.cmd, "normal! ]czz")
+      return
+    end
+    actions.next_hunk()
+  end, { desc = "next_hunk" })
+
+  vim.keymap.set("n", "[c", function()
+    if vim.o.diff then
+      pcall(vim.cmd, "normal! [czz")
+      return
+    end
+    actions.prev_hunk()
+  end, { desc = "prev_hunk" })
+end
+
 return M

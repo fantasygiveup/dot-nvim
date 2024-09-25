@@ -356,7 +356,7 @@ M.fzf = function()
     fzf_lua.git_commits()
   end, { desc = "git_commits" })
 
-  vim.keymap.set("v", "<leader>/", function()
+  vim.keymap.set("v", "<c-s>", function()
     fzf_lua.grep_visual({ rg_opts = require("vars").rg_opts })
   end, { desc = "grep_visual" })
 
@@ -369,9 +369,9 @@ M.fzf = function()
     fzf_lua.grep_project(opts)
   end
 
-  vim.keymap.set("n", "<leader>/", grep_project, { desc = "grep_project" })
+  vim.keymap.set("n", "<c-s>", grep_project, { desc = "grep_project" })
 
-  vim.keymap.set("n", "<c-s>", function()
+  vim.keymap.set("n", "gmn", function()
     local vars = require("vars")
     grep_project({ prompt = "Notes> ", cwd = vars.org_dir_path })
   end, { desc = "grep_notes" })
@@ -460,7 +460,7 @@ M.gitsigns = function()
 
   vim.keymap.set("n", "<localleader>ga", "<cmd>lua require'gitsigns'.blame_line({full=true})<cr>")
   vim.keymap.set("n", "ghp", "<cmd>lua require'gitsigns'.preview_hunk()<cr>")
-  vim.keymap.set("n", "ghu", "<cmd>lua require'gitsigns'.reset_hunk()<cr>")
+  vim.keymap.set("n", "<localleader>dh", "<cmd>lua require'gitsigns'.reset_hunk()<cr>")
   vim.keymap.set("n", "ghs", "<cmd>lua require'gitsigns'.stage_hunk()<cr>")
   vim.keymap.set("n", "gh#", "<cmd>lua require'gitsigns'.reset_buffer()<cr>")
 

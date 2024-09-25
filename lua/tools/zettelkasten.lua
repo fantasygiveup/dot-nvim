@@ -45,12 +45,7 @@ M.config = function()
         local buf = vim.api.nvim_get_current_buf()
         local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
         vim.api.nvim_buf_set_option(buf, "filetype", filetype .. ".zettelkasten") -- set file type zettelkasten
-
         require("keymap").zettelkasten_buffer(buf)
-
-        require("utils.async").timer(function()
-          require("view.zen_mode").zen_mode(0, 1)
-        end)
       end
     end,
   })

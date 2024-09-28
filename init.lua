@@ -104,6 +104,7 @@ lazy.setup({
     after = { "nvim-treesitter/nvim-treesitter" },
   },
   { "MeanderingProgrammer/render-markdown.nvim", config = require("view.render_markdown").config },
+  { "danilamihailov/beacon.nvim" }, -- cursor effects
 })
 
 require("event").init()

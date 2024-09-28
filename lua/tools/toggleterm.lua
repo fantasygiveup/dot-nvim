@@ -127,8 +127,6 @@ M.config = function()
     lfpicker:toggle()
   end
 
-  vim.keymap.set("n", "-", open_lf, { desc = "lf" })
-
   -- Replace netrw.
 
   ---Make `Lf` become the file manager that opens whenever a directory buffer is loaded
@@ -173,6 +171,8 @@ M.config = function()
       end
     end,
   })
+
+  require("keymap").lf(open_lf)
 end
 
 return M

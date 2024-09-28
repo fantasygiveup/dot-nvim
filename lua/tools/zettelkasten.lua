@@ -8,7 +8,16 @@ M.config = function()
     return
   end
 
-  zk.setup({ picker = "fzf_lua" })
+  zk.setup({
+    picker = "fzf_lua",
+    lsp = {
+      config = {
+        on_attach = function(client, bufnr)
+          require("keymap").zettelkasten_buffer(bufnr)
+        end,
+      },
+    },
+  })
 
   local commands = require("zk.commands")
 
@@ -36,19 +45,6 @@ M.config = function()
   end, { title = "Insert Zk link Insert Mode" })
 
   require("keymap").zettelkasten()
-
-  vim.api.nvim_create_autocmd({ "FileType" }, {
-    group = vim.api.nvim_create_augroup("ZettelkastenGroup", {}),
-    pattern = { "markdown" },
-    callback = function()
-      if require("zk.util").notebook_root(vim.fn.expand("%:p")) ~= nil then
-        local buf = vim.api.nvim_get_current_buf()
-        local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
-        vim.api.nvim_buf_set_option(buf, "filetype", filetype .. ".zettelkasten") -- set file type zettelkasten
-        require("keymap").zettelkasten_buffer(buf)
-      end
-    end,
-  })
 end
 
 function M.edit_or_new(options, picker_options)

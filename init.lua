@@ -103,6 +103,7 @@ lazy.setup({
     dependencies = { "nvim-lua/plenary.nvim" },
     after = { "nvim-treesitter/nvim-treesitter" },
   },
+  { "MeanderingProgrammer/render-markdown.nvim", config = require("view.render_markdown").config },
 })
 
 require("event").init()

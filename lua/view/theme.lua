@@ -12,10 +12,6 @@ M.config = function()
     style = vim.o.background,
     highlights = {
       QuickFixLine = { fmt = "none" },
-      -- Override https://github.com/rcarriga/nvim-notify colors.
-      NotifyINFOTitle = { fg = "$green" },
-      NotifyINFOIcon = { fg = "$green" },
-      NotifyINFOBorder = { fg = "$green" },
       -- Markdown | Zettelkasten.
       ["@markup.link.label"] = { fg = "$blue", fmt = "bold" },
       ["@markup.link"] = { fg = "$grey", fmt = "none" },
@@ -23,7 +19,14 @@ M.config = function()
       ["@markup.link.url"] = { fg = "none", fmt = "none" },
       markdownUrl = { fmt = "none" },
       markdownLink = { fmt = "none" },
-    }, -- overrides
+      -- render-markdown.
+      ["RenderMarkdownH1Bg"] = { bg = "$bg1" },
+      ["RenderMarkdownH2Bg"] = { bg = "$bg1" },
+      ["RenderMarkdownH3Bg"] = { bg = "$bg1" },
+      ["RenderMarkdownH4Bg"] = { bg = "$bg1" },
+      ["RenderMarkdownH5Bg"] = { bg = "$bg1" },
+      ["RenderMarkdownH6Bg"] = { bg = "$bg1" },
+    },
   })
   theme.load()
 end

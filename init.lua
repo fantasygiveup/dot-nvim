@@ -106,6 +106,12 @@ lazy.setup({
   },
   { "MeanderingProgrammer/render-markdown.nvim", config = require("view.render_markdown").config },
   { "danilamihailov/beacon.nvim" }, -- cursor effects
+  {
+    "folke/noice.nvim",
+    config = require("view.noice").config,
+    event = "VeryLazy",
+    dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+  },
 })
 
 require("event").init()

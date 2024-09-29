@@ -31,8 +31,9 @@ lazy.setup({
   { "ahmedkhalf/project.nvim", config = require("tools.project_nvim").config },
   { "akinsho/toggleterm.nvim", config = require("tools.toggleterm").config },
   {
-    "navarasu/onedark.nvim",
-    dependencies = { "rktjmp/fwatch.nvim" },
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
     config = require("view.theme").config,
   },
   { "folke/which-key.nvim", config = require("view.which_key").config },

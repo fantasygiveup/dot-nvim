@@ -109,7 +109,7 @@ function vars:load_options()
   vim.o.relativenumber = true
   vim.o.linebreak = true -- do not split a word into lines
   vim.o.foldtext = "" -- in neovim >= 0.10 to colorize fold
-  vim.o.fillchars = "fold: "
+  vim.o.fillchars = "fold:."
 end
 
 return vars

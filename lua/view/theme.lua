@@ -10,13 +10,18 @@ M.config = function()
     },
     custom_highlights = function(colors)
       return {
+        Folded = { bg = colors.base },
+        -- Override render_markdown.
         RenderMarkdownH1Bg = { bg = colors.base },
         RenderMarkdownH2Bg = { bg = colors.base },
         RenderMarkdownH3Bg = { bg = colors.base },
         RenderMarkdownH4Bg = { bg = colors.base },
         RenderMarkdownH5Bg = { bg = colors.base },
         RenderMarkdownH6Bg = { bg = colors.base },
-        Folded = { bg = colors.base },
+        -- Override nvim-notify.
+        NotifyINFOTitle = { fg = colors.green },
+        NotifyINFOIcon = { fg = colors.green },
+        NotifyINFOBorder = { fg = colors.green },
       }
     end,
   })

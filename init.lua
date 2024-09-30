@@ -110,6 +110,7 @@ lazy.setup({
     event = "VeryLazy",
     dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
   },
+  { "chrishrb/gx.nvim", dependencies = { "nvim-lua/plenary.nvim" } }, -- opener: substitution of netrw gx
 })
 
 require("event").init()

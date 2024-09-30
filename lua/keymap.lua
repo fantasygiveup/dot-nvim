@@ -302,11 +302,11 @@ end
 
 M.fzf_builtin = function()
   return {
-    ["<A-p>"] = "toggle-preview",
-    ["<C-d>"] = "preview-page-down",
-    ["<C-u>"] = "preview-page-up",
-    ["<F1>"] = "toggle-help",
-    ["<F2>"] = "toggle-fullscreen",
+    ["<a-p>"] = "toggle-preview",
+    ["<c-d>"] = "preview-page-down",
+    ["<c-u>"] = "preview-page-up",
+    ["<f1>"] = "toggle-help",
+    ["<f2>"] = "toggle-fullscreen",
   }
 end
 

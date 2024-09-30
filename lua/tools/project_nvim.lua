@@ -1,12 +1,7 @@
 local M = {}
 
 M.config = function()
-  local ok, project_nvim = pcall(require, "project_nvim")
-  if not ok then
-    return
-  end
-
-  project_nvim.setup({
+  require("project_nvim").setup({
     patterns = { ".git", ".hg", ".bzr", ".svn", "go.mod", "Makefile" },
     detection_methods = { "pattern", "lsp" },
   })

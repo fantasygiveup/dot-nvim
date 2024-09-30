@@ -1,12 +1,7 @@
 local M = {}
 
 M.navigate = function()
-  local ok, fzf_lua = pcall(require, "fzf-lua")
-  if not ok then
-    vim.notify("Could not find fzf-lua module", vim.log.levels.ERROR)
-    return
-  end
-
+  local fzf_lua = require("fzf-lua")
   local vars = require("vars")
 
   local pattern = ".git"

@@ -1,12 +1,7 @@
 local M = {}
 
 M.config = function()
-  local ok, dashboard = pcall(require, "dashboard")
-  if not ok then
-    return
-  end
-
-  dashboard.setup({
+  require("dashboard").setup({
     config = {
       week_header = {
         enable = true,

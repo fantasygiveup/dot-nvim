@@ -1,10 +1,8 @@
 local M = {}
 
 M.config = function()
-  ok, dap = pcall(require, "dap")
-  if not ok then
-    return
-  end
+  local dap = require("dap")
+
   dap.adapters.delve = {
     type = "server",
     port = "${port}",
@@ -37,12 +35,7 @@ M.config = function()
   vim.fn.sign_define("DapStopped", { text = "ﭥ" })
   vim.fn.sign_define("DapBreakpointRejected", { text = "" })
 
-  ok, dapui = pcall(require, "dapui")
-  if not ok then
-    return
-  end
-
-  dapui.setup({})
+  require("dapui").setup({})
   require("keymap").debugger()
 end
 

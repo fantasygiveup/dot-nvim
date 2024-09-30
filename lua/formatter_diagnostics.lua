@@ -1,10 +1,7 @@
 local M = {}
 
 M.config = function()
-  local ok, null_ls = pcall(require, "null-ls")
-  if not ok then
-    return
-  end
+  local null_ls = require("null-ls")
 
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
   local formatting = null_ls.builtins.formatting
@@ -50,15 +47,12 @@ M.config = function()
           local default_args =
             { "--config=" .. config_dir .. "prettier" .. vars.path_sep .. "prettier.config.js" }
 
-          local ok, project_root = pcall(require, "project_nvim.project")
-          if not ok then
-            return default_args
-          end
-
           local file_names = { ".prettierrc.js", ".prettierrc", "prettier.config.js" }
 
           for _, file_name in ipairs(file_names) do
-            local conf_path = project_root.get_project_root() .. vars.path_sep .. file_name
+            local conf_path = require("project_nvim.project").get_project_root()
+              .. vars.path_sep
+              .. file_name
             local prettierrc_fd = io.open(conf_path, "r")
 
             if prettierrc_fd ~= nil then

@@ -1,25 +1,16 @@
 local M = {}
 
-M.init = function()
-  require("keymap").git_helpers()
-end
-
 -- Push current file to git remote.
 M.push_current_buffer = function(allowed_file_patterns)
   allowed_file_patterns = allowed_file_patterns or {}
 
   local file = vim.api.nvim_buf_get_name(0)
   if file == nil or file == "" then
-    print("Not a file")
+    error("Not a file")
     return
   end
 
-  local ok, project = pcall(require, "project_nvim.project")
-  if not ok then
-    return
-  end
-
-  local project_root = project.get_project_root()
+  local project_root = require("project_nvim.project").get_project_root()
   if not project_root then
     return
   end
@@ -61,6 +52,10 @@ M.push_current_buffer = function(allowed_file_patterns)
     vim.fn.system(cmd)
   end
   print(name .. " pushed to " .. remote)
+end
+
+M.init = function()
+  require("keymap").git_helpers()
 end
 
 return M

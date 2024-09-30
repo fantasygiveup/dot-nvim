@@ -1,13 +1,7 @@
 local M = {}
 
 M.config = function()
-  local ok, dressing = pcall(require, "dressing")
-  if not ok then
-    return
-  end
-
-  -- Allow to pass options, e.g. center widget screen.
-  dressing.setup({
+  local dressing = require("dressing").setup({
     input = {
       get_config = function(opts)
         return opts
@@ -15,11 +9,7 @@ M.config = function()
     },
   })
 
-  local ok, fzf_lua = pcall(require, "fzf-lua")
-  if not ok then
-    return
-  end
-
+  local fzf_lua = require("fzf-lua")
   local keymap = require("keymap")
 
   fzf_lua.setup({

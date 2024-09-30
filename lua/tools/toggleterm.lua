@@ -1,20 +1,9 @@
 local M = {}
 
 M.config = function()
-  local ok, toggleterm = pcall(require, "toggleterm")
-  if not ok then
-    return
-  end
-
-  local ok, terminal = pcall(require, "toggleterm.terminal")
-  if not ok then
-    return
-  end
-
-  local ok, project = pcall(require, "project_nvim.project")
-  if not ok then
-    return
-  end
+  local toggleterm = require("toggleterm")
+  local terminal = require("toggleterm.terminal")
+  local project = require("project_nvim.project")
 
   local toggleterm_float_opts = function()
     return {

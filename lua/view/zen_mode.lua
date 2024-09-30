@@ -1,12 +1,7 @@
 local M = {}
 
 M.config = function()
-  local ok, zen_mode = pcall(require, "zen-mode")
-  if not ok then
-    return
-  end
-
-  zen_mode.setup({
+  require("zen-mode").setup({
     window = {
       backdrop = 1.0,
       width = 80,
@@ -55,10 +50,8 @@ M.config = function()
 end
 
 M.zen_mode = function(extra_width, direction)
-  local ok, view = pcall(require, "zen-mode.view")
-  if not ok then
-    return
-  end
+  local view = require("zen-mode.view")
+
   local extra_width = extra_width or 0
   local direction = direction or 0
 

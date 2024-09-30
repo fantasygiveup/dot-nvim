@@ -1,10 +1,7 @@
 local M = {}
 
 M.config = function()
-  local ok, lualine = pcall(require, "lualine")
-  if not ok then
-    return
-  end
+  local lualine = require("lualine")
 
   local function spell()
     if not vim.o.spell then

@@ -1,15 +1,8 @@
 local M = {}
 
 M.config = function()
-  local ok, lspconfig = pcall(require, "lspconfig")
-  if not ok then
-    return
-  end
-
-  local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-  if not ok then
-    return
-  end
+  local lspconfig = require("lspconfig")
+  local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
   local function lsp_highlight_document(client, bufnr)
     if client.server_capabilities.documentHighlightProvider then

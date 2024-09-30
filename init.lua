@@ -23,7 +23,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local ok, lazy = pcall(require, "lazy")
 if not ok then
-  error("lazy nvim is not installed")
+  error("Lazy plugin manager is not installed")
   return
 end
 
@@ -82,8 +82,8 @@ lazy.setup({
     config = require("treesitter").config,
   },
   {
-    "mfussenegger/nvim-dap",
-    dependencies = { "rcarriga/nvim-dap-ui" },
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     config = require("debugger").config,
   },
   { "numToStr/Comment.nvim", config = require("edit.comment").config },

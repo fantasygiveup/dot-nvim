@@ -1,18 +1,9 @@
 local M = {}
 
 M.config = function()
-  local ok, gitsigns = pcall(require, "gitsigns")
-  if not ok then
-    return
-  end
-
-  local ok, actions = pcall(require, "gitsigns.actions")
-  if not ok then
-    return
-  end
-
-  gitsigns.setup({
+  require("gitsigns").setup({
     on_attach = function(bufnr)
+      -- Skip some file types.
       if vim.o.diff or vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":e") == "gpg" then
         return false
       end

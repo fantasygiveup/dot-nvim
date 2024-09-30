@@ -1,12 +1,7 @@
 local M = {}
 
 M.config = function()
-  local ok, todo_comments = pcall(require, "todo-comments")
-  if not ok then
-    return
-  end
-
-  todo_comments.setup({
+  require("todo-comments").setup({
     signs = false,
     highlight = {
       keyword = "fg",

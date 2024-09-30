@@ -1,20 +1,8 @@
 local M = {}
 
 M.config = function()
-  local ok, cmp = pcall(require, "cmp")
-  if not ok then
-    return
-  end
-
-  local ok, luasnip = pcall(require, "luasnip")
-  if not ok then
-    return
-  end
-
-  local ok, _ = pcall(require, "snippets")
-  if not ok then
-    return
-  end
+  local cmp = require("cmp")
+  local luasnip = require("luasnip")
 
   local function has_words_before()
     unpack = unpack or table.unpack

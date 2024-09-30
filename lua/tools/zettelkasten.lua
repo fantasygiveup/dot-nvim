@@ -3,12 +3,7 @@ local M = {}
 local vars = require("vars")
 
 M.config = function()
-  local ok, zk = pcall(require, "zk")
-  if not ok then
-    return
-  end
-
-  zk.setup({
+  require("zk").setup({
     picker = "fzf_lua",
     lsp = {
       config = {

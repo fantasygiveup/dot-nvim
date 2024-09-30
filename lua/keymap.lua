@@ -42,7 +42,7 @@ M.init = function()
   vim.keymap.set("c", "<c-d>", "<del>")
   vim.keymap.set("c", "<esc>b", "<s-left>")
   vim.keymap.set("c", "<esc>f", "<s-right>")
-  vim.keymap.set("c", "<c-e>", [[<c-r>=expand("%:p:h") . "/" <cr>]])
+  vim.keymap.set("c", "<c-t>", [[<c-r>=expand("%:p:h") . "/" <cr>]])
 
   -- Insert mode (tcsh style).
   vim.keymap.set("i", "<a-b>", "<c-o>b")
@@ -273,7 +273,7 @@ M.cmp_preset = function()
     ["<c-f>"] = cmp.mapping.scroll_docs(4),
     ["<c-q>"] = cmp.mapping.abort(),
     ["<cr>"] = cmp.mapping.confirm({ select = true }),
-    ["<c-e>"] = cmp.mapping.confirm({ select = true }),
+    ["<c-t>"] = cmp.mapping.confirm({ select = true }),
     ["<tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
   }
 end

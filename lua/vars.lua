@@ -44,7 +44,6 @@ function vars:load_variables()
     .. "background"
   self.zettelkasten_dir_name = zettelkasten_dir_name
   self.zettelkasten_dir_path = zettelkasten_dir_path
-  self.todos_file = zettelkasten_dir_path .. path_sep .. "v11n.md"
   self.fleeting_notes = zettelkasten_dir_path .. path_sep .. "sm9z.md"
 end
 

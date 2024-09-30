@@ -160,16 +160,8 @@ M.zettelkasten = function()
     { desc = "zk find by tags", silent = true }
   )
 
-  vim.keymap.set("n", "<localleader>z1", function()
-    vim.cmd("e " .. require("vars").todos_file)
-  end, { desc = "open todos file", silent = true })
-
-  vim.keymap.set("n", "<localleader>ze", function()
-    require("tools.zettelkasten").fleeting_new_entry()
-  end, { desc = "new fleeting note", silent = true })
-
   vim.keymap.set("n", "<localleader>zv", function()
-    require("tools.zettelkasten").fleeting_open_file()
+    vim.cmd("e " .. require("vars").fleeting_notes)
   end, { desc = "visit fleeting note", silent = true })
 end
 

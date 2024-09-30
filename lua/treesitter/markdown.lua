@@ -84,7 +84,7 @@ local next_todo_state = function(current)
   return todo_states[index + 1]
 end
 
-M.todo_heading = function(bufnr)
+M.todo_section_toggle = function(bufnr)
   local node = ts.get_node_at_cursor(nil, true)
   local item = ts_parser.find_parent_node(node, "atx_heading")
   if not item then

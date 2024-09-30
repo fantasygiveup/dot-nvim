@@ -64,9 +64,11 @@ M.init = function()
   vim.keymap.set("i", "<c-n>", "<down>")
 
   -- Misc.
-  vim.keymap.set("n", "<localleader>wn", function()
-    vim.opt_local.number = not vim.opt_local.number
-    vim.opt_local.relativenumber = not vim.opt_local.relativenumber
+  vim.keymap.set("n", "<localleader>wl", function()
+    for _, name in pairs({ "number", "relativenumber" }) do
+      local opt = vim.api.nvim_win_get_option(0, name)
+      vim.api.nvim_win_set_option(0, name, not opt)
+    end
   end, { desc = "toggle line number" })
 
   vim.keymap.set("n", "<localleader>wr", function()

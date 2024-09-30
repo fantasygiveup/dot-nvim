@@ -3,7 +3,7 @@ local M = {}
 M.config = function()
   local ok, _ = require("snippets")
   if not ok then
-    error("Snippets are not loaded")
+    error("Snippets plugin is not loaded")
     return
   end
 

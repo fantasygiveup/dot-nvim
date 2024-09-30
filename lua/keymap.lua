@@ -273,13 +273,14 @@ M.cmp_preset = function()
   local luasnip = require("luasnip")
 
   return {
-    ["<C-n>"] = cmp.mapping.select_next_item({ behavior = "select", count = 1 }),
-    ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = "select", count = 1 }),
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-q>"] = cmp.mapping.abort(),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-    ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
+    ["<c-n>"] = cmp.mapping.select_next_item({ behavior = "select", count = 1 }),
+    ["<c-p>"] = cmp.mapping.select_prev_item({ behavior = "select", count = 1 }),
+    ["<c-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<c-f>"] = cmp.mapping.scroll_docs(4),
+    ["<c-q>"] = cmp.mapping.abort(),
+    ["<cr>"] = cmp.mapping.confirm({ select = true }),
+    ["<c-e>"] = cmp.mapping.confirm({ select = true }),
+    ["<tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
   }
 end
 

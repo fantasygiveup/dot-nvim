@@ -32,7 +32,7 @@ M.init = function()
     if nr == nr2 then
       vim.cmd("cclose")
     end
-  end, { desc = "qf_toggle" })
+  end, { desc = "quickfix toggle" })
 
   -- Command line (tcsh style).
   vim.keymap.set("c", "<c-a>", "<home>")
@@ -213,13 +213,13 @@ M.zettelkasten_buffer = function(bufnr)
 
   vim.keymap.set("n", "<Space><CR>", function()
     require("tools.zettelkasten").return_back()
-  end, { desc = "zk [return] to editor", buffer = bufnr })
+  end, { desc = "zk return to editor", buffer = bufnr })
 end
 
 M.zen_mode = function()
   vim.keymap.set("n", "<localleader>wz", function()
     require("view.zen_mode").zen_mode()
-  end, { desc = "[z]en mode toggle" })
+  end, { desc = "zen mode toggle" })
 end
 
 M.tree_sitter = function()
@@ -253,7 +253,7 @@ M.hop = function()
 
   vim.keymap.set("", "<a-t>", function()
     hop.hint_words({})
-  end, { remap = true, desc = "hop_words" })
+  end, { remap = true, desc = "hop" })
 end
 
 M.colorizer = function()
@@ -335,19 +335,19 @@ M.fzf = function()
 
   vim.keymap.set("n", "<localleader>gs", function()
     fzf_lua.git_status()
-  end, { desc = "git_status" })
+  end, { desc = "git status" })
 
   vim.keymap.set("n", "<localleader>gb", function()
     fzf_lua.git_bcommits()
-  end, { desc = "git_bcommits" })
+  end, { desc = "git buffer commits" })
 
   vim.keymap.set("n", "<localleader>gl", function()
     fzf_lua.git_commits()
-  end, { desc = "git_commits" })
+  end, { desc = "git commits" })
 
   vim.keymap.set("v", "<localleader>ss", function()
     fzf_lua.grep_visual({ rg_opts = require("vars").rg_opts })
-  end, { desc = "grep_visual" })
+  end, { desc = "grep visual" })
 
   local function grep_project(opts)
     local opts = opts or {}
@@ -358,12 +358,12 @@ M.fzf = function()
     fzf_lua.grep_project(opts)
   end
 
-  vim.keymap.set("n", "<localleader>ss", grep_project, { desc = "grep_project" })
+  vim.keymap.set("n", "<localleader>ss", grep_project, { desc = "grep project" })
 
   vim.keymap.set("n", "<c-s>", function()
     local vars = require("vars")
     grep_project({ prompt = "Notes> ", cwd = vars.org_dir_path })
-  end, { desc = "grep_notes" })
+  end, { desc = "grep notes" })
 
   vim.keymap.set("n", "<localleader>v", function()
     fzf_lua.lsp_document_symbols()
@@ -375,7 +375,7 @@ M.fzf_project = function()
     "n",
     "<C-g>",
     "<Cmd>lua require'fzf.project'.navigate()<CR>",
-    { desc = "switch project" }
+    { desc = "switch other project" }
   )
 end
 
@@ -387,36 +387,32 @@ end
 M.markdown = function()
   vim.keymap.set("n", "<localleader>xx", function()
     require("treesitter.markdown").toggle_checkbox({ create = true })
-  end, { desc = "Toggle Markdown Checkbox" })
+  end, { desc = "toggle markdown checkbox" })
 end
 
 M.buffers = function()
   local project = require("project_nvim.project")
   local close_buffers = require("close_buffers")
 
-  vim.keymap.set("n", "<localleader>db", "<cmd>bp | bd#<cr>", { desc = "close_buffer_only" })
+  vim.keymap.set("n", "<localleader>dB", "<cmd>bp | bd#<cr>", { desc = "close current buffer" })
 
-  vim.keymap.set("n", "<localleader>dd", function()
+  vim.keymap.set("n", "<localleader>db", function()
     local file_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), "%")
     close_buffers.wipe({ type = "this", force = true })
-    print("Close " .. file_name)
-  end, { desc = "close_current_buffer" })
+  end, { desc = "kill current buffer" })
 
   vim.keymap.set("n", "<localleader>do", function()
     close_buffers.wipe({ type = "other", force = true })
-    print("Close other buffers")
-  end, { desc = "close_other_buffers" })
+  end, { desc = "close other buffers" })
 
-  vim.keymap.set("n", "<localleader>d!", function()
+  vim.keymap.set("n", "<localleader>da", function()
     close_buffers.wipe({ type = "all", force = true })
-    print("Close all buffers")
-  end, { desc = "close_all_buffers" })
+  end, { desc = "close all buffers" })
 
   vim.keymap.set("n", "<localleader>dp", function()
     local project_root = project.get_project_root()
     close_buffers.wipe({ regex = project_root, force = true })
-    print(string.format("Close <%s> buffers", vim.fn.fnamemodify(project_root, ":t")))
-  end, { desc = "close_project_buffers " })
+  end, { desc = "close project buffers" })
 end
 
 M.git_linker = function()
@@ -459,7 +455,7 @@ M.gitsigns = function()
       return
     end
     actions.next_hunk()
-  end, { desc = "next_hunk" })
+  end, { desc = "next hunk" })
 
   vim.keymap.set("n", "[c", function()
     if vim.o.diff then
@@ -467,7 +463,7 @@ M.gitsigns = function()
       return
     end
     actions.prev_hunk()
-  end, { desc = "prev_hunk" })
+  end, { desc = "prev hunk" })
 end
 
 M.debugger = function()

@@ -396,12 +396,7 @@ M.buffers = function()
   local project = require("project_nvim.project")
   local close_buffers = require("close_buffers")
 
-  vim.keymap.set("n", "<localleader>dB", "<cmd>bp | bd#<cr>", { desc = "close current buffer" })
-
-  vim.keymap.set("n", "<localleader>db", function()
-    local file_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), "%")
-    close_buffers.wipe({ type = "this", force = true })
-  end, { desc = "kill current buffer" })
+  vim.keymap.set("n", "<localleader>db", "<cmd>bp | bd#<cr>", { desc = "close current buffer" })
 
   vim.keymap.set("n", "<localleader>do", function()
     close_buffers.wipe({ type = "other", force = true })

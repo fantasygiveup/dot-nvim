@@ -1,6 +1,12 @@
 local M = {}
 
 M.config = function()
+  local ok, _ = require("snippets")
+  if not ok then
+    error("Snippets are not loaded")
+    return
+  end
+
   local cmp = require("cmp")
   local luasnip = require("luasnip")
 

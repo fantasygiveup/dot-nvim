@@ -42,7 +42,7 @@ M.init = function()
   vim.keymap.set("c", "<c-d>", "<del>")
   vim.keymap.set("c", "<esc>b", "<s-left>")
   vim.keymap.set("c", "<esc>f", "<s-right>")
-  vim.keymap.set("c", "<c-t>", [[<c-r>=expand("%:p:h") . "/" <cr>]])
+  vim.keymap.set("c", "<c-e>", [[<c-r>=expand("%:p:h") . "/" <cr>]])
 
   -- Insert mode (tcsh style).
   vim.keymap.set("i", "<a-b>", "<c-o>b")

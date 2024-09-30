@@ -146,7 +146,7 @@ freopen("output.txt", "w", stdout);
   ),
 })
 
-ls.add_snippets("zettelkasten", {
+ls.add_snippets("markdown", {
   s(
     "header",
     fmt(

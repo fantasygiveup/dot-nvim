@@ -288,7 +288,7 @@ end
 M.luasnip = function()
   local luasnip = require("luasnip")
 
-  vim.keymap.set({ "i", "s" }, "<c-x>", function()
+  vim.keymap.set({ "i", "s" }, "<c-e>", function()
     if luasnip.expand_or_jumpable() then
       return "<plug>luasnip-expand-or-jump"
     end

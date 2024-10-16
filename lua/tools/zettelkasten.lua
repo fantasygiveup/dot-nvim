@@ -95,7 +95,7 @@ function M.insert_link(selected, opts, cb)
   end)
 end
 
-M.fleeting_todo_toggle = function(bufnr)
+M.todo_toggle = function(bufnr)
   local ts_markdown = require("treesitter.markdown")
   return ts_markdown.todo_section_toggle(bufnr)
 end

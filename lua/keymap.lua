@@ -217,8 +217,8 @@ M.zettelkasten_buffer = function(bufnr)
   )
 
   vim.keymap.set("n", "<Space><Space>", function()
-    require("tools.zettelkasten").fleeting_todo(bufnr)
-  end, { desc = "zk change fleeting todo state", buffer = bufnr })
+    require("treesitter.markdown").todo_section_toggle(bufnr)
+  end, { desc = "markdown toggle todo", buffer = bufnr })
 
   vim.keymap.set("n", "<Space><CR>", function()
     require("tools.zettelkasten").return_back()

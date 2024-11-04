@@ -22,7 +22,6 @@ M.init = function()
   vim.keymap.set("n", "<localleader>cw", [[<cmd>keeppatterns %s/\s\+$//e<cr>]]) -- remove white spaces
   vim.keymap.set("n", "ZZ", "<cmd>xa<cr>")
   vim.keymap.set("n", "ZQ", "<cmd>qa!<cr>")
-  vim.keymap.set("x", "p", "pgvy") -- do not override yank register
 
   -- Quickfix.
   vim.keymap.set("n", "X", function()

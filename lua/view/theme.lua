@@ -8,6 +8,7 @@ M.config = function()
       light = "latte",
       dark = "mocha",
     },
+    no_underline = true,
     custom_highlights = function(colors)
       return {
         Folded = { bg = colors.base },
@@ -22,6 +23,7 @@ M.config = function()
         NotifyINFOTitle = { fg = colors.green },
         NotifyINFOIcon = { fg = colors.green },
         NotifyINFOBorder = { fg = colors.green },
+        ["@markup.link.url"] = { fg = colors.surface2 },
       }
     end,
   })

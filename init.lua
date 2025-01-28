@@ -105,6 +105,7 @@ lazy.setup({
   { "MeanderingProgrammer/render-markdown.nvim", config = require("view.render_markdown").config },
   { "danilamihailov/beacon.nvim" }, -- cursor effects
   { "chrishrb/gx.nvim", dependencies = { "nvim-lua/plenary.nvim" } }, -- opener: substitution of netrw gx
+  { "gbprod/yanky.nvim", config = require("edit.yanky").config },
 })
 
 require("event").init()

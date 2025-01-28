@@ -500,4 +500,14 @@ M.lf = function(cb)
   vim.keymap.set("n", "-", cb, { desc = "lf file explorer" })
 end
 
+M.yanky = function()
+  vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+  vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
+  vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
+  vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
+
+  vim.keymap.set("n", "<c-p>", "<Plug>(YankyNextEntry)")
+  vim.keymap.set("n", "<c-n>", "<Plug>(YankyPreviousEntry)")
+end
+
 return M

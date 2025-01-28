@@ -353,17 +353,6 @@ M.fzf = function()
     fzf_lua.git_commits()
   end, { desc = "git commits" })
 
-  vim.keymap.set("v", "<localleader>ss", function()
-    fzf_lua.grep_visual({ rg_opts = require("vars").rg_opts })
-  end, { desc = "grep project visual" })
-
-  vim.keymap.set("v", "<localleader>sS", function()
-    fzf_lua.grep_visual({
-      rg_opts = require("vars").rg_opts,
-      cwd = require("utils.file").current_folder(),
-    })
-  end, { desc = "grep current folder visual" })
-
   local function grep_project(opts)
     local opts = opts or {}
     opts.rg_opts = require("vars").rg_opts
@@ -373,14 +362,62 @@ M.fzf = function()
     fzf_lua.grep_project(opts)
   end
 
-  vim.keymap.set("n", "<localleader>ss", grep_project, { desc = "grep project" })
+  vim.keymap.set("n", "<localleader>ss", function()
+    vim.ui.input({ prompt = "grep project", relative = "win" }, function(input)
+      if input then
+        grep_project({ rg_opts = require("vars").rg_opts, search = input })
+      end
+    end)
+  end, { desc = "grep project" })
+
+  vim.keymap.set("v", "<localleader>ss", function()
+    vim.ui.input({ prompt = "grep project visual", relative = "win" }, function(input)
+      if input then
+        fzf_lua.grep_visual({
+          rg_opts = require("vars").rg_opts,
+          search = input,
+        })
+      end
+    end)
+  end, { desc = "grep project visual" })
+
   vim.keymap.set("n", "<localleader>sS", function()
-    grep_project({ cwd = require("utils.file").current_folder() })
-  end, { desc = "grep current folder" })
+    vim.ui.input({ prompt = "grep current directory", relative = "win" }, function(input)
+      if input then
+        grep_project({
+          rg_opts = require("vars").rg_opts,
+          search = input,
+          cwd = require("utils.file").current_directory(),
+        })
+      end
+    end)
+  end, { desc = "grep current directory" })
+
+  vim.keymap.set("v", "<localleader>sS", function()
+    vim.ui.input({ prompt = "grep current directory", relative = "win" }, function(input)
+      if input then
+        fzf_lua.grep_visual({
+          rg_opts = require("vars").rg_opts,
+          search = input,
+          cwd = require("utils.file").current_directory(),
+        })
+      end
+    end)
+  end, { desc = "grep current directory visual" })
 
   vim.keymap.set("n", "<c-s>", function()
     local vars = require("vars")
-    grep_project({ prompt = "Notes> ", cwd = vars.org_dir_path })
+
+    vim.ui.input({ prompt = "grep notes", relative = "win" }, function(input)
+      if input then
+        fzf_lua.grep_project({
+          prompt = "Notes> ",
+          rg_opts = vars.rg_opts,
+          search = input,
+          cwd = vars.org_dir_path,
+        })
+      end
+    end)
   end, { desc = "grep notes" })
 
   vim.keymap.set("n", "<localleader>v", function()

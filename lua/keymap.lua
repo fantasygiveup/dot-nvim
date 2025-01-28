@@ -371,14 +371,10 @@ M.fzf = function()
   end, { desc = "grep project" })
 
   vim.keymap.set("v", "<localleader>ss", function()
-    vim.ui.input({ prompt = "grep project visual", relative = "win" }, function(input)
-      if input then
-        fzf_lua.grep_visual({
-          rg_opts = require("vars").rg_opts,
-          search = input,
-        })
-      end
-    end)
+    fzf_lua.grep_visual({
+      rg_opts = require("vars").rg_opts,
+      search = input,
+    })
   end, { desc = "grep project visual" })
 
   vim.keymap.set("n", "<localleader>sS", function()
@@ -394,15 +390,11 @@ M.fzf = function()
   end, { desc = "grep current directory" })
 
   vim.keymap.set("v", "<localleader>sS", function()
-    vim.ui.input({ prompt = "grep current directory", relative = "win" }, function(input)
-      if input then
-        fzf_lua.grep_visual({
-          rg_opts = require("vars").rg_opts,
-          search = input,
-          cwd = require("utils.file").current_directory(),
-        })
-      end
-    end)
+    fzf_lua.grep_visual({
+      rg_opts = require("vars").rg_opts,
+      search = input,
+      cwd = require("utils.file").current_directory(),
+    })
   end, { desc = "grep current directory visual" })
 
   vim.keymap.set("n", "<c-s>", function()

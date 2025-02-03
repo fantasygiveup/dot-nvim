@@ -44,7 +44,14 @@ lazy.setup({
     config = require("tools.terminal_multiplexer").config,
   },
   { "kazhala/close-buffers.nvim", config = require("tools.buffers").config },
-  { "jose-elias-alvarez/null-ls.nvim", config = require("formatter_diagnostics").config },
+  {
+    "nvimdev/guard.nvim",
+    config = require("formatter").config,
+    dependencies = {
+      { "nvimdev/guard-collection" },
+    },
+    ft = require("formatter").ft(),
+  },
   { "folke/zen-mode.nvim", config = require("view.zen_mode").config },
   {
     "ibhagwan/fzf-lua",

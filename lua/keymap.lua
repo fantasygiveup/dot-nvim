@@ -101,6 +101,10 @@ M.init = function()
     vim.cmd("e " .. require("vars").scratchpad_file)
   end, { desc = "open scratchpad", silent = true })
 
+  -- Fix unwarnted charracters print, such as, [72;2u[69;2u[76;2u[76;2u[79;2u
+  -- https://github.com/vim/vim/issues/6040
+  vim.keymap.set("t", "<S-space>", [[<space>]])
+
   -- Post.
   -- Bind C-c to ESC, also clean up the highlight.
   vim.keymap.set("n", "<c-c>", "<esc>:noh<cr>", { noremap = true, silent = true })

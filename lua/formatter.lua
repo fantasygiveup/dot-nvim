@@ -13,7 +13,7 @@ M.config = function()
 
   local vars = require("vars")
   local config_dir = os.getenv("HOME") .. vars.path_sep .. ".config" .. vars.path_sep
-  ft("yaml"):fmt({
+  ft("yaml,markdown"):fmt({
     cmd = "prettier",
     args = {
       "--config=" .. config_dir .. "prettier" .. vars.path_sep .. "prettier.config.js",

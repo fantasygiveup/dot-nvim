@@ -34,6 +34,7 @@ M.config = function()
   ft("elixir", "heex"):fmt("lsp")
   ft("c,cpp"):fmt({ cmd = "clang-format", stdin = true })
   ft("nix"):fmt({ cmd = "nixfmt", stdin = true })
+  ft("sh"):fmt({ cmd = "shfmt", stdin = true })
   ft("python"):fmt({ cmd = "yapf", stdin = true })
 end
 

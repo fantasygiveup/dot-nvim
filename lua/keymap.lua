@@ -539,4 +539,14 @@ M.yanky = function()
   vim.keymap.set("n", "<c-n>", "<Plug>(YankyPreviousEntry)")
 end
 
+M.bookmarks = function()
+  vim.keymap.set("n", "<leader>mm", "<cmd>BookmarksGoto<cr>")
+  vim.keymap.set(
+    "n",
+    "<leader>ma",
+    require("tools.bookmarks").toggle_bookmark,
+    { desc = "toggle bookmark" }
+  )
+end
+
 return M

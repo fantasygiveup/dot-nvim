@@ -113,6 +113,15 @@ lazy.setup({
   { "danilamihailov/beacon.nvim" }, -- cursor effects
   { "chrishrb/gx.nvim", dependencies = { "nvim-lua/plenary.nvim" } }, -- opener: substitution of netrw gx
   { "gbprod/yanky.nvim", config = require("edit.yanky").config },
+  {
+    "LintaoAmons/bookmarks.nvim",
+    dependencies = {
+      { "kkharji/sqlite.lua" },
+      { "nvim-telescope/telescope.nvim" },
+      { "stevearc/dressing.nvim" }, -- optional: better UI
+    },
+    config = require("tools.bookmarks").config,
+  },
 })
 
 require("event").init()

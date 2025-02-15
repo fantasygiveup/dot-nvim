@@ -175,9 +175,9 @@ M.git_helpers = function()
   git_helpers = require("vc.git_helpers")
 
   vim.keymap.set("n", "<localleader>gc", function()
-    local org_dir_name = require("vars").org_dir_name
+    local notes_dir_name = require("vars").notes_dir_name
 
-    git_helpers.push_current_buffer({ org_dir_name })
+    git_helpers.push_current_buffer({ notes_dir_name })
   end, { desc = "git push buffer", silent = true })
 end
 
@@ -235,120 +235,60 @@ end
 
 M.fzf_builtin = function()
   return {
-    ["<a-p>"] = "toggle-preview",
-    ["<c-d>"] = "preview-page-down",
-    ["<c-u>"] = "preview-page-up",
-    ["<f1>"] = "toggle-help",
-    ["<f2>"] = "toggle-fullscreen",
+    ["<c-a>"] = "toggle_all",
+    ["<c-f>"] = "results_scrolling_down",
+    ["<c-b>"] = "results_scrolling_up",
   }
 end
 
 M.fzf = function()
-  local fzf_lua = require("fzf-lua")
-
   vim.keymap.set("n", "<localleader>b", function()
-    fzf_lua.buffers()
+    require("telescope.builtin").buffers({ sort_lastused = true })
   end, { desc = "buffers" })
 
   vim.keymap.set("n", "<c-t>", function()
-    fzf_lua.files({ cmd = vim.env.FZF_DEFAULT_COMMAND })
-  end, { desc = "files" })
+    require("telescope.builtin").find_files({ find_command = require("vars").fzf_default_command })
+  end, { desc = "find project files" })
 
-  vim.keymap.set("n", "gh?", function()
-    fzf_lua.keymaps()
+  vim.keymap.set("n", "<leader>:", function()
+    require("telescope.builtin").commands()
+  end, { desc = "commands" })
+
+  vim.keymap.set("n", "<leader>?", function()
+    require("telescope.builtin").keymaps()
   end, { desc = "keymaps" })
 
   vim.keymap.set("n", "<localleader>~", function()
-    fzf_lua.filetypes()
+    require("telescope.builtin").filetypes()
   end, { desc = "filetypes" })
 
   vim.keymap.set("n", "<localleader>r", function()
-    fzf_lua.oldfiles()
+    require("telescope.builtin").oldfiles()
   end, { desc = "oldfiles" })
 
   vim.keymap.set("n", "<localleader>gs", function()
-    fzf_lua.git_status()
+    require("telescope.builtin").git_status()
   end, { desc = "git status" })
 
   vim.keymap.set("n", "<localleader>gb", function()
-    fzf_lua.git_bcommits()
+    require("telescope.builtin").git_bcommits()
   end, { desc = "git buffer commits" })
 
   vim.keymap.set("n", "<localleader>gl", function()
-    fzf_lua.git_commits()
+    require("telescope.builtin").git_commits()
   end, { desc = "git commits" })
 
-  local function grep_project(opts)
-    local opts = opts or {}
-    opts.rg_opts = require("vars").rg_opts
-    opts.fzf_opts = { ["--nth"] = false }
-    opts.no_esc = true
-    opts.search = opts.search or ""
-    fzf_lua.grep_project(opts)
-  end
+  vim.keymap.set({ "n" }, "<localleader>ss", function()
+    require("telescope.builtin").grep_string({ search = "" })
+  end, { desc = "search term" })
 
-  vim.keymap.set("n", "<localleader>ss", function()
-    vim.ui.input({ prompt = "grep project", relative = "win" }, function(input)
-      if input then
-        grep_project({ rg_opts = require("vars").rg_opts, search = input })
-      end
-    end)
-  end, { desc = "grep project" })
-
-  vim.keymap.set("v", "<localleader>ss", function()
-    fzf_lua.grep_visual({
-      rg_opts = require("vars").rg_opts,
-      search = input,
-    })
-  end, { desc = "grep project visual" })
-
-  vim.keymap.set("n", "<localleader>sS", function()
-    vim.ui.input({ prompt = "grep current directory", relative = "win" }, function(input)
-      if input then
-        grep_project({
-          rg_opts = require("vars").rg_opts,
-          search = input,
-          cwd = require("utils.file").current_directory(),
-        })
-      end
-    end)
-  end, { desc = "grep current directory" })
-
-  vim.keymap.set("v", "<localleader>sS", function()
-    fzf_lua.grep_visual({
-      rg_opts = require("vars").rg_opts,
-      search = input,
-      cwd = require("utils.file").current_directory(),
-    })
-  end, { desc = "grep current directory visual" })
+  vim.keymap.set({ "v" }, "<localleader>ss", function()
+    require("telescope.builtin").grep_string()
+  end, { desc = "search selection" })
 
   vim.keymap.set("n", "<c-s>", function()
-    local vars = require("vars")
-
-    vim.ui.input({ prompt = "grep notes", relative = "win" }, function(input)
-      if input then
-        fzf_lua.grep_project({
-          prompt = "Notes> ",
-          rg_opts = vars.rg_opts,
-          search = input,
-          cwd = vars.org_dir_path,
-        })
-      end
-    end)
-  end, { desc = "grep notes" })
-
-  vim.keymap.set("n", "<localleader>v", function()
-    fzf_lua.lsp_document_symbols()
-  end, { desc = "lsp document symbols" })
-end
-
-M.fzf_project = function()
-  vim.keymap.set(
-    "n",
-    "<C-g>",
-    "<Cmd>lua require'fzf.project'.navigate()<CR>",
-    { desc = "switch other project" }
-  )
+    require("telescope.builtin").grep_string({ cwd = require("vars").notes_dir, search = "" })
+  end, { desc = "search notes" })
 end
 
 M.icon_picker = function()

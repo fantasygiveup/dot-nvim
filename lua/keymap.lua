@@ -19,7 +19,12 @@ M.init = function()
   vim.keymap.set("n", "]x", "<cmd>cnext<cr>")
   vim.keymap.set("n", "<localleader>se", "<cmd>setlocal spell! spelllang=en_us<cr>")
   vim.keymap.set("n", "<localleader>su", "<cmd>setlocal spell! spelllang=uk_ua<cr>")
-  vim.keymap.set("n", "<localleader>cw", [[<cmd>keeppatterns %s/\s\+$//e<cr>]]) -- remove white spaces
+  vim.keymap.set(
+    "n",
+    "<localleader>cw",
+    [[<cmd>keeppatterns %s/\s\+$//e<cr>]],
+    { desc = "remove trailing whitespaces" }
+  ) -- remove white spaces
   vim.keymap.set("n", "ZZ", "<cmd>xa<cr>")
   vim.keymap.set("n", "ZQ", "<cmd>qa!<cr>")
 
@@ -165,7 +170,7 @@ M.tree_sitter = function()
 
   vim.keymap.set(
     "n",
-    "<localleader>su",
+    "localleader>sc",
     "<cmd>TSHighlightCapturesUnderCursor<cr>",
     { desc = "inspect tree sitter cursor" }
   )
@@ -262,9 +267,13 @@ M.fzf = function()
     require("telescope.builtin").filetypes()
   end, { desc = "filetypes" })
 
-  vim.keymap.set("n", "<localleader>r", function()
+  vim.keymap.set("n", "<localleader>rf", function()
     require("telescope.builtin").oldfiles()
-  end, { desc = "oldfiles" })
+  end, { desc = "show recent files" })
+
+  vim.keymap.set("n", "<localleader>rr", function()
+    require("telescope.builtin").resume()
+  end, { desc = "resume menu" })
 
   vim.keymap.set("n", "<localleader>gs", function()
     require("telescope.builtin").git_status()

@@ -7,7 +7,7 @@ M.config = function()
         enable = true,
       },
       shortcut = {
-        { desc = "󰊳 Update", group = "@property", action = "Lazy update", key = "u" },
+        { desc = "󰊳 update", group = "@property", action = "Lazy update", key = "u" },
       },
       project = { enable = false },
     },

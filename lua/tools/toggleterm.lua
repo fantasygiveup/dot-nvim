@@ -34,7 +34,7 @@ M.config = function()
       table.insert(opened_projects, project_root)
     end
     toggleterm.toggle(index, 0, project_root, "float")
-  end, { desc = "toggle_term_project" })
+  end, { desc = "toggle term project" })
 
   local gr = vim.api.nvim_create_augroup("TermToggle", {})
   vim.api.nvim_create_autocmd({ "TermOpen" }, {

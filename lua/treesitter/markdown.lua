@@ -125,7 +125,13 @@ M.todo_section_toggle = function(bufnr)
 end
 
 M.init = function()
-  require("keymap").markdown()
+  vim.api.nvim_create_autocmd({ "FileType" }, {
+    group = vim.api.nvim_create_augroup("MarkdownTreesitterGroup", {}),
+    pattern = "markdown",
+    callback = function()
+      require("keymap").markdown_ts_buffer(0)
+    end,
+  })
 end
 
 return M

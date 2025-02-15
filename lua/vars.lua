@@ -4,8 +4,10 @@ local home = os.getenv("HOME")
 local path_sep = vars.is_windows and "\\" or "/"
 local os_name = vim.loop.os_uname().sysname
 local user_repo = home .. path_sep .. "github.com" .. path_sep .. "fantasygiveup" .. path_sep
-local notes_dir_name = "zettelkasten"
-local notes_dir_path = user_repo .. notes_dir_name
+local zettelkasten_dir_name = "zettelkasten"
+local zettelkasten_dir_path = user_repo .. zettelkasten_dir_name
+local org_dir_name = zettelkasten_dir_name
+local org_dir_path = zettelkasten_dir_path
 local cache_dir = home .. path_sep .. ".cache" .. path_sep .. "nvim" .. path_sep
 local undo_dir = home .. path_sep .. ".cache" .. path_sep .. "undo" .. path_sep
 
@@ -21,7 +23,7 @@ function vars:load_variables()
   self.is_linux = os_name == "Linux"
   self.is_windows = os_name == "Windows"
   self.vim_path = vim.fn.stdpath("config")
-  self.org_dir_name = notes_dir_name
+  self.org_dir_name = zettelkasten_dir_name
   self.org_dir_path = org_dir_path
   self.cache_dir = cache_dir
   self.scratchpad_file = cache_dir .. "scratchpad.txt"
@@ -31,12 +33,8 @@ function vars:load_variables()
   self.home = home
   self.user_name = "Illia Danko"
   self.diagnostic_severity = vim.diagnostic.severity.ERROR
-  self.rg_opts = require("utils.string_helper").fields(
-    "rg --color=never --no-heading --with-filename --line-number --column --smart-case  "
-      .. vim.env.RG_OPTS_FILTER
-  )
-  self.fzf_default_command = require("utils.string_helper").fields(vim.env.FZF_DEFAULT_COMMAND)
-  self.scratchpad_path = cache_dir .. "scratchpad.txt"
+  self.rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512 "
+    .. vim.env.RG_OPTS_FILTER
   self.system_theme_file = home
     .. path_sep
     .. ".config"

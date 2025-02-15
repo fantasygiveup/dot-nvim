@@ -510,19 +510,18 @@ end
 
 M.debugger = function()
   -- Keymap.
-  -- TODO(idanko): think about keymap.
-  vim.keymap.set("n", "<leader><Space>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
+  vim.keymap.set("n", "<localleader>at", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
   vim.keymap.set(
     "n",
-    "<leader>t",
+    "<localleader>ad",
     "<cmd>lua require'dap'.terminate(); require'dap'.clear_breakpoints()<cr>"
   )
-  vim.keymap.set("n", "<leader>r", "<cmd>lua require'dap'.run_last()<cr>")
-  vim.keymap.set("n", "<leader>c", "<cmd>lua require'dap'.continue()<cr>")
-  vim.keymap.set("n", "<leader>n", "<cmd>lua require'dap'.step_over()<cr>")
-  vim.keymap.set("n", "<leader>i", "<cmd>lua require'dap'.step_into()<cr>")
-  vim.keymap.set("n", "<leader>u", "<cmd>lua require'dapui'.toggle()<cr>")
-  vim.keymap.set("v", "<leader>e", "<cmd>lua require'dapui'.eval(); vim.fn.feedkeys('v')<cr>")
+  vim.keymap.set("n", "<localleader>ar", "<cmd>lua require'dap'.run_last()<cr>")
+  vim.keymap.set("n", "<localleader>ac", "<cmd>lua require'dap'.continue()<cr>")
+  vim.keymap.set("n", "<localleader>an", "<cmd>lua require'dap'.step_over()<cr>")
+  vim.keymap.set("n", "<localleader>ai", "<cmd>lua require'dap'.step_into()<cr>")
+  vim.keymap.set("n", "<localleader>ao", "<cmd>lua require'dapui'.toggle()<cr>")
+  vim.keymap.set("v", "<localleader>ae", "<cmd>lua require'dapui'.eval(); vim.fn.feedkeys('v')<cr>")
 end
 
 M.lf = function(cb)

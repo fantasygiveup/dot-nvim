@@ -170,7 +170,7 @@ M.tree_sitter = function()
 
   vim.keymap.set(
     "n",
-    "localleader>sc",
+    "<localleader>sc",
     "<cmd>TSHighlightCapturesUnderCursor<cr>",
     { desc = "inspect tree sitter cursor" }
   )

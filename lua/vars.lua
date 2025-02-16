@@ -42,6 +42,9 @@ function vars:load_variables()
     .. "appearance"
     .. path_sep
     .. "background"
+  self.zettelkasten_dir_name = zettelkasten_dir_name
+  self.zettelkasten_dir_path = zettelkasten_dir_path
+  self.fleeting_notes = zettelkasten_dir_path .. path_sep .. "sm9z.md"
 end
 
 function vars:ensure_dir()

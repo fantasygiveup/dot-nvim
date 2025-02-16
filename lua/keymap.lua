@@ -220,10 +220,6 @@ M.zettelkasten_buffer = function(bufnr)
     { desc = "zk links", buffer = bufnr }
   )
 
-  vim.keymap.set("n", "<Space><Space>", function()
-    require("treesitter.markdown").todo_section_toggle(bufnr)
-  end, { desc = "markdown toggle todo", buffer = bufnr })
-
   vim.keymap.set("n", "<Space><CR>", function()
     require("tools.zettelkasten").return_back()
   end, { desc = "zk return to editor", buffer = bufnr })
@@ -440,10 +436,14 @@ M.icon_picker = function()
   vim.keymap.set("i", "<a-e>", "<cmd>IconPickerInsert<cr>")
 end
 
-M.markdown = function()
-  vim.keymap.set("n", "<localleader>xx", function()
+M.markdown_ts_buffer = function(bufnr)
+  vim.keymap.set("n", "<c-x><c-x>", function()
     require("treesitter.markdown").toggle_checkbox({ create = true })
-  end, { desc = "toggle markdown checkbox" })
+  end, { desc = "toggle markdown checkbox", buffer = bufnr })
+
+  vim.keymap.set("n", "<Space><Space>", function()
+    require("treesitter.markdown").todo_section_toggle(bufnr)
+  end, { desc = "markdown toggle todo", buffer = bufnr })
 end
 
 M.buffers = function()

@@ -144,14 +144,89 @@ M.lsp_flow = function(bufnr)
   vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 end
 
-M.markdown_ts_buffer = function(bufnr)
+M.zettelkasten = function()
+  local dir = require("vars").zettelkasten_dir_path
+
+  vim.keymap.set(
+    "n",
+    "<localleader>zn",
+    "<cmd>ZkEditOrNew { notebook_path = '" .. dir .. "' }<cr>",
+    { desc = "zk find or create", silent = true }
+  )
+
+  vim.keymap.set(
+    "v",
+    "<localleader>zf",
+    ":'<,'>ZkMatch { notebook_path = '" .. dir .. "' }<cr>",
+    { desc = "zk match", silent = true }
+  )
+
+  vim.keymap.set("n", "<localleader>zr", function()
+    local zk = require("zk")
+    zk.index({ notebook_path = dir })
+  end, { desc = "zk refersh index", silent = true })
+
+  vim.keymap.set(
+    "n",
+    "<localleader>zt",
+    ":ZkTags { notebook_path = '" .. dir .. "' }<cr>",
+    { desc = "zk find by tags", silent = true }
+  )
+
+  vim.keymap.set("n", "<localleader>zv", function()
+    vim.cmd("e " .. require("vars").fleeting_notes)
+  end, { desc = "visit fleeting note", silent = true })
+end
+
+M.zettelkasten_buffer = function(bufnr)
+  local dir = require("vars").zettelkasten_dir_path
+
+  vim.keymap.set(
+    "n",
+    "<cr>",
+    "<cmd>lua vim.lsp.buf.definition()<cr>",
+    { desc = "zk go to definition", buffer = bufnr, silent = true }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<localleader>zb",
+    "<cmd>ZkBacklinks { notebook_path = '" .. dir .. "' }<cr>",
+    { desc = "zk backlinks", buffer = bufnr }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<localleader>zi",
+    "<cmd>ZkInsertLinkNormalMode { notebook_path = '" .. dir .. "' }<cr>",
+    { desc = "zk insert link", buffer = bufnr }
+  )
+
+  vim.keymap.set("i", "<c-v>", function()
+    vim.cmd("ZkInsertLinkInsertMode { notebook_path = '" .. dir .. "' }")
+  end, { desc = "zk insert link insert mode", buffer = bufnr })
+
+  vim.keymap.set(
+    "v",
+    "<localleader>zi",
+    ":ZkInsertLinkAtSelection { notebook_path = '" .. dir .. "' }<cr>",
+    { desc = "zk insert link", buffer = bufnr, silent = true }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<localleader>zl",
+    "<cmd>ZkLinks { notebook_path = '" .. dir .. "' }<cr>",
+    { desc = "zk links", buffer = bufnr }
+  )
+
   vim.keymap.set("n", "<Space><Space>", function()
     require("treesitter.markdown").todo_section_toggle(bufnr)
   end, { desc = "markdown toggle todo", buffer = bufnr })
 
-  vim.keymap.set("n", "<c-x><c-x>", function()
-    require("treesitter.markdown").toggle_checkbox({ create = true })
-  end, { desc = "toggle markdown checkbox", buffer = bufnr })
+  vim.keymap.set("n", "<Space><CR>", function()
+    require("tools.zettelkasten").return_back()
+  end, { desc = "zk return to editor", buffer = bufnr })
 end
 
 M.zen_mode = function()
@@ -363,6 +438,12 @@ end
 M.icon_picker = function()
   vim.keymap.set("n", "<a-e>", "<cmd>IconPickerNormal<cr>")
   vim.keymap.set("i", "<a-e>", "<cmd>IconPickerInsert<cr>")
+end
+
+M.markdown = function()
+  vim.keymap.set("n", "<localleader>xx", function()
+    require("treesitter.markdown").toggle_checkbox({ create = true })
+  end, { desc = "toggle markdown checkbox" })
 end
 
 M.buffers = function()

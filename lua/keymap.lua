@@ -358,6 +358,10 @@ M.fzf = function()
     require("telescope.builtin").git_commits()
   end, { desc = "git commits" })
 
+  vim.keymap.set("n", "<localleader>v", function()
+    require("telescope.builtin").treesitter()
+  end, { desc = "buffer symbols" })
+
   vim.keymap.set({ "n" }, "<localleader>ss", function()
     require("telescope.builtin").grep_string({ search = "" })
   end, { desc = "search term" })

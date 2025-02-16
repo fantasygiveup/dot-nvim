@@ -44,9 +44,10 @@ function vars:load_variables()
     .. "appearance"
     .. path_sep
     .. "background"
-  self.zettelkasten_dir_name = zettelkasten_dir_name
-  self.zettelkasten_dir_path = zettelkasten_dir_path
-  self.fleeting_notes = zettelkasten_dir_path .. path_sep .. "sm9z.md"
+  self.notes_dir_path = notes_dir_path
+  self.zettelkasten_dir_name = notes_dir_name
+  self.zettelkasten_dir_path = notes_dir_path
+  self.fleeting_notes = notes_dir_path .. path_sep .. "sm9z.md"
 end
 
 function vars:ensure_dir()

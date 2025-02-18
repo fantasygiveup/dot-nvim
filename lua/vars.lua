@@ -101,7 +101,6 @@ function vars:load_options()
   vim.o.cursorline = true
   vim.o.foldenable = true
   vim.o.signcolumn = "yes"
-  vim.o.number = false
   vim.o.undofile = true
   vim.o.spellfile = cache_dir .. "spell/en.uft-8.add" .. "," .. cache_dir .. "spell/ua.uft-8.add"
   vim.o.updatetime = 500 -- used by vim.lsp.buf.document_highlight()

@@ -54,12 +54,11 @@ lazy.setup({
   },
   { "folke/zen-mode.nvim", config = require("view.zen_mode").config },
   {
-    "nvim-telescope/telescope.nvim",
+    "ibhagwan/fzf-lua",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim",
       "nvim-tree/nvim-web-devicons",
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      "stevearc/dressing.nvim",
     },
     config = require("fzf").config,
   },
@@ -127,7 +126,7 @@ lazy.setup({
 
 require("event").init()
 require("tools.gpg").init()
-require("vc.git_helpers").init()
+require("fzf.project").init()
 require("view.theme").init()
 require("custom").init()
 require("treesitter.markdown").init()

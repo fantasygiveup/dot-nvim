@@ -21,9 +21,9 @@ function vars:load_variables()
   self.is_linux = os_name == "Linux"
   self.is_windows = os_name == "Windows"
   self.vim_path = vim.fn.stdpath("config")
-  self.org_dir_name = notes_dir_name
-  self.org_dir_path = org_dir_path
   self.cache_dir = cache_dir
+  self.notes_dir_name = notes_dir_name
+  self.notes_dir_path = notes_dir_path
   self.scratchpad_file = cache_dir .. "scratchpad.txt"
   self.undo_dir = undo_dir
   self.modules_dir = self.vim_path .. path_sep .. "modules"
@@ -31,12 +31,8 @@ function vars:load_variables()
   self.home = home
   self.user_name = "Illia Danko"
   self.diagnostic_severity = vim.diagnostic.severity.ERROR
-  self.rg_opts = require("utils.string_helper").fields(
-    "rg --color=never --no-heading --with-filename --line-number --column --smart-case  "
-      .. vim.env.RG_OPTS_FILTER
-  )
-  self.fzf_default_command = require("utils.string_helper").fields(vim.env.FZF_DEFAULT_COMMAND)
-  self.scratchpad_path = cache_dir .. "scratchpad.txt"
+  self.rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512 "
+    .. vim.env.RG_OPTS_FILTER
   self.system_theme_file = home
     .. path_sep
     .. ".config"
@@ -44,9 +40,7 @@ function vars:load_variables()
     .. "appearance"
     .. path_sep
     .. "background"
-  self.zettelkasten_dir_name = zettelkasten_dir_name
-  self.zettelkasten_dir_path = zettelkasten_dir_path
-  self.fleeting_notes = zettelkasten_dir_path .. path_sep .. "sm9z.md"
+  self.fleeting_notes = notes_dir_path .. path_sep .. "sm9z.md"
 end
 
 function vars:ensure_dir()

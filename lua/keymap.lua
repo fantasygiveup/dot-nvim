@@ -388,7 +388,7 @@ M.fzf = function()
   end, { desc = "search selection buffer directory" })
 
   vim.keymap.set("n", "<c-s>", function()
-    require("telescope.builtin").grep_string({ cwd = require("vars").notes_dir_path, search = "" })
+    require("telescope.builtin").grep_string({ cwd = require("vars").notes_dir, search = "" })
   end, { desc = "search notes" })
 end
 

@@ -412,16 +412,11 @@ M.fzf = function()
   vim.keymap.set("n", "<c-s>", function()
     local vars = require("vars")
 
-    vim.ui.input({ prompt = "grep notes", relative = "win" }, function(input)
-      if input then
-        fzf_lua.grep_project({
-          prompt = "Notes> ",
-          rg_opts = vars.rg_opts,
-          search = input,
-          cwd = vars.org_dir_path,
-        })
-      end
-    end)
+    fzf_lua.grep_project({
+      prompt = "Notes> ",
+      rg_opts = vars.rg_opts,
+      cwd = vars.notes_dir_path,
+    })
   end, { desc = "grep notes" })
 
   vim.keymap.set("n", "<localleader>v", function()

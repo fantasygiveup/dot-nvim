@@ -23,7 +23,13 @@ M.init = function()
     "n",
     "<localleader>cw",
     [[<cmd>keeppatterns %s/\s\+$//e<cr>]],
-    { desc = "remove trailing whitespaces" }
+    { desc = "clean trailing whitespaces" }
+  ) -- remove white spaces
+  vim.keymap.set(
+    "n",
+    "<localleader>ce",
+    [[<cmd>%!sed -r 's/\x1b\[[0-9;]*m//g'<cr>]],
+    { desc = "clean ansi codes" }
   ) -- remove white spaces
   vim.keymap.set("n", "ZZ", "<cmd>xa<cr>")
   vim.keymap.set("n", "ZQ", "<cmd>qa!<cr>")

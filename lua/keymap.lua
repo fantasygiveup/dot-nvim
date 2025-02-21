@@ -368,20 +368,9 @@ M.fzf = function()
     require("telescope.builtin").grep_string({ search = "" })
   end, { desc = "search term" })
 
-  vim.keymap.set({ "n" }, "<localleader>sS", function()
-    require("telescope.builtin").grep_string({
-      search = "",
-      cwd = require("utils.file").buffer_directory(),
-    })
-  end, { desc = "search term buffer directory" })
-
   vim.keymap.set({ "v" }, "<localleader>ss", function()
     require("telescope.builtin").grep_string()
   end, { desc = "search selection" })
-
-  vim.keymap.set({ "v" }, "<localleader>sS", function()
-    require("telescope.builtin").grep_string({ cwd = require("utils.file").buffer_directory() })
-  end, { desc = "search selection buffer directory" })
 
   vim.keymap.set("n", "<c-s>", function()
     require("telescope.builtin").grep_string({ cwd = require("vars").notes_dir, search = "" })

@@ -1,8 +1,10 @@
 local M = {}
 
+local vars = require("vars")
+
 M.config = function()
   require("zk").setup({
-    picker = "telescope",
+    picker = "fzf_lua",
     lsp = {
       config = {
         on_attach = function(client, bufnr)
@@ -43,37 +45,25 @@ end
 function M.edit_or_new(options, picker_options)
   local zk = require("zk")
   local commands = require("zk.commands")
-  local actions = require("telescope.actions")
-  local action_state = require("telescope.actions.state")
 
   local picker_options = picker_options or {}
-  picker_options.telescope = {
-    attach_mappings = function(prompt_bufnr, map)
-      actions.select_default:replace(function(opts)
-        local current_picker = action_state.get_current_picker(prompt_bufnr)
-        local prompt = current_picker:_get_prompt()
-        local selected_entry = action_state.get_selected_entry()
-        if selected_entry ~= nil then
-          vim.cmd("edit! " .. selected_entry.path)
-        else
-          options = vim.tbl_extend("force", { title = prompt }, options or {})
-          commands.get("ZkNew")(options)
-        end
-      end)
-
-      -- Create a new entry.
-      map("i", "<c-e>", function(prompt_bufnr)
-        local current_picker = action_state.get_current_picker(prompt_bufnr)
-        local prompt = current_picker:_get_prompt()
-        options = vim.tbl_extend("force", { title = prompt }, options or {})
+  picker_options.fzf_lua = {
+    actions = {
+      ["ctrl-e"] = function(selected, opts)
+        options = vim.tbl_extend("force", { title = opts.last_query }, options or {})
         commands.get("ZkNew")(options)
-      end)
-
-      return true
-    end,
+      end,
+    },
   }
 
-  zk.pick_notes(options, picker_options)
+  zk.pick_notes(options, picker_options, function(notes)
+    if picker_options and picker_options.multi_select == false then
+      notes = { notes }
+    end
+    for _, note in ipairs(notes) do
+      vim.cmd("e " .. note.absPath)
+    end
+  end)
 end
 
 function M.insert_link(selected, opts, cb)

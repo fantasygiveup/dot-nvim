@@ -151,7 +151,7 @@ M.lsp_flow = function(bufnr)
 end
 
 M.zettelkasten = function()
-  local dir = require("vars").notes_dir_path
+  local dir = require("vars").zettelkasten_dir_path
 
   vim.keymap.set(
     "n",

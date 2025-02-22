@@ -26,6 +26,7 @@ M.config = function()
         ["@markup.link"] = { fg = colors.surface2 },
         ["@markup.link.url"] = { fg = colors.surface2 },
         ["@conceal"] = { fg = colors.surface2 },
+        ["@markup.raw"] = { fg = colors.sapphire },
       }
     end,
   })

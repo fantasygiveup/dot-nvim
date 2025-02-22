@@ -8,7 +8,6 @@ M.config = function()
     sign = { enabled = false },
     heading = { icons = { " ", " ", " ", " ", " ", " " } },
     code = { highlight_inline = "none" },
-    anti_conceal = { enabled = false },
   })
 end
 

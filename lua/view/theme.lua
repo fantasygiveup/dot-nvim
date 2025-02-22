@@ -25,6 +25,7 @@ M.config = function()
         NotifyINFOBorder = { fg = colors.green },
         ["@markup.link"] = { fg = colors.surface2 },
         ["@markup.link.url"] = { fg = colors.surface2 },
+        ["@conceal"] = { fg = colors.surface2 },
       }
     end,
   })

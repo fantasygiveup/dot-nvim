@@ -30,6 +30,7 @@ M.config = function()
         "RenderMarkdownH6",
       },
     },
+    code = { highlight_inline = "none" },
   })
 end
 

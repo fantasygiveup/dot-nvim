@@ -23,6 +23,7 @@ M.config = function()
         NotifyINFOTitle = { fg = colors.green },
         NotifyINFOIcon = { fg = colors.green },
         NotifyINFOBorder = { fg = colors.green },
+        ["@markup.link"] = { fg = colors.surface2 },
         ["@markup.link.url"] = { fg = colors.surface2 },
       }
     end,

@@ -240,14 +240,14 @@ end
 M.tree_sitter = function()
   vim.keymap.set(
     "n",
-    "<localleader>si",
+    "<localleader>wT",
     "<cmd>lua vim.treesitter.inspect_tree()<cr>",
     { desc = "inspect tree sitter" }
   )
 
   vim.keymap.set(
     "n",
-    "<localleader>sc",
+    "<localleader>wt",
     "<cmd>TSHighlightCapturesUnderCursor<cr>",
     { desc = "inspect tree sitter cursor" }
   )
@@ -262,7 +262,7 @@ M.hop = function()
 end
 
 M.colorizer = function()
-  vim.keymap.set("n", "<localleader>tc", "<cmd>ColorizerToggle<cr>", { desc = "colorized toggle" })
+  vim.keymap.set("n", "<localleader>wi", "<cmd>ColorizerToggle<cr>", { desc = "colorized toggle" })
 end
 
 M.cmp_preset = function()
@@ -326,7 +326,7 @@ M.fzf = function()
     fzf_lua.files({ cmd = vim.env.FZF_DEFAULT_COMMAND })
   end, { desc = "files" })
 
-  vim.keymap.set("n", "gh?", function()
+  vim.keymap.set("n", "<leader>?", function()
     fzf_lua.keymaps()
   end, { desc = "keymaps" })
 

@@ -507,7 +507,9 @@ M.gitsigns = function()
       pcall(vim.cmd, "normal! ]czz")
       return
     end
+
     actions.next_hunk()
+    pcall(vim.cmd, "normal! zz")
   end, { desc = "next hunk" })
 
   vim.keymap.set("n", "[c", function()
@@ -515,7 +517,9 @@ M.gitsigns = function()
       pcall(vim.cmd, "normal! [czz")
       return
     end
+
     actions.prev_hunk()
+    pcall(vim.cmd, "normal! zz")
   end, { desc = "prev hunk" })
 end
 

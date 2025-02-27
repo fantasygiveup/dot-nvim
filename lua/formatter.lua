@@ -23,7 +23,7 @@ M.config = function()
     fname = true,
   })
 
-  ft("typescript,javascript,typescriptreact,javascriptreact,css"):fmt({
+  ft("typescript,javascript,typescriptreact,javascriptreact,css,json"):fmt({
     cmd = "prettier",
     args = { "--stdin-filepath" },
     stdin = true,

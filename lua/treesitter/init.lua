@@ -80,6 +80,7 @@ M.config = function()
       "cpp",
       "css",
       "dart",
+      "dockerfile",
       "elixir",
       "elm",
       "fennel",

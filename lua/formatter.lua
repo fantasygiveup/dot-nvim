@@ -31,7 +31,7 @@ M.config = function()
   })
 
   ft("go"):fmt("lsp"):append({ cmd = "golines", args = { "--max-len=150" }, stdin = true })
-  ft("elixir", "heex"):fmt("lsp")
+  ft("elixir,heex"):fmt("lsp")
   ft("c,cpp"):fmt({ cmd = "clang-format", stdin = true })
   ft("nix"):fmt({ cmd = "nixfmt", stdin = true })
   ft("sh"):fmt({ cmd = "shfmt", stdin = true })

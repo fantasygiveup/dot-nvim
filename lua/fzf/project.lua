@@ -3,20 +3,16 @@ local M = {}
 M.navigate = function()
   local fzf_lua = require("fzf-lua")
   local vars = require("vars")
-
-  local pattern = ".git"
-  local root_path = os.getenv("HOME")
-  local unique_cmd = "sort -u"
-  local preview_cmd = "tree -C -L 1 " .. root_path .. "/{}"
-  local prompt = "Projects> "
-  local fd_exec = "fdir"
-  local fd_cmd = fd_exec
+  local preview_cmd = "tree -C -L 1 " .. vim.env.FZF_PROJECT_ROOT_DIRECTORY .. "/{}"
+  local prompt = "Project> "
+  local fd_cmd = "fd --hidden --case-sensitive --base-directory "
+    .. vim.env.FZF_PROJECT_ROOT_DIRECTORY
     .. " "
-    .. vim.env.FZF_PROJECTS_ROOT_DIRS
-    .. " --patterns "
-    .. vim.env.FZF_PROJECTS_PATTERNS
+    .. vim.env.FZF_PROJECT_FD_IGNORE_FILTER
+    .. " --relative-path --prune "
+    .. vim.env.FZF_PROJECT_SEARCH_PATTERN
 
-  fzf_lua.fzf_exec(fd_cmd .. " | " .. unique_cmd, {
+  fzf_lua.fzf_exec(fd_cmd .. " | sort -u | xargs dirname | awk '!x[$0]++'", {
     preview = preview_cmd,
     prompt = prompt,
     actions = {

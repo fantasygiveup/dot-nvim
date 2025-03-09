@@ -31,8 +31,8 @@ function vars:load_variables()
   self.home = home
   self.user_name = "Illia Danko"
   self.diagnostic_severity = vim.diagnostic.severity.ERROR
-  self.rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512 "
-    .. vim.env.RIPGREP_FILTER
+  self.rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512 --hidden "
+    .. vim.env.RIPGREP_IGNORE_SEARCH_FILTER
   self.system_theme_file = home
     .. path_sep
     .. ".config"

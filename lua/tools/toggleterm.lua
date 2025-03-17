@@ -16,7 +16,7 @@ M.config = function()
   toggleterm.setup({
     start_in_insert = false, -- manually handle autoinsert in all cases (see below)
     float_opts = toggleterm_float_opts(),
-    shell = "zsh",
+    shell = vim.env.SHELL or "bash",
   })
 
   -- Remember the opened project assosiated with a terminal session.

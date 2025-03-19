@@ -34,6 +34,11 @@ end
 
 M.system_theme = function(theme_file)
   local fd = io.open(theme_file)
+  -- Fallback to the light theme.
+  if not fd then
+    return "light"
+  end
+
   local theme = fd:read()
   fd:close()
   return theme

@@ -3,11 +3,11 @@ local M = {}
 M.config = function()
   local lualine = require("lualine")
 
-  local function spell()
+  local function spelling()
     if not vim.o.spell then
       return ""
     end
-    return "SPELL[" .. vim.o.spelllang .. "]"
+    return "📚 " .. vim.o.spelllang .. ""
   end
 
   local function lsp_active_clients(msg)
@@ -31,9 +31,6 @@ M.config = function()
         end
       end
     end
-    if string.len(str) > 0 then
-      str = "[" .. str .. "]"
-    end
     return str
   end
 
@@ -53,37 +50,50 @@ M.config = function()
     end
   end
 
+  local flavour = require("catppuccin").flavour
+  local clrs = require("catppuccin.palettes").get_palette(flavour)
+
   lualine.setup({
     options = {
-      theme = "auto",
-      section_separators = { left = "", right = "" },
-      component_separators = { left = "", right = "" },
+      theme = "catppuccin",
+      component_separators = "",
+      section_separators = { left = "", right = "" },
     },
     sections = {
-      lualine_a = { "mode", spell },
-      lualine_b = {
+      lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
+      lualine_b = { "filename", "branch" },
+      lualine_c = {
+        "%=",
         {
-          "diagnostics",
-          sources = { "nvim_diagnostic" },
-          sections = diagnostics_severity(),
-          symbols = { error = " ", warn = " ", info = " ", hint = " " },
-          diagnostics_color = {
-            error = "MiniStatuslineModeReplace", -- red background
-            warn = "MiniStatuslineModeCommand", -- yellow background
-          },
+          spelling,
+          color = { bg = clrs.surface0, fg = clrs.blue },
+          separator = { right = "", left = "" },
         },
-        "branch",
       },
       lualine_x = {
-        { lsp_active_clients, color = { fg = vim.g.terminal_color_6 } },
+        {
+          lsp_active_clients,
+          separator = { right = "", left = "" },
+          right_padding = 2,
+          color = { bg = clrs.surface0, fg = clrs.blue },
+        },
         "encoding",
-        "fileformat",
-        "filetype",
       },
-      lualine_y = {
-        "progress",
+      lualine_y = { "filetype", "progress" },
+      lualine_z = {
+        { "location", separator = { right = "" }, left_padding = 2 },
       },
     },
+    inactive_sections = {
+      lualine_a = { "filename" },
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = {},
+      lualine_y = {},
+      lualine_z = { "location" },
+    },
+    tabline = {},
+    extensions = {},
   })
 end
 

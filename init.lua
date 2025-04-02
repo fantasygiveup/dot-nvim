@@ -37,7 +37,7 @@ lazy.setup({
     config = require("view.theme").config,
   },
   { "folke/which-key.nvim", config = require("view.which_key").config },
-  { "nvim-lualine/lualine.nvim", config = require("status_line").config },
+  { "nvim-lualine/lualine.nvim" },
   { "ziontee113/icon-picker.nvim", config = require("tools.icon_picker").config },
   {
     "mrjones2014/smart-splits.nvim",
@@ -128,5 +128,6 @@ require("event").init()
 require("tools.gpg").init()
 require("fzf.project").init()
 require("view.theme").init()
+require("status_line").config() -- draw the status line after the theme gets initialized
 require("custom").init()
 require("treesitter.markdown").init()

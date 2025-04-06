@@ -66,7 +66,7 @@ M.config = function()
         "%=",
         {
           spelling,
-          color = { bg = clrs.surface0, fg = clrs.blue },
+          color = { bg = clrs.surface0, fg = clrs.red },
           separator = { right = "", left = "" },
         },
       },
@@ -75,7 +75,7 @@ M.config = function()
           lsp_active_clients,
           separator = { right = "", left = "" },
           right_padding = 2,
-          color = { bg = clrs.surface0, fg = clrs.blue },
+          color = { bg = clrs.surface0, fg = clrs.yellow },
         },
         "encoding",
       },

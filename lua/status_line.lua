@@ -12,7 +12,7 @@ M.config = function()
 
   local function lsp_active_clients(msg)
     local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-    local clients = vim.lsp.get_active_clients()
+    local clients = vim.lsp.get_clients()
     local str = ""
     if next(clients) == nil then
       return str

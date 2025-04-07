@@ -88,11 +88,6 @@ lazy.setup({
     },
     config = require("treesitter").config,
   },
-  {
-    "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
-    config = require("debugger").config,
-  },
   { "numToStr/Comment.nvim", config = require("edit.comment").config },
   { "kylechui/nvim-surround", config = require("edit.surround").config },
   { "windwp/nvim-autopairs", config = require("edit.autopairs").config },

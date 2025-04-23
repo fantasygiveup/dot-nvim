@@ -75,7 +75,7 @@ M.init = function()
 
   -- Misc.
   vim.keymap.set("n", "<localleader>wn", function()
-    for _, name in pairs({ "number", "relativenumber" }) do
+    for _, name in pairs({ "number" }) do
       local opt = vim.api.nvim_win_get_option(0, name)
       vim.api.nvim_win_set_option(0, name, not opt)
     end

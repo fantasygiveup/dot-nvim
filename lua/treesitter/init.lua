@@ -104,6 +104,7 @@ M.config = function()
       "scheme",
       "sql",
       "terraform",
+      "tmux",
       "tsx",
       "typescript",
       "vim",

@@ -5,13 +5,17 @@ local vars = require("vars")
 M.config = function()
   require("zk").setup({
     picker = "fzf_lua",
-    lsp = {
-      config = {
-        on_attach = function(client, bufnr)
-          require("keymap").zettelkasten_buffer(bufnr)
-        end,
-      },
-    },
+    lsp = { auto_attach = { enabled = false } },
+  })
+
+  -- HACK: Use vim.api.nvim_create_autocmd instead of zk.setup(lsp.config.on_attach) to avoid the
+  -- "lsp client is attached twice" issue.
+  vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+    group = vim.api.nvim_create_augroup("ZkGroup", {}),
+    pattern = { vars.notes_dir_path .. vars.path_sep .. "**" },
+    callback = function()
+      require("keymap").zettelkasten_buffer(0)
+    end,
   })
 
   local commands = require("zk.commands")

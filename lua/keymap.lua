@@ -150,7 +150,7 @@ M.lsp_flow = function(bufnr)
   vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 end
 
-M.zettelkasten = function()
+M.zk = function()
   local dir = require("vars").notes_dir_path
 
   vim.keymap.set(
@@ -184,7 +184,7 @@ M.zettelkasten = function()
   end, { desc = "visit fleeting note", silent = true })
 end
 
-M.zettelkasten_buffer = function(bufnr)
+M.zk_buffer = function(bufnr)
   local dir = require("vars").notes_dir_path
 
   vim.keymap.set(
@@ -225,10 +225,6 @@ M.zettelkasten_buffer = function(bufnr)
     "<cmd>ZkLinks { notebook_path = '" .. dir .. "' }<cr>",
     { desc = "zk links", buffer = bufnr }
   )
-
-  vim.keymap.set("n", "<Space><CR>", function()
-    require("tools.zettelkasten").return_back()
-  end, { desc = "zk return to editor", buffer = bufnr })
 end
 
 M.zen_mode = function()

@@ -96,7 +96,7 @@ lazy.setup({
   { "lewis6991/gitsigns.nvim", config = require("vc.gitsigns").config },
   { "kevinhwang91/nvim-bqf", ft = "qf" },
   { "nvimdev/dashboard-nvim", config = require("tools.dashboard").config },
-  { "zk-org/zk-nvim", config = require("tools.zettelkasten").config },
+  { "zk-org/zk-nvim", config = require("tools.zk").config },
   { "NvChad/nvim-colorizer.lua", config = require("view.colorizer").config },
   {
     "folke/todo-comments.nvim",

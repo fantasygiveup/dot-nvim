@@ -10,7 +10,7 @@ M.config = function()
         on_attach = function(client, bufnr)
           require("keymap").lsp_diagnostic(bufnr)
           require("keymap").lsp_flow()
-          require("keymap").zettelkasten_buffer(bufnr)
+          require("keymap").zk_buffer(bufnr)
         end,
       },
     },
@@ -41,7 +41,7 @@ M.config = function()
     end)
   end, { title = "Insert Zk link Insert Mode" })
 
-  require("keymap").zettelkasten()
+  require("keymap").zk()
 end
 
 function M.edit_or_new(options, picker_options)

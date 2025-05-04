@@ -55,32 +55,6 @@ M.config = function()
     end,
   })
 
-  local Terminal = terminal.Terminal
-  vim.keymap.set("n", "<localleader>gg", function()
-    local lazygit = Terminal:new({
-      cmd = "lazygit",
-      count = 100, -- use high value to no intersect with regular OpenTerm cmd
-      dir = "git_dir",
-      direction = "float",
-      float_opts = toggleterm_float_opts(),
-      on_open = function(term)
-        vim.cmd("startinsert!")
-        vim.api.nvim_buf_set_keymap(
-          term.bufnr,
-          "n",
-          "q",
-          "<cmd>close<CR>",
-          { noremap = true, silent = true }
-        )
-      end,
-      on_close = function(term)
-        vim.cmd("startinsert!")
-      end,
-    })
-
-    lazygit:toggle()
-  end, { desc = "lazygit" })
-
   -- `lf` file manager.
   -- Some parts are taken from https://github.com/lmburns/lf.nvim.
   -- TODO(idanko): consider to move to a mudule.

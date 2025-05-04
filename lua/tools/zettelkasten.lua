@@ -8,6 +8,8 @@ M.config = function()
     lsp = {
       config = {
         on_attach = function(client, bufnr)
+          require("keymap").lsp_diagnostic(bufnr)
+          require("keymap").lsp_flow()
           require("keymap").zettelkasten_buffer(bufnr)
         end,
       },

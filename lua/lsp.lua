@@ -101,13 +101,6 @@ M.config = function()
     capabilities = capabilities,
   })
 
-  lspconfig.zk.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { "zk", "lsp" },
-    name = "zk",
-  })
-
   lspconfig.tailwindcss.setup({
     on_attach = on_attach,
     capabilities = capabilities,

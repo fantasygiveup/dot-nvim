@@ -55,6 +55,8 @@ M.config = function()
     end,
   })
 
+  local Terminal = terminal.Terminal
+
   -- `lf` file manager.
   -- Some parts are taken from https://github.com/lmburns/lf.nvim.
   -- TODO(idanko): consider to move to a mudule.

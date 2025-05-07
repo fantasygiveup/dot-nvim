@@ -27,7 +27,7 @@ M.init = function()
   ) -- remove white spaces
   vim.keymap.set(
     "n",
-    "<localleader>ce",
+    "<localleader>ca",
     [[<cmd>%!sed -r 's/\x1b\[[0-9;]*m//g'<cr>]],
     { desc = "clean ansi codes" }
   ) -- remove white spaces

@@ -1,8 +1,6 @@
 local M = {}
 
 M.config = function()
-  M.load_background()
-
   require("catppuccin").setup({
     background = { -- :h background
       light = "latte",
@@ -32,25 +30,32 @@ M.config = function()
   })
 end
 
-M.system_theme = function(theme_file)
-  local fd = io.open(theme_file)
-  -- Fallback to the light theme.
+M.listen_to_system_theme_change = function()
+  local fwatch = require("fwatch")
+  local vars = require("vars")
+  local dir = vim.fn.stdpath("config") .. vars.path_sep .. "lua" .. vars.path_sep .. "color"
+  local file = dir .. vars.path_sep .. "color.lua"
+
+  local fd = io.open(file)
   if not fd then
-    return "light"
+    error("unable to monitor color.lua")
+    return
   end
+  fd.close()
 
-  local theme = fd:read()
-  fd:close()
-  return theme
-end
-
-M.load_background = function()
-  local system_theme_file = require("vars").system_theme_file
-  vim.o.background = M.system_theme(system_theme_file)
+  fwatch.watch(dir, {
+    on_event = function()
+      require("utils.async").timer(function()
+        dofile(file)
+        require("status_line").config() -- redraw status_line entirely
+      end)
+    end,
+  })
 end
 
 M.init = function()
   vim.cmd.colorscheme("catppuccin")
+  M.listen_to_system_theme_change()
 end
 
 return M

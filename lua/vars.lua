@@ -33,13 +33,6 @@ function vars:load_variables()
   self.diagnostic_severity = vim.diagnostic.severity.ERROR
   self.rg_opts = "--column --line-number --no-heading --color=always --colors='match:none' --smart-case --max-columns=512 --hidden "
     .. (vim.env.RIPGREP_IGNORE_SEARCH_FILTER or "") -- ignore the missing value in restricted environments
-  self.system_theme_file = home
-    .. path_sep
-    .. ".config"
-    .. path_sep
-    .. "appearance"
-    .. path_sep
-    .. "background"
   self.fleeting_notes = notes_dir_path .. path_sep .. "sm9z.md"
 end
 

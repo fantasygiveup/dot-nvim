@@ -38,7 +38,6 @@ M.listen_to_system_theme_change = function()
 
   local fd = io.open(file)
   if not fd then
-    error("unable to monitor color.lua")
     return
   end
   fd.close()

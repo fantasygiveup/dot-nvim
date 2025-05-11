@@ -123,6 +123,5 @@ lazy.setup({
 require("event").init()
 require("tools.gpg").init()
 require("fzf.project").init()
-require("custom").init()
 require("treesitter.markdown").init()
 require("view.theme").init()

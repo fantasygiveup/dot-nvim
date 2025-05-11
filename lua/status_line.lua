@@ -1,5 +1,19 @@
 local M = {}
 
+local function color_hl2rgb(name, background)
+  local background = background or false
+  local color_val = vim.api.nvim_get_hl_by_name(name, true)
+  if color_val == -1 then
+    return "#" .. name
+  end
+
+  if background then
+    return string.format("#%06x", color_val.background)
+  else
+    return string.format("#%06x", color_val.foreground)
+  end
+end
+
 M.config = function()
   local lualine = require("lualine")
 
@@ -50,9 +64,6 @@ M.config = function()
     end
   end
 
-  local flavour = require("catppuccin").flavour
-  local clrs = require("catppuccin.palettes").get_palette(flavour)
-
   lualine.setup({
     options = {
       theme = "catppuccin",
@@ -66,7 +77,10 @@ M.config = function()
         "%=",
         {
           spelling,
-          color = { bg = clrs.surface0, fg = clrs.red },
+          color = {
+            bg = color_hl2rgb("ColorColumn", true),
+            fg = color_hl2rgb("ErrorMsg"),
+          },
           separator = { right = "", left = "" },
         },
       },
@@ -75,14 +89,14 @@ M.config = function()
           lsp_active_clients,
           separator = { right = "", left = "" },
           right_padding = 2,
-          color = { bg = clrs.surface0, fg = clrs.yellow },
+          color = { bg = color_hl2rgb("ColorColumn", true), fg = color_hl2rgb("WarningMsg") },
         },
         {
           "diagnostics",
           sources = { "nvim_diagnostic" },
           sections = diagnostics_severity(),
           symbols = { error = " ", warn = " ", info = " ", hint = " " },
-          color = { bg = clrs.surface0, fg = clrs.red },
+          color = { bg = color_hl2rgb("ColorColumn", true), fg = color_hl2rgb("ErrorMsg") },
           separator = { right = "", left = "" },
         },
         "encoding",

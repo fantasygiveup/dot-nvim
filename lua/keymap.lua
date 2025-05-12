@@ -334,7 +334,7 @@ M.fzf = function()
     fzf_lua.resume()
   end, { desc = "resume menu" })
 
-  vim.keymap.set("n", "<localleader>rf", function()
+  vim.keymap.set("n", "<localleader>sr", function()
     fzf_lua.oldfiles()
   end, { desc = "show recent files" })
 

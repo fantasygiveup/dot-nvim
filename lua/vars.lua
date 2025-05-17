@@ -95,6 +95,19 @@ function vars:load_options()
   vim.o.linebreak = true -- do not split a word into lines
   vim.o.foldtext = "" -- in neovim >= 0.10 to colorize fold
   vim.o.fillchars = "fold:."
+
+  vim.g.clipboard = {
+    name = "xsel",
+    copy = {
+      ["+"] = { "xsel", "--clipboard" },
+      ["*"] = { "xsel", "--primary" },
+    },
+    paste = {
+      ["+"] = { "xsel", "-o", "--clipboard" },
+      ["*"] = { "xsel", "-o", "--primary" },
+    },
+    cache_enabled = true,
+  }
 end
 
 return vars
